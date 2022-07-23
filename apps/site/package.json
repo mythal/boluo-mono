@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --fix",
-    "test": "jest --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "i18n:extract": "formatjs extract 'src/**/*.ts*' --out-file lang/en.json --id-interpolation-pattern '[sha512:contenthash:base64:6]' --format crowdin",
     "i18n:compile": "formatjs compile-folder --ast --format crowdin ./lang ./lang/compiled",
     "pre-commit": "lint-staged --verbose"

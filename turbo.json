@@ -13,6 +13,10 @@
       "dependsOn": ["i18n:compile", "^build"],
       "outputs": ["dist/**", ".next/**"]
     },
+    "test": {
+      "dependsOn": ["^test"],
+      "cache": false
+    },
     "lint": {
       "outputs": []
     },

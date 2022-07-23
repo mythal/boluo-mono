@@ -13,5 +13,5 @@ const AllTheProviders: FC<{ children: React.ReactNode }> = ({ children }) => {
     </ReduxProvider>
   );
 };
-export const render = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
+export const render = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>): ReturnType<typeof jestRender> =>
   jestRender(ui, { wrapper: AllTheProviders, ...options });
