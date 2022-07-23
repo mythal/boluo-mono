@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+const path = require('path');
 const withMDX = require('@next/mdx')();
 const withTM = require('next-transpile-modules')(['ui']);
 
@@ -19,6 +19,9 @@ const config = {
     dirs: ['src', 'tests'],
   },
   output: 'standalone',
+  experimental: {
+    outputFileTracingRoot: path.join(__dirname, '../../'),
+  },
   async rewrites() {
     return [
       {

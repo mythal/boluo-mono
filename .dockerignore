@@ -1,0 +1,7 @@
+.idea/
+.vscode/
+**/.next/
+**/node_modules/
+**/dist/
+**/.env.local
+**/.env

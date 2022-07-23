@@ -10,8 +10,7 @@
       "outputs": ["lang/compiled/**"]
     },
     "build": {
-      "dependsOn": ["i18n:compile", "^build"],
-      "outputs": ["dist/**", ".next/**"]
+      "dependsOn": ["i18n:compile", "^build"]
     },
     "test": {
       "dependsOn": ["^test"],
