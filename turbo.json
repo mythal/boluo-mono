@@ -1,14 +1,23 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
+    "i18n:extract": {
+      "dependsOn": ["^i18n:extract"],
+      "cache": false
+    },
+    "i18n:compile": {
+      "dependsOn": ["^i18n:compile"],
+      "outputs": ["lang/compiled/**"]
+    },
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["i18n:compile", "^build"],
       "outputs": ["dist/**", ".next/**"]
     },
     "lint": {
       "outputs": []
     },
     "dev": {
+      "dependsOn": ["i18n:compile"],
       "cache": false
     }
   }
