@@ -2,8 +2,8 @@ import type { FC } from 'react';
 import { useIntl } from 'react-intl';
 import { useTransition } from 'transition-hook';
 import clsx from 'clsx';
-import type { ChildrenProps, StyleProps } from '../../helper/props';
 import { Button } from 'ui';
+import type { ChildrenProps, StyleProps } from '../../helper/props';
 import { Overlay } from './Overlay';
 
 interface Props extends StyleProps, ChildrenProps {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import { Button } from 'ui';
 import { Toast } from '../components/fundamental/Toast';
 import { empty } from '../helper/function';
-import { Button } from 'ui';
 import { useNotify } from '../state/user-interface';
 
 const NotificationDesign = () => {

@@ -5,10 +5,10 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useSWRConfig } from 'swr';
+import { Button, TextInput } from 'ui';
 import { post } from '../api';
 import type { LoginResult } from '../api/types/users';
 import type { StyleProps } from '../helper/props';
-import { Button, TextInput } from 'ui';
 import Oops from './Oops';
 
 interface Props extends StyleProps {}

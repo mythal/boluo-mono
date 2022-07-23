@@ -2,10 +2,10 @@ import type { NextPage } from 'next';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { VirtuosoHandle } from 'react-virtuoso';
 import { Virtuoso } from 'react-virtuoso';
+import { Button } from 'ui';
 import { selectRandom } from '../helper/random';
 import { useVirtualListBottomLock } from '../hooks/useVirtualListBottomLock';
 import { useDetectUpScroll } from '../hooks/useDetectUpScroll';
-import { Button } from 'ui';
 import Icon from '../components/fundamental/Icon';
 import { Providers } from '../components/global/Providers';
 

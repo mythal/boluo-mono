@@ -5,7 +5,7 @@
   "types": "./src/index.tsx",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint *.ts*"
+    "lint": "eslint --fix src/**/*.{ts,tsx}"
   },
   "sideEffects": false,
   "devDependencies": {

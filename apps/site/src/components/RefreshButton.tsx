@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 import React, { useCallback } from 'react';
-import type { StyleProps } from '../helper/props';
 import { Button } from 'ui';
+import type { StyleProps } from '../helper/props';
 import Icon from './fundamental/Icon';
 
 interface Props extends StyleProps {
