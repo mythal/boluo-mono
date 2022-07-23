@@ -21,7 +21,6 @@
     "autoprefixer": "^10.4.7",
     "eslint": "8.20.0",
     "eslint-config-custom": "workspace:*",
-    "tailwind-config": "workspace:*",
     "next-transpile-modules": "9.0.0",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.1.6",
