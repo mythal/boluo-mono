@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-size: clamp(12px, 1.25vw, 15px);
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+  html.switching,
+  html.switching * {
+    transition-duration: 200ms;
+    transition-timing-function: ease-in;
+    transition-property: background-color, border-bottom-color, border-top-color, border-left-color, border-right-color,
+      outline-color;
+  }
+  @font-face {
+    font-family: Fusion-Pixel-12;
+    src: url('../fonts/fusion-pixel.woff2');
+  }
+
+  #__next {
+    height: 100%;
+  }
+}
+
+@layer components {
+  .link {
+    @apply text-link-text no-underline hover:text-link-hover active:text-link-active;
+  }
+
+  .input {
+    @apply rounded border-[0.125rem] border-solid py-2
+      px-3 focus:outline-none focus:ring
+      disabled:cursor-not-allowed disabled:contrast-50;
+  }
+
+  .input-default {
+    @apply border-input-default-border bg-input-default-bg placeholder:text-input-default-placeholder
+      focus:border-input-default-focusBorder hover-enabled:border-input-default-hoverBorder;
+  }
+
+  .input-error {
+    @apply border-input-error-border bg-input-error-bg ring-input-error-ring
+      placeholder:text-input-error-placeholder focus:border-input-error-focusBorder
+      hover-enabled:border-input-error-hoverBorder;
+  }
+
+  .input-warning {
+    @apply border-input-warning-border bg-input-warning-bg ring-input-warning-ring
+      placeholder:text-input-warning-placeholder focus:border-input-warning-focusBorder
+      hover-enabled:border-input-warning-hoverBorder;
+  }
+}
+
+@layer utilities {
+}

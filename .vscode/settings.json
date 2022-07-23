@@ -1,0 +1,12 @@
+{
+  "eslint.packageManager": "pnpm",
+  "eslint.workingDirectories": [{ "pattern": "./packages/*" }, { "pattern": "./apps/*" }],
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.associations": {
+    "*.tailwind.css": "tailwindcss",
+    "tailwind.css": "tailwindcss"
+  },
+  "tailwindCSS.experimental.classRegex": [["clsx\\(([^)]*)\\)", "'([^']*)'"]],
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true
+}
