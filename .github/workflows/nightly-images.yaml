@@ -1,11 +1,11 @@
-name: Nightly image
+name: Nightly images
 on:
   push:
     branches:
       - master
 jobs:
   push_to_registry:
-    name: Push Docker image to GitHub Packages
+    name: Push to registery
     runs-on: ubuntu-latest
     permissions:
       packages: write
