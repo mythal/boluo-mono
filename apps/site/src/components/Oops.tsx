@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 import React, { useRef } from 'react';
 import clsx from 'clsx';
+import { Refresh } from 'boluo-icons';
 import { useContainerQuery } from '../hooks/useContainerQuery';
 import { Text } from './fundamental/Text';
 import { RefreshButton } from './RefreshButton';
@@ -30,7 +31,7 @@ function OopsXs({}: Props) {
       <Text>
         <FormattedMessage defaultMessage="Something going wrong." />{' '}
         <a href="#" onClick={() => window.location.reload()}>
-          <Icon icon="refresh" className="mr-1" />
+          <Icon icon={Refresh} className="mr-1" />
           <FormattedMessage defaultMessage="refresh" />
         </a>
       </Text>

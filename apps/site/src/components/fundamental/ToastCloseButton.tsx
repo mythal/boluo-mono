@@ -1,3 +1,4 @@
+import { X } from 'boluo-icons';
 import clsx from 'clsx';
 import React from 'react';
 import Icon from './Icon';
@@ -17,7 +18,7 @@ export const ToastCloseButton: React.FC<Props> = ({ onClose }) => {
         'bg-white/20 hover:bg-white/50 focus:ring active:bg-white/75'
       )}
     >
-      <Icon icon="x" />
+      <Icon icon={X} />
     </button>
   );
 };

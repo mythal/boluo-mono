@@ -1,0 +1,20 @@
+{
+  "name": "boluo-icons",
+  "version": "0.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "homepage": "https://github.com/mythal/boluo-mono",
+  "scripts": {
+    "build": "svgr --config-file svgr.config.js -- icons && tsc --project tsconfig.json"
+  },
+  "dependencies": {
+    "tsconfig": "workspace:*"
+  },
+  "sideEffects": false,
+  "devDependencies": {
+    "@svgr/cli": "~6.3.1",
+    "@types/react": "^18.0.15",
+    "react": "^18.2.0",
+    "typescript": "~4.7.4"
+  }
+}
