@@ -1,4 +1,4 @@
-import type { Id } from '../../helper/id';
+import type { Id } from 'boluo-utils';
 import type { Channel, ChannelMember } from './channels';
 import type { User } from './users';
 

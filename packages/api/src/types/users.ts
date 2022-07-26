@@ -1,4 +1,4 @@
-import type { Id } from '../../helper/id';
+import type { Id } from 'boluo-utils';
 import type { ChannelWithMember } from './channels';
 import type { SpaceWithMember } from './spaces';
 

@@ -16,3 +16,8 @@ export function post<T, U extends object = object, Q extends object = Record<str
 ): Promise<T> {
   return request(makeUri(path, query), 'POST', JSON.stringify(payload));
 }
+
+export * from './types/users';
+export * from './types/channels';
+export * from './types/spaces';
+export * from './types/id';

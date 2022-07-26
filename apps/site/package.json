@@ -40,6 +40,7 @@
     "swr": "^2.0.0-beta.6",
     "transition-hook": "^1.5.2",
     "ui": "workspace:*",
+    "boluo-api": "workspace:*",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import type { Id } from '../../helper/id';
+import type { Id } from 'boluo-utils';
 
 export interface IdQuery {
   id: Id;

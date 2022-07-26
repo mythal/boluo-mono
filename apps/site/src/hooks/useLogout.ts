@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useSWRConfig } from 'swr';
-import { get } from '../api';
+import { get } from 'boluo-api';
 
 export function useLogout(): () => void {
   const { mutate } = useSWRConfig();

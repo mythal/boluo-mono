@@ -1,0 +1,18 @@
+{
+  "name": "boluo-api",
+  "version": "0.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --project tsconfig.json"
+  },
+  "license": "GPL-3.0",
+  "dependencies": {
+    "boluo-utils": "workspace:*",
+    "tsconfig": "workspace:*"
+  },
+  "sideEffects": false,
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
+}

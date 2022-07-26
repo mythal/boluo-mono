@@ -1,4 +1,4 @@
-import { IS_DEBUG } from '../const';
+import { IS_DEBUG } from 'boluo-utils';
 import type { ApiError } from './errors';
 import { AppErrorBox } from './errors';
 
