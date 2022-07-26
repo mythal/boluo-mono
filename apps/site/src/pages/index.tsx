@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { FormattedMessage } from 'react-intl';
 import Link from 'next/link';
-import Logo from '../../public/logo.svg';
+import { Logo } from 'boluo-logo';
 import { Me } from '../components/Me';
 import { Title } from '../components/global/Title';
 

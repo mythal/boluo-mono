@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import clsx from 'clsx';
 import { Button } from 'ui';
+import { Settings } from 'boluo-icons';
 import type { Page } from '../../helper/layout';
 import { tabRouteTable, useDesignRoute } from '../../design/useDesignRoute';
 import Home from '../../design/Home.mdx';
@@ -57,7 +58,7 @@ const Design: Page = ({ swrFallback }) => {
       <div className="h-screen bg-design-sidebar py-4 px-9">
         <div>
           <Button aria-label="Settings" onClick={() => setSettingDialog(true)}>
-            <Icon icon="settings" />
+            <Icon icon={Settings} />
           </Button>
           <Dialog dismiss={() => setSettingDialog(false)} show={settingDialog}>
             <div>

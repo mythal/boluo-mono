@@ -1,18 +1,16 @@
 import React from 'react';
-import { icons } from '../../icons/icons';
+import type { Close } from 'boluo-icons';
 
 interface Props {
-  icon: keyof typeof icons;
+  icon: typeof Close;
   className?: string;
   noStrut?: boolean;
   label?: string | undefined;
 }
 
 const Icon: React.FC<Props> = ({ icon, noStrut = false, className, label }: Props) => {
-  const DynamicIcon = icons[icon];
-  const loaded = (
-    <DynamicIcon aria-hidden role="img" width="1em" height="1em" className={className} aria-label={label} />
-  );
+  const Icon = icon;
+  const loaded = <Icon aria-hidden role="img" width="1em" height="1em" className={className} aria-label={label} />;
   if (noStrut) {
     return loaded;
   } else {

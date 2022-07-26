@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { VirtuosoHandle } from 'react-virtuoso';
 import { Virtuoso } from 'react-virtuoso';
 import { Button } from 'ui';
+import { Pause, Play } from 'boluo-icons';
 import { selectRandom } from '../helper/random';
 import { useVirtualListBottomLock } from '../hooks/useVirtualListBottomLock';
 import { useDetectUpScroll } from '../hooks/useDetectUpScroll';
@@ -96,7 +97,7 @@ const Messenger: NextPage = () => {
           followOutput="smooth"
         />
         <div>
-          <Button onClick={togglePause}>{pause ? <Icon icon="play" /> : <Icon icon="pause" />}</Button>
+          <Button onClick={togglePause}>{pause ? <Icon icon={Play} /> : <Icon icon={Pause} />}</Button>
         </div>
       </div>
     </Providers>

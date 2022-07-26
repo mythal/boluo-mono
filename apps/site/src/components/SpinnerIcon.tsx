@@ -1,4 +1,5 @@
 import React from 'react';
+import { CircleNotch } from 'boluo-icons';
 import Icon from './fundamental/Icon';
 
 interface Props {
@@ -6,6 +7,6 @@ interface Props {
 }
 
 export const SpinnerIcon: React.FC<Props> = ({ label }) => {
-  return <Icon className="animate-spin" icon="spinner" label={label} />;
+  return <Icon className="animate-spin" icon={CircleNotch} label={label} />;
 };
 SpinnerIcon.displayName = 'SpinnerIcon';

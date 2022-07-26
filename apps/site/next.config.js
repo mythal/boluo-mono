@@ -39,12 +39,6 @@ const config = {
       config.plugins.push(plugin);
     }
 
-    // noinspection JSValidateTypes
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
-    });
-
     // `react-intl` without parser
     // https://formatjs.io/docs/guides/advanced-usage#react-intl-without-parser-40-smaller
     // https://github.com/vercel/next.js/issues/30434

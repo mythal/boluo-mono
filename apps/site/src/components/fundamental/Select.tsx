@@ -2,6 +2,7 @@ import React, { useId } from 'react';
 import { useSelect } from 'downshift';
 import { useTransition } from 'transition-hook';
 import clsx from 'clsx';
+import { ChevronUp } from 'boluo-icons';
 import type { StyleProps } from '../../helper/props';
 import Icon from './Icon';
 
@@ -65,7 +66,7 @@ export const Select: React.FC<Props> = ({ items, value, onChange, label, classNa
         >
           <span>{selectedItem?.label}</span>
           <span>
-            <Icon icon="chevrons-up" className={clsx(isOpen || 'rotate-180', 'duration-150300 transition-transform')} />
+            <Icon icon={ChevronUp} className={clsx(isOpen || 'rotate-180', 'duration-150300 transition-transform')} />
           </span>
         </button>
       </div>

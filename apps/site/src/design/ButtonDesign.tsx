@@ -1,3 +1,4 @@
+import { Archive, DiceTwentyFacesTwenty, Fairy } from 'boluo-icons';
 import type { FC } from 'react';
 import { Button } from 'ui';
 import Icon from '../components/fundamental/Icon';
@@ -9,17 +10,17 @@ const ButtonDesign: FC = () => {
       <div className="my-2 flex gap-2">
         <Button>Button</Button>
         <Button data-icon>
-          <Icon icon="fairy" />
+          <Icon icon={Fairy} />
         </Button>
         <Button>
-          <Icon icon="dice-twenty-faces-twenty" /> With text
+          <Icon icon={DiceTwentyFacesTwenty} /> With text
         </Button>
         <Button disabled>Disabled</Button>
       </div>
       <div className="my-2 flex gap-2">
         <Button data-small>small</Button>
         <Button data-small>
-          <Icon icon="archive" /> small
+          <Icon icon={Archive} /> small
         </Button>
         <Button data-small>
           <SpinnerIcon /> small
