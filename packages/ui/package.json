@@ -3,21 +3,22 @@
   "version": "0.0.0",
   "main": "./src/index.tsx",
   "types": "./src/index.tsx",
+  "homepage": "https://github.com/mythal/boluo-mono",
   "license": "GPL-3.0",
   "scripts": {
     "lint": "eslint --fix src/**/*.{ts,tsx}"
   },
   "sideEffects": false,
   "devDependencies": {
-    "@types/react": "^18.0.15",
-    "@types/react-dom": "^18.0.6",
-    "eslint": "^8.20.0",
+    "@types/react": "~18.0.15",
+    "@types/react-dom": "~18.0.6",
+    "eslint": "~8.20.0",
     "eslint-config-custom": "workspace:*",
-    "react": "^18.2.0",
-    "tailwindcss": "^3.1.6",
+    "react": "~18.2.0",
+    "tailwindcss": "~3.1.6",
     "tailwindcss-theme-swapper": "^0.6.2",
     "tsconfig": "workspace:*",
-    "typescript": "^4.7.4"
+    "typescript": "~4.7.4"
   },
   "dependencies": {
     "clsx": "^1.2.1"

@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "homepage": "https://github.com/mythal/boluo-mono",
   "scripts": {
     "build": "tsc --project tsconfig.json"
   },
@@ -13,6 +14,6 @@
   },
   "sideEffects": false,
   "devDependencies": {
-    "typescript": "^4.7.4"
+    "typescript": "~4.7.4"
   }
 }
