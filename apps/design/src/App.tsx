@@ -1,29 +1,20 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
+import { PageRouter, PageLinkList } from './pages';
+import { Providers } from './Providers';
+import { SchemeSwitch } from 'ui';
+import clsx from 'clsx';
 
-function App() {
-  const [count, setCount] = useState(0);
-
+export function App() {
   return (
-    <div className="p-8">
-      <div>
-        <a href="https://vitejs.dev" target="_blank" className="animate-spin">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Providers>
+      <div className={clsx('flex w-full')}>
+        <div className={clsx('flex-1 p-4')}>
+          <PageRouter />
+        </div>
+        <div className="flex-none p-4">
+          <SchemeSwitch className="mb-4" />
+          <PageLinkList />
+        </div>
       </div>
-      <h1 className="text-xl">Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </div>
+    </Providers>
   );
 }
-
-export default App;
