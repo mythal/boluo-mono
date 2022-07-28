@@ -80,5 +80,21 @@
     "typescript": "~4.7.4",
     "webpack": "^5.74.0",
     "webpack-bundle-analyzer": "^4.5.0"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "dependsOn": [
+          "^build",
+          "i18n:compile"
+        ]
+      },
+      "dev": {
+        "dependsOn": [
+          "^build",
+          "i18n:compile"
+        ]
+      }
+    }
   }
 }
