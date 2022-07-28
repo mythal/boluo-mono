@@ -5,11 +5,11 @@ export type Locale = 'en' | 'ja' | 'zh-CN';
 export const loadMessages = async (locale: Locale): Promise<IntlMessages> => {
   switch (locale) {
     case 'en':
-      return (await import('../../lang/compiled/en.json')).default;
+      return (await import('lang/compiled/en.json')).default;
     case 'ja':
-      return (await import('../../lang/compiled/ja_JP.json')).default;
+      return (await import('lang/compiled/ja_JP.json')).default;
     case 'zh-CN':
-      return (await import('../../lang/compiled/zh_CN.json')).default;
+      return (await import('lang/compiled/zh_CN.json')).default;
   }
 };
 

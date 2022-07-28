@@ -96,7 +96,6 @@ importers:
       '@dnd-kit/utilities': ^3.2.0
       '@floating-ui/dom': ^1.0.0
       '@floating-ui/react-dom': ^1.0.0
-      '@formatjs/cli': ^5.0.6
       '@formatjs/intl': ^2.3.1
       '@jest/types': ^28.1.3
       '@mdx-js/loader': ^2.1.2
@@ -127,6 +126,7 @@ importers:
       husky: ^8.0.1
       jest: ^28.1.3
       jest-environment-jsdom: ^28.1.3
+      lang: workspace:*
       lint-staged: ^13.0.3
       next: ^12.2.3
       next-transpile-modules: ~9.0.0
@@ -167,6 +167,7 @@ importers:
       boluo-logo: link:../../packages/logo
       clsx: 1.2.1
       downshift: 6.1.7_react@18.2.0
+      lang: link:../../packages/lang
       next: 12.2.3_qugu52izettqdqqm5qcjcltcia
       optics-ts: 2.3.0
       react: 18.2.0
@@ -184,7 +185,6 @@ importers:
       uuid: 8.3.2
     devDependencies:
       '@babel/core': 7.18.9
-      '@formatjs/cli': 5.0.6
       '@jest/types': 28.1.3
       '@mdx-js/loader': 2.1.2_webpack@5.74.0
       '@mdx-js/react': 2.1.2_react@18.2.0
@@ -265,6 +265,12 @@ importers:
       '@types/react': 18.0.15
       react: 18.2.0
       typescript: 4.7.4
+
+  packages/lang:
+    specifiers:
+      '@formatjs/cli': ^5.0.6
+    devDependencies:
+      '@formatjs/cli': 5.0.6
 
   packages/logo:
     specifiers:

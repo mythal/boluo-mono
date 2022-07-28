@@ -9,8 +9,11 @@
     }
   },
   "targetDefaults": {
+    "generate": {
+      "dependsOn": ["^generate"]
+    },
     "build": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["generate", "^build"]
     },
     "dev": {
       "dependsOn": ["^build"]
