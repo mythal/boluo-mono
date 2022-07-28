@@ -6,10 +6,9 @@
     "build": "tsc --project tsconfig.json"
   },
   "license": "GPL-3.0",
-  "dependencies": {},
   "sideEffects": false,
   "devDependencies": {
     "tsconfig": "workspace:*",
-    "typescript": "^4"
+    "typescript": "^4.7.4"
   }
 }
