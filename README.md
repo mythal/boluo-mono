@@ -11,5 +11,5 @@ In order to build this project, you need to install the following tools:
 
 ```
 pnpm install
-pnpm build
+pnpm build:all
 ```

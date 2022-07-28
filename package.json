@@ -7,22 +7,24 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev --parallel",
-    "lint": "turbo run lint",
-    "test": "turbo run test --parallel",
+    "build": "nx build",
+    "build:all": "nx run-many --target=build --all",
+    "dev": "nx dev",
+    "lint": "nx lint",
+    "lint:all": "nx run-many --target=lint --all",
+    "test": "nx test",
+    "test:all": "nx run-many --target=test --all",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "i18n:extract": "turbo run i18n:extract",
-    "i18n:compile": "turbo run i18n:compile",
-    "pre-commit": "turbo run pre-commit",
+    "pre-commit": "nx run-many --target=pre-commit --all",
     "prepare": "husky install"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
     "husky": "^8.0.1",
+    "nx": "14.4.3",
     "prettier": "latest",
     "prettier-plugin-tailwindcss": "^0.1.12",
-    "turbo": "latest"
+    "typescript": "^4"
   },
   "engines": {
     "npm": ">=7.0.0",
