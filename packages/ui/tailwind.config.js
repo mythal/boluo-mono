@@ -196,7 +196,7 @@ const darkTheme = {
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}', '../../packages/*/src/**/*.{js,ts,jsx,tsx}'],
+  content: ['./src/**/*.{js,jsx,ts,tsx,html}', './index.html', '../../packages/*/src/**/*.{js,ts,jsx,tsx,html}'],
   darkMode: 'class',
   theme: {
     colors: {

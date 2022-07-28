@@ -1,6 +1,6 @@
-import * as React from 'react';
-
-export * from './Button';
-export * from './TextInput';
-export * from './ClientBox';
-export * from './Text';
+export { Button } from './Button';
+export { TextInput, TextArea } from './TextInput';
+export { ClientBox } from './ClientBox';
+export { Text } from './Text';
+export { SchemeSwitch } from './SchemeSwitch';
+export { useScheme } from './hooks/useScheme';
