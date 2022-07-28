@@ -16,7 +16,8 @@
     "skipLibCheck": true,
     "strict": true,
     "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true
+    "noImplicitOverride": true,
+    "target": "ES2016"
   },
   "exclude": ["node_modules"]
 }

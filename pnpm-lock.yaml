@@ -32,7 +32,7 @@ importers:
       react-dom: ^18.2.0
       react-router-dom: '6'
       tailwindcss: ^3.1.6
-      typescript: ^4.6.4
+      typescript: ^4
       ui: workspace:*
       vite: ^3.0.0
     dependencies:
@@ -68,7 +68,7 @@ importers:
       react-dom: 18.2.0
       tailwindcss: ^3.1.6
       tsconfig: workspace:*
-      typescript: ^4.7.4
+      typescript: ^4
       ui: workspace:*
     dependencies:
       next: 12.2.3_qugu52izettqdqqm5qcjcltcia
@@ -147,7 +147,7 @@ importers:
       transition-hook: ^1.5.2
       ts-node: ^10.9.1
       tsconfig: workspace:*
-      typescript: ~4.7.4
+      typescript: ^4
       ui: workspace:*
       uuid: ^8.3.2
       webpack: ^5.74.0
@@ -223,7 +223,7 @@ importers:
     specifiers:
       boluo-utils: workspace:*
       tsconfig: workspace:*
-      typescript: ~4.7.4
+      typescript: ^4
     dependencies:
       boluo-utils: link:../utils
       tsconfig: link:../tsconfig
@@ -240,7 +240,7 @@ importers:
       eslint-plugin-formatjs: ^4.0.2
       eslint-plugin-import: ^2.26.0
       eslint-plugin-react: 7.28.0
-      typescript: ^4.7.4
+      typescript: ^4
     dependencies:
       '@typescript-eslint/eslint-plugin': 5.31.0_6ha3eecbwr5cxnj72rgwwy3opa
       '@typescript-eslint/parser': 5.31.0_hxadhbs2xogijvk7vq4t2azzbu
@@ -259,7 +259,7 @@ importers:
       '@types/react': ^18.0.15
       react: ^18.2.0
       tsconfig: workspace:*
-      typescript: ~4.7.4
+      typescript: ^4
     dependencies:
       tsconfig: link:../tsconfig
     devDependencies:
@@ -280,7 +280,7 @@ importers:
       '@types/react': ^18.0.15
       react: ^18.2.0
       tsconfig: workspace:*
-      typescript: ~4.7.4
+      typescript: ^4
     dependencies:
       tsconfig: link:../tsconfig
     devDependencies:
@@ -306,7 +306,7 @@ importers:
       tailwindcss: ~3.1.6
       tailwindcss-theme-swapper: ^0.6.2
       tsconfig: workspace:*
-      typescript: ~4.7.4
+      typescript: ^4
     dependencies:
       '@radix-ui/react-toggle-group': 1.0.0_biqbaboplfbrettd7655fr4n2y
       boluo-icons: link:../icons
@@ -327,7 +327,7 @@ importers:
     specifiers:
       '@types/uuid': ^8.3.4
       tsconfig: workspace:*
-      typescript: ~4.7.4
+      typescript: ^4
       uuid: ^8.3.2
     dependencies:
       uuid: 8.3.2
