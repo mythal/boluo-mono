@@ -16,7 +16,8 @@
     "test:all": "nx run-many --target=test --all",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "pre-commit": "nx run-many --target=pre-commit --all",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "graph": "nx graph"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
