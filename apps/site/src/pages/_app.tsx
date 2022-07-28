@@ -6,7 +6,7 @@ import 'ui/src/tailwind.css';
 function registerServiceWorker() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
-      .register(new URL('../serviceWorker.ts', import.meta.url))
+      .register(new URL('workers/dist/serviceWorker.js', import.meta.url))
       .then(function (reg) {
         // registration worked
         console.log('Registration succeeded. Scope is ' + reg.scope);

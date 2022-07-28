@@ -43,6 +43,7 @@
     "ui": "workspace:*",
     "lang": "workspace:*",
     "boluo-logo": "workspace:*",
+    "workers": "workspace:*",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

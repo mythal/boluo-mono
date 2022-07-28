@@ -152,6 +152,7 @@ importers:
       uuid: ^8.3.2
       webpack: ^5.74.0
       webpack-bundle-analyzer: ^4.5.0
+      workers: workspace:*
     dependencies:
       '@dnd-kit/core': 6.0.5_biqbaboplfbrettd7655fr4n2y
       '@dnd-kit/sortable': 7.0.1_vvd3dzag27tc7rclyb2whqqnpe
@@ -183,6 +184,7 @@ importers:
       transition-hook: 1.5.2_biqbaboplfbrettd7655fr4n2y
       ui: link:../../packages/ui
       uuid: 8.3.2
+      workers: link:../../packages/worker
     devDependencies:
       '@babel/core': 7.18.9
       '@jest/types': 28.1.3
@@ -331,6 +333,14 @@ importers:
       uuid: 8.3.2
     devDependencies:
       '@types/uuid': 8.3.4
+      tsconfig: link:../tsconfig
+      typescript: 4.7.4
+
+  packages/worker:
+    specifiers:
+      tsconfig: workspace:*
+      typescript: ^4
+    devDependencies:
       tsconfig: link:../tsconfig
       typescript: 4.7.4
 
