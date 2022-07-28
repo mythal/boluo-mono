@@ -26,7 +26,7 @@
     "@react-aria/overlays": "^3.9.1",
     "@redux-devtools/extension": "^3.2.2",
     "boluo-api": "workspace:*",
-    "boluo-icons": "workspace:^0.0.0",
+    "boluo-icons": "workspace:*",
     "clsx": "^1.2.1",
     "downshift": "^6.1.7",
     "next": "^12.2.3",

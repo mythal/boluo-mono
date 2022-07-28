@@ -81,7 +81,7 @@ importers:
       babel-jest: ^28.1.3
       babel-plugin-formatjs: ^10.3.25
       boluo-api: workspace:*
-      boluo-icons: workspace:^0.0.0
+      boluo-icons: workspace:*
       boluo-logo: workspace:*
       clsx: ^1.2.1
       downshift: ^6.1.7
