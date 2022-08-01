@@ -10,8 +10,8 @@ interface Props extends StyleProps {}
 export const SchemeSwitch: FC<Props> = ({ className }) => {
   const scheme = useScheme();
 
-  const buttonClass = clsx(
-    'bg-gray-100 first-of-type:rounded-l last-of-type:rounded-r p-2 hover:bg-gray-50 [&[data-state="on"]]:bg-gray-200'
+  const btnClasses = clsx(
+    'bg-gray-300 first-of-type:rounded-l last-of-type:rounded-r p-2 hover:bg-gray-200 state-on:bg-gray-500 state-on:text-gray-50'
   );
   const handleChange = (value: string | undefined) => {
     const html = window.document.documentElement;
@@ -32,13 +32,13 @@ export const SchemeSwitch: FC<Props> = ({ className }) => {
 
   return (
     <ToggleGroup.Root className={clsx(className, 'flex')} type="single" value={scheme} onValueChange={handleChange}>
-      <ToggleGroup.Item value="light" className={buttonClass}>
+      <ToggleGroup.Item value="light" className={btnClasses}>
         <Sun />
       </ToggleGroup.Item>
-      <ToggleGroup.Item value="system" className={buttonClass}>
+      <ToggleGroup.Item value="system" className={btnClasses}>
         system
       </ToggleGroup.Item>
-      <ToggleGroup.Item value="dark" className={buttonClass}>
+      <ToggleGroup.Item value="dark" className={btnClasses}>
         <Moon />
       </ToggleGroup.Item>
     </ToggleGroup.Root>

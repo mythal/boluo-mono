@@ -19,6 +19,8 @@
     "tailwindcss": "^3.1.6",
     "tailwindcss-theme-swapper": "^0.6.2",
     "tsconfig": "workspace:*",
+    "boluo-utils": "workspace:*",
+    "node-utils": "workspace:*",
     "typescript": "^4.7.4"
   },
   "dependencies": {

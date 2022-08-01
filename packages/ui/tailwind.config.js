@@ -1,3 +1,4 @@
+const { revertPalette: revert } = require('node-utils');
 const colors = require('tailwindcss/colors');
 const plugin = require('tailwindcss/plugin');
 const themeSwapper = require('tailwindcss-theme-swapper');
@@ -7,8 +8,12 @@ const { red, blue, green, yellow, white, black, gray, slate } = colors;
 /** @type {import('tailwindcss').Config.theme} */
 const lightTheme = {
   colors: {
+    highest: black,
+    lowest: white,
     bg: white,
     text: black,
+    brand: green,
+    gray,
     design: {
       sidebar: gray['100'],
       sortItem: green[200],
@@ -102,8 +107,12 @@ const lightTheme = {
 /** @type {import('tailwindcss').Config.theme} */
 const darkTheme = {
   colors: {
+    highest: white,
+    lowest: black,
     bg: slate[700],
     text: gray[50],
+    brand: revert(blue),
+    gray: revert(gray),
     design: {
       sidebar: slate[800],
       sortItem: green[700],
@@ -204,7 +213,6 @@ module.exports = {
       blue: colors.blue,
       neutral: colors.neutral,
       slate: colors.slate,
-      gray: colors.gray,
       black: '#000',
       white: '#FFF',
       tooltip: colors.yellow[100],
@@ -232,6 +240,7 @@ module.exports = {
       addVariant('enabled', '&:not(:disabled)');
       addVariant('hover-enabled', '&:hover:not(:disabled)');
       addVariant('active-enabled', '&:active:not(:disabled)');
+      addVariant('state-on', '&[data-state="on"]');
     }),
 
     themeSwapper({

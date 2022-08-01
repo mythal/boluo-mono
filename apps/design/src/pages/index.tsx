@@ -22,7 +22,7 @@ const pageLinkClass = ({ isActive }: { isActive: boolean }) =>
   });
 
 export const PageLinkList = () => (
-  <ul className="border-l">
+  <ul className="border-brand-400 hover:border-brand-600 border-l-1/2">
     <li>
       <NavLink to="/" className={pageLinkClass}>
         Home

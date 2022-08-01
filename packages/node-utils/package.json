@@ -1,0 +1,17 @@
+{
+  "name": "node-utils",
+  "version": "0.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "homepage": "https://github.com/mythal/boluo-mono",
+  "scripts": {
+    "build": "tsc --project tsconfig.json"
+  },
+  "license": "GPL-3.0",
+  "dependencies": {},
+  "sideEffects": false,
+  "devDependencies": {
+    "tsconfig": "workspace:*",
+    "typescript": "^4.7.4"
+  }
+}
