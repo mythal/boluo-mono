@@ -11,7 +11,9 @@ export const SchemeSwitch: FC<Props> = ({ className }) => {
   const scheme = useScheme();
 
   const btnClasses = clsx(
-    'bg-gray-300 first-of-type:rounded-l last-of-type:rounded-r p-2 hover:bg-gray-200 state-on:bg-gray-500 state-on:text-gray-50'
+    'bg-gray-300 first-of-type:rounded-l last-of-type:rounded-r p-2 hover:bg-gray-200',
+    'state-on:bg-gray-500 state-on:text-gray-50 state-on:hover:bg-gray-400',
+    'transition-colors duration-200'
   );
   const handleChange = (value: string | undefined) => {
     const html = window.document.documentElement;
