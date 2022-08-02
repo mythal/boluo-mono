@@ -1,5 +1,6 @@
 services:
   site:
+    image: ghcr.io/mythal/boluo-mono/site:nightly
     build:
       context: .
       dockerfile: ./apps/site/Dockerfile
