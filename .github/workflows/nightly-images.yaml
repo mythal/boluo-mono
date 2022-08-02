@@ -26,4 +26,4 @@ jobs:
           context: .
           file: apps/site/Dockerfile
           tags: |
-            ghcr.io/${{ github.repository }}:site-nightly
+            ghcr.io/${{ github.repository }}/site:nightly

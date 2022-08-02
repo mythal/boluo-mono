@@ -1,4 +1,4 @@
-const { revertPalette: revert } = require('node-utils');
+const { revertPalette: revert } = require('build-utils');
 const colors = require('tailwindcss/colors');
 const plugin = require('tailwindcss/plugin');
 const themeSwapper = require('tailwindcss-theme-swapper');
