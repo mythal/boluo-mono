@@ -11,7 +11,11 @@ jobs:
         node-version: [16.x]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
+        with:
+          # 0 indicates all history for all branches and tags.
+          fetch-depth: 0
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -37,11 +41,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - uses: nrwl/nx-set-shas@v2
+        with:
+          main-branch-name: master
+
       - name: build
-        run: pnpm build:all
+        run: pnpm build:affected
         env:
           CI: true
+
       - name: test
-        run: pnpm test:all
+        run: pnpm test:affected
         env:
           CI: true

@@ -8,16 +8,20 @@
   ],
   "scripts": {
     "build": "nx build",
+    "build:affected": "nx affected --target=build",
     "build:all": "nx run-many --target=build --all",
     "dev": "nx dev",
     "lint": "nx lint",
+    "lint:affected": "nx affected --taget=lint",
     "lint:all": "nx run-many --target=lint --all",
     "test": "nx test",
+    "test:affected": "nx affected --target=test",
     "test:all": "nx run-many --target=test --all",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "pre-commit": "nx run-many --target=pre-commit --all",
     "prepare": "husky install",
-    "graph": "nx graph"
+    "graph": "nx graph",
+    "graph:affected": "nx affected:graph"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
