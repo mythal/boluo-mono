@@ -4,6 +4,8 @@ importers:
 
   .:
     specifiers:
+      '@nrwl/devkit': ^14.5.2
+      '@nxrs/cargo': ^0.3.3
       eslint-config-custom: workspace:*
       husky: ^8.0.1
       nx: 14.4.3
@@ -11,6 +13,8 @@ importers:
       prettier-plugin-tailwindcss: ^0.1.13
       typescript: ^4.7.4
     devDependencies:
+      '@nrwl/devkit': 14.5.2_nx@14.4.3
+      '@nxrs/cargo': 0.3.3_@nrwl+devkit@14.5.2
       eslint-config-custom: link:packages/eslint-config-custom
       husky: 8.0.1
       nx: 14.4.3
@@ -1497,6 +1501,18 @@ packages:
       - '@swc/core'
     dev: true
 
+  /@nrwl/devkit/14.5.2_nx@14.4.3:
+    resolution: {integrity: sha512-li94W0D5SQZ7tjMiq+CZLHTx6/Gos5l3lc6jAzW/FHfoiAaaWN2zOPoydBQY7uw5TC+MH1jBbv/49Nf4wmXGVA==}
+    peerDependencies:
+      nx: '>= 13.10 <= 15'
+    dependencies:
+      ejs: 3.1.8
+      ignore: 5.2.0
+      nx: 14.4.3
+      semver: 7.3.4
+      tslib: 2.4.0
+    dev: true
+
   /@nrwl/tao/14.4.3:
     resolution: {integrity: sha512-sHlnqTlJ/XEc/lv0MIKYI1R643CWFvYL6QyZD7f38FvP1RblZ6eVqvOJcrkpwcvRWcZNEY+GrQpb1Io1ZvMEmQ==}
     hasBin: true
@@ -1505,6 +1521,15 @@ packages:
     transitivePeerDependencies:
       - '@swc-node/register'
       - '@swc/core'
+    dev: true
+
+  /@nxrs/cargo/0.3.3_@nrwl+devkit@14.5.2:
+    resolution: {integrity: sha512-Osh6dbWfygkCTLwedIv/+qyFUJ/rvultE4KN8ELimBgaGKbPrCqqlxVqhnzAcfEv2qYs/tLKRKvPCJqCBCH1Ig==}
+    peerDependencies:
+      '@nrwl/devkit': '>= 12.7.0'
+    dependencies:
+      '@nrwl/devkit': 14.5.2_nx@14.4.3
+      chalk: 4.1.2
     dev: true
 
   /@parcel/watcher/2.0.4:
@@ -2793,6 +2818,10 @@ packages:
     resolution: {integrity: sha512-sRpyiNrx2dEYIMmUXprS8nlpRg2Drs8m9ElX9vVEXaCB4XEAJhKfs7IcX0IwShjuOAjLR6wzIrgoptz1n19i1A==}
     hasBin: true
 
+  /async/3.2.4:
+    resolution: {integrity: sha512-iAB+JbDEGXhyIUavoDl9WP/Jj106Kz9DEn1DPgYw5ruDn0e3Wgi3sKFm55sASdGBNOQB8F59d9qQ7deqrHA8wQ==}
+    dev: true
+
   /asynckit/0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
     dev: true
@@ -3549,6 +3578,14 @@ packages:
 
   /eastasianwidth/0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
+    dev: true
+
+  /ejs/3.1.8:
+    resolution: {integrity: sha512-/sXZeMlhS0ArkfX2Aw780gJzXSMPnKjtspYZv+f3NiKLlubezAHDU5+9xz6gd3/NhG3txQCo6xlglmTS+oTGEQ==}
+    engines: {node: '>=0.10.0'}
+    hasBin: true
+    dependencies:
+      jake: 10.8.5
     dev: true
 
   /electron-to-chromium/1.4.204:
@@ -4464,6 +4501,12 @@ packages:
     dependencies:
       flat-cache: 3.0.4
 
+  /filelist/1.0.4:
+    resolution: {integrity: sha512-w1cEuf3S+DrLCQL7ET6kz+gmlJdbq9J7yXCSjK/OZCPA+qEN1WyF4ZAf0YYJa4/shHJra2t/d/r8SV4Ji+x+8Q==}
+    dependencies:
+      minimatch: 5.1.0
+    dev: true
+
   /fill-range/7.0.1:
     resolution: {integrity: sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==}
     engines: {node: '>=8'}
@@ -5108,6 +5151,17 @@ packages:
     dependencies:
       html-escaper: 2.0.2
       istanbul-lib-report: 3.0.0
+    dev: true
+
+  /jake/10.8.5:
+    resolution: {integrity: sha512-sVpxYeuAhWt0OTWITwT98oyV0GsXyMlXCF+3L1SuafBVUIr/uILGRB+NqwkzhgXKvoJpDIpQvqkUALgdmQsQxw==}
+    engines: {node: '>=10'}
+    hasBin: true
+    dependencies:
+      async: 3.2.4
+      chalk: 4.1.2
+      filelist: 1.0.4
+      minimatch: 3.1.2
     dev: true
 
   /jest-changed-files/28.1.3:

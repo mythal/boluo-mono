@@ -5,10 +5,20 @@ on: [push]
 jobs:
   check:
     runs-on: ubuntu-latest
+    container: rustlang/rust:nightly
 
     strategy:
       matrix:
         node-version: [16.x]
+
+    services:
+      redis:
+        image: redis
+      postgres:
+        image: ghcr.io/mythal/boluo-postgres:latest
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: boluo
 
     steps:
       - uses: actions/checkout@v3
@@ -50,7 +60,18 @@ jobs:
         env:
           CI: true
 
+      - name: Init Database
+        run: cargo run --bin manage init
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@postgres/boluo
+
       - name: test
         run: pnpm test:affected
         env:
           CI: true
+          DATABASE_URL: postgresql://postgres:postgres@postgres/boluo
+          TEST_DATABASE_URL: postgresql://postgres:postgres@postgres/boluo
+          SECRET: SOME_SECRET
+          REDIS_URL: redis://redis/
+          DEBUG: 1
+          PORT: 3000
