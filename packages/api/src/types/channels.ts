@@ -1,6 +1,10 @@
 import type { Id } from 'boluo-utils';
-import type { Space, SpaceMember } from './spaces';
-import type { User } from './users';
+import type { Channel } from 'server-bindings/Channel';
+import type { ChannelMember } from 'server-bindings/ChannelMember';
+import type { ChannelMemberWithUser } from 'server-bindings/ChannelMemberWithUser';
+import type { ChannelWithMember } from 'server-bindings/ChannelWithMember';
+import type { Member } from 'server-bindings/Member';
+import type { ChannelWithRelated } from 'server-bindings/ChannelWithRelated';
 
 export interface CreateChannel {
   spaceId: Id;
@@ -8,42 +12,6 @@ export interface CreateChannel {
   characterName: string;
   defaultDiceType?: string;
   isPublic?: boolean;
-}
-
-export interface Channel {
-  id: Id;
-  name: string;
-  topic: string;
-  spaceId: string;
-  created: number;
-  isPublic: boolean;
-  defaultDiceType: string;
-  defaultRollCommand: string;
-}
-
-export interface ChannelMember {
-  userId: Id;
-  channelId: Id;
-  joinDate: number;
-  characterName: string;
-  isMaster: boolean;
-  textColor: string | null;
-}
-
-export interface ChannelMemberWithUser {
-  member: ChannelMember;
-  user: User;
-}
-
-export interface ChannelWithMember {
-  channel: Channel;
-  member: ChannelMember;
-}
-
-export interface Member {
-  channel: ChannelMember;
-  space: SpaceMember;
-  user: User;
 }
 
 export interface JoinChannel {
@@ -54,15 +22,6 @@ export interface JoinChannel {
 export interface AddMember {
   channelId: Id;
   userId: Id;
-}
-
-export interface ChannelWithRelated {
-  channel: Channel;
-  members: Member[];
-  space: Space;
-  colorList: Record<Id, string>;
-  heartbeatMap: Record<Id, number>;
-  encodedEvents: string[];
 }
 
 export interface EditChannel {
@@ -91,3 +50,5 @@ export interface Export {
   channelId: Id;
   after?: number;
 }
+
+export { Channel, ChannelMember, ChannelMemberWithUser, ChannelWithMember, Member, ChannelWithRelated };

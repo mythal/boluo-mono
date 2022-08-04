@@ -1,6 +1,5 @@
 .env
 /target
-/bindings
 **/*.rs.bk
 **/*.log
 .idea/

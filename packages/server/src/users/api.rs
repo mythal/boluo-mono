@@ -1,6 +1,7 @@
 use super::User;
 use crate::channels::api::ChannelWithMember;
 use crate::spaces::api::SpaceWithMember;
+use ts_rs::TS;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
@@ -22,10 +23,22 @@ pub struct CheckUsernameExists {
     pub username: String,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize, TS)]
+#[ts(export)]
+#[serde(rename_all = "camelCase")]
+pub struct Settings {
+    #[serde(default)]
+    enter_send: bool,
+    #[serde(default)]
+    expand_dice: bool,
+}
+
+#[derive(Debug, Serialize, TS)]
+#[ts(export)]
 #[serde(rename_all = "camelCase")]
 pub struct GetMe {
     pub user: User,
+    #[ts(type = "unknown")]
     pub settings: serde_json::Value,
     pub my_channels: Vec<ChannelWithMember>,
     pub my_spaces: Vec<SpaceWithMember>,
@@ -49,7 +62,8 @@ pub struct Login {
     pub with_token: bool,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, TS)]
+#[ts(export)]
 #[serde(rename_all = "camelCase")]
 pub struct LoginReturn {
     pub me: GetMe,

@@ -1,23 +1,6 @@
-import type { Id } from 'boluo-utils';
-import type { ChannelWithMember } from './channels';
-import type { SpaceWithMember } from './spaces';
-
-export interface User {
-  id: Id;
-  username: string;
-  nickname: string;
-  bio: string;
-  joined: number;
-  deactivated: boolean;
-  avatarId: Id | null;
-}
-
-export interface GetMe {
-  user: User;
-  settings: Settings;
-  mySpaces: SpaceWithMember[];
-  myChannels: ChannelWithMember[];
-}
+import type { User } from 'server-bindings/User';
+import type { GetMe } from 'server-bindings/GetMe';
+import type { LoginReturn } from 'server-bindings/LoginReturn';
 
 export interface EditUser {
   nickname?: string;
@@ -34,11 +17,6 @@ export interface RegisterData {
 export interface LoginData {
   username: string;
   password: string;
-}
-
-export interface LoginResult {
-  me: GetMe;
-  token: null;
 }
 
 export interface CheckEmail {
@@ -66,3 +44,5 @@ export interface ResetPasswordConfirm {
 export interface ResetPasswordTokenCheck {
   token: string;
 }
+
+export { User, GetMe, LoginReturn };

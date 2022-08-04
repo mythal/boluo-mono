@@ -10,7 +10,8 @@
   "license": "GPL-3.0",
   "dependencies": {
     "boluo-utils": "workspace:*",
-    "tsconfig": "workspace:*"
+    "tsconfig": "workspace:*",
+    "server-bindings": "workspace:*"
   },
   "sideEffects": false,
   "devDependencies": {

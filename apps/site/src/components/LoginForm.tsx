@@ -7,7 +7,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useSWRConfig } from 'swr';
 import { Button, TextInput } from 'ui';
 import { post } from 'boluo-api';
-import type { LoginResult } from 'boluo-api';
+import type { LoginReturn } from 'boluo-api';
 import type { StyleProps } from '../helper/props';
 import Oops from './Oops';
 
@@ -30,7 +30,7 @@ export const LoginForm = ({ className }: StyleProps) => {
   const intl = useIntl();
   const required = intl.formatMessage({ defaultMessage: "Can't be empty." });
   const onSubmit: SubmitHandler<Inputs> = async ({ password, username }) => {
-    let result: LoginResult;
+    let result: LoginReturn;
     try {
       result = await post('/users/login', { username, password });
     } catch (e) {

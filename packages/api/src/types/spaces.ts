@@ -1,36 +1,15 @@
 import type { Id } from 'boluo-utils';
-import type { Channel, ChannelMember } from './channels';
-import type { User } from './users';
+import type { Space } from 'server-bindings/Space';
+import type { SpaceMember } from 'server-bindings/SpaceMember';
+import type { SpaceMemberWithUser } from 'server-bindings/SpaceMemberWithUser';
+import type { SpaceWithMember } from 'server-bindings/SpaceWithMember';
+import type { SpaceWithRelated } from 'server-bindings/SpaceWithRelated';
+import type { UserStatus } from 'server-bindings/UserStatus';
+import type { StatusKind } from 'server-bindings/StatusKind';
 
 export interface SpaceIdWithToken {
   spaceId: Id;
   token?: string;
-}
-
-export interface Space {
-  id: Id;
-  name: string;
-  description: string;
-  created: string;
-  modified: string;
-  ownerId: Id;
-  isPublic: boolean;
-  language: string;
-  defaultDiceType: string;
-  explorable: boolean;
-  allowSpectator: boolean;
-}
-
-export interface SpaceMember {
-  userId: Id;
-  spaceId: Id;
-  isAdmin: boolean;
-  joinDate: string;
-}
-
-export interface SpaceWithMember {
-  space: Space;
-  member: SpaceMember;
 }
 
 export interface CreateSpace {
@@ -52,27 +31,9 @@ export interface EditSpace {
   explorable?: boolean;
 }
 
-export type StatusKind = 'OFFLINE' | 'AWAY' | 'ONLINE';
-
-export interface UserStatus {
-  timestamp: number;
-  kind: StatusKind;
-}
-
-export interface SpaceWithRelated {
-  space: Space;
-  members: Record<Id, SpaceMemberWithUser | undefined>;
-  channels: Channel[];
-  channelMembers: Record<Id, ChannelMember[] | undefined>;
-  usersStatus: Record<Id, UserStatus>;
-}
-
-export interface SpaceMemberWithUser {
-  space: SpaceMember;
-  user: User;
-}
-
 export interface Kick {
   spaceId: Id;
   userId: Id;
 }
+
+export { Space, SpaceMember, SpaceMemberWithUser, SpaceWithMember, SpaceWithRelated, UserStatus, StatusKind };
