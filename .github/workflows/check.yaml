@@ -7,7 +7,7 @@ jobs:
     env:
       CI: true
     runs-on: ubuntu-latest
-    container: rustlang/rust:nightly
+    container: rustlang/rust:nightly-bullseye
 
     services:
       redis:
@@ -21,15 +21,25 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: build
-        run: cargo build
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            server:
+              - 'server/**'
+
+      - name: Build server
+        if: steps.changes.outputs.server == 'true'
+        run: cargo build -p server
 
       - name: Init Database
+        if: steps.changes.outputs.server == 'true'
         run: cargo run --bin manage init
         env:
           DATABASE_URL: postgresql://postgres:postgres@postgres/boluo
 
       - name: test
+        if: steps.changes.outputs.server == 'true'
         run: cargo test
         env:
           DATABASE_URL: postgresql://postgres:postgres@postgres/boluo
