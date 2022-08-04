@@ -28,6 +28,9 @@ jobs:
             server:
               - 'server/**'
 
+      - uses: Swatinem/rust-cache@v2
+        if: steps.changes.changes[0] != null
+
       - name: Build server
         if: steps.changes.outputs.server == 'true'
         run: cargo build -p server
