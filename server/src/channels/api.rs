@@ -12,9 +12,10 @@ fn tautology() -> bool {
     true
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, TS)]
+#[ts(export)]
 #[serde(rename_all = "camelCase")]
-pub struct Create {
+pub struct CreateChannel {
     pub space_id: Uuid,
     pub name: String,
     #[serde(default)]
@@ -24,9 +25,10 @@ pub struct Create {
     pub is_public: bool,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, TS)]
+#[ts(export)]
 #[serde(rename_all = "camelCase")]
-pub struct Edit {
+pub struct EditChannel {
     pub channel_id: Uuid,
     pub name: Option<String>,
     pub topic: Option<String>,
@@ -40,16 +42,18 @@ pub struct Edit {
     pub is_document: Option<bool>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, TS)]
+#[ts(export)]
 #[serde(rename_all = "camelCase")]
 pub struct CheckChannelName {
     pub space_id: Uuid,
     pub name: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, TS)]
+#[ts(export)]
 #[serde(rename_all = "camelCase")]
-pub struct EditMember {
+pub struct EditChannelMember {
     pub channel_id: Uuid,
     pub character_name: Option<String>,
     pub text_color: Option<String>,
@@ -83,7 +87,8 @@ pub struct ChannelMemberWithUser {
     pub user: User,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, TS)]
+#[ts(export)]
 #[serde(rename_all = "camelCase")]
 pub struct JoinChannel {
     pub channel_id: Uuid,
@@ -91,16 +96,18 @@ pub struct JoinChannel {
     pub character_name: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, TS)]
+#[ts(export)]
 #[serde(rename_all = "camelCase")]
-pub struct AddMember {
+pub struct AddChannelMember {
     pub channel_id: Uuid,
     pub user_id: Uuid,
     #[serde(default)]
     pub character_name: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, TS)]
+#[ts(export)]
 #[serde(rename_all = "camelCase")]
 pub struct Export {
     pub channel_id: Uuid,

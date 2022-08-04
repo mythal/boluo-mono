@@ -3,4 +3,8 @@ import type { ChannelMember } from "./ChannelMember";
 import type { SpaceMember } from "./SpaceMember";
 import type { User } from "./User";
 
-export interface Member { channel: ChannelMember, space: SpaceMember, user: User, }
+export interface Member {
+  channel: ChannelMember;
+  space: SpaceMember;
+  user: User;
+}

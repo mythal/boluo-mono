@@ -10,7 +10,7 @@ use crate::error::{AppError, Find, ValidationFailed};
 use crate::interface;
 use crate::media::{upload, upload_params};
 use crate::spaces::Space;
-use crate::users::api::{CheckEmailExists, CheckUsernameExists, Edit, GetMe, QueryUser};
+use crate::users::api::{CheckEmailExists, CheckUsernameExists, EditUser, GetMe, QueryUser};
 use crate::users::models::UserExt;
 use crate::utils::get_ip;
 use hyper::{Body, Method, Request};
@@ -137,7 +137,7 @@ pub async fn logout(req: Request<Body>) -> Result<Response, AppError> {
 pub async fn edit(req: Request<Body>) -> Result<User, AppError> {
     use crate::csrf::authenticate;
     let session = authenticate(&req).await?;
-    let Edit { nickname, bio, avatar }: Edit = parse_body(req).await?;
+    let EditUser { nickname, bio, avatar }: EditUser = parse_body(req).await?;
     let mut db = database::get().await?;
     User::edit(&mut *db, &session.user_id, nickname, bio, avatar)
         .await

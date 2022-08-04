@@ -2,4 +2,7 @@
 import type { Channel } from "./Channel";
 import type { ChannelMember } from "./ChannelMember";
 
-export interface ChannelWithMember { channel: Channel, member: ChannelMember, }
+export interface ChannelWithMember {
+  channel: Channel;
+  member: ChannelMember;
+}

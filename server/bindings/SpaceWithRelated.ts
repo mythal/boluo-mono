@@ -5,4 +5,10 @@ import type { Space } from "./Space";
 import type { SpaceMemberWithUser } from "./SpaceMemberWithUser";
 import type { UserStatus } from "./UserStatus";
 
-export interface SpaceWithRelated { space: Space, members: Record<string, SpaceMemberWithUser>, channels: Array<Channel>, channelMembers: Record<string, Array<ChannelMember>>, usersStatus: Record<string, UserStatus>, }
+export interface SpaceWithRelated {
+  space: Space;
+  members: Record<string, SpaceMemberWithUser>;
+  channels: Array<Channel>;
+  channelMembers: Record<string, Array<ChannelMember>>;
+  usersStatus: Record<string, UserStatus>;
+}

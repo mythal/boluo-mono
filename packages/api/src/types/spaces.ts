@@ -6,34 +6,26 @@ import type { SpaceWithMember } from 'server-bindings/SpaceWithMember';
 import type { SpaceWithRelated } from 'server-bindings/SpaceWithRelated';
 import type { UserStatus } from 'server-bindings/UserStatus';
 import type { StatusKind } from 'server-bindings/StatusKind';
+import type { CreateSpace } from 'server-bindings/CreateSpace';
+import type { SearchParams } from 'server-bindings/SearchParams';
+import type { KickFromSpace } from 'server-bindings/KickFromSpace';
+import type { EditSpace } from 'server-bindings/EditSpace';
 
 export interface SpaceIdWithToken {
   spaceId: Id;
   token?: string;
 }
 
-export interface CreateSpace {
-  name: string;
-  description: string;
-  defaultDiceType: string | undefined;
-  firstChannelName: string;
-}
-
-export interface SearchParams {
-  search: string;
-}
-
-export interface EditSpace {
-  spaceId: Id;
-  name?: string;
-  description?: string;
-  defaultDiceType: string | undefined;
-  explorable?: boolean;
-}
-
-export interface Kick {
-  spaceId: Id;
-  userId: Id;
-}
-
-export { Space, SpaceMember, SpaceMemberWithUser, SpaceWithMember, SpaceWithRelated, UserStatus, StatusKind };
+export {
+  Space,
+  SpaceMember,
+  SpaceMemberWithUser,
+  SpaceWithMember,
+  SpaceWithRelated,
+  UserStatus,
+  StatusKind,
+  CreateSpace,
+  SearchParams,
+  KickFromSpace,
+  EditSpace,
+};
