@@ -1,0 +1,7 @@
+{
+  "extends": "./packages/base.json",
+  "compileOnSave": false,
+  "compilerOptions": {
+    "paths": {}
+  }
+}
