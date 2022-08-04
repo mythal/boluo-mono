@@ -1,8 +1,8 @@
-use super::api::{Create, Edit};
+use super::api::{CreateChannel, EditChannel};
 use super::models::ChannelMember;
 use super::Channel;
 use crate::channels::api::{
-    AddMember, ChannelMemberWithUser, ChannelWithMember, ChannelWithRelated, CheckChannelName, EditMember, Export,
+    AddChannelMember, ChannelMemberWithUser, ChannelWithMember, ChannelWithRelated, CheckChannelName, EditChannelMember, Export,
     JoinChannel,
 };
 use crate::channels::models::Member;
@@ -71,7 +71,7 @@ async fn query_with_related(req: Request<Body>) -> Result<ChannelWithRelated, Ap
 
 async fn create(req: Request<Body>) -> Result<ChannelWithMember, AppError> {
     let session = authenticate(&req).await?;
-    let Create {
+    let CreateChannel {
         space_id,
         name,
         character_name,
@@ -100,7 +100,7 @@ async fn create(req: Request<Body>) -> Result<ChannelWithMember, AppError> {
 
 async fn edit(req: Request<Body>) -> Result<Channel, AppError> {
     let session = authenticate(&req).await?;
-    let Edit {
+    let EditChannel {
         channel_id,
         name,
         topic,
@@ -151,7 +151,7 @@ async fn edit(req: Request<Body>) -> Result<Channel, AppError> {
 
 async fn add_member(req: Request<Body>) -> Result<ChannelWithMember, AppError> {
     let session = authenticate(&req).await?;
-    let AddMember {
+    let AddChannelMember {
         channel_id,
         user_id,
         character_name,
@@ -176,7 +176,7 @@ async fn add_member(req: Request<Body>) -> Result<ChannelWithMember, AppError> {
 
 async fn edit_member(req: Request<Body>) -> Result<ChannelMember, AppError> {
     let session = authenticate(&req).await?;
-    let EditMember {
+    let EditChannelMember {
         channel_id,
         character_name,
         text_color,

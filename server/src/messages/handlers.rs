@@ -1,11 +1,11 @@
-use super::api::{Edit, NewMessage};
+use super::api::{EditMessage, NewMessage};
 use super::Message;
 use crate::channels::{Channel, ChannelMember};
 use crate::csrf::authenticate;
 use crate::error::{AppError, Find};
 use crate::events::Event;
 use crate::interface::{missing, ok_response, parse_query, Response};
-use crate::messages::api::{ByChannel, MoveBetween};
+use crate::messages::api::{GetMessagesByChannel, MoveMessageBetween};
 use crate::spaces::SpaceMember;
 use crate::{database, interface};
 use hyper::{Body, Request};
@@ -54,7 +54,7 @@ async fn send(req: Request<Body>) -> Result<Message, AppError> {
 
 async fn edit(req: Request<Body>) -> Result<Message, AppError> {
     let session = authenticate(&req).await?;
-    let Edit {
+    let EditMessage {
         message_id,
         name,
         text,
@@ -100,7 +100,7 @@ async fn edit(req: Request<Body>) -> Result<Message, AppError> {
 
 async fn move_between(req: Request<Body>) -> Result<bool, AppError> {
     let session = authenticate(&req).await?;
-    let MoveBetween {
+    let MoveMessageBetween {
         message_id,
         channel_id,
         range,
@@ -195,7 +195,7 @@ async fn toggle_fold(req: Request<Body>) -> Result<Message, AppError> {
 }
 
 async fn by_channel(req: Request<Body>) -> Result<Vec<Message>, AppError> {
-    let ByChannel {
+    let GetMessagesByChannel {
         channel_id,
         limit,
         before,

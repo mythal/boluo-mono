@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use super::api::{Create, Edit, SpaceWithRelated};
+use super::api::{CreateSpace, EditSpace, SpaceWithRelated};
 use super::models::space_users_status;
 use super::{Space, SpaceMember};
 use crate::channels::{Channel, ChannelMember};
@@ -9,7 +9,7 @@ use crate::database;
 use crate::error::{AppError, Find};
 use crate::events::Event;
 use crate::interface::{self, missing, ok_response, parse_query, IdQuery, Response};
-use crate::spaces::api::{Join, Kick, SearchParams, SpaceWithMember};
+use crate::spaces::api::{JoinSpace, KickFromSpace, SearchParams, SpaceWithMember};
 use crate::spaces::models::SpaceMemberWithUser;
 use crate::users::User;
 use hyper::{Body, Request};
@@ -98,13 +98,13 @@ async fn search(req: Request<Body>) -> Result<Vec<Space>, AppError> {
 
 async fn create(req: Request<Body>) -> Result<SpaceWithMember, AppError> {
     let session = authenticate(&req).await?;
-    let Create {
+    let CreateSpace {
         name,
         password,
         description,
         default_dice_type,
         first_channel_name,
-    }: Create = interface::parse_body(req).await?;
+    }: CreateSpace = interface::parse_body(req).await?;
 
     let mut conn = database::get().await?;
     let mut trans = conn.transaction().await?;
@@ -122,7 +122,7 @@ async fn create(req: Request<Body>) -> Result<SpaceWithMember, AppError> {
 
 async fn edit(req: Request<Body>) -> Result<Space, AppError> {
     let session = authenticate(&req).await?;
-    let Edit {
+    let EditSpace {
         space_id,
         name,
         description,
@@ -132,7 +132,7 @@ async fn edit(req: Request<Body>) -> Result<Space, AppError> {
         allow_spectator,
         grant_admins,
         remove_admins,
-    }: Edit = interface::parse_body(req).await?;
+    }: EditSpace = interface::parse_body(req).await?;
 
     let mut conn = database::get().await?;
     let mut trans = conn.transaction().await?;
@@ -175,7 +175,7 @@ async fn edit(req: Request<Body>) -> Result<Space, AppError> {
 
 async fn join(req: Request<Body>) -> Result<SpaceWithMember, AppError> {
     let session = authenticate(&req).await?;
-    let Join { space_id, token } = parse_query(req.uri())?;
+    let JoinSpace { space_id, token } = parse_query(req.uri())?;
 
     let mut db = database::get().await?;
     let db = &mut *db;
@@ -216,7 +216,7 @@ async fn leave(req: Request<Body>) -> Result<bool, AppError> {
 
 async fn kick(req: Request<Body>) -> Result<bool, AppError> {
     let session = authenticate(&req).await?;
-    let Kick { space_id, user_id } = parse_query(req.uri())?;
+    let KickFromSpace { space_id, user_id } = parse_query(req.uri())?;
 
     let mut conn = database::get().await?;
     let mut trans = conn.transaction().await?;

@@ -1,14 +1,17 @@
+use ts_rs::TS;
 use serde::Deserialize;
 use uuid::Uuid;
 
-#[derive(Deserialize)]
+#[derive(Deserialize, TS)]
+#[ts(export)]
 #[serde(rename_all = "camelCase")]
 pub struct Upload {
     pub filename: String,
     pub mime_type: Option<String>,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, TS)]
+#[ts(export)]
 #[serde(rename_all = "camelCase")]
 pub struct MediaQuery {
     pub filename: Option<String>,

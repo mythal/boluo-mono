@@ -2,4 +2,7 @@
 import type { SpaceMember } from "./SpaceMember";
 import type { User } from "./User";
 
-export interface SpaceMemberWithUser { space: SpaceMember, user: User, }
+export interface SpaceMemberWithUser {
+  space: SpaceMember;
+  user: User;
+}

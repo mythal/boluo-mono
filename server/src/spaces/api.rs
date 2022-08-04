@@ -6,9 +6,10 @@ use uuid::Uuid;
 
 use super::models::UserStatus;
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, TS)]
+#[ts(export)]
 #[serde(rename_all = "camelCase")]
-pub struct Create {
+pub struct CreateSpace {
     pub name: String,
     pub password: Option<String>,
     pub description: String,
@@ -16,29 +17,33 @@ pub struct Create {
     pub first_channel_name: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, TS)]
+#[ts(export)]
 #[serde(rename_all = "camelCase")]
-pub struct Join {
+pub struct JoinSpace {
     pub space_id: Uuid,
     pub token: Option<Uuid>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, TS)]
+#[ts(export)]
 #[serde(rename_all = "camelCase")]
-pub struct Kick {
+pub struct KickFromSpace {
     pub space_id: Uuid,
     pub user_id: Uuid,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, TS)]
+#[ts(export)]
 #[serde(rename_all = "camelCase")]
 pub struct SearchParams {
     pub search: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, TS)]
+#[ts(export)]
 #[serde(rename_all = "camelCase")]
-pub struct Edit {
+pub struct EditSpace {
     pub space_id: Uuid,
     pub name: Option<String>,
     pub description: Option<String>,

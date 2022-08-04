@@ -45,7 +45,7 @@ tokio-tungstenite = "0.15"
 
 [dependencies.ts-rs]
 version = "6.2"
-features = ["serde-compat", "uuid-impl", "chrono-impl"]
+features = ["serde-compat", "uuid-impl", "chrono-impl", "format"]
 
 [dependencies.reqwest]
 version = "0.11"
