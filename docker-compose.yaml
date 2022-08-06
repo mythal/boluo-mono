@@ -4,3 +4,8 @@ services:
     build:
       context: .
       dockerfile: ./apps/site/Dockerfile
+
+  server:
+    image: ghcr.io/mythal/boluo-mono/server:nightly
+    build:
+      dockerfile: ./server/Dockerfile
