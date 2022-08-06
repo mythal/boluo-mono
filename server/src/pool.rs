@@ -69,7 +69,9 @@ impl<C> InternalPool<C> {
         }
         while let Some(waiter) = self.waiters.pop_front() {
             if let Some(conn) = connection {
+                // The rx was dropped
                 if let Err(returned) = waiter.send(conn) {
+                    // Send the connection to the next waiter
                     connection = Some(returned);
                 } else {
                     return;
@@ -135,14 +137,44 @@ impl<F: Factory> Pool<F> {
 
         let pool = Arc::downgrade(&self.inner);
         let mut internal = self.inner.inner.lock().await;
+
+        if internal.conns.len() > internal.num {
+            let mut conns: VecDeque<Option<F::Output>> = VecDeque::new();
+            std::mem::swap(&mut conns, &mut internal.conns);
+            internal.conns = conns.into_iter().take(internal.num).collect();
+        }
+
+        for conn in internal.conns.iter_mut() {
+            // A `conn` of `None` means that the original connection is broken.
+            if conn.is_none() {
+                match self.inner.factory.make().await {
+                    Ok(fixed_connection) => *conn = Some(fixed_connection),
+                    Err(e) => {
+                        log::error!("Failed to establish connection with database, retry after 0.5 second: {}", e);
+                        tokio::time::sleep(std::time::Duration::from_millis(500)).await;
+                        match self.inner.factory.make().await {
+                            Ok(fixed_connection) => *conn = Some(fixed_connection),
+                            Err(e) => {
+                                log::error!("Failed to establish connection with database (2/2) {}", e);
+                                return Err(e);
+                            }
+                        }
+                    },
+                }
+            }
+        }
+
         let conn = if let Some(conn) = internal.conns.pop_front() {
             drop(internal);
             if let Some(conn) = conn {
                 conn
             } else {
+                log::error!("Unexpected! `conn` remains `None`");
                 self.inner.factory.make().await?
             }
         } else {
+            log::warn!("All connections is busy.");
+
             let (tx, rx) = oneshot::channel::<F::Output>();
             internal.waiters.push_back(tx);
             drop(internal);
