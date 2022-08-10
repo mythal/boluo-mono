@@ -10,7 +10,7 @@ interface Config<W extends Breakpoints, H extends Breakpoints> {
 
 export const useContainerQuery = <W extends Breakpoints, H extends Breakpoints>(
   ref: RefObject<HTMLElement | null>,
-  config: Config<W, H>
+  config: Config<W, H>,
 ): [keyof W | null, keyof H | null] => {
   const { width: widthConfig, height: heightConfig } = config;
   const calculateWidthBreakPoint: (rect: DOMRectReadOnly | null | undefined) => keyof W | null = useCallback(
@@ -29,7 +29,7 @@ export const useContainerQuery = <W extends Breakpoints, H extends Breakpoints>(
       }
       return breakpointName;
     },
-    [widthConfig]
+    [widthConfig],
   );
 
   const calculateHeightBreakPoint: (rect: DOMRectReadOnly | null | undefined) => keyof H | null = useCallback(
@@ -49,7 +49,7 @@ export const useContainerQuery = <W extends Breakpoints, H extends Breakpoints>(
       }
       return breakpointName;
     },
-    [heightConfig]
+    [heightConfig],
   );
   const rect = ref.current?.getBoundingClientRect();
   const [widthBreakpoint, setWidthBreakpoint] = useState<keyof W | null>(calculateWidthBreakPoint(rect));

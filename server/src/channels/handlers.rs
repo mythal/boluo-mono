@@ -2,8 +2,8 @@ use super::api::{CreateChannel, EditChannel};
 use super::models::ChannelMember;
 use super::Channel;
 use crate::channels::api::{
-    AddChannelMember, ChannelMemberWithUser, ChannelWithMember, ChannelWithRelated, CheckChannelName, EditChannelMember, Export,
-    JoinChannel,
+    AddChannelMember, ChannelMemberWithUser, ChannelWithMember, ChannelWithRelated, CheckChannelName,
+    EditChannelMember, Export, JoinChannel,
 };
 use crate::channels::models::Member;
 use crate::csrf::authenticate;

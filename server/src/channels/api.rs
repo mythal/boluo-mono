@@ -2,10 +2,10 @@ use super::models::{Channel, ChannelMember};
 use crate::channels::models::Member;
 use crate::spaces::Space;
 use crate::users::User;
-use ts_rs::TS;
 use chrono::NaiveDateTime;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
+use ts_rs::TS;
 use uuid::Uuid;
 
 fn tautology() -> bool {

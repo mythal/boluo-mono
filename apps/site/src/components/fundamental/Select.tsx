@@ -1,8 +1,8 @@
-import React, { useId } from 'react';
-import { useSelect } from 'downshift';
-import { useTransition } from 'transition-hook';
-import clsx from 'clsx';
 import { ChevronUp } from 'boluo-icons';
+import clsx from 'clsx';
+import { useSelect } from 'downshift';
+import React, { useId } from 'react';
+import { useTransition } from 'transition-hook';
 import type { StyleProps } from '../../helper/props';
 import Icon from './Icon';
 
@@ -55,7 +55,7 @@ export const Select: React.FC<Props> = ({ items, value, onChange, label, classNa
             'border-1/2 border-select-button-border bg-select-button-bg text-select-button-text',
             'disabled:bg-select-button-disabled disabled:text-select-button-disabledText',
             'hover-enabled:border-select-button-hoverBorder hover-enabled:bg-select-button-hover',
-            isOpen && 'border-select-button-openBorder bg-select-button-open'
+            isOpen && 'border-select-button-openBorder bg-select-button-open',
           )}
           aria-label="toggle menu"
           type="button"
@@ -79,7 +79,7 @@ export const Select: React.FC<Props> = ({ items, value, onChange, label, classNa
           'absolute z-10 m-0 mt-1 w-full select-none list-none rounded border p-0',
           'origin-top scale-y-0 transition-all duration-75',
           'border border-select-list-border text-select-list-text shadow-menu',
-          stage === 'enter' && 'scale-y-100'
+          stage === 'enter' && 'scale-y-100',
         )}
       >
         {items.map((item, index) => {
@@ -98,7 +98,7 @@ export const Select: React.FC<Props> = ({ items, value, onChange, label, classNa
                 selected && [
                   'text-white hover:bg-select-item-selectedHover',
                   highlighted ? 'bg-select-item-selectedHighlighted' : 'bg-select-item-selected',
-                ]
+                ],
               )}
             >
               {item.label}

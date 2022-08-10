@@ -4,9 +4,9 @@ use crate::error::AppError;
 use crate::events::Event;
 use crate::{cache, error::Find};
 use chrono::NaiveDateTime;
-use ts_rs::TS;
 use serde::{Deserialize, Serialize};
 use serde_json::Value as JsonValue;
+use ts_rs::TS;
 use uuid::Uuid;
 
 #[derive(Debug, Serialize, Deserialize, Clone, TS)]

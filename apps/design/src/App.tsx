@@ -1,7 +1,7 @@
-import { PageRouter, PageLinkList } from './pages';
-import { Providers } from './Providers';
-import { SchemeSwitch } from 'ui';
 import clsx from 'clsx';
+import { SchemeSwitch } from 'ui';
+import { PageLinkList, PageRouter } from './pages';
+import { Providers } from './Providers';
 
 export function App() {
   return (

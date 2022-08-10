@@ -8,7 +8,7 @@ interface Result {
 
 export const useRequestNotification = (): Result => {
   const [permission, setPermisson] = useState<typeof Notification.permission>(
-    typeof window === 'undefined' ? 'default' : Notification.permission
+    typeof window === 'undefined' ? 'default' : Notification.permission,
   );
   useEffect(() => {
     if (!navigator.permissions) {

@@ -10,11 +10,11 @@ use crate::spaces::models::{space_users_status, StatusKind, UserStatus};
 use crate::utils::timestamp;
 use crate::{cache, database};
 use redis::AsyncCommands;
-use ts_rs::TS;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::Arc;
 use tokio::spawn;
+use ts_rs::TS;
 use uuid::Uuid;
 
 #[derive(Deserialize, Debug)]

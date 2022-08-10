@@ -11,7 +11,7 @@ export const useLocale = (): [Locale, (locale: Locale) => void] => {
       const as = undefined;
       await router.push(url, as, { locale });
     },
-    [router]
+    [router],
   );
   return [toLocale(router.locale), changeLocale];
 };

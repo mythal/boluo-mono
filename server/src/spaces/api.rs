@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
-use ts_rs::TS;
 use serde::{Deserialize, Serialize};
+use ts_rs::TS;
 use uuid::Uuid;
 
 use super::models::UserStatus;

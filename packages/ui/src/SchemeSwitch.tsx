@@ -1,9 +1,9 @@
+import * as ToggleGroup from '@radix-ui/react-toggle-group';
+import { Moon, Sun } from 'boluo-icons';
 import clsx from 'clsx';
 import { FC, useEffect, useState } from 'react';
-import { StyleProps } from './types';
-import * as ToggleGroup from '@radix-ui/react-toggle-group';
-import { Sun, Moon } from 'boluo-icons';
 import { useScheme } from './hooks/useScheme';
+import { StyleProps } from './types';
 
 interface Props extends StyleProps {}
 
@@ -13,7 +13,7 @@ export const SchemeSwitch: FC<Props> = ({ className }) => {
   const btnClasses = clsx(
     'bg-gray-300 first-of-type:rounded-l last-of-type:rounded-r p-2 hover:bg-gray-200',
     'state-on:bg-gray-500 state-on:text-gray-50 state-on:hover:bg-gray-400',
-    'transition-colors duration-200'
+    'transition-colors duration-200',
   );
   const handleChange = (value: string | undefined) => {
     const html = window.document.documentElement;

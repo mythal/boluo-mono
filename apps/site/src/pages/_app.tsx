@@ -7,11 +7,11 @@ function registerServiceWorker() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
       .register(new URL('workers/dist/serviceWorker.js', import.meta.url))
-      .then(function (reg) {
+      .then(function(reg) {
         // registration worked
         console.log('Registration succeeded. Scope is ' + reg.scope);
       })
-      .catch(function (error) {
+      .catch(function(error) {
         // registration failed
         console.log('Registration failed with ' + String(error));
       });
@@ -30,7 +30,7 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
     <Providers>
       <Component {...pageProps} />
     </Providers>,
-    title
+    title,
   );
 }
 export default App;

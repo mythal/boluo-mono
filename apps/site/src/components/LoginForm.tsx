@@ -1,3 +1,5 @@
+import { post } from 'boluo-api';
+import type { LoginReturn } from 'boluo-api';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -6,8 +8,6 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useSWRConfig } from 'swr';
 import { Button, TextInput } from 'ui';
-import { post } from 'boluo-api';
-import type { LoginReturn } from 'boluo-api';
 import type { StyleProps } from '../helper/props';
 import Oops from './Oops';
 
@@ -28,7 +28,7 @@ export const LoginForm = ({ className }: StyleProps) => {
   } = useForm<Inputs>();
   const [error, setError] = useState<unknown>(null);
   const intl = useIntl();
-  const required = intl.formatMessage({ defaultMessage: "Can't be empty." });
+  const required = intl.formatMessage({ defaultMessage: 'Can\'t be empty.' });
   const onSubmit: SubmitHandler<Inputs> = async ({ password, username }) => {
     let result: LoginReturn;
     try {

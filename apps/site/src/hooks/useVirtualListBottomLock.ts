@@ -4,7 +4,7 @@ import type { IndexLocationWithAlign, VirtuosoHandle } from 'react-virtuoso';
 
 export const useVirtualListBottomLock = (
   virtualListRef: RefObject<VirtuosoHandle>,
-  itemLength: number
+  itemLength: number,
 ): MutableRefObject<boolean> => {
   const bottomLock = useRef(true);
   useEffect(() => {

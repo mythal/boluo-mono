@@ -1,19 +1,19 @@
+import { Settings } from 'boluo-icons';
+import clsx from 'clsx';
+import Head from 'next/head';
+import Link from 'next/link';
 import type { FC } from 'react';
 import React, { Suspense, useState } from 'react';
-import Link from 'next/link';
-import Head from 'next/head';
-import clsx from 'clsx';
 import { Button } from 'ui';
-import { Settings } from 'boluo-icons';
-import type { Page } from '../../helper/layout';
-import { tabRouteTable, useDesignRoute } from '../../design/useDesignRoute';
-import Home from '../../design/Home.mdx';
-import { SchemeSwitch } from '../../components/SchemeSwitch';
-import Icon from '../../components/fundamental/Icon';
 import { Dialog } from '../../components/fundamental/Dialog';
-import { LocaleSwitch } from '../../components/LocaleSwitch';
-import { useRequestNotification } from '../../hooks/useRequestNotification';
+import Icon from '../../components/fundamental/Icon';
 import { Loading } from '../../components/Loading';
+import { LocaleSwitch } from '../../components/LocaleSwitch';
+import { SchemeSwitch } from '../../components/SchemeSwitch';
+import Home from '../../design/Home.mdx';
+import { tabRouteTable, useDesignRoute } from '../../design/useDesignRoute';
+import type { Page } from '../../helper/layout';
+import { useRequestNotification } from '../../hooks/useRequestNotification';
 
 const DesignRoute: FC<{ tab: keyof typeof tabRouteTable }> = ({ tab }) => {
   if (tabRouteTable.hasOwnProperty(tab)) {

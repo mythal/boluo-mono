@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
+import { toLocale } from '../helper/locale';
 import type { StyleProps } from '../helper/props';
 import { useLocale } from '../hooks/useLocale';
-import { toLocale } from '../helper/locale';
 import { Select } from './fundamental/Select';
 
 export const LocaleSwitch: React.FC<StyleProps> = ({ className }) => {
@@ -24,7 +24,7 @@ export const LocaleSwitch: React.FC<StyleProps> = ({ className }) => {
         label: '日本語',
       },
     ],
-    []
+    [],
   );
   return <Select className={className} items={items} value={locale} onChange={handler} />;
 };

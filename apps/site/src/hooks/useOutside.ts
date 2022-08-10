@@ -4,14 +4,14 @@ import { useCallback, useEffect } from 'react';
 export function useOutside(
   callback: (() => void) | undefined,
   overlayRef: React.RefObject<HTMLElement | null>,
-  triggerRef?: React.RefObject<HTMLElement | null>
+  triggerRef?: React.RefObject<HTMLElement | null>,
 ) {
   /**
    * https://stackoverflow.com/a/42234988
    */
 
   const handleClickOutside = useCallback(
-    function (event: MouseEvent) {
+    function(event: MouseEvent) {
       if (!callback || !overlayRef.current || !event.target) {
         return;
       }
@@ -26,7 +26,7 @@ export function useOutside(
       }
       callback();
     },
-    [overlayRef, triggerRef, callback]
+    [overlayRef, triggerRef, callback],
   );
 
   useEffect(() => {

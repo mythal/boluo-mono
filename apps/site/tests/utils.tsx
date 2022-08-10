@@ -1,8 +1,8 @@
 import type { RenderOptions } from '@testing-library/react';
 import { render as jestRender } from '@testing-library/react';
 import type { FC, ReactElement } from 'react';
-import { Provider as ReduxProvider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
+import { Provider as ReduxProvider } from 'react-redux';
 import { store } from '../src/state/store';
 
 // See https://testing-library.com/docs/react-testing-library/setup#custom-render

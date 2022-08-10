@@ -1,8 +1,8 @@
+import clsx from 'clsx';
 import type { FC } from 'react';
 import React, { useRef } from 'react';
-import clsx from 'clsx';
-import { useOutside } from '../../hooks/useOutside';
 import { useOnEsc } from '../../hooks/useOnEsc';
+import { useOutside } from '../../hooks/useOutside';
 import { Portal } from './Portal';
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {

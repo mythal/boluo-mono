@@ -2,4 +2,5 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 pnpm run pre-commit
+dprint check
 cargo test export_bindings_

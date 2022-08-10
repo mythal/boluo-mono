@@ -1,11 +1,11 @@
 use std::collections::HashMap;
 use std::convert::TryInto;
 
-use ts_rs::TS;
 use chrono::naive::NaiveDateTime;
 use postgres_types::FromSql;
 use redis::AsyncCommands;
 use serde::{Deserialize, Serialize};
+use ts_rs::TS;
 use uuid::Uuid;
 
 use crate::cache::make_key;

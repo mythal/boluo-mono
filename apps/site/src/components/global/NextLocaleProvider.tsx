@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { IntlProvider } from 'react-intl';
 import type { OnErrorFn } from '@formatjs/intl';
 import { IntlErrorCode } from '@formatjs/intl';
 import { useRouter } from 'next/router';
-import type { ChildrenProps } from '../../helper/props';
+import React, { useEffect, useState } from 'react';
+import { IntlProvider } from 'react-intl';
 import type { IntlMessages, Locale } from '../../helper/locale';
 import { loadMessages } from '../../helper/locale';
+import type { ChildrenProps } from '../../helper/props';
 import { useNotify } from '../../state/user-interface';
 
 const onError: OnErrorFn = (err) => {

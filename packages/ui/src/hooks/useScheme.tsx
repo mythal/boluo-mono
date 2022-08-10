@@ -13,7 +13,7 @@ export const getScheme = (): Scheme => {
   }
 };
 
-export const observeScheme = (callback: (scheme: Scheme) => void): (() => void) => {
+export const observeScheme = (callback: (scheme: Scheme) => void): () => void => {
   const node = window.document.documentElement;
   const config: MutationObserverInit = {
     attributeFilter: ['class'],

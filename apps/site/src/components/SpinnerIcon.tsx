@@ -1,5 +1,5 @@
-import React from 'react';
 import { CircleNotch } from 'boluo-icons';
+import React from 'react';
 import Icon from './fundamental/Icon';
 
 interface Props {

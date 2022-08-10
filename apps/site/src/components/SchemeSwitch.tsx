@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import type { StyleProps } from '../helper/props';
-import { useSwitchScheme } from '../state/user-interface';
 import { useAppSelector } from '../state/store';
+import { useSwitchScheme } from '../state/user-interface';
 import { Select } from './fundamental/Select';
 
 export const SchemeSwitch: React.FC<StyleProps> = ({ className }) => {
@@ -24,7 +24,7 @@ export const SchemeSwitch: React.FC<StyleProps> = ({ className }) => {
         value: 'auto',
       },
     ],
-    [intl]
+    [intl],
   );
 
   return (

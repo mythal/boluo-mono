@@ -2,9 +2,8 @@ use chrono::naive::NaiveDateTime;
 use postgres_types::FromSql;
 use serde::{Deserialize, Serialize};
 use serde_json::Value as JsonValue;
-use uuid::Uuid;
 use ts_rs::TS;
-
+use uuid::Uuid;
 
 use crate::database::Querist;
 use crate::error::{AppError, DbError, ModelError, ValidationFailed};

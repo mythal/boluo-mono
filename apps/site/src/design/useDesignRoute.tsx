@@ -1,5 +1,5 @@
-import { lazy } from 'react';
 import { useRouter } from 'next/router';
+import { lazy } from 'react';
 
 interface RouteItem {
   title: string;

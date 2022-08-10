@@ -1,8 +1,8 @@
+import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 import { useTransition } from 'transition-hook';
-import clsx from 'clsx';
-import type { UiNotification } from '../../state/user-interface';
 import type { ChildrenProps, StyleProps } from '../../helper/props';
+import type { UiNotification } from '../../state/user-interface';
 import { ToastCloseButton } from './ToastCloseButton';
 
 interface Props extends StyleProps, ChildrenProps {
@@ -56,7 +56,7 @@ export const Toast: React.FC<Props> = ({
           stage === 'enter' && 'translate-y-0 opacity-100 transition-all duration-300',
           stage === 'leave' && 'translate-x-full translate-y-0 opacity-0 transition-all duration-200',
         ],
-        className
+        className,
       )}
       data-stage={stage}
     >

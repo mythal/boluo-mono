@@ -150,7 +150,10 @@ impl<F: Factory> Pool<F> {
                 match self.inner.factory.make().await {
                     Ok(fixed_connection) => *conn = Some(fixed_connection),
                     Err(e) => {
-                        log::error!("Failed to establish connection with database, retry after 0.5 second: {}", e);
+                        log::error!(
+                            "Failed to establish connection with database, retry after 0.5 second: {}",
+                            e
+                        );
                         tokio::time::sleep(std::time::Duration::from_millis(500)).await;
                         match self.inner.factory.make().await {
                             Ok(fixed_connection) => *conn = Some(fixed_connection),
@@ -159,7 +162,7 @@ impl<F: Factory> Pool<F> {
                                 return Err(e);
                             }
                         }
-                    },
+                    }
                 }
             }
         }

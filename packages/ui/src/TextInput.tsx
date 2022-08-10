@@ -1,5 +1,5 @@
-import React from 'react';
 import clsx from 'clsx';
+import React from 'react';
 import type { DataAttr } from './types';
 
 type DataAttrProps = DataAttr<{
@@ -19,7 +19,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, InputProps>((props, 
         state === 'default' && 'input-default',
         state === 'error' && 'input-error',
         state === 'warning' && 'input-warning',
-        props.className
+        props.className,
       )}
     />
   );
@@ -35,7 +35,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>((pr
         state === 'default' && 'input-default',
         state === 'error' && 'input-error',
         state === 'warning' && 'input-warning',
-        props.className
+        props.className,
       )}
       ref={ref}
       {...props}

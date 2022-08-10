@@ -3,9 +3,9 @@ use crate::utils::inner_result_map;
 use crate::{context::media_path, database::Querist};
 use chrono::naive::NaiveDateTime;
 use postgres_types::FromSql;
-use ts_rs::TS;
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
+use ts_rs::TS;
 use uuid::Uuid;
 
 pub struct MediaFile {
