@@ -1,13 +1,19 @@
 //! Make server allow all origins for development.
 use hyper::header::{
-    HeaderValue, ACCESS_CONTROL_ALLOW_HEADERS, ACCESS_CONTROL_ALLOW_METHODS, ACCESS_CONTROL_ALLOW_ORIGIN,
-    ACCESS_CONTROL_REQUEST_HEADERS,
+    HeaderValue, ACCESS_CONTROL_ALLOW_CREDENTIALS, ACCESS_CONTROL_ALLOW_HEADERS, ACCESS_CONTROL_ALLOW_METHODS,
+    ACCESS_CONTROL_ALLOW_ORIGIN, ACCESS_CONTROL_REQUEST_HEADERS,
 };
 use hyper::{Body, Request, Response};
+use std::env;
 
 pub fn allow_origin(mut res: Response<Body>) -> Response<Body> {
     let header = res.headers_mut();
-    header.insert(ACCESS_CONTROL_ALLOW_ORIGIN, HeaderValue::from_static("*"));
+    let orgin = env::var("ALLOW_ORGIN").unwrap_or("*".to_string());
+    header.insert(
+        ACCESS_CONTROL_ALLOW_ORIGIN,
+        HeaderValue::from_str(&orgin).expect("Failed to convert `ALLOW_ORGIN` environment variable to `HeaderValue`."),
+    );
+    header.insert(ACCESS_CONTROL_ALLOW_CREDENTIALS, HeaderValue::from_static("true"));
     res
 }
 
