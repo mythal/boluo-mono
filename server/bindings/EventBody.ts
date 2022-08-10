@@ -15,10 +15,6 @@ export type EventBody =
   | { type: 'CHANNEL_EDITED'; channel_id: string; channel: Channel }
   | { type: 'MEMBERS'; channel_id: string; members: Array<Member> }
   | { type: 'INITIALIZED' }
-  | {
-    type: 'STATUS_MAP';
-    status_map: Record<string, UserStatus>;
-    space_id: string;
-  }
+  | { type: 'STATUS_MAP'; status_map: Record<string, UserStatus>; space_id: string }
   | { type: 'SPACE_UPDATED'; space_with_related: SpaceWithRelated }
   | { type: 'APP_UPDATED' };

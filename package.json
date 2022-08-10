@@ -21,7 +21,8 @@
     "pre-commit": "nx run-many --target=pre-commit --all",
     "prepare": "husky install",
     "graph": "nx graph",
-    "graph:affected": "nx affected:graph"
+    "graph:affected": "nx affected:graph",
+    "generate:bindings": "cargo test export_bindings_ && dprint fmt"
   },
   "devDependencies": {
     "@nrwl/devkit": "^14.5.2",
