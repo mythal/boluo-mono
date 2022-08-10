@@ -52,6 +52,13 @@ jobs:
           DEBUG: 1
           PORT: 3000
 
+  dprint:
+    runs-on: ubuntu-latest
+    container: rustlang/rust:nightly-bullseye
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dprint/check@v2.1
+
   nx:
     runs-on: ubuntu-latest
 
