@@ -17,6 +17,7 @@
     "tailwind.css": "tailwindcss"
   },
   "dprint.verbose": true,
+  "dprint.path": "node_modules/.bin/dprint",
   "tailwindCSS.experimental.classRegex": [["clsx\\(([^)]*)\\)", "'([^']*)'"]],
   "typescript.tsserver.experimental.enableProjectDiagnostics": true
 }

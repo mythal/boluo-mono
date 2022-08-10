@@ -14,7 +14,15 @@
   "toml": {},
   "dockerfile": {},
   "includes": ["**/*.{toml,dockerfile,rs,json,md,ts,tsx,html}"],
-  "excludes": ["**/*-lock.json", "**/target/", "**/build/", "**/dist/"],
+  "excludes": [
+    "**/*-lock.json",
+    "**/target/",
+    "**/build/",
+    "**/dist/",
+    "**/.next/",
+    "**/compiled/",
+    "packages/logo/src/"
+  ],
   "plugins": [
     "https://plugins.dprint.dev/toml-0.5.4.wasm",
     "https://plugins.dprint.dev/dockerfile-0.2.3.wasm",
