@@ -17,8 +17,8 @@ pub fn generate_csrf_token(session_key: &Uuid) -> String {
     let mut buffer = String::with_capacity(128);
     base64::encode_config_buf(session_key.as_bytes(), base64::STANDARD, &mut buffer);
     buffer.push('.');
-    buffer.push_str(&*timestamp.to_string());
-    let signature = sign(&*buffer);
+    buffer.push_str(&timestamp.to_string());
+    let signature = sign(&buffer);
     buffer.push('.');
     base64::encode_config_buf(&signature, base64::STANDARD, &mut buffer);
     buffer

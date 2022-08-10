@@ -49,14 +49,14 @@ pub async fn space_users_status(
                 continue;
             }
         };
-        match serde_json::from_slice::<UserStatus>(&*data) {
+        match serde_json::from_slice::<UserStatus>(&data) {
             Ok(status) => {
                 table.insert(Uuid::from_bytes(user_id_array), status);
             }
             Err(err) => log::error!("failed to deserialize user status in cache: {}", err),
         }
     }
-    return Ok(table);
+    Ok(table)
 }
 
 #[derive(Debug, Serialize, Deserialize, FromSql, Clone, TS)]
@@ -95,7 +95,7 @@ impl Space {
         default_dice_type: Option<&str>,
     ) -> Result<Space, ModelError> {
         use crate::validators::{DESCRIPTION, DICE, DISPLAY_NAME};
-        let name = merge_blank(&*name);
+        let name = merge_blank(&name);
         DISPLAY_NAME.run(&name)?;
         if let Some(default_dice_type) = default_dice_type {
             DICE.run(default_dice_type)?;
@@ -373,9 +373,9 @@ async fn space_test() -> Result<(), crate::error::AppError> {
     let space = Space::get_by_id(db, &space.id).await?.unwrap();
     assert!(Space::is_public(db, &space.id).await?.unwrap());
     let spaces = Space::all(db).await?;
-    assert!(spaces.into_iter().find(|s| s.id == space.id).is_some());
+    assert!(spaces.into_iter().any(|s| s.id == space.id));
     let spaces = Space::user_owned(db, &user.id).await?;
-    assert!(spaces.into_iter().find(|s| s.id == space.id).is_some());
+    assert!(spaces.into_iter().any(|s| s.id == space.id));
     let token = Space::get_token(db, &space.id).await?;
     assert_eq!(token, space.invite_token);
     let new_token = Space::refresh_token(db, &space.id).await?;

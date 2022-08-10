@@ -21,7 +21,7 @@ pub fn secret() -> &'static str {
     } else {
         env::var("SECRET").expect("environment variable `SECRET` not present")
     };
-    &*SECRET.get_or_init(|| secret_string)
+    SECRET.get_or_init(|| secret_string)
 }
 
 pub fn is_systemd() -> bool {

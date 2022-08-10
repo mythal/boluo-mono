@@ -89,7 +89,7 @@ impl Message {
         limit: i32,
     ) -> Result<Vec<Message>, ModelError> {
         use postgres_types::Type;
-        if limit > 256 || limit < 1 {
+        if !(1..=256).contains(&limit) {
             return Err(ValidationFailed("illegal limit range").into());
         }
         let rows = db
@@ -151,7 +151,7 @@ impl Message {
         };
         check_pos(pos)?;
 
-        let mut name = merge_blank(&*name);
+        let mut name = merge_blank(name);
         if name.is_empty() {
             name = default_name.trim().to_string();
         }
@@ -421,7 +421,7 @@ async fn message_test() -> Result<(), crate::error::AppError> {
         &channel.id,
         &user.id,
         "",
-        &*user.nickname,
+        &user.nickname,
         text,
         vec![],
         true,
@@ -473,7 +473,7 @@ async fn message_test() -> Result<(), crate::error::AppError> {
         &channel.id,
         &user.id,
         "orange",
-        &*user.nickname,
+        &user.nickname,
         "腰不舒服！",
         vec![],
         true,
@@ -496,7 +496,7 @@ async fn message_test() -> Result<(), crate::error::AppError> {
         &channel.id,
         &user.id,
         "orange",
-        &*user.nickname,
+        &user.nickname,
         "昨天我打了疫苗，已经是变种人了！",
         vec![],
         true,

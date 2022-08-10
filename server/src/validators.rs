@@ -76,7 +76,7 @@ pub static DICE: Validator<str> = Validator(&[("Illegal dice format.", &is_match
 
 #[test]
 fn validator_test() {
-    assert_eq!(PASSWORD.run("whoa!whoa!".to_string()), Ok(()));
+    assert_eq!(PASSWORD.run("whoa!whoa!"), Ok(()));
     assert!(PASSWORD.run("whoa!").is_err());
 
     assert_eq!(NAME.run("whoa"), Ok(()));

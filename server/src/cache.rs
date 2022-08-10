@@ -65,7 +65,7 @@ pub fn make_key(type_name: &[u8], id: &Uuid, field_name: &[u8]) -> Vec<u8> {
     let mut buffer = Vec::with_capacity(type_name.len() + field_name.len() + 24);
     buffer.extend_from_slice(type_name);
     buffer.push(b':');
-    buffer.extend_from_slice(&*id.as_bytes());
+    buffer.extend_from_slice(id.as_bytes());
     buffer.push(b':');
     buffer.extend_from_slice(field_name);
     buffer

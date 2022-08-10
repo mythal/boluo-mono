@@ -21,10 +21,10 @@ impl MediaFile {
     pub async fn create<T: Querist>(self, db: &mut T, user_id: Uuid, source: &str) -> Result<Media, DbError> {
         Media::create(
             db,
-            &*self.mime_type,
+            &self.mime_type,
             user_id,
-            &*self.filename,
-            &*self.original_filename,
+            &self.filename,
+            &self.original_filename,
             self.hash,
             self.size as i32,
             source,
@@ -93,6 +93,6 @@ impl Media {
                 ],
             )
             .await?;
-        Ok(row.try_get(0)?)
+        row.try_get(0)
     }
 }

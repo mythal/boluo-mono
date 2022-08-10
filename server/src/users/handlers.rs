@@ -25,7 +25,7 @@ async fn register(req: Request<Body>) -> Result<User, AppError> {
         password,
     }: Register = interface::parse_body(req).await?;
     let mut db = database::get().await?;
-    let user = User::register(&mut *db, &*email, &*username, &*nickname, &*password).await?;
+    let user = User::register(&mut *db, &email, &username, &nickname, &password).await?;
     log::info!("{} ({}) was registered.", user.username, user.email);
     Ok(user)
 }
@@ -79,7 +79,7 @@ pub async fn login(req: Request<Body>) -> Result<Response, AppError> {
     let form: Login = interface::parse_body(req).await?;
     let mut conn = database::get().await?;
     let db = &mut *conn;
-    let user = User::login(db, &*form.username, &*form.password)
+    let user = User::login(db, &form.username, &form.password)
         .await
         .or_no_permission()?;
     let session = session::start(&user.id).await.map_err(error_unexpected!())?;
@@ -105,7 +105,7 @@ pub async fn login(req: Request<Body>) -> Result<Response, AppError> {
     };
     let mut response = ok_response(LoginReturn { me, token });
     let headers = response.headers_mut();
-    headers.insert(SET_COOKIE, HeaderValue::from_str(&*session_cookie).unwrap());
+    headers.insert(SET_COOKIE, HeaderValue::from_str(&session_cookie).unwrap());
     Ok(response)
 }
 
@@ -128,7 +128,7 @@ pub async fn logout(req: Request<Body>) -> Result<Response, AppError> {
             .expires(time::OffsetDateTime::now_utc())
             .finish()
             .to_string();
-        HeaderValue::from_str(&*cookie).unwrap()
+        HeaderValue::from_str(&cookie).unwrap()
     });
     header.append(SET_COOKIE, header_value.clone());
     Ok(response)
@@ -181,21 +181,21 @@ pub async fn edit_avatar(req: Request<Body>) -> Result<User, AppError> {
 pub async fn check_email_exists(req: Request<Body>) -> Result<bool, AppError> {
     let CheckEmailExists { email } = parse_query(req.uri())?;
     let mut db = database::get().await?;
-    let user = User::get_by_email(&mut *db, &*email).await?;
+    let user = User::get_by_email(&mut *db, &email).await?;
     Ok(user.is_some())
 }
 
 pub async fn check_username_exists(req: Request<Body>) -> Result<bool, AppError> {
     let CheckUsernameExists { username } = parse_query(req.uri())?;
     let mut db = database::get().await?;
-    let user = User::get_by_username(&mut *db, &*username).await?;
+    let user = User::get_by_username(&mut *db, &username).await?;
     Ok(user.is_some())
 }
 
 pub fn token_key(token: &str) -> Vec<u8> {
     let mut key = b"reset_password:".to_vec();
     key.extend_from_slice(token.as_bytes());
-    return key;
+    key
 }
 
 pub async fn ip_limit(cache: &mut cache::Connection, req: &Request<Body>) -> Result<(), AppError> {
@@ -259,7 +259,7 @@ pub async fn reset_password(req: Request<Body>) -> Result<(), AppError> {
         ),
     )
     .await
-    .map_err(|e| AppError::Unexpected(e))?;
+    .map_err(AppError::Unexpected)?;
     Ok(())
 }
 
@@ -285,11 +285,11 @@ pub async fn reset_password_confirm(req: Request<Body>) -> Result<(), AppError> 
         .get(token_key(&token).as_slice())
         .await?
         .map(String::from_utf8)
-        .ok_or_else(|| AppError::NotFound("token"))?
+        .ok_or(AppError::NotFound("token"))?
         .map_err(|e| AppError::Unexpected(e.into()))?;
     let user = User::get_by_email(&mut *db, &email)
         .await?
-        .ok_or_else(|| AppError::NotFound("user"))?;
+        .ok_or(AppError::NotFound("user"))?;
     User::reset_password(&mut *db, user.id, &password).await?;
     Ok(())
 }

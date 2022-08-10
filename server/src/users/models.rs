@@ -135,7 +135,7 @@ impl User {
         avatar: Option<Uuid>,
     ) -> Result<User, ModelError> {
         use crate::validators::{BIO, DISPLAY_NAME};
-        let nickname = nickname.map(|s| merge_blank(&*s));
+        let nickname = nickname.map(|s| merge_blank(&s));
         let bio = bio.as_ref().map(|s| s.trim());
         if let Some(nickname) = &nickname {
             DISPLAY_NAME.run(nickname)?;
@@ -237,6 +237,6 @@ async fn user_test() -> Result<(), crate::error::AppError> {
     User::deactivated(db, &new_user.id).await.unwrap();
 
     let all_users = User::all(db).await.unwrap();
-    assert!(all_users.into_iter().find(|u| u.id == user.id).is_none());
+    assert!(!all_users.into_iter().any(|u| u.id == user.id));
     Ok(())
 }

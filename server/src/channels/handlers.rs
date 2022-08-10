@@ -87,8 +87,8 @@ async fn create(req: Request<Body>) -> Result<ChannelWithMember, AppError> {
         .ok_or_else(|| AppError::BadRequest("The space not found".to_string()))?;
     admin_only(db, &session.user_id, &space_id).await?;
 
-    let channel = Channel::create(db, &space_id, &*name, is_public, default_dice_type.as_deref()).await?;
-    let channel_member = ChannelMember::add_user(db, &session.user_id, &channel.id, &*character_name, true).await?;
+    let channel = Channel::create(db, &space_id, &name, is_public, default_dice_type.as_deref()).await?;
+    let channel_member = ChannelMember::add_user(db, &session.user_id, &channel.id, &character_name, true).await?;
     trans.commit().await?;
     let joined = ChannelWithMember {
         channel,
@@ -120,7 +120,7 @@ async fn edit(req: Request<Body>) -> Result<Channel, AppError> {
         .await
         .or_no_permission()?;
     if !space_member.is_admin {
-        return Err(AppError::NoPermission(format!("user is not admin")));
+        return Err(AppError::NoPermission("user is not admin".to_string()));
     }
     let channel = Channel::edit(
         db,
@@ -168,7 +168,7 @@ async fn add_member(req: Request<Body>) -> Result<ChannelWithMember, AppError> {
     SpaceMember::get(db, &session.user_id, &channel.space_id)
         .await
         .or_no_permission()?;
-    let member = ChannelMember::add_user(db, &user_id, &channel_id, &*character_name, false).await?;
+    let member = ChannelMember::add_user(db, &user_id, &channel_id, &character_name, false).await?;
     trans.commit().await?;
     Event::push_members(channel_id);
     Ok(ChannelWithMember { channel, member })
@@ -220,12 +220,12 @@ async fn join(req: Request<Body>) -> Result<ChannelWithMember, AppError> {
 
     let channel = Channel::get_by_id(db, &channel_id).await.or_not_found()?;
     if !channel.is_public {
-        return Err(AppError::NoPermission(format!("private channel")));
+        return Err(AppError::NoPermission("private channel".to_string()));
     }
     SpaceMember::get(db, &session.user_id, &channel.space_id)
         .await
         .or_no_permission()?;
-    let member = ChannelMember::add_user(db, &session.user_id, &channel.id, &*character_name, false).await?;
+    let member = ChannelMember::add_user(db, &session.user_id, &channel.id, &character_name, false).await?;
     trans.commit().await?;
     Event::push_members(channel_id);
     Ok(ChannelWithMember { channel, member })
@@ -279,7 +279,7 @@ async fn export(req: Request<Body>) -> Result<Vec<Message>, AppError> {
         .or_no_permission()?;
     let channel_member = ChannelMember::get(db, &session.user_id, &channel_id).await?;
     if channel_member.is_none() && !space_member.is_admin {
-        return Err(AppError::NoPermission(format!("user is not channel member")));
+        return Err(AppError::NoPermission("user is not channel member".to_string()));
     }
     let hide = channel_member.map_or(true, |member| !member.is_master);
     Message::export(db, &channel.id, hide, after).await.map_err(Into::into)
@@ -296,7 +296,7 @@ async fn my_channels(req: Request<Body>) -> Result<Vec<ChannelWithMember>, AppEr
 pub async fn check_channel_name_exists(req: Request<Body>) -> Result<bool, AppError> {
     let CheckChannelName { space_id, name } = parse_query(req.uri())?;
     let mut db = database::get().await?;
-    let channel = Channel::get_by_name(&mut *db, space_id, &*name).await?;
+    let channel = Channel::get_by_name(&mut *db, space_id, &name).await?;
     Ok(channel.is_some())
 }
 pub async fn router(req: Request<Body>, path: &str) -> Result<Response, AppError> {

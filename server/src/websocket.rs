@@ -22,7 +22,7 @@ pub fn check_websocket_header(headers: &HeaderMap) -> Result<HeaderValue, AppErr
         .and_then(|v| v.to_str().ok())
         .ok_or_else(|| AppError::BadRequest("Missing the \"Connection\" header".to_string()))?;
 
-    if connection.find("Upgrade").is_none() && connection.find("upgrade").is_none() {
+    if !connection.contains("Upgrade") && !connection.contains("upgrade") {
         log::error!("Can't find \"upgrade\"");
     }
     let mut key = headers
@@ -32,7 +32,7 @@ pub fn check_websocket_header(headers: &HeaderMap) -> Result<HeaderValue, AppErr
         .to_string();
     key.push_str("258EAFA5-E914-47DA-95CA-C5AB0DC85B11");
     let accept = base64::encode(sha1(key.as_bytes()).as_ref());
-    HeaderValue::from_str(&*accept).map_err(error_unexpected!())
+    HeaderValue::from_str(&accept).map_err(error_unexpected!())
 }
 
 pub fn establish_web_socket<H, F>(req: Request, handler: H) -> Result<Response, anyhow::Error>

@@ -11,7 +11,7 @@ pub fn token(session: &Uuid) -> String {
     // [body (base64)].[sign]
     let mut buffer = String::with_capacity(64);
     base64::encode_config_buf(session.as_bytes(), base64::STANDARD, &mut buffer);
-    let signature = sign(&*buffer);
+    let signature = sign(&buffer);
     buffer.push('.');
     base64::encode_config_buf(&signature, base64::STANDARD, &mut buffer);
     buffer
@@ -29,14 +29,14 @@ pub fn token_verify(token: &str) -> Result<Uuid, anyhow::Error> {
 
 pub async fn revoke_session(id: &Uuid) -> Result<(), CacheError> {
     let key = make_key(id);
-    cache::conn().await.remove(&*key).await
+    cache::conn().await.remove(&key).await
 }
 
 #[test]
 fn test_session_sign() {
     let session = utils::id();
     assert!(token_verify("").is_err());
-    let session_2 = token_verify(&*token(&session)).unwrap();
+    let session_2 = token_verify(&token(&session)).unwrap();
     assert_eq!(session, session_2);
 }
 
@@ -59,7 +59,7 @@ pub struct Session {
 
 pub async fn remove_session(id: Uuid) -> Result<(), CacheError> {
     let key = make_key(&id);
-    cache::conn().await.remove(&*key).await?;
+    cache::conn().await.remove(&key).await?;
     Ok(())
 }
 
@@ -85,19 +85,19 @@ pub async fn authenticate(req: &hyper::Request<hyper::Body>) -> Result<Session, 
     } else {
         let cookie = headers
             .get(COOKIE)
-            .ok_or(Unauthenticated(format!("There is no cookie in header")))?;
+            .ok_or(Unauthenticated("There is no cookie in header".to_string()))?;
         let token = parse_cookie(cookie);
 
         token.map_err(|err| {
             log::warn!("Failed to parse cookie: {}", err);
-            Unauthenticated(format!("Invalid cookie"))
+            Unauthenticated("Invalid cookie".to_string())
         })?
     };
 
     let id = match token_verify(token) {
         Err(err) => {
             log::warn!("{}", err);
-            return Err(AppError::Unauthenticated(format!("Invalid session")));
+            return Err(AppError::Unauthenticated("Invalid session".to_string()));
         }
         Ok(id) => id,
     };
@@ -105,14 +105,14 @@ pub async fn authenticate(req: &hyper::Request<hyper::Body>) -> Result<Session, 
     let key = make_key(&id);
     let bytes: Vec<u8> = cache::conn()
         .await
-        .get(&*key)
+        .get(&key)
         .await
         .map_err(error_unexpected!())?
         .ok_or_else(|| {
             log::warn!("Session {} not found, token: {}", id, token);
-            Unauthenticated(format!("Session not found"))
+            Unauthenticated("Session not found".to_string())
         })?;
 
-    let user_id = Uuid::from_slice(&*bytes).map_err(error_unexpected!())?;
+    let user_id = Uuid::from_slice(&bytes).map_err(error_unexpected!())?;
     Ok(Session { id, user_id })
 }

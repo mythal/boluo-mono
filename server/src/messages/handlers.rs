@@ -36,9 +36,9 @@ async fn send(req: Request<Body>) -> Result<Message, AppError> {
         message_id.as_ref(),
         &channel_id,
         &session.user_id,
-        &*channel_member.character_name,
-        &*name,
-        &*text,
+        &channel_member.character_name,
+        &name,
+        &text,
         entities,
         in_game,
         is_action,
@@ -74,7 +74,7 @@ async fn edit(req: Request<Body>) -> Result<Message, AppError> {
         .await
         .or_no_permission()?;
     if !channel.is_document && message.sender_id != session.user_id {
-        return Err(AppError::NoPermission(format!("user id dismatch")));
+        return Err(AppError::NoPermission("user id dismatch".to_string()));
     }
     if name.is_some() || text.is_some() || entities.is_some() || in_game.is_some() || is_action.is_some() {
         let text = text.as_deref();
@@ -116,12 +116,10 @@ async fn move_between(req: Request<Body>) -> Result<bool, AppError> {
     let channel_member = ChannelMember::get(db, &session.user_id, &message.channel_id)
         .await
         .or_no_permission()?;
-    if !channel.is_document {
-        if !channel_member.is_master && message.sender_id != session.user_id {
-            return Err(AppError::NoPermission(format!(
-                "Only the master can move other's messages."
-            )));
-        }
+    if !channel.is_document && !channel_member.is_master && message.sender_id != session.user_id {
+        return Err(AppError::NoPermission(
+            "Only the master can move other's messages.".to_string(),
+        ));
     }
 
     let message = match range {
@@ -164,7 +162,7 @@ async fn delete(req: Request<Body>) -> Result<Message, AppError> {
         .await
         .or_no_permission()?;
     if !space_member.is_admin && message.sender_id != session.user_id {
-        return Err(AppError::NoPermission(format!("user id mismatch")));
+        return Err(AppError::NoPermission("user id mismatch".to_string()));
     }
     Message::delete(db, &id).await?;
     Event::message_deleted(space_member.space_id, message.channel_id, message.id);
@@ -181,10 +179,8 @@ async fn toggle_fold(req: Request<Body>) -> Result<Message, AppError> {
     let channel_member = ChannelMember::get(db, &session.user_id, &message.channel_id)
         .await
         .or_no_permission()?;
-    if !channel.is_document {
-        if message.sender_id != session.user_id && !channel_member.is_master {
-            return Err(AppError::NoPermission(format!("user id dismatch")));
-        }
+    if !channel.is_document && message.sender_id != session.user_id && !channel_member.is_master {
+        return Err(AppError::NoPermission("user id dismatch".to_string()));
     }
     let folded = Some(!message.folded);
     let message = Message::edit(db, None, &message.id, None, None, None, None, folded, None)

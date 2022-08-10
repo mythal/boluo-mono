@@ -103,7 +103,7 @@ where
         log::debug!("{}", e);
         AppError::BadRequest("Failed to read the request body".to_string())
     })?;
-    serde_json::from_slice(&*body).map_err(|e| {
+    serde_json::from_slice(&body).map_err(|e| {
         log::debug!("{}", e);
         AppError::BadRequest("Failed to parse the request body".to_string())
     })
@@ -119,7 +119,7 @@ fn test_get_uuid() {
     use uuid::Uuid;
 
     let uuid = Uuid::new_v4();
-    let path_and_query = format!("/?id={}", uuid.to_string());
+    let path_and_query = format!("/?id={}", uuid);
     let uri = Uri::builder().path_and_query(&*path_and_query).build().unwrap();
     let query: IdQuery = parse_query(&uri).unwrap();
     assert_eq!(query.id, uuid);

@@ -60,7 +60,7 @@ pub fn sha1(data: &[u8]) -> ring::digest::Digest {
 
 pub fn verify(message: &str, signature: &str) -> Result<(), anyhow::Error> {
     let signature = base64::decode(signature.trim()).context("Failed to decode signature")?;
-    hmac::verify(key(), message.as_bytes(), &*signature)
+    hmac::verify(key(), message.as_bytes(), &signature)
         .map_err(|_| anyhow::anyhow!("Failed to verify signature of message {}", message))
 }
 
@@ -90,7 +90,7 @@ fn test_sign() {
     let message = "hello, world";
     let signature = sign(message);
     let signature = base64::encode(&signature);
-    verify(message, &*signature).unwrap();
+    verify(message, &signature).unwrap();
 }
 
 pub struct MessageRng {
@@ -105,7 +105,7 @@ pub fn get_ip(req: &Request<Body>) -> Option<&str> {
         headers.get(&real_ip)?.to_str().ok()
     } else {
         let value = headers.get(forwarded_for)?.to_str().ok()?;
-        Some(value.split(",").next()?.trim())
+        Some(value.split(',').next()?.trim())
     }
 }
 

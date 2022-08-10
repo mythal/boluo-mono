@@ -204,11 +204,11 @@ impl ChannelMember {
         for row in rows {
             let member: ChannelMember = row.try_get(0)?;
             let id = member.channel_id;
-            if channel_member_map.contains_key(&id) {
+            if let std::collections::hash_map::Entry::Vacant(e) = channel_member_map.entry(id) {
+                e.insert(vec![member]);
+            } else {
                 let member_list = channel_member_map.get_mut(&id).unwrap();
                 member_list.push(member);
-            } else {
-                channel_member_map.insert(id, vec![member]);
             }
         }
         Ok(channel_member_map)
