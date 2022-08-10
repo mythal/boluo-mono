@@ -22,7 +22,7 @@ pub async fn alloc_new_pos<T: Querist>(
     if !in_cache {
         // if not present, initialize it
         let initial_pos = crate::messages::Message::max_pos(db, &channel_id).await.ceil();
-        let _: () = cache.inner.set_nx(&max_pos_key, initial_pos as i64 + 1).await?;
+        cache.inner.set_nx(&max_pos_key, initial_pos as i64 + 1).await?;
     }
     cache.inner.incr(&max_pos_key, 1).await
 }
@@ -45,7 +45,7 @@ pub async fn pos<T: Querist>(
 }
 
 pub async fn reset_channel_pos(cache: &mut crate::cache::Connection, channel_id: &Uuid) -> Result<(), CacheError> {
-    cache.inner.del(create_max_pos_key(&channel_id)).await
+    cache.inner.del(create_max_pos_key(channel_id)).await
 }
 
 pub async fn finished(

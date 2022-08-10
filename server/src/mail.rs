@@ -11,7 +11,7 @@ pub async fn send(to: &str, subject: &str, html: &str) -> Result<(), anyhow::Err
     params.insert("subject", subject);
     params.insert("html", html);
 
-    let mut url = reqwest::Url::parse(&*url)?;
+    let mut url = reqwest::Url::parse(&url)?;
     url.set_username("api").unwrap();
     url.set_password(Some(&*api_key)).unwrap();
     let res = client.post(url).form(&params).send().await?;

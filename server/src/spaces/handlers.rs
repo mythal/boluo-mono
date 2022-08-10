@@ -60,7 +60,9 @@ async fn token(req: Request<Body>) -> Result<Uuid, AppError> {
         .map(|space_member| space_member.is_admin)
         .unwrap_or(false);
     if !is_admin {
-        return Err(AppError::NoPermission(format!("A non-admin tries to get join token")));
+        return Err(AppError::NoPermission(
+            "A non-admin tries to get join token".to_string(),
+        ));
     }
     Space::get_token(db, &id).await.map_err(Into::into)
 }
@@ -75,9 +77,9 @@ async fn refresh_token(req: Request<Body>) -> Result<Uuid, AppError> {
         .map(|space_member| space_member.is_admin)
         .unwrap_or(false);
     if !is_admin {
-        return Err(AppError::NoPermission(format!(
-            "A non-admin tries to refresh join token"
-        )));
+        return Err(AppError::NoPermission(
+            "A non-admin tries to refresh join token".to_string(),
+        ));
     }
     Space::refresh_token(db, &id).await.map_err(Into::into)
 }
@@ -115,7 +117,7 @@ async fn create(req: Request<Body>) -> Result<SpaceWithMember, AppError> {
         .ok_or(AppError::NotFound("user"))?;
     let space = Space::create(db, name, &user.id, description, password, default_dice_type).await?;
     let member = SpaceMember::add_admin(db, &user.id, &space.id).await?;
-    let channel = Channel::create(db, &space.id, &*first_channel_name, true, default_dice_type).await?;
+    let channel = Channel::create(db, &space.id, &first_channel_name, true, default_dice_type).await?;
     ChannelMember::add_user(db, &user.id, &channel.id, "", true).await?;
     trans.commit().await?;
     log::info!("a space ({}) was just created", space.id);
@@ -144,7 +146,7 @@ async fn edit(req: Request<Body>) -> Result<Space, AppError> {
         .await
         .or_no_permission()?;
     if !space_member.is_admin {
-        return Err(AppError::NoPermission(format!("A non-admin tries to edit space")));
+        return Err(AppError::NoPermission("A non-admin tries to edit space".to_string()));
     }
     let space = Space::edit(
         db,
@@ -184,9 +186,9 @@ async fn join(req: Request<Body>) -> Result<SpaceWithMember, AppError> {
 
     let space = Space::get_by_id(db, &space_id).await?.or_not_found()?;
     if !space.is_public && token != Some(space.invite_token) && space.owner_id != session.user_id {
-        return Err(AppError::NoPermission(format!(
-            "A user tries to join group without token"
-        )));
+        return Err(AppError::NoPermission(
+            "A user tries to join group without token".to_string(),
+        ));
     }
     let user_id = &session.user_id;
     let user = User::get_by_id(db, user_id)
@@ -239,7 +241,7 @@ async fn kick(req: Request<Body>) -> Result<bool, AppError> {
         }
         Ok(true)
     } else {
-        Err(AppError::NoPermission(format!("A non-admin tries to kick")))
+        Err(AppError::NoPermission("A non-admin tries to kick".to_string()))
     }
 }
 
@@ -264,7 +266,7 @@ async fn delete(req: Request<Body>) -> Result<Space, AppError> {
         return Ok(space);
     }
     log::warn!("The user {} failed to try delete a space {}", session.user_id, space.id);
-    Err(AppError::NoPermission(format!("failed to delete")))
+    Err(AppError::NoPermission("failed to delete".to_string()))
 }
 
 pub async fn router(req: Request<Body>, path: &str) -> Result<Response, AppError> {

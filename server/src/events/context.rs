@@ -70,12 +70,12 @@ impl Cache {
 
     pub async fn try_mailbox(&self, mailbox_id: &Uuid) -> Option<Arc<Mutex<MailBoxCache>>> {
         let map = self.mailboxes.read().await;
-        map.get(&mailbox_id).cloned()
+        map.get(mailbox_id).cloned()
     }
 
     pub async fn mailbox(&self, mailbox_id: &Uuid) -> Arc<Mutex<MailBoxCache>> {
         let map = self.mailboxes.read().await;
-        if let Some(cache) = map.get(&mailbox_id) {
+        if let Some(cache) = map.get(mailbox_id) {
             cache.clone()
         } else {
             drop(map);

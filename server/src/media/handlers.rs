@@ -17,9 +17,9 @@ use tokio::io::AsyncWriteExt;
 fn content_disposition(attachment: bool, filename: &str) -> HeaderValue {
     use percent_encoding::{utf8_percent_encode, AsciiSet, NON_ALPHANUMERIC};
     let kind = if attachment { "attachment" } else { "inline" };
-    const SET: &AsciiSet = &NON_ALPHANUMERIC;
+    const SET: &AsciiSet = NON_ALPHANUMERIC;
     let filename = utf8_percent_encode(filename, SET).to_string();
-    HeaderValue::from_str(&*format!("{}; filename*=utf-8''{}", kind, filename)).unwrap()
+    HeaderValue::from_str(&format!("{}; filename*=utf-8''{}", kind, filename)).unwrap()
 }
 
 fn filename_sanitizer(filename: String) -> String {
@@ -41,7 +41,7 @@ pub async fn upload(req: Request<Body>, params: Upload, max_size: usize) -> Resu
     let id = utils::id();
     let temp_filename = format!("{}_{}", id, filename);
 
-    let path = Media::path(&*temp_filename);
+    let path = Media::path(&temp_filename);
     let mut file = File::create(&path).await?;
     let mut body = req.into_body();
     let mut hasher = blake3::Hasher::new();
@@ -61,10 +61,10 @@ pub async fn upload(req: Request<Body>, params: Upload, max_size: usize) -> Resu
 
     let hash = hasher.finalize();
     let hash = hash.to_hex().to_string();
-    let ext = path.extension().map(|s| s.to_str()).flatten().unwrap_or("");
+    let ext = path.extension().and_then(|s| s.to_str()).unwrap_or("");
 
     let new_filename = format!("{}.{}", hash, ext);
-    let new_path = Media::path(&*new_filename);
+    let new_path = Media::path(&new_filename);
     let duplicate = new_path.exists();
     if duplicate {
         tokio::fs::remove_file(path).await?;
@@ -121,10 +121,10 @@ async fn get(req: Request<Body>) -> Result<Response, AppError> {
     if let Some(id) = id {
         media = Some(Media::get_by_id(db, &id).await.or_not_found()?);
     } else if let Some(filename) = filename {
-        media = Some(Media::get_by_filename(db, &*filename).await.or_not_found()?);
+        media = Some(Media::get_by_filename(db, &filename).await.or_not_found()?);
     }
     let media = media.ok_or_else(|| AppError::BadRequest("Filename or media id must be specified.".to_string()))?;
-    let path = Media::path(&*media.filename);
+    let path = Media::path(&media.filename);
     let size = std::fs::metadata(&path)
         .map(|metadata| metadata.len())
         .map_err(|_| AppError::NotFound("Failed to read file information."))?;
@@ -147,12 +147,12 @@ async fn get(req: Request<Body>) -> Result<Response, AppError> {
         .header(header::CACHE_CONTROL, HeaderValue::from_static("max-age=31536000")) // for year
         .header(
             header::CONTENT_DISPOSITION,
-            content_disposition(download, &*media.original_filename),
+            content_disposition(download, &media.original_filename),
         );
     if !media.mime_type.is_empty() {
         response_builder = response_builder.header(
             header::CONTENT_TYPE,
-            HeaderValue::from_str(&*media.mime_type).map_err(error_unexpected!())?,
+            HeaderValue::from_str(&media.mime_type).map_err(error_unexpected!())?,
         );
     }
     let response = response_builder.body(body).map_err(error_unexpected!())?;
