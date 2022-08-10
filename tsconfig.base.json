@@ -3,5 +3,6 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {}
-  }
+  },
+  "exclude": ["node_modules"]
 }
