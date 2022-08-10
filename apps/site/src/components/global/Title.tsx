@@ -1,5 +1,5 @@
-import { useIntl } from 'react-intl';
 import Head from 'next/head';
+import { useIntl } from 'react-intl';
 
 interface Props {
   name: string;

@@ -110,7 +110,9 @@ async fn create(req: Request<Body>) -> Result<SpaceWithMember, AppError> {
     let mut trans = conn.transaction().await?;
     let db = &mut trans;
     let default_dice_type = default_dice_type.as_deref();
-    let user = User::get_by_id(db, &session.user_id).await?.ok_or(AppError::NotFound("user"))?;
+    let user = User::get_by_id(db, &session.user_id)
+        .await?
+        .ok_or(AppError::NotFound("user"))?;
     let space = Space::create(db, name, &user.id, description, password, default_dice_type).await?;
     let member = SpaceMember::add_admin(db, &user.id, &space.id).await?;
     let channel = Channel::create(db, &space.id, &*first_channel_name, true, default_dice_type).await?;
@@ -187,7 +189,9 @@ async fn join(req: Request<Body>) -> Result<SpaceWithMember, AppError> {
         )));
     }
     let user_id = &session.user_id;
-    let user = User::get_by_id(db, user_id).await?.ok_or_else(|| unexpected!("No such user found."))?;
+    let user = User::get_by_id(db, user_id)
+        .await?
+        .ok_or_else(|| unexpected!("No such user found."))?;
     let member = if &space.owner_id == user_id {
         SpaceMember::add_admin(db, user_id, &space_id).await?
     } else {

@@ -1,6 +1,6 @@
-import { Fragment } from 'react';
 import logoDev from 'boluo-logo/png/logo-dev.png';
 import logo from 'boluo-logo/png/logo.png';
+import { Fragment } from 'react';
 import { IS_DEVELOPMENT } from '../../const';
 
 export const Favicon = () => {

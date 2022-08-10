@@ -39,7 +39,7 @@ export const request = async <T>(
   path: string,
   method: string,
   body: Exclude<RequestInit['body'], undefined>,
-  contentType = 'application/json'
+  contentType = 'application/json',
 ): Promise<T> => {
   const headers = new Headers({
     'Content-Type': contentType,

@@ -1,5 +1,5 @@
-use ts_rs::TS;
 use serde::Deserialize;
+use ts_rs::TS;
 use uuid::Uuid;
 
 #[derive(Deserialize, TS)]

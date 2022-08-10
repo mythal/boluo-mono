@@ -1,6 +1,6 @@
+import clsx from 'clsx';
 import type { FC } from 'react';
 import { useState } from 'react';
-import clsx from 'clsx';
 import { Loading } from '../components/Loading';
 
 export const LoadingDesign: FC = () => {

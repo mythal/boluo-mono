@@ -1,8 +1,7 @@
 use postgres_types::FromSql;
 use serde::Serialize;
-use uuid::Uuid;
 use ts_rs::TS;
-
+use uuid::Uuid;
 
 use crate::database::Querist;
 use crate::error::{DbError, ModelError};

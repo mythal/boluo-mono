@@ -1,5 +1,5 @@
-import React from 'react';
 import type { Close } from 'boluo-icons';
+import React from 'react';
 
 interface Props {
   icon: typeof Close;

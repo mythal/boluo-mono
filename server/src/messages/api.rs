@@ -1,6 +1,6 @@
-use ts_rs::TS;
 use serde::Deserialize;
 use serde_json::Value as JsonValue;
+use ts_rs::TS;
 use uuid::Uuid;
 
 #[derive(Deserialize, Debug, TS)]

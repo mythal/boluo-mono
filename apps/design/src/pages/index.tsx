@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { FC } from 'react';
-import { Routes, Route, NavLink } from 'react-router-dom';
+import { NavLink, Route, Routes } from 'react-router-dom';
 import { ButtonPage } from './ButtonPage';
 import { Home } from './Home';
 

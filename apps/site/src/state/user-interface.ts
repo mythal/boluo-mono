@@ -1,15 +1,15 @@
-import type { Reducer } from 'redux';
-import type { IntlConfig } from 'react-intl';
+import { appendTo, compose, find, prop, remove, set } from 'optics-ts/standalone';
 import type { ReactNode } from 'react';
 import { useCallback } from 'react';
-import { prop, compose, remove, find, set, appendTo } from 'optics-ts/standalone';
-import type { Id } from '../helper/id';
-import { makeId } from '../helper/id';
+import type { IntlConfig } from 'react-intl';
+import type { Reducer } from 'redux';
 import type { SelfMapper } from '../helper/function';
 import { identity } from '../helper/function';
-import type { GenericHandler } from './handlers';
+import type { Id } from '../helper/id';
+import { makeId } from '../helper/id';
 import type { Action, AppAction } from './actions';
 import { usePerform } from './actions';
+import type { GenericHandler } from './handlers';
 import type { AppDispatch } from './store';
 
 export interface UserInterfaceActionMap {
@@ -47,8 +47,8 @@ const handleDissmissNotification: Handler<'dismissNotification'> = (id: string) 
   remove(
     compose(
       'notifications',
-      find((notification: UiNotification) => notification.id === id)
-    )
+      find((notification: UiNotification) => notification.id === id),
+    ),
   );
 
 function applyAction(action: UserInterfaceAction): SelfMapper<UserInterfaceState> {
@@ -77,7 +77,7 @@ export const useSwitchScheme = () => {
         perform('auto');
       }
     },
-    [perform]
+    [perform],
   );
 };
 
@@ -94,6 +94,6 @@ export const useNotify = () => {
     (child: ReactNode, level: UiNotification['level'] = 'default') => {
       perform({ child, level, id: makeId() });
     },
-    [perform]
+    [perform],
   );
 };

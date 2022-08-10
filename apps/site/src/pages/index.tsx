@@ -1,9 +1,9 @@
-import type { NextPage } from 'next';
-import { FormattedMessage } from 'react-intl';
-import Link from 'next/link';
 import { Logo } from 'boluo-logo';
-import { Me } from '../components/Me';
+import type { NextPage } from 'next';
+import Link from 'next/link';
+import { FormattedMessage } from 'react-intl';
 import { Title } from '../components/global/Title';
+import { Me } from '../components/Me';
 
 const Home: NextPage = () => {
   return (

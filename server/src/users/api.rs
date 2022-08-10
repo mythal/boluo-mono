@@ -1,8 +1,8 @@
 use super::User;
 use crate::channels::api::ChannelWithMember;
 use crate::spaces::api::SpaceWithMember;
-use ts_rs::TS;
 use serde::{Deserialize, Serialize};
+use ts_rs::TS;
 use uuid::Uuid;
 
 #[derive(Debug, Deserialize, TS)]

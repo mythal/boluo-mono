@@ -1,7 +1,7 @@
+import clsx from 'clsx';
 import type { FC } from 'react';
 import { useIntl } from 'react-intl';
 import { useTransition } from 'transition-hook';
-import clsx from 'clsx';
 import { Button } from 'ui';
 import type { ChildrenProps, StyleProps } from '../../helper/props';
 import { Overlay } from './Overlay';
@@ -51,7 +51,7 @@ export const Dialog: FC<Props> = ({
         'shadow-1 shadow-dialog-shadow',
         stage === 'enter' && 'opacity-100 transition-all duration-200',
         stage === 'leave' && ['opacity-0 transition-all duration-200', '-translate-x-1/2 translate-y-[30em]'],
-        className
+        className,
       )}
     >
       {title && <div className="mb-2 pb-1 text-xl">{title}</div>}

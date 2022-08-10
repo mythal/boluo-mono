@@ -1,5 +1,5 @@
-import { HexColorInput, HexColorPicker } from 'react-colorful';
 import type { FC } from 'react';
+import { HexColorInput, HexColorPicker } from 'react-colorful';
 
 interface Props {
   color: string;

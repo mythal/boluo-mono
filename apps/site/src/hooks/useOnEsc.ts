@@ -9,7 +9,7 @@ export const useOnEsc = (callback: undefined | (() => void)) => {
         }
       }
     },
-    [callback]
+    [callback],
   );
 
   useEffect(() => {

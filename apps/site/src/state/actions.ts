@@ -5,11 +5,10 @@ import type { UserInterfaceActionMap } from './user-interface';
 
 export type ActionMap = UserInterfaceActionMap;
 
-export type Action<ActionName> = ActionName extends keyof ActionMap
-  ? {
-      type: ActionName;
-      payload: ActionMap[ActionName];
-    }
+export type Action<ActionName> = ActionName extends keyof ActionMap ? {
+    type: ActionName;
+    payload: ActionMap[ActionName];
+  }
   : never;
 
 export function makeAction<A extends Action<keyof ActionMap>>(type: A['type'], payload: A['payload']): A {

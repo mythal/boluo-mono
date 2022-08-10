@@ -1,6 +1,6 @@
+import { arrow, autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/react-dom';
 import type { CSSProperties, MutableRefObject } from 'react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { arrow, autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/react-dom';
 
 import clsx from 'clsx';
 import { Button } from 'ui';
@@ -66,7 +66,7 @@ export const PopoverDesign = () => {
               className={clsx(
                 styles.tooltip,
                 'tooltip inline-block min-w-[8em] max-w-[10em] rounded-sm p-4',
-                'bg-tooltip text-black'
+                'bg-tooltip text-black',
               )}
               role="tooltip"
             >

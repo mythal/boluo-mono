@@ -9,7 +9,7 @@ export const Portal: React.FC<ChildrenProps> = React.memo(({ children }) => {
   useEffect(() => {
     const portalElement = document.getElementById('portal');
     if (!portalElement) {
-      throw new Error("Can't found portal element.");
+      throw new Error('Can\'t found portal element.');
     }
     rootRef.current = portalElement;
     setMounted(true);

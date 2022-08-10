@@ -1,7 +1,7 @@
 use chrono::prelude::*;
 use postgres_types::FromSql;
-use ts_rs::TS;
 use serde::{Deserialize, Serialize};
+use ts_rs::TS;
 use uuid::Uuid;
 
 use crate::channels::api::{ChannelMemberWithUser, ChannelWithMember};

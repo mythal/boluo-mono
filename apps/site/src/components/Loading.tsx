@@ -1,6 +1,6 @@
+import clsx from 'clsx';
 import type { FC } from 'react';
 import { useRef } from 'react';
-import clsx from 'clsx';
 import { useContainerQuery } from '../hooks/useContainerQuery';
 import { SpinnerIcon } from './SpinnerIcon';
 
@@ -38,7 +38,7 @@ export const Loading: FC = () => {
         lg && 'text-[3rem]',
         md && 'text-2xl',
         sm && 'text-base',
-        xs && 'text-sm'
+        xs && 'text-sm',
       )}
     >
       <SpinnerIcon label="loading icon" />

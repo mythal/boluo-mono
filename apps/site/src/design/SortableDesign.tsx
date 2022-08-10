@@ -1,4 +1,3 @@
-import React, { forwardRef, useState, useId } from 'react';
 import type { DragEndEvent, DragStartEvent, UniqueIdentifier } from '@dnd-kit/core';
 import {
   closestCenter,
@@ -18,12 +17,13 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import clsx from 'clsx';
+import React, { forwardRef, useId, useState } from 'react';
 
 interface SortableItemProps {
   id: UniqueIdentifier;
 }
 const item = clsx(
-  'text-text w-full p-4 cursor-move bg-design-sortItem border border-transprent hover:border-design-sortItemBorder'
+  'text-text w-full p-4 cursor-move bg-design-sortItem border border-transprent hover:border-design-sortItemBorder',
 );
 
 function SortableItem({ id }: SortableItemProps) {
@@ -64,7 +64,7 @@ export function SortableDesign() {
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    })
+    }),
   );
 
   return (
@@ -76,9 +76,7 @@ export function SortableDesign() {
       onDragEnd={handleDragEnd}
     >
       <SortableContext items={items} strategy={verticalListSortingStrategy}>
-        {items.map((id) => (
-          <SortableItem key={id} id={id} />
-        ))}
+        {items.map((id) => <SortableItem key={id} id={id} />)}
       </SortableContext>
       <DragOverlay>{activeId ? <Item id={activeId} /> : null}</DragOverlay>
     </DndContext>

@@ -1,7 +1,7 @@
-import { FormattedMessage } from 'react-intl';
-import React, { useCallback } from 'react';
-import { Button } from 'ui';
 import { Refresh } from 'boluo-icons';
+import React, { useCallback } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { Button } from 'ui';
 import type { StyleProps } from '../helper/props';
 import Icon from './fundamental/Icon';
 

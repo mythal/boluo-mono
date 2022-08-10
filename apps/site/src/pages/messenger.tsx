@@ -1,14 +1,14 @@
+import { Pause, Play } from 'boluo-icons';
 import type { NextPage } from 'next';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { VirtuosoHandle } from 'react-virtuoso';
 import { Virtuoso } from 'react-virtuoso';
 import { Button } from 'ui';
-import { Pause, Play } from 'boluo-icons';
-import { selectRandom } from '../helper/random';
-import { useVirtualListBottomLock } from '../hooks/useVirtualListBottomLock';
-import { useDetectUpScroll } from '../hooks/useDetectUpScroll';
 import Icon from '../components/fundamental/Icon';
 import { Providers } from '../components/global/Providers';
+import { selectRandom } from '../helper/random';
+import { useDetectUpScroll } from '../hooks/useDetectUpScroll';
+import { useVirtualListBottomLock } from '../hooks/useVirtualListBottomLock';
 
 interface Item {
   name: string;
@@ -19,8 +19,8 @@ const nameList: string[] = ['DM', 'Wizard', 'Ranger'];
 
 const fakeTextList: string[] = [
   'A jolt of electricity runs through your spinal cord as your cybernetic implants come back to life; You awaken in a pool of your own blood, bullet casings litter the floor like spilled popcorn on a movie theater.',
-  "Grunting, you rise, using a nearby wall for support and leaving a hand-shaped bloodstain over a street graffiti. Everything hurts like hell but, you're still alive, glad not to become another statistic in the city's rising murder rates. A quick scan reveals that you're the only one still in the realm of the living. Your entire fucking crew is dead—flatlined by lethal injections of high-speed lead, courtesy of the finest private soldiers money can buy.",
-  "There's no time to mourn. That will come later in the bottom of a bottle. Still clutching your wounds, you stumble out of that accursed alley into the neon-lit streets in search of vengeance. The first place you head to is the bar where all this began. If anyone has answers, then it must be Fat Freddy.",
+  'Grunting, you rise, using a nearby wall for support and leaving a hand-shaped bloodstain over a street graffiti. Everything hurts like hell but, you\'re still alive, glad not to become another statistic in the city\'s rising murder rates. A quick scan reveals that you\'re the only one still in the realm of the living. Your entire fucking crew is dead—flatlined by lethal injections of high-speed lead, courtesy of the finest private soldiers money can buy.',
+  'There\'s no time to mourn. That will come later in the bottom of a bottle. Still clutching your wounds, you stumble out of that accursed alley into the neon-lit streets in search of vengeance. The first place you head to is the bar where all this began. If anyone has answers, then it must be Fat Freddy.',
   'As you stagger up the front door, the beating of the music grows louder. After one glance at you, the bouncer steps to the side, his eyes betray fear at what he sees.',
   '"Hey man," says the bartender, "you look like shit."',
   '"...What happened?"',
