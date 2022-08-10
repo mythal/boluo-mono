@@ -1,12 +1,22 @@
 {
   "eslint.packageManager": "pnpm",
-  "eslint.workingDirectories": [{ "pattern": "./packages/*" }, { "pattern": "./apps/*" }],
+  "eslint.workingDirectories": [
+    { "pattern": "./packages/*" },
+    { "pattern": "./apps/*" }
+  ],
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "dprint.dprint",
+  "[typescript]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
   "files.associations": {
     "*.tailwind.css": "tailwindcss",
     "tailwind.css": "tailwindcss"
   },
+  "dprint.verbose": true,
   "tailwindCSS.experimental.classRegex": [["clsx\\(([^)]*)\\)", "'([^']*)'"]],
   "typescript.tsserver.experimental.enableProjectDiagnostics": true
 }

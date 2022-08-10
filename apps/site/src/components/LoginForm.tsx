@@ -28,7 +28,7 @@ export const LoginForm = ({ className }: StyleProps) => {
   } = useForm<Inputs>();
   const [error, setError] = useState<unknown>(null);
   const intl = useIntl();
-  const required = intl.formatMessage({ defaultMessage: 'Can\'t be empty.' });
+  const required = intl.formatMessage({ defaultMessage: "Can't be empty." });
   const onSubmit: SubmitHandler<Inputs> = async ({ password, username }) => {
     let result: LoginReturn;
     try {
