@@ -1,7 +1,7 @@
-const { revertPalette: revert } = require('build-utils');
-const colors = require('tailwindcss/colors');
-const plugin = require('tailwindcss/plugin');
-const themeSwapper = require('tailwindcss-theme-swapper');
+const { revertPalette: revert } = require("build-utils");
+const colors = require("tailwindcss/colors");
+const plugin = require("tailwindcss/plugin");
+const themeSwapper = require("tailwindcss-theme-swapper");
 
 const { red, blue, green, yellow, white, black, gray, slate } = colors;
 
@@ -15,10 +15,10 @@ const lightTheme = {
     brand: green,
     gray,
     design: {
-      sidebar: gray['100'],
+      sidebar: gray["100"],
       sortItem: green[200],
       sortItemBorder: green[700],
-      popoverBox: gray['100'],
+      popoverBox: gray["100"],
     },
     button: {
       default: {
@@ -37,7 +37,7 @@ const lightTheme = {
     dialog: {
       border: gray[300],
       bg: gray[50],
-      shadow: 'rgba(0, 0, 0, 0.25)',
+      shadow: "rgba(0, 0, 0, 0.25)",
     },
     toast: {
       default: gray[700],
@@ -136,7 +136,7 @@ const darkTheme = {
     dialog: {
       border: gray[900],
       bg: slate[800],
-      shadow: 'rgba(0, 0, 0, 0.03)',
+      shadow: "rgba(0, 0, 0, 0.03)",
     },
     toast: {
       default: gray[900],
@@ -205,54 +205,62 @@ const darkTheme = {
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx,html}', './index.html', '../../packages/*/src/**/*.{js,ts,jsx,tsx,html}'],
-  darkMode: 'class',
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx,html}",
+    "./index.html",
+    "../../packages/*/src/**/*.{js,ts,jsx,tsx,html}",
+  ],
+  darkMode: "class",
   theme: {
     colors: {
       green: colors.green,
       blue: colors.blue,
       neutral: colors.neutral,
       slate: colors.slate,
-      black: '#000',
-      white: '#FFF',
+      black: "#000",
+      white: "#FFF",
       tooltip: colors.yellow[100],
-      transprent: 'transparent',
+      transprent: "transparent",
     },
     borderWidth: {
-      DEFAULT: '1px',
-      '1/2': '0.125rem',
-      1: '0.25rem',
+      DEFAULT: "1px",
+      "1/2": "0.125rem",
+      1: "0.25rem",
     },
     extend: {
+      fontSize: {
+        "12px": "12px",
+        "24px": "24px",
+      },
       boxShadow: {
-        '1/2': '0.125rem 0.125rem 0',
-        1: '0.25rem 0.25rem 0',
-        toast: '0.125rem 0.125rem 0 rgba(0, 0, 0, 0.25)',
-        menu: '0.25rem 0.25rem 0 rgba(0, 0, 0, 0.1)',
+        "1/2": "0.125rem 0.125rem 0",
+        1: "0.25rem 0.25rem 0",
+        toast: "0.125rem 0.125rem 0 rgba(0, 0, 0, 0.25)",
+        menu: "0.25rem 0.25rem 0 rgba(0, 0, 0, 0.1)",
       },
       fontFamily: {
-        pixel: ['Fusion-Pixel-12', 'monospace'],
+        pixel: ["Fusion-Pixel-12", "monospace"],
       },
     },
   },
   plugins: [
     plugin(function ({ addVariant }) {
-      addVariant('enabled', '&:not(:disabled)');
-      addVariant('hover-enabled', '&:hover:not(:disabled)');
-      addVariant('active-enabled', '&:active:not(:disabled)');
-      addVariant('state-on', '&[data-state="on"]');
+      addVariant("enabled", "&:not(:disabled)");
+      addVariant("hover-enabled", "&:hover:not(:disabled)");
+      addVariant("active-enabled", "&:active:not(:disabled)");
+      addVariant("state-on", '&[data-state="on"]');
     }),
 
     themeSwapper({
       themes: [
         {
-          name: 'base',
-          selectors: [':root'],
+          name: "base",
+          selectors: [":root"],
           theme: lightTheme,
         },
         {
-          name: 'dark',
-          selectors: ['.dark'],
+          name: "dark",
+          selectors: [".dark"],
           theme: darkTheme,
         },
       ],

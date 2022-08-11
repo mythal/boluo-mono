@@ -2,9 +2,10 @@ import clsx from 'clsx';
 import { FC } from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
 import { ButtonPage } from './ButtonPage';
+import { Font } from './Font';
 import { Home } from './Home';
 
-const pages = [ButtonPage];
+const pages = [ButtonPage, Font];
 
 const getName = (component: FC<{}>): string => {
   const name = component.displayName ?? component.name;
