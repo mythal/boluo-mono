@@ -1,4 +1,4 @@
-import { post } from 'boluo-api';
+import { login } from 'boluo-api';
 import type { LoginReturn } from 'boluo-api';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
@@ -32,7 +32,7 @@ export const LoginForm = ({ className }: StyleProps) => {
   const onSubmit: SubmitHandler<Inputs> = async ({ password, username }) => {
     let result: LoginReturn;
     try {
-      result = await post('/users/login', { username, password });
+      result = await login({ password, username });
     } catch (e) {
       setError(e);
       return;
