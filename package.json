@@ -11,6 +11,7 @@
     "build:affected": "nx affected --target=build",
     "build:all": "nx run-many --target=build --all",
     "dev": "nx dev",
+    "dev:all": "nx run-many --target=dev --all --parallel 16",
     "lint": "nx lint",
     "lint:affected": "nx affected --taget=lint",
     "lint:all": "nx run-many --target=lint --all",
@@ -25,7 +26,7 @@
     "generate:bindings": "cargo test export_bindings_ && dprint fmt"
   },
   "devDependencies": {
-    "@nrwl/devkit": "^14.5.2",
+    "@nrwl/devkit": "^14.5.5",
     "dprint": "^0.30.3",
     "eslint-config-custom": "workspace:*",
     "husky": "^8.0.1",

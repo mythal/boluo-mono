@@ -1,5 +1,5 @@
 {
-  "extends": "./packages/base.json",
+  "extends": "./packages/tsconfig/base.json",
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {}

@@ -1,24 +1,22 @@
 import { makeUri, request } from './request';
 import type { GetMe, LoginData, LoginReturn } from './types/users';
 
-function get<Q extends object, R>(path: string, query?: Q | undefined): Promise<R> {
+function get(path: '/users/get_me'): Promise<GetMe | null>;
+function get(path: '/users/logout'): Promise<true>;
+function get(path: string, query?: object): Promise<unknown> {
   return request(makeUri(path, query), 'GET', null);
 }
 
-export const getMe = (): Promise<GetMe | null> => get('/users/get_me');
-
-export const logout = (): Promise<true> => get('/users/logout');
-
-function post<P, Q extends object, R>(
+function post(path: '/users/login', payload: LoginData): Promise<LoginReturn>;
+function post(
   path: string,
-  payload: P,
-  query?: Q,
-): Promise<R> {
+  payload: object,
+  query?: object,
+): Promise<unknown> {
   return request(makeUri(path, query), 'POST', JSON.stringify(payload));
 }
 
-export const login = (data: LoginData): Promise<LoginReturn> => post('/users/login', data);
-
+export { get, post };
 export * from './types/channels';
 export * from './types/id';
 export * from './types/spaces';

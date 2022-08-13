@@ -5,13 +5,15 @@
   "types": "./dist/index.d.ts",
   "homepage": "https://github.com/mythal/boluo-mono",
   "scripts": {
-    "build": "tsc --project tsconfig.json"
+    "build": "tsc",
+    "dev": "tsc --watch"
   },
   "license": "GPL-3.0",
   "dependencies": {
     "boluo-utils": "workspace:*",
+    "server-bindings": "workspace:*",
     "tsconfig": "workspace:*",
-    "server-bindings": "workspace:*"
+    "tslib": "^2.4.0"
   },
   "sideEffects": false,
   "devDependencies": {

@@ -15,18 +15,18 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ childr
   return (
     <button
       className={clsx(
-        'disabled:cursor-not-allowed enabled:cursor-pointer',
+        'disabled:cursor-not-allowed enabled:cursor-pointer disabled:brightness-125 disabled:contrast-50 disabled:text-surface-600',
         'select-none appearance-none border-none',
-        'inline-flex items-center justify-center focus:ring disabled:brightness-75 disabled:contrast-75',
-        'm-0 gap-1 rounded-sm px-4 py-2 text-base',
-        isSmall && 'min-h-[2rem] py-0.5 px-3',
+        'inline-flex items-center justify-centr focus:ring ring-surface-200',
+        'm-0 gap-1 rounded-sm px-4 py-2 text-baese',
+        isSmall && 'min-h-[2rem] py-0.5 px-3 text-sm',
         type === 'default' && [
-          'bg-button-default-bg text-button-default-text',
-          'hover-enabled:bg-button-default-hover active-enabled:bg-button-default-active',
+          'bg-surface-300 text-highest',
+          'hover-enabled:bg-surface-200 active-enabled:bg-surface-400',
         ],
         type === 'primary' && [
-          'bg-button-primary-bg text-button-primary-text',
-          'hover-enabled:bg-button-primary-hover active-enabled:bg-button-primary-active',
+          'bg-pin-brand-600 text-white',
+          'hover-enabled:bg-pin-brand-500 active-enabled:bg-pin-brand-700',
         ],
         className,
       )}

@@ -1,12 +1,12 @@
 {
-  "3cc4Ct": {
-    "message": "Light"
-  },
-  "47FYwb": {
-    "message": "Cancel"
+  "2gujDD": {
+    "message": "These are the pages used to design and debug the components"
   },
   "5sg7KC": {
     "message": "Password"
+  },
+  "8I/DPV": {
+    "message": "Switch to light mode"
   },
   "AyGauy": {
     "message": "Login"
@@ -14,8 +14,8 @@
   "CoEsov": {
     "message": "Username or Email"
   },
-  "FcwBEE": {
-    "message": "refresh"
+  "FwQ8Qb": {
+    "message": "According to the system setting"
   },
   "HpyhN3": {
     "message": "Boluo"
@@ -23,29 +23,27 @@
   "MWO2zy": {
     "message": "Something going wrong."
   },
-  "NXI/XL": {
-    "message": "Auto"
-  },
   "X2ic5v": {
     "message": "You are logged out"
+  },
+  "Y6tZmW": {
+    "message": "Switch to dark mode"
   },
   "aIRWQB": {
     "message": "Back to home"
   },
+  "crTG+P": {
+    "description": "Follow the system scheme",
+    "message": "system"
+  },
+  "gjBiyj": {
+    "message": "Loading..."
+  },
   "nmSKJK": {
     "message": "Can't be empty."
   },
-  "pULdOq": {
-    "message": "This may be caused by a network problem. If the error persists after refreshing the page, please contact the admin."
-  },
   "rELDbB": {
     "message": "Refresh"
-  },
-  "tOdNiY": {
-    "message": "Dark"
-  },
-  "wSZR47": {
-    "message": "Submit"
   },
   "z/ipXX": {
     "message": "Oops"

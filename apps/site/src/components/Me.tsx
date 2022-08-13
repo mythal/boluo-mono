@@ -1,3 +1,4 @@
+import { Loading } from 'ui';
 import { useMe } from '../hooks/useMe';
 
 export const Me = () => {
@@ -6,7 +7,7 @@ export const Me = () => {
     return <span>Not logged in</span>;
   }
   if (me === 'LOADING') {
-    return <span>[...]</span>;
+    return <Loading type="inline" />;
   }
   return <span>{me.user.nickname}</span>;
 };
