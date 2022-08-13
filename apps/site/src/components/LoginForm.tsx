@@ -1,4 +1,4 @@
-import { login } from 'boluo-api';
+import { post } from 'boluo-api';
 import type { LoginReturn } from 'boluo-api';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
@@ -7,9 +7,8 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useSWRConfig } from 'swr';
-import { Button, TextInput } from 'ui';
+import { Button, Oops, TextInput } from 'ui';
 import type { StyleProps } from '../helper/props';
-import Oops from './Oops';
 
 interface Props extends StyleProps {}
 
@@ -32,7 +31,7 @@ export const LoginForm = ({ className }: StyleProps) => {
   const onSubmit: SubmitHandler<Inputs> = async ({ password, username }) => {
     let result: LoginReturn;
     try {
-      result = await login({ password, username });
+      result = await post('/users/login', { password, username });
     } catch (e) {
       setError(e);
       return;
@@ -41,7 +40,7 @@ export const LoginForm = ({ className }: StyleProps) => {
     await router.push('/');
   };
   if (error) {
-    return <Oops error={error} className={className} />;
+    return <Oops type="inline" error={error} />;
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={clsx('flex flex-col gap-2', className)}>

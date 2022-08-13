@@ -1,9 +1,11 @@
 import type { ErrorInfo } from 'react';
 import React, { Component } from 'react';
-import type { ChildrenProps, StyleProps } from '../helper/props';
-import Oops from './Oops';
+import { Oops, OopsType } from './Oops';
+import type { ChildrenProps, StyleProps } from './types';
 
-interface Props extends ChildrenProps, StyleProps {}
+interface Props extends ChildrenProps, StyleProps {
+  type?: OopsType;
+}
 
 interface State {
   error: unknown;
@@ -24,9 +26,9 @@ export class ErrorBoundary extends Component<Props, State> {
 
   override render() {
     if (this.state.error) {
-      return <Oops error={this.state.error} />;
+      return <Oops error={this.state.error} type={this.props.type} />;
     } else {
-      return this.props.children;
+      return <React.Fragment>{this.props.children}</React.Fragment>;
     }
   }
 }

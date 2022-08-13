@@ -1,8 +1,9 @@
 import { Refresh } from 'boluo-icons';
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button, Icon } from 'ui';
-import type { StyleProps } from '../helper/props';
+import { Button } from './Button';
+import Icon from './Icon';
+import type { StyleProps } from './types';
 
 interface Props extends StyleProps {
   small?: boolean;

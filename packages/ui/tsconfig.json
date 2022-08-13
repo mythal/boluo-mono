@@ -1,7 +1,13 @@
 {
   "extends": "tsconfig/react-library.json",
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"]
+    "outDir": "./dist",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "declaration": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "sourceMap": true
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["dist", "build", "node_modules"]

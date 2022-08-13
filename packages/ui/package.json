@@ -1,31 +1,47 @@
 {
   "name": "ui",
   "version": "0.0.0",
-  "main": "./src/index.tsx",
-  "types": "./src/index.tsx",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "homepage": "https://github.com/mythal/boluo-mono",
   "license": "GPL-3.0",
   "scripts": {
-    "lint": "eslint --fix src/**/*.{ts,tsx}"
+    "lint": "eslint --fix src/**/*.{ts,tsx}",
+    "dev": "rollup -c config/rollup.config.ts --configPlugin rollup-plugin-typescript2 --watch",
+    "build": "rollup -c config/rollup.config.ts --configPlugin rollup-plugin-typescript2"
   },
   "sideEffects": false,
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
   "devDependencies": {
-    "@types/react": "^18.0.15",
+    "@formatjs/ts-transformer": "^3.9.9",
+    "@types/node": "^16.11.48",
+    "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
-    "eslint": "^8.20.0",
+    "boluo-utils": "workspace:*",
+    "build-utils": "workspace:*",
+    "eslint": "^8.21.0",
     "eslint-config-custom": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tailwindcss": "^3.1.6",
+    "rollup": "^2.77.3",
+    "rollup-plugin-typescript2": "^0.32.1",
+    "tailwindcss": "^3.1.8",
     "tailwindcss-theme-swapper": "^0.6.2",
+    "ts-node": "^10.9.1",
     "tsconfig": "workspace:*",
-    "boluo-utils": "workspace:*",
-    "build-utils": "workspace:*",
     "typescript": "^4.7.4"
   },
   "dependencies": {
+    "@radix-ui/react-label": "^1.0.0",
+    "@radix-ui/react-select": "^1.0.0",
+    "@radix-ui/react-switch": "^1.0.0",
     "@radix-ui/react-toggle-group": "^1.0.0",
     "boluo-icons": "workspace:*",
-    "clsx": "^1.2.1"
+    "clsx": "^1.2.1",
+    "react-intl": "^6.0.5",
+    "tslib": "^2.4.0"
   }
 }

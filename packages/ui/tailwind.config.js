@@ -3,36 +3,40 @@ const colors = require("tailwindcss/colors");
 const plugin = require("tailwindcss/plugin");
 const themeSwapper = require("tailwindcss-theme-swapper");
 
-const { red, blue, green, yellow, white, black, gray, slate } = colors;
+const { red, neutral, blue, green, yellow, white, black, gray, slate, lime } =
+  colors;
+const revRed = revert(red);
+const revNetral = revert(neutral);
+const revGreen = revert(green);
+const revYellow = revert(yellow);
+const revGray = revert(gray);
+const revLime = revert(lime);
+const revSlate = revert(slate);
+const revBlue = revert(blue);
 
 /** @type {import('tailwindcss').Config.theme} */
 const lightTheme = {
   colors: {
+    pin: {
+      highest: black,
+      lowest: white,
+      surface: neutral,
+      brand: lime,
+    },
     highest: black,
     lowest: white,
-    bg: white,
+    bg: neutral[50],
     text: black,
-    brand: green,
+    brand: lime,
     gray,
+    error: red,
+    warning: yellow,
+    surface: neutral,
     design: {
       sidebar: gray["100"],
       sortItem: green[200],
       sortItemBorder: green[700],
       popoverBox: gray["100"],
-    },
-    button: {
-      default: {
-        bg: gray[300],
-        hover: gray[200],
-        active: gray[400],
-        text: black,
-      },
-      primary: {
-        bg: green[600],
-        text: white,
-        hover: green[500],
-        active: green[700],
-      },
     },
     dialog: {
       border: gray[300],
@@ -71,11 +75,6 @@ const lightTheme = {
         selectedHighlighted: green[600],
       },
     },
-    link: {
-      text: green[700],
-      hover: green[600],
-      active: green[500],
-    },
     input: {
       default: {
         border: gray[300],
@@ -109,29 +108,21 @@ const darkTheme = {
   colors: {
     highest: white,
     lowest: black,
-    bg: slate[700],
-    text: gray[50],
-    brand: revert(blue),
+    pin: {
+      brand: blue,
+    },
+    bg: slate[900],
+    text: neutral[50],
+    brand: revBlue,
     gray: revert(gray),
+    error: revRed,
+    warning: revYellow,
+    surface: revert(neutral),
     design: {
       sidebar: slate[800],
       sortItem: green[700],
       sortItemBorder: black,
       popoverBox: gray[900],
-    },
-    button: {
-      default: {
-        bg: gray[600],
-        hover: gray[500],
-        active: gray[600],
-        text: white,
-      },
-      primary: {
-        bg: blue[600],
-        text: white,
-        hover: blue[500],
-        active: blue[700],
-      },
     },
     dialog: {
       border: gray[900],
@@ -169,11 +160,6 @@ const darkTheme = {
         selected: blue[800],
         selectedHighlighted: blue[600],
       },
-    },
-    link: {
-      text: blue[400],
-      hover: blue[300],
-      active: blue[200],
     },
     input: {
       default: {
@@ -249,6 +235,12 @@ module.exports = {
       addVariant("hover-enabled", "&:hover:not(:disabled)");
       addVariant("active-enabled", "&:active:not(:disabled)");
       addVariant("state-on", '&[data-state="on"]');
+      addVariant("state-off", '&[data-state="off"]');
+      addVariant("state-open", '&[data-state="open"]');
+      addVariant("state-closed", '&[data-state="closed"]');
+      addVariant("state-checked", '&[data-state="checked"]');
+      addVariant("state-unchecked", '&[data-state="unchecked"]');
+      addVariant("hightlighted", "&[data-highlighted]");
     }),
 
     themeSwapper({
