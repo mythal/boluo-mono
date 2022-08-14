@@ -1,12 +1,12 @@
 {
   "2gujDD": {
-    "message": "These are the pages used to design and debug the components"
+    "message": "这些是用于设计和调试组件的页面"
   },
   "5sg7KC": {
     "message": "密码"
   },
   "8I/DPV": {
-    "message": "Switch to light mode"
+    "message": "切换到亮色模式"
   },
   "AyGauy": {
     "message": "登录"
@@ -15,7 +15,7 @@
     "message": "用户名或邮箱"
   },
   "FwQ8Qb": {
-    "message": "According to the system setting"
+    "message": "按系统设置"
   },
   "HpyhN3": {
     "message": "菠萝"
@@ -23,21 +23,24 @@
   "MWO2zy": {
     "message": "出错了！"
   },
+  "RraqCg": {
+    "message": "Username and password do not match"
+  },
   "X2ic5v": {
     "message": "您已登出"
   },
   "Y6tZmW": {
-    "message": "Switch to dark mode"
+    "message": "切换暗色主题"
   },
   "aIRWQB": {
     "message": "返回主页"
   },
   "crTG+P": {
     "description": "Follow the system scheme",
-    "message": "system"
+    "message": "跟随系统"
   },
   "gjBiyj": {
-    "message": "Loading..."
+    "message": "加载中..."
   },
   "nmSKJK": {
     "message": "不能为空。"
