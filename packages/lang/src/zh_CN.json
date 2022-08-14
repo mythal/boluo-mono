@@ -1,12 +1,12 @@
 {
-  "3cc4Ct": {
-    "message": "亮色"
-  },
-  "47FYwb": {
-    "message": "取消"
+  "2gujDD": {
+    "message": "These are the pages used to design and debug the components"
   },
   "5sg7KC": {
     "message": "密码"
+  },
+  "8I/DPV": {
+    "message": "Switch to light mode"
   },
   "AyGauy": {
     "message": "登录"
@@ -14,8 +14,8 @@
   "CoEsov": {
     "message": "用户名或邮箱"
   },
-  "FcwBEE": {
-    "message": "刷新"
+  "FwQ8Qb": {
+    "message": "According to the system setting"
   },
   "HpyhN3": {
     "message": "菠萝"
@@ -23,29 +23,27 @@
   "MWO2zy": {
     "message": "出错了！"
   },
-  "NXI/XL": {
-    "message": "自动"
-  },
   "X2ic5v": {
     "message": "您已登出"
+  },
+  "Y6tZmW": {
+    "message": "Switch to dark mode"
   },
   "aIRWQB": {
     "message": "返回主页"
   },
+  "crTG+P": {
+    "description": "Follow the system scheme",
+    "message": "system"
+  },
+  "gjBiyj": {
+    "message": "Loading..."
+  },
   "nmSKJK": {
     "message": "不能为空。"
   },
-  "pULdOq": {
-    "message": "这可能是网络问题。如果刷新页面后错误仍然存在，请联系管理员。"
-  },
   "rELDbB": {
     "message": "刷新"
-  },
-  "tOdNiY": {
-    "message": "暗色"
-  },
-  "wSZR47": {
-    "message": "提交"
   },
   "z/ipXX": {
     "message": "糟糕！"
