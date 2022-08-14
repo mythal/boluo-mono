@@ -1,12 +1,12 @@
 {
   "2gujDD": {
-    "message": "These are the pages used to design and debug the components"
+    "message": "これらはコンポーネントの設計とデバッグに使用されるページです"
   },
   "5sg7KC": {
     "message": "パスワード"
   },
   "8I/DPV": {
-    "message": "Switch to light mode"
+    "message": "ライトスキームに切り替える"
   },
   "AyGauy": {
     "message": "ログイン"
@@ -15,7 +15,7 @@
     "message": "ユーザー名またはメール"
   },
   "FwQ8Qb": {
-    "message": "According to the system setting"
+    "message": "システム設定によると"
   },
   "HpyhN3": {
     "message": "パイン"
@@ -23,21 +23,24 @@
   "MWO2zy": {
     "message": "何か問題が起きました。"
   },
+  "RraqCg": {
+    "message": "Username and password do not match"
+  },
   "X2ic5v": {
     "message": "ログアウトしました"
   },
   "Y6tZmW": {
-    "message": "Switch to dark mode"
+    "message": "暗いスキームに切り替える"
   },
   "aIRWQB": {
     "message": "ホームへ戻る"
   },
   "crTG+P": {
     "description": "Follow the system scheme",
-    "message": "system"
+    "message": "システム"
   },
   "gjBiyj": {
-    "message": "Loading..."
+    "message": "読み込み中…"
   },
   "nmSKJK": {
     "message": "入力必須です。"
