@@ -1,13 +1,14 @@
-import { post } from 'boluo-api';
-import type { LoginReturn } from 'boluo-api';
+import type { NoPermissionError } from 'boluo-api';
+import { keepError, post } from 'boluo-api';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
+import type { FC } from 'react';
 import { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useSWRConfig } from 'swr';
-import { Button, Oops, TextInput } from 'ui';
+import { Button, TextInput } from 'ui';
 import type { StyleProps } from '../helper/props';
 
 interface Props extends StyleProps {}
@@ -17,7 +18,7 @@ interface Inputs {
   password: string;
 }
 
-export const LoginForm = ({ className }: StyleProps) => {
+export const LoginForm: FC<Props> = ({ className }) => {
   const router = useRouter();
   const { mutate } = useSWRConfig();
   const {
@@ -25,28 +26,30 @@ export const LoginForm = ({ className }: StyleProps) => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  const [error, setError] = useState<unknown>(null);
+  const [error, setError] = useState<NoPermissionError | null>(null);
   const intl = useIntl();
   const required = intl.formatMessage({ defaultMessage: "Can't be empty." });
   const onSubmit: SubmitHandler<Inputs> = async ({ password, username }) => {
-    let result: LoginReturn;
-    try {
-      result = await post('/users/login', { password, username });
-    } catch (e) {
-      setError(e);
-      return;
+    const result = (await post('/users/login', { password, username })).mapErr(keepError(['NO_PERMISSION']));
+    if (result.isOk) {
+      await mutate('/users/get_me', result.value.me);
+      await router.push('/');
+    } else {
+      setError(result.value);
     }
-    await mutate('/users/get_me', result.me);
-    await router.push('/');
   };
-  if (error) {
-    return <Oops type="inline" error={error} />;
-  }
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={clsx('flex flex-col gap-2', className)}>
       <div className="text-2xl">
         <FormattedMessage defaultMessage="Login" />
       </div>
+
+      {error?.code === 'NO_PERMISSION' && (
+        <div className="my-1 text-error-700">
+          <FormattedMessage defaultMessage="Username and password do not match" />
+        </div>
+      )}
+
       <div className="w-full">
         <label className="w-full">
           <FormattedMessage defaultMessage="Username or Email" />

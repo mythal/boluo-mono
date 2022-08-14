@@ -23,6 +23,7 @@
     "boluo-api": "workspace:*",
     "boluo-icons": "workspace:*",
     "boluo-logo": "workspace:*",
+    "boluo-utils": "workspace:*",
     "clsx": "^1.2.1",
     "lang": "workspace:*",
     "next": "^12.2.5",

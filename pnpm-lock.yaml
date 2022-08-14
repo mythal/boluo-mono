@@ -120,6 +120,7 @@ importers:
       boluo-api: workspace:*
       boluo-icons: workspace:*
       boluo-logo: workspace:*
+      boluo-utils: workspace:*
       clsx: ^1.2.1
       eslint: ^8.21.0
       eslint-config-custom: workspace:*
@@ -161,6 +162,7 @@ importers:
       boluo-api: link:../../packages/api
       boluo-icons: link:../../packages/icons
       boluo-logo: link:../../packages/logo
+      boluo-utils: link:../../packages/utils
       clsx: 1.2.1
       lang: link:../../packages/lang
       next: 12.2.5_twoewwu6sg7cdf3ao6njtbftne

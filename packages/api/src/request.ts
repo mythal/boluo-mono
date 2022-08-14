@@ -1,6 +1,7 @@
-import { IS_DEBUG } from 'boluo-utils';
+import { IS_DEBUG, Ok } from 'boluo-utils';
+import { Err, Result } from 'boluo-utils';
+import { FetchFailError, NotJsonError } from './error-types';
 import type { ApiError } from './errors';
-import { AppErrorBox } from './errors';
 
 export const makeUri = (path: string, query?: object): string => {
   if (path[0] !== '/') {
@@ -35,29 +36,29 @@ interface AppResponse {
   err: ApiError;
 }
 
-export const request = async <T>(
+export const request = async <T, E extends ApiError = ApiError>(
   path: string,
   method: string,
   body: Exclude<RequestInit['body'], undefined>,
   contentType = 'application/json',
-): Promise<T> => {
+): Promise<Result<T, E | NotJsonError | FetchFailError>> => {
   const headers = new Headers({
     'Content-Type': contentType,
   });
   if (IS_DEBUG) {
     headers.append('development', '');
   }
-  const fetchPromise = fetch(path, {
-    method,
-    headers,
-    body,
-    credentials: 'include',
-  });
   let res: Response;
   try {
-    res = await fetchPromise;
+    res = await fetch(path, {
+      method,
+      headers,
+      body,
+      credentials: 'include',
+    });
   } catch (cause) {
-    throw new AppErrorBox({ code: 'FETCH_FAIL', cause });
+    const fetchError: FetchFailError = { code: 'FETCH_FAIL', cause };
+    return new Err(fetchError);
   }
   let data: AppResponse;
   try {
@@ -65,11 +66,12 @@ export const request = async <T>(
     data = await res.json();
   } catch (cause) {
     console.error('Failed to parse JSON: ', cause);
-    throw new AppErrorBox({ code: 'NOT_JSON', cause });
+    const notJson: NotJsonError = { code: 'NOT_JSON', cause };
+    return new Err(notJson);
   }
   if (data.isOk) {
-    return data.ok as T;
+    return new Ok(data.ok as T);
   } else {
-    throw new AppErrorBox(data.err);
+    throw new Err(data.err);
   }
 };

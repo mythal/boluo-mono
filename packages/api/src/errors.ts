@@ -1,64 +1,41 @@
-export const UNAUTHENTICATED = 'UNAUTHENTICATED';
-export type UNAUTHENTICATED = typeof UNAUTHENTICATED;
+import * as errors from './error-types';
 
-export const NO_PERMISSION = 'NO_PERMISSION';
-export type NO_PERMISSION = typeof NO_PERMISSION;
+export type ApiError =
+  | errors.UnauthenticatedError
+  | errors.NoPermissionError
+  | errors.NotJsonError
+  | errors.NotFoundError
+  | errors.FetchFailError
+  | errors.UnexpectedError
+  | errors.BadRequestError
+  | errors.ValidationFailError
+  | errors.ConflictError
+  | errors.MethodNotAllowedError
+  | errors.LimitExceededError;
 
-export const NOT_JSON = 'NOT_JSON';
-export type NOT_JSON = typeof NOT_JSON;
+// https://stackoverflow.com/a/50125960/1137004
+type DiscriminateUnion<T, K extends keyof T, V extends T[K]> = T extends Record<K, V> ? T : never;
+type MapDiscriminatedUnion<T extends Record<K, string>, K extends keyof T> = {
+  [V in T[K]]: DiscriminateUnion<T, K, V>;
+};
+export type ApiErrorMap = MapDiscriminatedUnion<ApiError, 'code'>;
 
-export const NOT_FOUND = 'NOT_FOUND';
-export type NOT_FOUND = typeof NOT_FOUND;
+export type ApiErrorCode = ApiError['code'];
 
-export const FETCH_FAIL = 'FETCH_FAIL';
-export type FETCH_FAIL = typeof FETCH_FAIL;
+export const isApiError = (error: unknown): error is ApiError =>
+  typeof error === 'object'
+  && error !== null
+  && error.hasOwnProperty('code')
+  && (error.hasOwnProperty('message') || error.hasOwnProperty('cause'));
 
-export const UNEXPECTED = 'UNEXPECTED';
-export type UNEXPECTED = typeof UNEXPECTED;
-
-export const BAD_REQUEST = 'BAD_REQUEST';
-export type BAD_REQUEST = typeof BAD_REQUEST;
-
-export const VALIDATION_FAIL = 'VALIDATION_FAIL';
-export type VALIDATION_FAIL = typeof VALIDATION_FAIL;
-
-export const CONFLICT = 'CONFLICT';
-export type CONFLICT = typeof CONFLICT;
-
-export const METHOD_NOT_ALLOWED = 'METHOD_NOT_ALLOWED';
-export type METHOD_NOT_ALLOWED = typeof METHOD_NOT_ALLOWED;
-
-export const LIMIT_EXCEEDED = 'LIMIT_EXCEEDED';
-export type LIMIT_EXCEEDED = typeof LIMIT_EXCEEDED;
-
-export interface ApiError {
-  code:
-    | UNAUTHENTICATED
-    | NO_PERMISSION
-    | NOT_FOUND
-    | UNEXPECTED
-    | BAD_REQUEST
-    | VALIDATION_FAIL
-    | CONFLICT
-    | FETCH_FAIL
-    | METHOD_NOT_ALLOWED
-    | LIMIT_EXCEEDED;
-  message: string;
-  context: string | null;
-}
-
-export interface NotJsonError {
-  code: NOT_JSON;
-  cause: unknown;
-}
-
-export interface FetchFail {
-  code: FETCH_FAIL;
-  cause: unknown;
-}
-
-export type AppError = ApiError | NotJsonError | FetchFail;
-
-export class AppErrorBox {
-  constructor(public readonly error: AppError) {}
-}
+export const keepError = <Code extends ApiErrorCode>(watchCodeList: Code[]) => (error: unknown): ApiErrorMap[Code] => {
+  if (!isApiError(error)) {
+    throw error;
+  }
+  for (const code of watchCodeList) {
+    if (code === error.code) {
+      return error as ApiErrorMap[Code];
+    }
+  }
+  throw error;
+};
