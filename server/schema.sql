@@ -142,7 +142,7 @@ ALTER TABLE messages
 
 CREATE INDEX "message_pos" ON messages (pos);
 CREATE INDEX "message_tags" ON messages USING GIN (tags);
-CREATE INDEX "message_channel" ON messages USING btree (channel_id);
+CREATE INDEX "message_channel_index" ON messages USING btree (channel_id);
 
 CREATE TABLE restrained_members
 (
