@@ -6,19 +6,15 @@ export class Err<E> {
   readonly isOk = false;
   readonly isErr = true;
 
-  constructor(public readonly value: E) {}
+  constructor(public readonly err: E) {}
 
   ok(): null {
     return null;
   }
 
-  err(): E {
-    return this.value;
-  }
-
   expect(msg: string): never {
     console.error(msg);
-    throw this.value;
+    throw this.err;
   }
 
   unwrap(): never {
@@ -30,7 +26,7 @@ export class Err<E> {
   }
 
   unwrapOrElse<T>(orElse: (err: E) => T): T {
-    return orElse(this.value);
+    return orElse(this.err);
   }
 
   map(): Err<E> {
@@ -38,7 +34,7 @@ export class Err<E> {
   }
 
   mapErr<E2>(mapper: (err: E) => E2): Err<E2> {
-    return new Err(mapper(this.value));
+    return new Err(mapper(this.err));
   }
 
   andThen(): Err<E> {
@@ -50,35 +46,27 @@ export class Ok<T> {
   readonly isOk = true;
   readonly isErr = false;
 
-  constructor(public readonly value: T) {}
-
-  ok(): T {
-    return this.value;
-  }
-
-  err(): null {
-    return null;
-  }
+  constructor(public readonly some: T) {}
 
   expect(): T {
-    return this.value;
+    return this.some;
   }
 
   unwrap(): T {
-    return this.value;
+    return this.some;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   unwrapOr(other: T): T {
-    return this.value;
+    return this.some;
   }
 
   unwrapOrElse(): T {
-    return this.value;
+    return this.some;
   }
 
   map<U>(mapper: (value: T) => U): Ok<U> {
-    return new Ok(mapper(this.value));
+    return new Ok(mapper(this.some));
   }
 
   mapErr<E2>(): Ok<T> {
@@ -86,13 +74,11 @@ export class Ok<T> {
   }
 
   andThen<U, E>(f: (a: T) => Result<U, E>) {
-    return f(this.value);
+    return f(this.some);
   }
 }
 
 export type Result<T, E> = (Ok<T> | Err<E>) & {
-  ok(): T | null;
-  err(): E | null;
   map<U>(mapper: (value: T) => U): Result<U, E>;
   mapErr<E2>(mapper: (value: E) => E2): Result<T, E2>;
   andThen<U>(f: (a: T) => Result<U, E>): Result<U, E>;
@@ -100,7 +86,7 @@ export type Result<T, E> = (Ok<T> | Err<E>) & {
 
 export const unwrap = <T>(result: Result<T, any>): T => {
   if (result.isOk) {
-    return result.value;
+    return result.some;
   } else {
     return result.unwrap();
   }
@@ -108,7 +94,7 @@ export const unwrap = <T>(result: Result<T, any>): T => {
 
 export const expect = (msg: string) => <T>(result: Result<T, any>): T => {
   if (result.isOk) {
-    return result.value;
+    return result.some;
   } else {
     return result.expect(msg);
   }

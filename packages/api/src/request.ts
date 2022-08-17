@@ -72,6 +72,6 @@ export const request = async <T, E extends ApiError = ApiError>(
   if (data.isOk) {
     return new Ok(data.ok as T);
   } else {
-    throw new Err(data.err);
+    return new Err(data.err as E);
   }
 };

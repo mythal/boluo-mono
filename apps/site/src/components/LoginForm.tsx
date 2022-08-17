@@ -1,85 +1,147 @@
-import type { NoPermissionError } from 'boluo-api';
-import { keepError, post } from 'boluo-api';
-import clsx from 'clsx';
+import type { ApiError } from 'boluo-api';
+import { post } from 'boluo-api';
 import { useRouter } from 'next/router';
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
+import { useId } from 'react';
 import { useState } from 'react';
-import type { SubmitHandler } from 'react-hook-form';
+import type { FieldError, SubmitHandler } from 'react-hook-form';
+import { FormProvider, useFormContext } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useSWRConfig } from 'swr';
-import { Button, TextInput } from 'ui';
+import { Button, Label, Oops, TextInput } from 'ui';
 import type { StyleProps } from '../helper/props';
+import { required } from '../validations';
 
-interface Props extends StyleProps {}
+// https://web.dev/sign-in-form-best-practices/
+
+interface Props extends StyleProps {
+}
 
 interface Inputs {
   username: string;
   password: string;
 }
 
-export const LoginForm: FC<Props> = ({ className }) => {
-  const router = useRouter();
-  const { mutate } = useSWRConfig();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Inputs>();
-  const [error, setError] = useState<NoPermissionError | null>(null);
-  const intl = useIntl();
-  const required = intl.formatMessage({ defaultMessage: "Can't be empty." });
-  const onSubmit: SubmitHandler<Inputs> = async ({ password, username }) => {
-    const result = (await post('/users/login', { password, username })).mapErr(keepError(['NO_PERMISSION']));
-    if (result.isOk) {
-      await mutate('/users/get_me', result.value.me);
-      await router.push('/');
-    } else {
-      setError(result.value);
-    }
-  };
+const FormErrorDisplay: FC<{ error: ApiError }> = ({ error }) => {
+  let oops: ReactNode;
+
+  if (error.code === 'NO_PERMISSION') {
+    oops = <FormattedMessage defaultMessage="Username and password do not match" />;
+  } else {
+    oops = <Oops error={error} type="inline" />;
+  }
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={clsx('flex flex-col gap-2', className)}>
+    <div className="my-1 text-error-700">
+      {oops}
+    </div>
+  );
+};
+
+const FieldErrorDisplay: FC<{ error?: FieldError }> = ({ error }) => {
+  if (!error) {
+    return null;
+  }
+  return <div className="mt-1 text-sm">{error.message}</div>;
+};
+
+const UsernameField = () => {
+  const id = useId();
+  const intl = useIntl();
+  const { register, formState: { errors: { username: error } } } = useFormContext<Inputs>();
+  return (
+    <>
+      <div>
+        <Label htmlFor={id} className="w-full block py-1">
+          <FormattedMessage defaultMessage="Username or Email" />
+        </Label>
+
+        <TextInput
+          className="w-full"
+          id={id}
+          autoComplete="username"
+          data-state={error ? 'error' : 'default'}
+          {...register('username', required(intl))}
+        />
+      </div>
+      <FieldErrorDisplay error={error} />
+    </>
+  );
+};
+
+const PasswordField = () => {
+  const id = useId();
+  const intl = useIntl();
+  const { register, formState: { errors: { password: error } } } = useFormContext<Inputs>();
+  return (
+    <>
+      <div>
+        <Label htmlFor={id} className="w-full block py-1">
+          <FormattedMessage defaultMessage="Password" />
+        </Label>
+        <TextInput
+          id={id}
+          type="password"
+          autoComplete="current-password"
+          className="w-full"
+          data-state={error ? 'error' : 'default'}
+          {...register('password', required(intl))}
+        />
+      </div>
+      <FieldErrorDisplay error={error} />
+    </>
+  );
+};
+
+const FormContent: FC<{ error: ApiError | null }> = ({ error }) => {
+  return (
+    <div className="flex flex-col gap-2">
       <div className="text-2xl">
         <FormattedMessage defaultMessage="Login" />
       </div>
 
-      {error?.code === 'NO_PERMISSION' && (
+      <div className="w-full">
+        <UsernameField />
+      </div>
+      <div className="w-full">
+        <PasswordField />
+      </div>
+
+      {error && (
         <div className="my-1 text-error-700">
-          <FormattedMessage defaultMessage="Username and password do not match" />
+          <FormErrorDisplay error={error} />
         </div>
       )}
 
-      <div className="w-full">
-        <label className="w-full">
-          <FormattedMessage defaultMessage="Username or Email" />
-          <TextInput
-            className="w-full"
-            autoComplete="username"
-            data-state={errors.username ? 'error' : 'default'}
-            {...register('username', { required })}
-          />
-        </label>
-        {errors.username?.message && <div className="mt-1 text-sm">{errors.username.message}</div>}
-      </div>
-      <div className="w-full">
-        <label>
-          <FormattedMessage defaultMessage="Password" />
-          <TextInput
-            type="password"
-            autoComplete="current-password"
-            className="w-full"
-            data-state={errors.password ? 'error' : 'default'}
-            {...register('password', { required })}
-          />
-          {errors.password?.message && <div className="mt-1 text-sm">{errors.password.message}</div>}
-        </label>
-      </div>
       <div className="mt-2 flex justify-end">
         <Button data-type="primary" type="submit">
           <FormattedMessage defaultMessage="Login" />
         </Button>
       </div>
-    </form>
+    </div>
+  );
+};
+
+export const LoginForm: FC<Props> = () => {
+  const router = useRouter();
+  const { mutate } = useSWRConfig();
+  const methods = useForm<Inputs>();
+  const [error, setError] = useState<ApiError | null>(null);
+  const onSubmit: SubmitHandler<Inputs> = async ({ password, username }) => {
+    const result = await post('/users/login', { password, username });
+    if (result.isErr) {
+      return setError(result.err);
+    }
+    setError(null);
+    await mutate('/users/get_me', result.some.me);
+    await router.push('/');
+  };
+
+  return (
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <FormContent error={error} />
+      </form>
+    </FormProvider>
   );
 };

@@ -1,5 +1,5 @@
+import type { AppProps } from 'next/app';
 import { Providers } from '../components/global/Providers';
-import type { AppPropsWithLayout } from '../helper/layout';
 import 'ui/src/tailwind.css';
 
 function registerServiceWorker() {
@@ -21,14 +21,11 @@ if (typeof window !== 'undefined') {
   registerServiceWorker();
 }
 
-function App({ Component, pageProps }: AppPropsWithLayout) {
-  const getLayout = Component.getLayout ?? ((page) => page);
-  const title = Component.title;
-  return getLayout(
+function App({ Component, pageProps }: AppProps) {
+  return (
     <Providers>
       <Component {...pageProps} />
-    </Providers>,
-    title,
+    </Providers>
   );
 }
 export default App;
