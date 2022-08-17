@@ -1,9 +1,21 @@
 {
+  "+OyBM6": {
+    "message": "This email is already in use."
+  },
   "2gujDD": {
     "message": "これらはコンポーネントの設計とデバッグに使用されるページです"
   },
+  "39AHJm": {
+    "message": "Sign Up"
+  },
+  "5HUwAy": {
+    "message": "Only letters, numbers, and underscores are allowed."
+  },
   "5sg7KC": {
     "message": "パスワード"
+  },
+  "6JNvt/": {
+    "message": "Must be at least {min} characters."
   },
   "8I/DPV": {
     "message": "ライトスキームに切り替える"
@@ -11,14 +23,29 @@
   "AyGauy": {
     "message": "ログイン"
   },
+  "BcTz5b": {
+    "message": "Server Internal Error"
+  },
   "CoEsov": {
     "message": "ユーザー名またはメール"
   },
   "FwQ8Qb": {
     "message": "システム設定によると"
   },
+  "HH8O0c": {
+    "message": "Request failed, possible network anomaly."
+  },
   "HpyhN3": {
     "message": "パイン"
+  },
+  "JCIgkj": {
+    "message": "Username"
+  },
+  "K7AkdL": {
+    "message": "Show"
+  },
+  "KNyL7j": {
+    "message": "You don't have permission to operate"
   },
   "MWO2zy": {
     "message": "何か問題が起きました。"
@@ -26,14 +53,29 @@
   "RraqCg": {
     "message": "ユーザー名とパスワードが一致しません"
   },
+  "SBkvpf": {
+    "message": "Nickname"
+  },
+  "TThIOM": {
+    "message": "Not found"
+  },
+  "VA/Z1S": {
+    "message": "Hide"
+  },
   "X2ic5v": {
     "message": "ログアウトしました"
   },
   "Y6tZmW": {
     "message": "暗いスキームに切り替える"
   },
+  "ZgSUm5": {
+    "message": "Too many requests! Please try again later."
+  },
   "aIRWQB": {
     "message": "ホームへ戻る"
+  },
+  "bF0HPN": {
+    "message": "There is a resource conflict."
   },
   "crTG+P": {
     "description": "Follow the system scheme",
@@ -42,11 +84,38 @@
   "gjBiyj": {
     "message": "読み込み中…"
   },
+  "hFIEcy": {
+    "message": "Malformed request."
+  },
+  "kMogDE": {
+    "message": "Must be a valid email address."
+  },
+  "kNZGAe": {
+    "message": "Failed to validate."
+  },
+  "nKu0Ba": {
+    "message": "Must be logged in."
+  },
   "nmSKJK": {
     "message": "入力必須です。"
   },
+  "oVARYX": {
+    "message": "Must be at most {max} characters."
+  },
   "rELDbB": {
     "message": "再読み込み"
+  },
+  "vMrnt6": {
+    "message": "An error occurred while parsing the data."
+  },
+  "wb3MSp": {
+    "message": "This username is already taken."
+  },
+  "xgZgnO": {
+    "message": "Wrong request method."
+  },
+  "y63e7m": {
+    "message": "EMail"
   },
   "z/ipXX": {
     "message": "おっとっと！"
