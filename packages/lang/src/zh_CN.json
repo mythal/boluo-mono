@@ -54,13 +54,13 @@
     "message": "帐号与密码不匹配"
   },
   "SBkvpf": {
-    "message": "Nickname"
+    "message": "昵称"
   },
   "TThIOM": {
-    "message": "Not found"
+    "message": "未找到"
   },
   "VA/Z1S": {
-    "message": "Hide"
+    "message": "隐藏"
   },
   "X2ic5v": {
     "message": "您已登出"
@@ -69,13 +69,13 @@
     "message": "切换暗色主题"
   },
   "ZgSUm5": {
-    "message": "Too many requests! Please try again later."
+    "message": "请求次数过多！请稍后再试。"
   },
   "aIRWQB": {
     "message": "返回主页"
   },
   "bF0HPN": {
-    "message": "There is a resource conflict."
+    "message": "存在资源冲突。"
   },
   "crTG+P": {
     "description": "Follow the system scheme",
@@ -85,37 +85,37 @@
     "message": "加载中..."
   },
   "hFIEcy": {
-    "message": "Malformed request."
+    "message": "请求格式不正确。"
   },
   "kMogDE": {
-    "message": "Must be a valid email address."
+    "message": "请输入合法的邮箱地址。"
   },
   "kNZGAe": {
-    "message": "Failed to validate."
+    "message": "验证失败。"
   },
   "nKu0Ba": {
-    "message": "Must be logged in."
+    "message": "你必须先登录。"
   },
   "nmSKJK": {
     "message": "不能为空。"
   },
   "oVARYX": {
-    "message": "Must be at most {max} characters."
+    "message": "至多 {max} 个字符。"
   },
   "rELDbB": {
     "message": "刷新"
   },
   "vMrnt6": {
-    "message": "An error occurred while parsing the data."
+    "message": "解析数据时出错了。"
   },
   "wb3MSp": {
-    "message": "This username is already taken."
+    "message": "此用户名已被占用。"
   },
   "xgZgnO": {
-    "message": "Wrong request method."
+    "message": "请求方式错误。"
   },
   "y63e7m": {
-    "message": "EMail"
+    "message": "邮箱"
   },
   "z/ipXX": {
     "message": "糟糕！"
