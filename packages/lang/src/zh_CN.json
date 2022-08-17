@@ -1,9 +1,21 @@
 {
+  "+OyBM6": {
+    "message": "This email is already in use."
+  },
   "2gujDD": {
     "message": "这些是用于设计和调试组件的页面"
   },
+  "39AHJm": {
+    "message": "Sign Up"
+  },
+  "5HUwAy": {
+    "message": "Only letters, numbers, and underscores are allowed."
+  },
   "5sg7KC": {
     "message": "密码"
+  },
+  "6JNvt/": {
+    "message": "Must be at least {min} characters."
   },
   "8I/DPV": {
     "message": "切换到亮色模式"
@@ -11,14 +23,29 @@
   "AyGauy": {
     "message": "登录"
   },
+  "BcTz5b": {
+    "message": "Server Internal Error"
+  },
   "CoEsov": {
     "message": "用户名或邮箱"
   },
   "FwQ8Qb": {
     "message": "按系统设置"
   },
+  "HH8O0c": {
+    "message": "Request failed, possible network anomaly."
+  },
   "HpyhN3": {
     "message": "菠萝"
+  },
+  "JCIgkj": {
+    "message": "Username"
+  },
+  "K7AkdL": {
+    "message": "Show"
+  },
+  "KNyL7j": {
+    "message": "You don't have permission to operate"
   },
   "MWO2zy": {
     "message": "出错了！"
@@ -26,14 +53,29 @@
   "RraqCg": {
     "message": "帐号与密码不匹配"
   },
+  "SBkvpf": {
+    "message": "Nickname"
+  },
+  "TThIOM": {
+    "message": "Not found"
+  },
+  "VA/Z1S": {
+    "message": "Hide"
+  },
   "X2ic5v": {
     "message": "您已登出"
   },
   "Y6tZmW": {
     "message": "切换暗色主题"
   },
+  "ZgSUm5": {
+    "message": "Too many requests! Please try again later."
+  },
   "aIRWQB": {
     "message": "返回主页"
+  },
+  "bF0HPN": {
+    "message": "There is a resource conflict."
   },
   "crTG+P": {
     "description": "Follow the system scheme",
@@ -42,11 +84,38 @@
   "gjBiyj": {
     "message": "加载中..."
   },
+  "hFIEcy": {
+    "message": "Malformed request."
+  },
+  "kMogDE": {
+    "message": "Must be a valid email address."
+  },
+  "kNZGAe": {
+    "message": "Failed to validate."
+  },
+  "nKu0Ba": {
+    "message": "Must be logged in."
+  },
   "nmSKJK": {
     "message": "不能为空。"
   },
+  "oVARYX": {
+    "message": "Must be at most {max} characters."
+  },
   "rELDbB": {
     "message": "刷新"
+  },
+  "vMrnt6": {
+    "message": "An error occurred while parsing the data."
+  },
+  "wb3MSp": {
+    "message": "This username is already taken."
+  },
+  "xgZgnO": {
+    "message": "Wrong request method."
+  },
+  "y63e7m": {
+    "message": "EMail"
   },
   "z/ipXX": {
     "message": "糟糕！"
