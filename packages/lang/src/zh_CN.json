@@ -1,21 +1,21 @@
 {
   "+OyBM6": {
-    "message": "This email is already in use."
+    "message": "这个邮箱地址已经被使用。"
   },
   "2gujDD": {
     "message": "这些是用于设计和调试组件的页面"
   },
   "39AHJm": {
-    "message": "Sign Up"
+    "message": "注册"
   },
   "5HUwAy": {
-    "message": "Only letters, numbers, and underscores are allowed."
+    "message": "只允许字母，数字和下划线。"
   },
   "5sg7KC": {
     "message": "密码"
   },
   "6JNvt/": {
-    "message": "Must be at least {min} characters."
+    "message": "至少需要 {min} 个字符。"
   },
   "8I/DPV": {
     "message": "切换到亮色模式"
@@ -24,7 +24,7 @@
     "message": "登录"
   },
   "BcTz5b": {
-    "message": "Server Internal Error"
+    "message": "服务器内部错误"
   },
   "CoEsov": {
     "message": "用户名或邮箱"
@@ -33,19 +33,19 @@
     "message": "按系统设置"
   },
   "HH8O0c": {
-    "message": "Request failed, possible network anomaly."
+    "message": "请求失败，可能是网络异常。"
   },
   "HpyhN3": {
     "message": "菠萝"
   },
   "JCIgkj": {
-    "message": "Username"
+    "message": "用户名"
   },
   "K7AkdL": {
-    "message": "Show"
+    "message": "显示"
   },
   "KNyL7j": {
-    "message": "You don't have permission to operate"
+    "message": "您没有操作权限"
   },
   "MWO2zy": {
     "message": "出错了！"
