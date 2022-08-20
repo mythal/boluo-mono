@@ -1,7 +1,6 @@
 use crate::pool::PoolError;
 use hyper::{StatusCode, Uri};
 pub use redis::RedisError as CacheError;
-use std::backtrace::Backtrace;
 use std::error::Error;
 use thiserror::Error;
 pub use tokio_postgres::Error as DbError;
@@ -9,12 +8,11 @@ pub use tokio_postgres::Error as DbError;
 #[derive(Debug, Error)]
 pub enum AppError {
     #[error("An unexpected database error occurred: {source}")]
-    Database { source: DbError, backtrace: Backtrace },
+    Database { source: DbError },
     #[error("An unexpected cache database error occurred: {source}")]
     Cache {
         #[from]
         source: CacheError,
-        backtrace: Backtrace,
     },
     #[error("Authentication failed: {0}")]
     Unauthenticated(String),
@@ -40,13 +38,11 @@ pub enum AppError {
     Hyper {
         #[from]
         source: hyper::Error,
-        backtrace: Backtrace,
     },
     #[error("An I/O error occurred")]
     TokioIo {
         #[from]
         source: tokio::io::Error,
-        backtrace: Backtrace,
     },
 }
 
@@ -159,10 +155,7 @@ impl From<ModelError> for AppError {
     fn from(e: ModelError) -> Self {
         match e {
             ModelError::Validation(e) => AppError::Validation(e),
-            ModelError::Database(source) => AppError::Database {
-                source,
-                backtrace: Backtrace::capture(),
-            },
+            ModelError::Database(source) => AppError::Database { source },
             ModelError::Conflict(type_) => AppError::Conflict(type_),
         }
     }
@@ -192,9 +185,9 @@ pub fn log_error(e: &AppError, uri: &Uri) {
         }
         e => {
             log::error!("{} - {}\n", uri, e);
-            if let Some(backtrace) = e.backtrace() {
-                log::error!("{}", backtrace);
-            }
+            // if let Some(backtrace) = e.backtrace() {
+            //     log::error!("{}", backtrace);
+            // }
             let mut source: Option<&_> = e.source();
             while let Some(e) = source {
                 log::error!("> {}", e);
@@ -212,19 +205,13 @@ pub trait Find<T: Sized> {
 impl<T> Find<T> for Result<Option<T>, DbError> {
     fn or_no_permission(self) -> Result<T, AppError> {
         match self {
-            Err(source) => Err(AppError::Database {
-                source,
-                backtrace: Backtrace::capture(),
-            }),
+            Err(source) => Err(AppError::Database { source }),
             Ok(x) => x.or_no_permission(),
         }
     }
     fn or_not_found(self) -> Result<T, AppError> {
         match self {
-            Err(source) => Err(AppError::Database {
-                source,
-                backtrace: Backtrace::capture(),
-            }),
+            Err(source) => Err(AppError::Database { source }),
             Ok(x) => x.or_not_found(),
         }
     }

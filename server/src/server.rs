@@ -1,4 +1,3 @@
-#![feature(backtrace)]
 #![allow(dead_code)]
 
 use std::env;
