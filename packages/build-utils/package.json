@@ -8,10 +8,9 @@
     "build": "tsc --project tsconfig.json"
   },
   "license": "GPL-3.0",
-  "dependencies": {},
   "sideEffects": false,
   "devDependencies": {
-    "tsconfig": "workspace:*",
-    "typescript": "^4.7.4"
+    "tsconfig": "workspace:0.0.0",
+    "typescript": "^4.8.2"
   }
 }

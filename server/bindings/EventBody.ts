@@ -7,14 +7,14 @@ import type { SpaceWithRelated } from './SpaceWithRelated';
 import type { UserStatus } from './UserStatus';
 
 export type EventBody =
-  | { type: 'NEW_MESSAGE'; channel_id: string; message: Message }
-  | { type: 'MESSAGE_DELETED'; message_id: string; channel_id: string }
-  | { type: 'MESSAGE_EDITED'; channel_id: string; message: Message }
-  | { type: 'MESSAGE_PREVIEW'; channel_id: string; preview: Preview }
-  | { type: 'CHANNEL_DELETED'; channel_id: string }
-  | { type: 'CHANNEL_EDITED'; channel_id: string; channel: Channel }
-  | { type: 'MEMBERS'; channel_id: string; members: Array<Member> }
+  | { type: 'NEW_MESSAGE'; channelId: string; message: Message }
+  | { type: 'MESSAGE_DELETED'; messageId: string; channelId: string }
+  | { type: 'MESSAGE_EDITED'; channelId: string; message: Message }
+  | { type: 'MESSAGE_PREVIEW'; channelId: string; preview: Preview }
+  | { type: 'CHANNEL_DELETED'; channelId: string }
+  | { type: 'CHANNEL_EDITED'; channelId: string; channel: Channel }
+  | { type: 'MEMBERS'; channelId: string; members: Array<Member> }
   | { type: 'INITIALIZED' }
-  | { type: 'STATUS_MAP'; status_map: Record<string, UserStatus>; space_id: string }
-  | { type: 'SPACE_UPDATED'; space_with_related: SpaceWithRelated }
+  | { type: 'STATUS_MAP'; statusMap: Record<string, UserStatus>; spaceId: string }
+  | { type: 'SPACE_UPDATED'; spaceWithRelated: SpaceWithRelated }
   | { type: 'APP_UPDATED' };

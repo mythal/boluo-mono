@@ -12,7 +12,7 @@ const Logout = () => {
   useEffect(() => logout);
   return (
     <>
-      <Title name={pageName} />
+      <Title>{pageName}</Title>
       <div className="flex h-screen items-start justify-center pt-[20vh]">
         <div className="min-w-[20rem] max-w-[90vw] rounded border bg-neutral-50 p-6 shadow-1 shadow-gray-300/75">
           <div className="w-full text-2xl">

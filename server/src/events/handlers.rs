@@ -92,8 +92,10 @@ async fn push_events(mailbox: Uuid, outgoing: &mut Sender) -> Result<(), anyhow:
         Ok(())
     };
 
-    let ping = IntervalStream::new(interval(Duration::from_secs(30))).for_each(|_| async {
-        tx.clone().send(WsMessage::Ping(Vec::new())).await.ok();
+    let ping = IntervalStream::new(interval(Duration::from_secs(3))).for_each(|_| async {
+        if let Err(err) = tx.clone().send(WsMessage::Text("♥".to_string())).await {
+            log::warn!("{}", err);
+        }
     });
 
     tokio::select! {
@@ -168,6 +170,9 @@ async fn connect(req: Request) -> Result<Response, anyhow::Error> {
             .and_then(future::ready)
             .try_for_each(|message: WsMessage| async move {
                 if let WsMessage::Text(message) = message {
+                    if message == "♡" {
+                        return Ok(());
+                    }
                     if let Err(e) = handle_client_event(mailbox, user_id, message).await {
                         log::warn!("Failed to handle the event from client: {}", e);
                     }

@@ -30,6 +30,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>((pr
   const state = props['data-state'] ?? 'default';
   return (
     <textarea
+      {...props}
       className={clsx(
         'input',
         state === 'default' && 'input-default',
@@ -38,7 +39,6 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>((pr
         props.className,
       )}
       ref={ref}
-      {...props}
     />
   );
 });

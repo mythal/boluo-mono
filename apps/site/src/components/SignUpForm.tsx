@@ -19,13 +19,6 @@ interface Schema {
 }
 
 const FormErrorDisplay: FC<{ error: ApiError }> = ({ error }) => {
-  // let oops: ReactNode;
-
-  // if (error.code === 'NO_PERMISSION') {
-  //   oops = <FormattedMessage defaultMessage="Username and password do not match" />;
-  // } else {
-  //   oops = <Oops error={error} type="inline" />;
-  // }
   return (
     <div className="my-1 text-error-700">
       <Oops error={error} type="inline" />
@@ -102,6 +95,7 @@ const NicknameField = () => {
         <TextInput
           className="w-full"
           id={id}
+          autoComplete="nickname"
           data-state={error ? 'error' : 'default'}
           {...register('nickname', validations.nickname(intl))}
         />

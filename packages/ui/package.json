@@ -16,15 +16,16 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@formatjs/ts-transformer": "^3.9.9",
-    "@types/node": "^16.11.51",
+    "@formatjs/ts-transformer": "^3.10.0",
+    "@types/node": "^16.11.56",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
-    "boluo-api": "workspace:*",
-    "boluo-utils": "workspace:*",
-    "build-utils": "workspace:*",
-    "eslint": "^8.22.0",
-    "eslint-config-custom": "workspace:*",
+    "boluo-api": "workspace:0.0.0",
+    "boluo-utils": "workspace:0.0.0",
+    "build-utils": "workspace:0.0.0",
+    "eslint": "^8.23.0",
+    "eslint-config-custom": "workspace:0.0.0",
+    "postcss": "^8.4.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup": "^2.78.1",
@@ -32,17 +33,17 @@
     "tailwindcss": "^3.1.8",
     "tailwindcss-theme-swapper": "^0.6.2",
     "ts-node": "^10.9.1",
-    "tsconfig": "workspace:*",
-    "typescript": "^4.7.4"
+    "tsconfig": "workspace:0.0.0",
+    "typescript": "^4.8.2"
   },
   "dependencies": {
     "@radix-ui/react-label": "^1.0.0",
     "@radix-ui/react-select": "^1.0.0",
     "@radix-ui/react-switch": "^1.0.0",
     "@radix-ui/react-toggle-group": "^1.0.0",
-    "boluo-icons": "workspace:*",
+    "boluo-icons": "workspace:0.0.0",
     "clsx": "^1.2.1",
-    "react-intl": "^6.0.5",
+    "react-intl": "^6.1.0",
     "tslib": "^2.4.0"
   }
 }

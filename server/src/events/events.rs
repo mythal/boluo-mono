@@ -39,48 +39,52 @@ pub enum ClientEvent {
 #[serde(tag = "type")]
 #[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum EventBody {
-    #[serde(rename_all = "camelCase")]
+    // Workaround https://github.com/Aleph-Alpha/ts-rs/issues/72
+    // #[serde(rename_all = "camelCase")]
     NewMessage {
+        #[serde(rename = "channelId")]
         channel_id: Uuid,
         message: Box<Message>,
     },
-    #[serde(rename_all = "camelCase")]
     MessageDeleted {
+        #[serde(rename = "messageId")]
         message_id: Uuid,
+        #[serde(rename = "channelId")]
         channel_id: Uuid,
     },
-    #[serde(rename_all = "camelCase")]
     MessageEdited {
+        #[serde(rename = "channelId")]
         channel_id: Uuid,
         message: Box<Message>,
     },
-    #[serde(rename_all = "camelCase")]
     MessagePreview {
+        #[serde(rename = "channelId")]
         channel_id: Uuid,
         preview: Box<Preview>,
     },
-    #[serde(rename_all = "camelCase")]
     ChannelDeleted {
+        #[serde(rename = "channelId")]
         channel_id: Uuid,
     },
-    #[serde(rename_all = "camelCase")]
     ChannelEdited {
+        #[serde(rename = "channelId")]
         channel_id: Uuid,
         channel: Channel,
     },
-    #[serde(rename_all = "camelCase")]
     Members {
+        #[serde(rename = "channelId")]
         channel_id: Uuid,
         members: Vec<Member>,
     },
     Initialized,
-    #[serde(rename_all = "camelCase")]
     StatusMap {
+        #[serde(rename = "statusMap")]
         status_map: HashMap<Uuid, UserStatus>,
+        #[serde(rename = "spaceId")]
         space_id: Uuid,
     },
-    #[serde(rename_all = "camelCase")]
     SpaceUpdated {
+        #[serde(rename = "spaceWithRelated")]
         space_with_related: SpaceWithRelated,
     },
     AppUpdated,

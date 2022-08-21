@@ -51,7 +51,19 @@
       placeholder:text-warning-400 focus:border-warning-600
       hover-enabled:border-warning-600;
   }
+
 }
 
 @layer utilities {
+}
+
+.chat-grid {
+  display: grid;
+  grid-template-rows: 3rem 1fr 4rem;
+  grid-auto-flow: column;
+  grid-template-columns: 10em repeat(auto-fit, minmax(0, 1fr));
+}
+
+.sidebar-body {
+  grid-row: 2/4;
 }

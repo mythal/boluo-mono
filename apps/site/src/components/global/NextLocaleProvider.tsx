@@ -6,7 +6,6 @@ import { IntlProvider } from 'react-intl';
 import type { IntlMessages, Locale } from '../../helper/locale';
 import { loadMessages } from '../../helper/locale';
 import type { ChildrenProps } from '../../helper/props';
-import { useNotify } from '../../state/user-interface';
 
 const onError: OnErrorFn = (err) => {
   if (err.code === IntlErrorCode.MISSING_TRANSLATION) {
@@ -18,15 +17,13 @@ const onError: OnErrorFn = (err) => {
 
 const useLoadMessages = (locale: Locale): IntlMessages => {
   const [messages, setMessages] = useState<IntlMessages>(undefined);
-  const notify = useNotify();
   useEffect(() => {
     loadMessages(locale)
       .then(setMessages)
       .catch((e) => {
         console.error(e);
-        notify('An error occurred while loading the language data.', 'error');
       });
-  }, [locale, notify]);
+  }, [locale]);
   return messages;
 };
 
