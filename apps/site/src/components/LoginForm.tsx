@@ -126,6 +126,7 @@ export const LoginForm: FC<Props> = () => {
   const router = useRouter();
   const { mutate } = useSWRConfig();
   const methods = useForm<Inputs>();
+  const { handleSubmit } = methods;
   const [error, setError] = useState<ApiError | null>(null);
   const onSubmit: SubmitHandler<Inputs> = async ({ password, username }) => {
     const result = await post('/users/login', { password, username });
@@ -139,7 +140,7 @@ export const LoginForm: FC<Props> = () => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <FormContent error={error} />
       </form>
     </FormProvider>

@@ -2,10 +2,10 @@ import Head from 'next/head';
 import { useIntl } from 'react-intl';
 
 interface Props {
-  name: string;
+  children: string;
 }
 
-export const Title = ({ name }: Props) => {
+export const Title = ({ children: name }: Props) => {
   const intl = useIntl();
   const siteName = intl.formatMessage({ defaultMessage: 'Boluo' });
   const title = `${name} - ${siteName}`;

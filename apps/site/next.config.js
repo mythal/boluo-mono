@@ -2,7 +2,8 @@ const path = require("path");
 const withMDX = require("@next/mdx")();
 
 const ANALYZE = Boolean(process.env.ANALYZE);
-const BACKEND_URL = process.env.BACKEND_URL || "https://test.boluo.chat";
+const BACKEND_URL =
+  process.env.NEXT_PUBLIC_BACKEND_URL || "https://test.boluo.chat";
 
 /** @type {import('next').NextConfig} */
 const config = {

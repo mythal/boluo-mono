@@ -20,6 +20,9 @@
   "8I/DPV": {
     "message": "Switch to light mode"
   },
+  "8ULGYw": {
+    "message": "Space name"
+  },
   "AyGauy": {
     "message": "Login"
   },
@@ -50,17 +53,32 @@
   "MWO2zy": {
     "message": "Something going wrong."
   },
+  "OvBwdK": {
+    "message": "Initial channel name"
+  },
+  "Q8Qw5B": {
+    "message": "Description"
+  },
   "RraqCg": {
     "message": "Username and password do not match"
   },
   "SBkvpf": {
     "message": "Nickname"
   },
+  "Sf+ebw": {
+    "message": "Close pane"
+  },
+  "Sns2BW": {
+    "message": "Create a Plane"
+  },
   "TThIOM": {
     "message": "Not found"
   },
   "VA/Z1S": {
     "message": "Hide"
+  },
+  "VzzYJk": {
+    "message": "Create"
   },
   "X2ic5v": {
     "message": "You are logged out"
@@ -80,6 +98,9 @@
   "crTG+P": {
     "description": "Follow the system scheme",
     "message": "system"
+  },
+  "dMEGZV": {
+    "message": "Split pane"
   },
   "gjBiyj": {
     "message": "Loading..."
@@ -104,6 +125,9 @@
   },
   "rELDbB": {
     "message": "Refresh"
+  },
+  "s/IAy6": {
+    "message": "Default dice"
   },
   "vMrnt6": {
     "message": "An error occurred while parsing the data."

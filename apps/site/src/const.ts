@@ -5,3 +5,4 @@ export const IS_BROWSER = process.browser;
 export const IS_SAFARI = IS_BROWSER && /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 export const IS_DEBUG = parseBool(process.env.NEXT_PUBLIC_DEBUG);
 export const IS_REDUX_TRACE_ENABLE = parseBool(process.env.NEXT_PUBLIC_REDUX_TRACE);
+export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://test.boluo.chat';

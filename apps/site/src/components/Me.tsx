@@ -1,13 +1,13 @@
 import { Loading } from 'ui';
-import { useMe } from '../hooks/useMe';
+import { useGetMe } from '../hooks/useMe';
 
 export const Me = () => {
-  const me = useMe();
-  if (!me) {
+  const me = useGetMe();
+  if (me === 'GUEST') {
     return <span>Not logged in</span>;
-  }
-  if (me === 'LOADING') {
+  } else if (me === 'LOADING') {
     return <Loading type="inline" />;
+  } else {
+    return <span>{me.user.nickname}</span>;
   }
-  return <span>{me.user.nickname}</span>;
 };
