@@ -26,7 +26,7 @@
     "generate:bindings": "cargo test export_bindings_ && dprint fmt"
   },
   "devDependencies": {
-    "@nrwl/devkit": "^14.5.6",
+    "@nrwl/devkit": "^14.5.8",
     "dprint": "^0.30.3",
     "eslint-config-custom": "workspace:*",
     "husky": "^8.0.1",
