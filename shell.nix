@@ -1,4 +1,4 @@
 { pkgs ? import <nixpkgs> {} }:
 pkgs.mkShell {
-  nativeBuildInputs = with pkgs; [ nodejs-16_x nodePackages.pnpm ];
+  nativeBuildInputs = with pkgs; [ nodejs-16_x nodePackages.pnpm libiconv ];
 }
