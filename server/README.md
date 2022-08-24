@@ -10,7 +10,8 @@ First, set up Redis and Postgres database (and install [pg_rational](https://git
 createdb boluo
 psql -U postgres boluo < schema.sql
 cp .env.dev.template .env # edit it
-./test.sh
+./create-test-database.sh
+cargo test
 ```
 
 ## Generate TypeScript interfaces

@@ -38,6 +38,9 @@ pub struct RedisFactory {
 impl RedisFactory {
     pub fn new() -> RedisFactory {
         use std::env::var;
+        if cfg!(test) {
+            dotenv::dotenv().ok();
+        }
         let url = var("REDIS_URL").expect("Failed to load Redis URL");
         let client = redis::Client::open(&*url).unwrap();
         RedisFactory { client }
