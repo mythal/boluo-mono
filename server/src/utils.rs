@@ -37,7 +37,7 @@ pub fn id() -> Uuid {
     let now = now_unix_duration();
     static CONTEXT: UuidContext = UuidContext::new(0);
     let timestamp = Timestamp::from_unix(&CONTEXT, now.as_secs(), now.subsec_nanos());
-    Uuid::new_v1(timestamp, node_id).expect("failed to generate UUID")
+    Uuid::new_v1(timestamp, node_id)
 }
 
 fn key() -> &'static hmac::Key {
