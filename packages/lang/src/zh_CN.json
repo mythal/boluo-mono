@@ -20,6 +20,9 @@
   "8I/DPV": {
     "message": "切换到亮色模式"
   },
+  "8ULGYw": {
+    "message": "Space name"
+  },
   "AyGauy": {
     "message": "登录"
   },
@@ -50,17 +53,32 @@
   "MWO2zy": {
     "message": "出错了！"
   },
+  "OvBwdK": {
+    "message": "Initial channel name"
+  },
+  "Q8Qw5B": {
+    "message": "Description"
+  },
   "RraqCg": {
     "message": "帐号与密码不匹配"
   },
   "SBkvpf": {
     "message": "昵称"
   },
+  "Sf+ebw": {
+    "message": "Close pane"
+  },
+  "Sns2BW": {
+    "message": "Create a Plane"
+  },
   "TThIOM": {
     "message": "未找到"
   },
   "VA/Z1S": {
     "message": "隐藏"
+  },
+  "VzzYJk": {
+    "message": "Create"
   },
   "X2ic5v": {
     "message": "您已登出"
@@ -80,6 +98,9 @@
   "crTG+P": {
     "description": "Follow the system scheme",
     "message": "跟随系统"
+  },
+  "dMEGZV": {
+    "message": "Split pane"
   },
   "gjBiyj": {
     "message": "加载中..."
@@ -104,6 +125,9 @@
   },
   "rELDbB": {
     "message": "刷新"
+  },
+  "s/IAy6": {
+    "message": "Default dice"
   },
   "vMrnt6": {
     "message": "解析数据时出错了。"
