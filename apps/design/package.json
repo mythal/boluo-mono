@@ -12,7 +12,7 @@
     "@radix-ui/react-toggle-group": "^1.0.0",
     "boluo-icons": "workspace:0.0.0",
     "clsx": "^1.2.1",
-    "jotai": "^1.8.1",
+    "jotai": "^1.8.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intl": "^6.1.0",
@@ -20,7 +20,7 @@
     "ui": "workspace:0.0.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.17",
+    "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.0.1",
     "autoprefixer": "^10.4.8",

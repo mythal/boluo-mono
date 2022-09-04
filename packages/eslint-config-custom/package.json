@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "main": "index.js",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.35.1",
-    "@typescript-eslint/parser": "^5.35.1",
+    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@typescript-eslint/parser": "^5.36.1",
     "eslint": "^7.32.0",
     "eslint-config-next": "^12.2.5",
     "eslint-plugin-formatjs": "^4.3.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-react": "^7.31.1"
+    "eslint-plugin-react": "^7.31.4"
   },
   "devDependencies": {
     "typescript": "^4.8.2"
