@@ -1,13 +1,10 @@
 import { Loading } from 'ui';
+import { PaneBox } from './PaneBox';
 
 export const PaneLoading = () => {
   return (
-    <>
-      <div className="border-b" />
-      <div className="flex items-center justify-center text-surface-400">
-        <Loading />
-      </div>
-      <div />
-    </>
+    <PaneBox>
+      <Loading />
+    </PaneBox>
   );
 };
