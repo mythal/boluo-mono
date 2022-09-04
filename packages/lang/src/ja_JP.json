@@ -21,7 +21,7 @@
     "message": "ライトスキームに切り替える"
   },
   "8ULGYw": {
-    "message": "Space name"
+    "message": "スペース名"
   },
   "AyGauy": {
     "message": "ログイン"
@@ -54,10 +54,10 @@
     "message": "何か問題が起きました。"
   },
   "OvBwdK": {
-    "message": "Initial channel name"
+    "message": "最初のチャネル名"
   },
   "Q8Qw5B": {
-    "message": "Description"
+    "message": "説明"
   },
   "RraqCg": {
     "message": "ユーザー名とパスワードが一致しません"
@@ -66,10 +66,10 @@
     "message": "ニックネーム"
   },
   "Sf+ebw": {
-    "message": "Close pane"
+    "message": "ペインを閉じる"
   },
   "Sns2BW": {
-    "message": "Create a Plane"
+    "message": "ペインを作成"
   },
   "TThIOM": {
     "message": "見つかりません"
@@ -78,7 +78,7 @@
     "message": "非表示"
   },
   "VzzYJk": {
-    "message": "Create"
+    "message": "作成する"
   },
   "X2ic5v": {
     "message": "ログアウトしました"
@@ -93,14 +93,14 @@
     "message": "ホームへ戻る"
   },
   "bF0HPN": {
-    "message": "There is a resource conflict."
+    "message": "リソースの競合があります。"
   },
   "crTG+P": {
     "description": "Follow the system scheme",
     "message": "システム"
   },
   "dMEGZV": {
-    "message": "Split pane"
+    "message": "分割ペイン"
   },
   "gjBiyj": {
     "message": "読み込み中…"
@@ -127,7 +127,7 @@
     "message": "再読み込み"
   },
   "s/IAy6": {
-    "message": "Default dice"
+    "message": "デフォルトのサイコロ"
   },
   "vMrnt6": {
     "message": "データを解析中にエラーが発生しました。"
