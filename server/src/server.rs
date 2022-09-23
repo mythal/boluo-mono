@@ -18,7 +18,6 @@ mod context;
 mod cors;
 mod csrf;
 mod database;
-mod date_format;
 mod events;
 mod interface;
 mod logger;

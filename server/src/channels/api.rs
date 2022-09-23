@@ -8,10 +8,6 @@ use std::collections::HashMap;
 use ts_rs::TS;
 use uuid::Uuid;
 
-fn tautology() -> bool {
-    true
-}
-
 #[derive(Deserialize, Debug, TS)]
 #[ts(export)]
 #[serde(rename_all = "camelCase")]
@@ -21,7 +17,6 @@ pub struct CreateChannel {
     #[serde(default)]
     pub character_name: String,
     pub default_dice_type: Option<String>,
-    #[serde(default = "tautology")]
     pub is_public: bool,
 }
 
@@ -111,7 +106,6 @@ pub struct AddChannelMember {
 #[serde(rename_all = "camelCase")]
 pub struct Export {
     pub channel_id: Uuid,
-    #[serde(with = "crate::date_format::option")]
     #[serde(default)]
     pub after: Option<NaiveDateTime>,
 }

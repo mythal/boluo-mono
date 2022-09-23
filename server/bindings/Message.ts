@@ -17,9 +17,9 @@ export interface Message {
   text: string;
   whisperToUsers: Array<string> | null;
   entities: unknown;
-  created: number;
-  modified: number;
-  orderDate: number;
+  created: string;
+  modified: string;
+  orderDate: string;
   orderOffset: number;
   pos: number;
 }

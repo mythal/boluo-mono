@@ -29,7 +29,6 @@ pub struct Preview {
     pub entities: Vec<JsonValue>,
     pub start: f64,
     pub pos: f64,
-    #[serde(with = "crate::date_format::option")]
     pub edit_for: Option<NaiveDateTime>,
 }
 
@@ -47,7 +46,6 @@ pub struct PreviewPost {
     pub clear: bool,
     pub entities: Vec<JsonValue>,
     #[serde(default)]
-    #[serde(with = "crate::date_format::option")]
     pub edit_for: Option<NaiveDateTime>,
 }
 

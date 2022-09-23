@@ -46,14 +46,8 @@ pub struct Message {
     pub whisper_to_users: Option<Vec<Uuid>>,
     #[ts(type = "unknown")]
     pub entities: JsonValue,
-    #[ts(type = "number")]
-    #[serde(with = "crate::date_format")]
     pub created: NaiveDateTime,
-    #[ts(type = "number")]
-    #[serde(with = "crate::date_format")]
     pub modified: NaiveDateTime,
-    #[ts(type = "number")]
-    #[serde(with = "crate::date_format")]
     pub order_date: NaiveDateTime,
     pub order_offset: i32,
     pub pos: f64,
