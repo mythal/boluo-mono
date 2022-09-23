@@ -1,4 +1,6 @@
+import logo from 'boluo-logo/png/logo.png';
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
 import { Providers } from '../components/global/Providers';
 import 'ui/src/tailwind.css';
 
@@ -24,6 +26,11 @@ if (typeof window !== 'undefined') {
 function App({ Component, pageProps }: AppProps) {
   return (
     <Providers>
+      <Head>
+        <link rel="shortcut icon" href={logo.src} key="icon" />
+        <link rel="manifest" href="/site.webmanifest" type="application/manifest+json" key="manifest" />
+        <meta name="theme-color" content="#ffffff" key="theme-color" />
+      </Head>
       <Component {...pageProps} />
     </Providers>
   );

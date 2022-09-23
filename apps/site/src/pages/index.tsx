@@ -6,6 +6,7 @@ import type { FC } from 'react';
 import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import type { StyleProps } from 'ui/dist/types';
+import { Favicon } from '../components/global/Favicon';
 import { Title } from '../components/global/Title';
 import { Me } from '../components/Me';
 import { isLoggedIn, useGetMe } from '../hooks/useMe';
@@ -57,6 +58,7 @@ const Home: NextPage = () => {
   const me = useGetMe();
   return (
     <div>
+      <Favicon />
       <Title>Home</Title>
       <main className="p-4">
         <Logo />
