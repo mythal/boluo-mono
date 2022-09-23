@@ -43,9 +43,7 @@ tokio-stream = "0.1"
 tokio-tungstenite = "0.17"
 
 [dependencies.ts-rs]
-version = "6.2"
-# Remove this after https://github.com/Aleph-Alpha/ts-rs/pull/109 be merged
-git = "https://github.com/mythal/ts-rs"
+git = "https://github.com/Aleph-Alpha/ts-rs"
 features = ["serde-compat", "uuid-impl", "chrono-impl"]
 
 [dependencies.reqwest]
@@ -58,7 +56,7 @@ default-features = false
 features = ["std"]
 
 [dependencies.clap]
-version = "3.1"
+version = "4.0.0-rc.2"
 features = ["derive"]
 
 [dependencies.sentry]
