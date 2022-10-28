@@ -9,25 +9,25 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@radix-ui/react-toggle-group": "^1.0.0",
+    "@radix-ui/react-toggle-group": "^1.0.1",
     "boluo-icons": "workspace:0.0.0",
     "clsx": "^1.2.1",
-    "jotai": "^1.8.5",
+    "jotai": "^1.9.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-intl": "^6.2.0",
+    "react-intl": "^6.2.1",
     "react-router-dom": "^6.4.2",
     "ui": "workspace:0.0.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
-    "@vitejs/plugin-react": "^2.1.0",
-    "autoprefixer": "^10.4.12",
-    "babel-plugin-formatjs": "^10.3.30",
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8",
+    "@vitejs/plugin-react": "^2.2.0",
+    "autoprefixer": "^10.4.13",
+    "babel-plugin-formatjs": "^10.3.31",
     "postcss": "^8.4.18",
-    "tailwindcss": "^3.1.8",
+    "tailwindcss": "^3.2.1",
     "typescript": "^4.8.4",
-    "vite": "^3.1.8"
+    "vite": "^3.2.0"
   }
 }

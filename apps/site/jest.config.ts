@@ -37,10 +37,12 @@ const config: Config.InitialOptions = {
   testEnvironment: 'jsdom',
   transform: {
     // Use babel-jest to transpile tests, babel will use the `babel.config.js`.
-    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
+    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },
-  // Jest will skip `node_modules` by default, but we need to override this behavior
-  transformIgnorePatterns: ['^.+\\.module\\.(css|sass|scss)$'],
+  transformIgnorePatterns: [
+    '/node_modules/',
+    '^.+\\.module\\.(css|sass|scss)$',
+  ],
 };
 
 export default config;

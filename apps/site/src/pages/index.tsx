@@ -20,10 +20,10 @@ const UserOperations = ({ className }: StyleProps) => {
     return (
       <div className={className}>
         <Link className="link" href="/account/login">
-          <a className="link">Login</a>
+          Login
         </Link>
         <Link className="link" href="/account/sign-up">
-          <a className="link">Sign Up</a>
+          Sign Up
         </Link>
       </div>
     );
@@ -31,7 +31,7 @@ const UserOperations = ({ className }: StyleProps) => {
   return (
     <div className={className}>
       <Link className="link" href="/account/logout">
-        <a className="link">Logout</a>
+        Logout
       </Link>
     </div>
   );
@@ -40,8 +40,8 @@ const UserOperations = ({ className }: StyleProps) => {
 const MySpaceListItem: FC<{ space: Space }> = ({ space }) => {
   return (
     <div>
-      <Link href={`/chat/space/${space.id}`}>
-        <a className="link">{space.name}</a>
+      <Link href={`/chat/space/${space.id}`} className="link">
+        {space.name}
       </Link>
     </div>
   );
@@ -70,8 +70,8 @@ const Home: NextPage = () => {
         </div>
         <UserOperations className="flex gap-2" />
         {isLoggedIn(me) && <MySpaceList me={me} />}
-        <Link href="/space/create">
-          <a className="link">Create Plane</a>
+        <Link href="/space/create" className="link">
+          Create Plane
         </Link>
       </main>
     </div>

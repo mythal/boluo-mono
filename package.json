@@ -26,11 +26,11 @@
     "generate:bindings": "cargo test export_bindings_ && dprint fmt"
   },
   "devDependencies": {
-    "@nrwl/devkit": "^14.8.4",
-    "dprint": "^0.30.3",
+    "@nrwl/devkit": "^15.0.4",
+    "dprint": "^0.32.2",
     "eslint-config-custom": "workspace:0.0.0",
     "husky": "^8.0.1",
-    "nx": "14.4.3",
+    "nx": "15.0.4",
     "typescript": "^4.8.4"
   },
   "engines": {

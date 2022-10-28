@@ -33,10 +33,9 @@ export const ChatSiderbar: FC<Props> = ({ space, panes }) => {
     <>
       <Link
         href={`/chat/space/${space.id}`}
+        className="bg-surface-700 border-r text-surface-50 flex p-2 items-center overflow-ellipsis overflow-hidden"
       >
-        <a className="bg-surface-700 border-r text-surface-50 flex p-2 items-center overflow-ellipsis overflow-hidden">
-          {space.name}
-        </a>
+        {space.name}
       </Link>
       <div className="border-r">
         {channelList}

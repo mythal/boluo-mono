@@ -19,10 +19,8 @@ const Logout = () => {
             <FormattedMessage defaultMessage="You are logged out" />
           </div>
           <div className="mt-4 w-full">
-            <Link href="/">
-              <a className="link">
-                <FormattedMessage defaultMessage="Back to home" />
-              </a>
+            <Link href="/" className="link">
+              <FormattedMessage defaultMessage="Back to home" />
             </Link>
           </div>
         </div>
