@@ -1,10 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Title } from '../../components/global/Title';
-import { useLogout } from '../../hooks/useLogout';
+import { Title } from '../../../components/global/Title';
+import { useLogout } from '../../../hooks/useLogout';
 
-const Logout = () => {
+export const LogoutPage = () => {
   const logout = useLogout();
 
   const intl = useIntl();
@@ -28,5 +30,3 @@ const Logout = () => {
     </>
   );
 };
-
-export default Logout;

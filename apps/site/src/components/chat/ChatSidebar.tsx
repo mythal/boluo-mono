@@ -2,7 +2,6 @@ import type { Space } from 'boluo-api';
 import Link from 'next/link';
 import type { FC } from 'react';
 import { useMemo } from 'react';
-import { SchemeSwitch } from 'ui';
 import { useChannelList } from '../../hooks/useChannelList';
 import type { ChatPane } from '../../types/ChatPane';
 import { ChatSidebarItem } from './ChatSidebarItem';
@@ -39,9 +38,6 @@ export const ChatSiderbar: FC<Props> = ({ space, panes }) => {
       </Link>
       <div className="border-r">
         {channelList}
-      </div>
-      <div className="pt-6">
-        <SchemeSwitch />
       </div>
     </>
   );

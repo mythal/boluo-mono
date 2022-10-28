@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { useIntl } from 'react-intl';
 import { Spinner } from './Spinner';
 
 export type LoadingType = 'inline' | 'block';
@@ -9,8 +8,7 @@ interface Props {
 }
 
 export const Loading: FC<Props> = ({ type = 'block' }) => {
-  const intl = useIntl();
-  const label = intl.formatMessage({ defaultMessage: 'Loading...' });
+  const label = 'Loading';
   if (type === 'inline') {
     return (
       <span className="text-sm">

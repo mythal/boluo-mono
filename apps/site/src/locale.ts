@@ -2,6 +2,7 @@ import type { IntlConfig } from 'react-intl';
 
 export type IntlMessages = IntlConfig['messages'];
 export type Locale = 'en' | 'ja' | 'zh-CN';
+export const defaultLocale = 'en';
 export const loadMessages = async (locale: Locale): Promise<IntlMessages> => {
   switch (locale) {
     case 'en':

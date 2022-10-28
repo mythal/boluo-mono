@@ -1,3 +1,5 @@
+'use client';
+
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import React, { Suspense, useEffect, useMemo, useState } from 'react';
@@ -55,7 +57,7 @@ const ChatMeProvider: FC<ChildrenProps> = ({ children }) => {
   return <MeContext.Provider value={me}>{children}</MeContext.Provider>;
 };
 
-const ChatPage: FC = () => {
+export const ChatPage: FC = () => {
   const [loading, setLoading] = useState<Reason | false>('Page Loading...');
 
   // To prevent SSR
@@ -73,12 +75,8 @@ const ChatPage: FC = () => {
   const { spaceId } = params;
 
   return (
-    <Suspense fallback={<ChatLoading />}>
-      <ChatMeProvider>
-        <Chat key={spaceId} spaceId={spaceId} />
-      </ChatMeProvider>
-    </Suspense>
+    <ChatMeProvider>
+      <Chat key={spaceId} spaceId={spaceId} />
+    </ChatMeProvider>
   );
 };
-
-export default ChatPage;

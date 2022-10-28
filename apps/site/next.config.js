@@ -11,15 +11,12 @@ const config = {
   poweredByHeader: false,
   trailingSlash: true,
   swcMinify: false,
-  i18n: {
-    locales: ["en", "ja", "zh-CN"],
-    defaultLocale: "en",
-  },
   eslint: {
     dirs: ["src", "tests"],
   },
   output: "standalone",
   experimental: {
+    appDir: true,
     outputFileTracingRoot: path.join(__dirname, "../../"),
   },
   async rewrites() {

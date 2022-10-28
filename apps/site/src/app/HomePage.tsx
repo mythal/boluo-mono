@@ -1,3 +1,5 @@
+'use client';
+
 import type { GetMe, Space } from 'boluo-api';
 import { Logo } from 'boluo-logo';
 import type { NextPage } from 'next';
@@ -55,7 +57,6 @@ const MySpaceList: FC<{ me: GetMe }> = ({ me }) => {
 };
 
 const Home: NextPage = () => {
-  const me = useGetMe();
   return (
     <div>
       <Favicon />
@@ -66,13 +67,14 @@ const Home: NextPage = () => {
           <FormattedMessage defaultMessage="Boluo" />
         </h1>
         <div>
-          <Me />
+          {/* <Me /> */}
         </div>
-        <UserOperations className="flex gap-2" />
-        {isLoggedIn(me) && <MySpaceList me={me} />}
-        <Link href="/space/create" className="link">
+        {/* <UserOperations className="flex gap-2" /> */}
+        {
+          /* <Link href="/space/create" className="link">
           Create Plane
-        </Link>
+        </Link> */
+        }
       </main>
     </div>
   );
