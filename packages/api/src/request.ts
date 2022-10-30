@@ -9,9 +9,6 @@ export const makeUri = (path: string, query?: object): string => {
   } else {
     path = '/api' + path;
   }
-  if (path.at(-1) !== '/') {
-    path = path + '/';
-  }
   if (query === undefined) {
     return path;
   }
@@ -42,6 +39,8 @@ export const request = async <T, E extends ApiError = ApiError>(
   body: Exclude<RequestInit['body'], undefined>,
   contentType = 'application/json',
 ): Promise<Result<T, E | NotJsonError | FetchFailError>> => {
+  const host = 'http://localhost:3000';
+  console.log(host, path);
   const headers = new Headers({
     'Content-Type': contentType,
   });
@@ -50,7 +49,7 @@ export const request = async <T, E extends ApiError = ApiError>(
   }
   let res: Response;
   try {
-    res = await fetch(path, {
+    res = await fetch(host + path, {
       method,
       headers,
       body,
