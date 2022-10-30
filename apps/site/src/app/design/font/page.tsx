@@ -1,4 +1,4 @@
-export const Font = () => {
+export default function FontPage() {
   return (
     <div>
       <h2 className="text-xl mb-4">Pixel</h2>
@@ -10,7 +10,7 @@ export const Font = () => {
             天地玄黃　宇宙洪荒<br />
             日月盈昃　辰宿列張<br />
             寒來暑往　秋收冬藏<br />
-            God is in his heaven, all's right with the world
+            God is in his heaven, all&apos;s right with the world
           </div>
         </div>
 
@@ -20,10 +20,10 @@ export const Font = () => {
             天地玄黃　宇宙洪荒<br />
             日月盈昃　辰宿列張<br />
             寒來暑往　秋收冬藏<br />
-            God is in his heaven, all's right with the world
+            God is in his heaven, all&apos;s right with the world
           </div>
         </div>
       </div>
     </div>
   );
-};
+}

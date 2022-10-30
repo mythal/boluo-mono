@@ -1,7 +1,7 @@
-import { useAtom } from 'jotai';
+'use client';
+
 import { useState } from 'react';
 import { Label, Select, Switch, TextArea, TextInput } from 'ui';
-import { disabledAtom } from '../atoms';
 
 const items = [
   { label: 'Papika', value: 'papika' },
@@ -9,8 +9,8 @@ const items = [
   { label: 'Cocona', value: 'cocona' },
 ];
 
-export const Form = () => {
-  const [disabled, setDisabled] = useAtom(disabledAtom);
+export const FormPlayground = () => {
+  const [disabled, setDisabled] = useState(false);
   const [item, setItem] = useState<string>('papika');
   return (
     <div className="flex flex-col gap-4">

@@ -1,11 +1,13 @@
+'use client';
+
 import { Fairy } from 'boluo-icons';
-import { useAtom } from 'jotai';
-import { FC, useState } from 'react';
+import type { FC } from 'react';
+import { useState } from 'react';
 import { Button, Icon, Label, RefreshButton, Spinner, Switch } from 'ui';
-import { disabledAtom, smallAtom } from '../atoms';
-export const Buttons: FC = () => {
-  const [disabled, setDisabled] = useAtom(disabledAtom);
-  const [small, setSmall] = useAtom(smallAtom);
+
+export const ButtonPlayground: FC = () => {
+  const [disabled, setDisabled] = useState(false);
+  const [small, setSmall] = useState(true);
   const [icon, setIcon] = useState(false);
   return (
     <div>
@@ -42,4 +44,3 @@ export const Buttons: FC = () => {
     </div>
   );
 };
-Buttons.displayName = 'Buttons';
