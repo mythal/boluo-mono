@@ -3,7 +3,7 @@ import zhCn from 'lang/compiled/zh_CN.json';
 import { headers } from 'next/headers';
 import type { ReactNode } from 'react';
 import type { IntlMessages, Locale } from '../../locale';
-import { Providers } from './Providers';
+import { ClientProviders } from './Providers';
 
 function getLocale(): Locale {
   const defaultLocale: Locale = 'en';
@@ -33,5 +33,5 @@ const loadMessages = (locale: Locale): IntlMessages | undefined => {
 export default function ServerProviders({ children }: { children: ReactNode }) {
   const locale = getLocale();
   const messages = loadMessages(locale);
-  return <Providers locale={locale} messages={messages}>{children}</Providers>;
+  return <ClientProviders locale={locale} messages={messages}>{children}</ClientProviders>;
 }
