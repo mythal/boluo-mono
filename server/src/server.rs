@@ -7,6 +7,7 @@ use crate::context::debug;
 use hyper::server::conn::AddrStream;
 use hyper::service::{make_service_fn, service_fn};
 use hyper::{Body, Request, Server};
+use tokio::signal::unix::{signal, SignalKind};
 
 #[macro_use]
 mod utils;
@@ -118,10 +119,13 @@ async fn main() {
 
     let make_svc = make_service_fn(|_: &AddrStream| async { Ok::<_, hyper::Error>(service_fn(handler)) });
 
-    let server = Server::bind(&addr).serve(make_svc);
+    let _server = Server::bind(&addr).serve(make_svc);
     events::tasks::start();
-    // Run this server for... forever!
-    if let Err(e) = server.await {
-        log::error!("server error: {}", e);
+    // https://tokio.rs/tokio/topics/shutdown
+    let mut stream = signal(SignalKind::terminate()).unwrap();
+
+    loop {
+        stream.recv().await;
+        println!("Shutdown server");
     }
 }

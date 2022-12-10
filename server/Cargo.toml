@@ -7,6 +7,9 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[profile.release]
+panic = "abort"
+
 [[bin]]
 name = "manage"
 path = "src/manage.rs"
