@@ -127,5 +127,6 @@ async fn main() {
     loop {
         stream.recv().await;
         println!("Shutdown server");
+        break;
     }
 }
