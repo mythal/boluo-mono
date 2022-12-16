@@ -3,6 +3,7 @@
 import { Fairy } from 'boluo-icons';
 import type { FC } from 'react';
 import { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Button, Icon, Label, RefreshButton, Spinner, Switch } from 'ui';
 
 export const ButtonPlayground: FC = () => {
@@ -38,7 +39,9 @@ export const ButtonPlayground: FC = () => {
           </Button>
         </div>
         <div>
-          <RefreshButton />
+          <RefreshButton>
+            <FormattedMessage defaultMessage="Refresh" />
+          </RefreshButton>
         </div>
       </div>
     </div>

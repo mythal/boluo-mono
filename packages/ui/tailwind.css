@@ -16,7 +16,7 @@
   }
   @font-face {
     font-family: Fusion-Pixel-12;
-    src: url('../fonts/fusion-pixel.woff2');
+    src: url('./fonts/fusion-pixel.woff2');
   }
 
   #__next {

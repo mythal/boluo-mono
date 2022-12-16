@@ -1,15 +1,8 @@
-import { IS_DEBUG, Ok } from 'boluo-utils';
-import { Err, Result } from 'boluo-utils';
-import { FetchFailError, NotJsonError } from './error-types';
 import type { ApiError } from './errors';
 
-export const makeUri = (path: string, query?: object): string => {
-  if (path[0] !== '/') {
-    path = '/api/' + path;
-  } else {
-    path = '/api' + path;
-  }
-  if (query === undefined) {
+export const makeUri = (baseUrl: string, path: string, query?: unknown): string => {
+  path = baseUrl + path;
+  if (query === undefined || query === null || typeof query !== 'object') {
     return path;
   }
   const entities = Object.entries(query);
@@ -18,7 +11,6 @@ export const makeUri = (path: string, query?: object): string => {
   }
   const searchParams = new URLSearchParams();
   for (const entry of entities) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const [key, value] = entry;
     if (typeof value === 'boolean' || typeof value === 'number' || typeof value === 'string') {
       searchParams.set(key, String(value));
@@ -27,50 +19,14 @@ export const makeUri = (path: string, query?: object): string => {
   return `${path}?${searchParams.toString()}`;
 };
 
-interface AppResponse {
+export interface AppResponse {
   isOk: boolean;
   ok: unknown;
   err: ApiError;
 }
-
-export const request = async <T, E extends ApiError = ApiError>(
-  path: string,
-  method: string,
-  body: Exclude<RequestInit['body'], undefined>,
-  contentType = 'application/json',
-): Promise<Result<T, E | NotJsonError | FetchFailError>> => {
-  const host = 'http://localhost:3000';
-  console.log(host, path);
-  const headers = new Headers({
-    'Content-Type': contentType,
-  });
-  if (IS_DEBUG) {
-    headers.append('development', '');
+export function isAppResponse(data: any): data is AppResponse {
+  if (typeof data !== 'object' || data === undefined || data === null) {
+    return false;
   }
-  let res: Response;
-  try {
-    res = await fetch(host + path, {
-      method,
-      headers,
-      body,
-      credentials: 'include',
-    });
-  } catch (cause) {
-    const fetchError: FetchFailError = { code: 'FETCH_FAIL', cause };
-    return new Err(fetchError);
-  }
-  let data: AppResponse;
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    data = await res.json();
-  } catch (cause) {
-    console.error('Failed to parse JSON: ', cause);
-    const notJson: NotJsonError = { code: 'NOT_JSON', cause };
-    return new Err(notJson);
-  }
-  if (data.isOk) {
-    return new Ok(data.ok as T);
-  } else {
-    return new Err(data.err as E);
-  }
-};
+  return 'isOk' in data;
+}

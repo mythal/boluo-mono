@@ -1,24 +1,34 @@
 'use client';
 
 import type { GetMe, Space } from 'boluo-api';
-import { Logo } from 'boluo-logo';
 import type { NextPage } from 'next';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import type { FC } from 'react';
+import { useCallback } from 'react';
 import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
-import type { StyleProps } from 'ui/dist/types';
-import { Favicon } from '../components/global/Favicon';
-import { Title } from '../components/global/Title';
+import { useSWRConfig } from 'swr';
+import { get } from '../api/browser';
 import { Me } from '../components/Me';
-import { isLoggedIn, useGetMe } from '../hooks/useMe';
+import type { StyleProps } from '../helper/props';
+import { useMe } from '../hooks/useMe';
+
+const useLogout = () => {
+  const router = useRouter();
+  const { mutate } = useSWRConfig();
+
+  return useCallback(async () => {
+    await get('/users/logout', null);
+    await mutate('/users/get_me', null);
+    router.refresh();
+  }, [router, mutate]);
+};
 
 const UserOperations = ({ className }: StyleProps) => {
-  const me = useGetMe();
-  if (me === 'LOADING') {
-    return <span>Loading...</span>;
-  }
-  if (me === 'GUEST') {
+  const me = useMe();
+  const logout = useLogout();
+  if (me === null) {
     return (
       <div className={className}>
         <Link className="link" href="/account/login">
@@ -32,8 +42,12 @@ const UserOperations = ({ className }: StyleProps) => {
   }
   return (
     <div className={className}>
-      <Link className="link" href="/account/logout">
+      <a className="link" href="#" onClick={logout}>
         Logout
+      </a>
+
+      <Link href="/space/create" className="link">
+        Create Plane
       </Link>
     </div>
   );
@@ -49,34 +63,31 @@ const MySpaceListItem: FC<{ space: Space }> = ({ space }) => {
   );
 };
 
-const MySpaceList: FC<{ me: GetMe }> = ({ me }) => {
+const MySpaceList: FC = () => {
+  const me = useMe();
+  const spaces = useMemo(() => me?.mySpaces ?? [], [me?.mySpaces]);
   const items = useMemo(() => (
-    me.mySpaces.map(item => <MySpaceListItem key={item.space.id} space={item.space} />)
-  ), [me.mySpaces]);
+    spaces.map(item => <MySpaceListItem key={item.space.id} space={item.space} />)
+  ), [spaces]);
+
+  if (me === null) {
+    return null;
+  }
   return <div>{items}</div>;
 };
 
 const Home: NextPage = () => {
   return (
-    <div>
-      <Favicon />
-      <Title>Home</Title>
-      <main className="p-4">
-        <Logo />
-        <h1 className=" text-3xl">
-          <FormattedMessage defaultMessage="Boluo" />
-        </h1>
-        <div>
-          {/* <Me /> */}
-        </div>
-        {/* <UserOperations className="flex gap-2" /> */}
-        {
-          /* <Link href="/space/create" className="link">
-          Create Plane
-        </Link> */
-        }
-      </main>
-    </div>
+    <>
+      <h1 className="my-4 text-3xl">
+        <FormattedMessage defaultMessage="Boluo" />
+      </h1>
+      <div className="my-8">
+        <Me />
+        <UserOperations className="flex gap-2" />
+      </div>
+      <MySpaceList />
+    </>
   );
 };
 

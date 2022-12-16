@@ -1,16 +1,19 @@
 'use client';
 
 import type { OnErrorFn } from '@formatjs/intl';
+import type { GetMe } from 'boluo-api';
 import type { FC } from 'react';
 import { IntlProvider } from 'react-intl';
 import { SWRConfig } from 'swr';
 import type { ChildrenProps } from '../../helper/props';
+import { MeProvider } from '../../hooks/useMe';
 import type { IntlMessages, Locale } from '../../locale';
 import { defaultLocale } from '../../locale';
 
 interface Props extends ChildrenProps {
   locale: Locale;
   messages: IntlMessages;
+  me: GetMe | null;
 }
 
 const onIntlError: OnErrorFn = (e) => {
@@ -25,11 +28,13 @@ const onIntlError: OnErrorFn = (e) => {
   }
 };
 
-export const ClientProviders: FC<Props> = ({ children, locale, messages }) => {
+export const ClientProviders: FC<Props> = ({ children, locale, messages, me }) => {
   return (
     <SWRConfig value={{}}>
       <IntlProvider locale={locale} messages={messages} defaultLocale={defaultLocale} onError={onIntlError}>
-        {children}
+        <MeProvider initialMe={me}>
+          {children}
+        </MeProvider>
       </IntlProvider>
     </SWRConfig>
   );

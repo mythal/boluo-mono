@@ -7,7 +7,6 @@ import { useSpace } from '../../hooks/useSpace';
 import { ChatStateProvider } from '../../state/chat';
 import { useConnectionState } from '../../state/connection';
 import { PaneProvider, usePanes } from '../../state/panes';
-import { Title } from '../global/Title';
 import { ChatView } from './ChatView';
 
 interface ProviderProps extends ChildrenProps {
@@ -31,7 +30,6 @@ const Chat: FC<Props> = ({ spaceId }) => {
     <Suspense fallback={<Loading />}>
       <PaneProvider dispatch={dispatch} focused={focused}>
         <ChatConnectionProvider mailboxId={spaceId}>
-          <Title>{space.name}</Title>
           <ChatStateProvider>
             <ChatView space={space} panes={panes} />
           </ChatStateProvider>

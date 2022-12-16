@@ -1,6 +1,6 @@
-import { get } from 'boluo-api/dist/index';
 import type { RegisterOptions } from 'react-hook-form';
 import type { IntlShape } from 'react-intl';
+import { get } from './api/browser';
 
 export type Validator = (intl: IntlShape) => RegisterOptions;
 

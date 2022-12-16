@@ -194,6 +194,7 @@ module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx,html}",
     "./index.html",
+    "../../packages/ui/*.{js,ts,jsx,tsx,html}",
     "../../packages/*/src/**/*.{js,ts,jsx,tsx,html}",
   ],
   darkMode: "class",

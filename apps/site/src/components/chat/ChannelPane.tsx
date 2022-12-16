@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { useMemo } from 'react';
 import { useContextSelector } from 'use-context-selector';
 import { useChannelId } from '../../hooks/useChannelId';
+import { useMe } from '../../hooks/useMe';
 import { ChatContext } from '../../state/chat';
 import { useFocusPane } from '../../state/panes';
 import { ChannelHeader } from './ChannelHeader';
@@ -18,6 +19,7 @@ interface ViewProps {
 
 const ChatPaneChannelView: FC<ViewProps> = ({ channelId, messages }) => {
   const focus = useFocusPane();
+  const me = useMe();
   return (
     <>
       <ChannelHeader />
@@ -28,7 +30,7 @@ const ChatPaneChannelView: FC<ViewProps> = ({ channelId, messages }) => {
           </div>
         ))}
       </div>
-      <Compose />
+      {me && <Compose me={me} />}
     </>
   );
 };

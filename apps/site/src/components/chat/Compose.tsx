@@ -1,12 +1,16 @@
-import { post } from 'boluo-api';
+'use client';
+import type { GetMe } from 'boluo-api';
 import { useState } from 'react';
+import { post } from '../../api/browser';
 import { useChannelId } from '../../hooks/useChannelId';
-import { useMe } from '../../hooks/useMe';
 import { useFocusPane } from '../../state/panes';
 
-export const Compose = () => {
+interface Props {
+  me: GetMe;
+}
+
+export const Compose = ({ me }: Props) => {
   const channelId = useChannelId();
-  const me = useMe();
   const focus = useFocusPane();
   const [text, setText] = useState('');
   const onSubmit = async () => {

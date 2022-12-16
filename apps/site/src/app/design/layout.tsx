@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { Footer } from './Footer';
 
 export default function DesignLayout({
   children,
@@ -22,6 +23,9 @@ export default function DesignLayout({
         </ul>
       </header>
       <div>{children}</div>
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import type { Channel } from 'boluo-api';
-import { get } from 'boluo-api';
 import { unwrap } from 'boluo-utils';
 import useSWR from 'swr';
+import { get } from '../api/browser';
 
 export const useChannel = (channelId: string): Channel => {
   const query = useSWR(

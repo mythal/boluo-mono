@@ -1,6 +1,8 @@
 services:
   site:
     image: ghcr.io/mythal/boluo-mono/site:nightly
+    ports:
+      - "127.0.0.1:3000:3000"
     build:
       context: .
       dockerfile: ./apps/site/Dockerfile

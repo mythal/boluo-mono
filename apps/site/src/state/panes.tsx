@@ -2,7 +2,7 @@ import { makeId } from 'boluo-utils';
 import type { Dispatch, FC } from 'react';
 import { useCallback } from 'react';
 import { createContext, useContext, useReducer } from 'react';
-import type { ChildrenProps } from 'ui/dist/types';
+import type { ChildrenProps } from '../helper/props';
 import { useChannelList } from '../hooks/useChannelList';
 import type { ChatPane } from '../types/ChatPane';
 

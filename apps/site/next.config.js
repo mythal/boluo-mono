@@ -3,13 +3,12 @@ const withMDX = require("@next/mdx")();
 
 const ANALYZE = Boolean(process.env.ANALYZE);
 const BACKEND_URL =
-  process.env.NEXT_PUBLIC_BACKEND_URL || "https://test.boluo.chat";
+  process.env.BACKEND_PROXY_URL || "https://boluo.chat/api";
 
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
   poweredByHeader: false,
-  trailingSlash: true,
   swcMinify: false,
   eslint: {
     dirs: ["src", "tests"],
@@ -17,13 +16,14 @@ const config = {
   output: "standalone",
   experimental: {
     appDir: true,
+    transpilePackages: ["ui"],
     outputFileTracingRoot: path.join(__dirname, "../../"),
   },
   async rewrites() {
     return [
       {
         source: "/api/:path*",
-        destination: `${BACKEND_URL}/api/:path*`, // Proxy to Backend
+        destination: `${BACKEND_URL}/:path*`, // Proxy to Backend
       },
     ];
   },

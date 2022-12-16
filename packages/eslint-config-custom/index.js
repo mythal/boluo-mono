@@ -1,14 +1,13 @@
 module.exports = {
-  plugins: ["formatjs"],
-  extends: ["next"],
+  parserOptions: {
+    "ecmaVersion": "latest"
+  },
+  plugins: ["formatjs", "import"],
   rules: {
     "@next/next/no-html-link-for-pages": "off",
     "react/jsx-key": "off",
 
     // https://eslint.org/docs/rules/
-    // https://github.com/facebook/react/tree/master/packages/eslint-plugin-react-hooks
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "error",
     // https://github.com/yannickcr/eslint-plugin-react#list-of-supported-rules
     "react/prop-types": "off",
     "react/jsx-uses-react": "off",
@@ -16,6 +15,8 @@ module.exports = {
     "formatjs/no-offset": "error",
     "formatjs/no-emoji": "error",
     "formatjs/enforce-default-message": ["error", "literal"],
+
+    // https://github.com/import-js/eslint-plugin-import
     "import/order": "warn",
     "import/newline-after-import": "warn",
     "import/first": "warn",

@@ -1,13 +1,14 @@
+'use client';
 import type { ApiError, CreateSpace } from 'boluo-api';
-import { post } from 'boluo-api';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import type { FC } from 'react';
 import { useId, useState } from 'react';
 import type { FieldError, SubmitHandler } from 'react-hook-form';
 import { FormProvider, useController, useForm, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Label, Oops, Select, TextArea, TextInput } from 'ui';
-import type { SelectItem } from 'ui/dist/Select';
+import type { SelectItem } from 'ui/Select';
+import { post } from '../api/browser';
 import { required } from '../validations';
 
 const FormErrorDispay: FC<{ error: ApiError }> = ({ error }) => {
@@ -126,7 +127,7 @@ export const CreateSpaceForm: FC<Props> = () => {
       return;
     }
     const { space, member } = result.some;
-    await router.push('/');
+    router.push('/');
   };
   return (
     <FormProvider {...methods}>

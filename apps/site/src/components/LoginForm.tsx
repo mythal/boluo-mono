@@ -1,6 +1,6 @@
+'use client';
 import type { ApiError } from 'boluo-api';
-import { post } from 'boluo-api';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import type { FC, ReactNode } from 'react';
 import { useId } from 'react';
 import { useState } from 'react';
@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useSWRConfig } from 'swr';
 import { Button, Label, Oops, TextInput } from 'ui';
+import { post } from '../api/browser';
 import type { StyleProps } from '../helper/props';
 import { required } from '../validations';
 
@@ -135,7 +136,7 @@ export const LoginForm: FC<Props> = () => {
     }
     setError(null);
     await mutate('/users/get_me', result.some.me);
-    await router.push('/');
+    router.push('/');
   };
 
   return (

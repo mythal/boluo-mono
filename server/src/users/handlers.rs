@@ -88,7 +88,7 @@ pub async fn login(req: Request<Body>) -> Result<Response, AppError> {
         .same_site(SameSite::Lax)
         .secure(!is_developer && !debug())
         .http_only(true)
-        .path("/api/")
+        .path("/")
         .permanent()
         .finish()
         .to_string();
@@ -124,7 +124,7 @@ pub async fn logout(req: Request<Body>) -> Result<Response, AppError> {
     let header_value = HEADER_VALUE.get_or_init(|| {
         let cookie = CookieBuilder::new("session", "")
             .http_only(true)
-            .path("/api/")
+            .path("/")
             .expires(time::OffsetDateTime::now_utc())
             .finish()
             .to_string();

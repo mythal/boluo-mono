@@ -1,5 +1,6 @@
 import type { Event } from 'boluo-api';
 import { createContext, useEffect, useReducer, useRef, useState } from 'react';
+import { BACKEND_HOST } from '../const';
 
 export const PING = '♥';
 export const PONG = '♡';
@@ -71,10 +72,9 @@ const reducer = (state: ConnectionState, action: Action): ConnectionState => {
 };
 
 const createMailboxConnection = (id: string): WebSocket => {
-  const host = 'localhost:3000';
   const protocol = window.location.protocol === 'http:' ? 'ws:' : 'wss:';
 
-  return new WebSocket(`${protocol}//${host}/api/events/connect?mailbox=${id}`);
+  return new WebSocket(`${protocol}//${BACKEND_HOST}/events/connect?mailbox=${id}`);
 };
 
 export const useConnectionState = (mailboxId: string): ConnectionState => {

@@ -119,14 +119,16 @@ async fn main() {
 
     let make_svc = make_service_fn(|_: &AddrStream| async { Ok::<_, hyper::Error>(service_fn(handler)) });
 
-    let _server = Server::bind(&addr).serve(make_svc);
+    let server = Server::bind(&addr).serve(make_svc);
     events::tasks::start();
     // https://tokio.rs/tokio/topics/shutdown
     let mut stream = signal(SignalKind::terminate()).unwrap();
 
     loop {
-        stream.recv().await;
-        println!("Shutdown server");
+        tokio::select! {
+            _ = stream.recv() => log::info!("Shutdown boluo server"),
+            Err(e) = server => log::error!("server error: {}", e),
+        }
         break;
     }
 }

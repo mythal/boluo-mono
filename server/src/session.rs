@@ -10,10 +10,10 @@ use uuid::Uuid;
 pub fn token(session: &Uuid) -> String {
     // [body (base64)].[sign]
     let mut buffer = String::with_capacity(64);
-    base64::encode_config_buf(session.as_bytes(), base64::STANDARD, &mut buffer);
+    base64::encode_config_buf(session.as_bytes(), base64::STANDARD_NO_PAD, &mut buffer);
     let signature = sign(&buffer);
     buffer.push('.');
-    base64::encode_config_buf(&signature, base64::STANDARD, &mut buffer);
+    base64::encode_config_buf(&signature, base64::STANDARD_NO_PAD, &mut buffer);
     buffer
 }
 

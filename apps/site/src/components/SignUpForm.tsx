@@ -1,12 +1,13 @@
+'use client';
 import type { ApiError } from 'boluo-api';
-import { post } from 'boluo-api';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import type { FC } from 'react';
 import { useId, useState } from 'react';
 import type { FieldError, SubmitHandler } from 'react-hook-form';
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Label, Oops, TextInput } from 'ui';
+import { post } from '../api/browser';
 import * as validations from '../validations';
 
 // https://web.dev/sign-in-form-best-practices/
@@ -173,7 +174,7 @@ export const SignUpForm = () => {
       return setError(result.err);
     }
     setError(null);
-    await router.push('/account/login');
+    router.push('/account/login');
   };
 
   return (

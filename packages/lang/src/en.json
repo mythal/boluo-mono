@@ -17,26 +17,14 @@
   "6JNvt/": {
     "message": "Must be at least {min} characters."
   },
-  "8I/DPV": {
-    "message": "Switch to light mode"
-  },
   "8ULGYw": {
     "message": "Space name"
   },
   "AyGauy": {
     "message": "Login"
   },
-  "BcTz5b": {
-    "message": "Server Internal Error"
-  },
   "CoEsov": {
     "message": "Username or Email"
-  },
-  "FwQ8Qb": {
-    "message": "According to the system setting"
-  },
-  "HH8O0c": {
-    "message": "Request failed, possible network anomaly."
   },
   "HpyhN3": {
     "message": "Boluo"
@@ -46,12 +34,6 @@
   },
   "K7AkdL": {
     "message": "Show"
-  },
-  "KNyL7j": {
-    "message": "You don't have permission to operate"
-  },
-  "MWO2zy": {
-    "message": "Something going wrong."
   },
   "OvBwdK": {
     "message": "Initial channel name"
@@ -71,48 +53,17 @@
   "Sns2BW": {
     "message": "Create a Plane"
   },
-  "TThIOM": {
-    "message": "Not found"
-  },
   "VA/Z1S": {
     "message": "Hide"
   },
   "VzzYJk": {
     "message": "Create"
   },
-  "X2ic5v": {
-    "message": "You are logged out"
-  },
-  "Y6tZmW": {
-    "message": "Switch to dark mode"
-  },
-  "ZgSUm5": {
-    "message": "Too many requests! Please try again later."
-  },
-  "aIRWQB": {
-    "message": "Back to home"
-  },
-  "bF0HPN": {
-    "message": "There is a resource conflict."
-  },
-  "crTG+P": {
-    "description": "Follow the system scheme",
-    "message": "system"
-  },
   "dMEGZV": {
     "message": "Split pane"
   },
-  "hFIEcy": {
-    "message": "Malformed request."
-  },
   "kMogDE": {
     "message": "Must be a valid email address."
-  },
-  "kNZGAe": {
-    "message": "Failed to validate."
-  },
-  "nKu0Ba": {
-    "message": "Must be logged in."
   },
   "nmSKJK": {
     "message": "Can't be empty."
@@ -126,19 +77,10 @@
   "s/IAy6": {
     "message": "Default dice"
   },
-  "vMrnt6": {
-    "message": "An error occurred while parsing the data."
-  },
   "wb3MSp": {
     "message": "This username is already taken."
   },
-  "xgZgnO": {
-    "message": "Wrong request method."
-  },
   "y63e7m": {
     "message": "EMail"
-  },
-  "z/ipXX": {
-    "message": "Oops"
   }
 }
