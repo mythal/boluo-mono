@@ -23,17 +23,11 @@
   "AyGauy": {
     "message": "登录"
   },
-  "BcTz5b": {
-    "message": "服务器内部错误"
-  },
   "C81/uG": {
     "message": "Logout"
   },
   "CoEsov": {
     "message": "用户名或邮箱"
-  },
-  "HH8O0c": {
-    "message": "请求失败，可能是网络异常。"
   },
   "HpyhN3": {
     "message": "菠萝"
@@ -43,12 +37,6 @@
   },
   "K7AkdL": {
     "message": "显示"
-  },
-  "KNyL7j": {
-    "message": "您没有操作权限"
-  },
-  "MWO2zy": {
-    "message": "出错了！"
   },
   "OvBwdK": {
     "message": "初始频道名称"
@@ -68,9 +56,6 @@
   "Sns2BW": {
     "message": "创建窗格"
   },
-  "TThIOM": {
-    "message": "未找到"
-  },
   "VA/Z1S": {
     "message": "隐藏"
   },
@@ -80,29 +65,14 @@
   "X2ic5v": {
     "message": "您已登出"
   },
-  "ZgSUm5": {
-    "message": "请求次数过多！请稍后再试。"
-  },
   "aIRWQB": {
     "message": "返回主页"
-  },
-  "bF0HPN": {
-    "message": "存在资源冲突。"
   },
   "dMEGZV": {
     "message": "分割窗格"
   },
-  "hFIEcy": {
-    "message": "请求格式不正确。"
-  },
   "kMogDE": {
     "message": "请输入合法的邮箱地址。"
-  },
-  "kNZGAe": {
-    "message": "验证失败。"
-  },
-  "nKu0Ba": {
-    "message": "你必须先登录。"
   },
   "nmSKJK": {
     "message": "不能为空。"
@@ -116,19 +86,10 @@
   "s/IAy6": {
     "message": "默认使用的骰子"
   },
-  "vMrnt6": {
-    "message": "解析数据时出错了。"
-  },
   "wb3MSp": {
     "message": "此用户名已被占用。"
   },
-  "xgZgnO": {
-    "message": "请求方式错误。"
-  },
   "y63e7m": {
     "message": "邮箱"
-  },
-  "z/ipXX": {
-    "message": "糟糕！"
   }
 }
