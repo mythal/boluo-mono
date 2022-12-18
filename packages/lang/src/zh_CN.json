@@ -17,9 +17,6 @@
   "6JNvt/": {
     "message": "至少需要 {min} 个字符。"
   },
-  "8I/DPV": {
-    "message": "切换到亮色模式"
-  },
   "8ULGYw": {
     "message": "空间名称"
   },
@@ -29,11 +26,11 @@
   "BcTz5b": {
     "message": "服务器内部错误"
   },
+  "C81/uG": {
+    "message": "Logout"
+  },
   "CoEsov": {
     "message": "用户名或邮箱"
-  },
-  "FwQ8Qb": {
-    "message": "按系统设置"
   },
   "HH8O0c": {
     "message": "请求失败，可能是网络异常。"
@@ -83,9 +80,6 @@
   "X2ic5v": {
     "message": "您已登出"
   },
-  "Y6tZmW": {
-    "message": "切换暗色主题"
-  },
   "ZgSUm5": {
     "message": "请求次数过多！请稍后再试。"
   },
@@ -94,10 +88,6 @@
   },
   "bF0HPN": {
     "message": "存在资源冲突。"
-  },
-  "crTG+P": {
-    "description": "Follow the system scheme",
-    "message": "跟随系统"
   },
   "dMEGZV": {
     "message": "分割窗格"
