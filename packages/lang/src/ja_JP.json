@@ -23,17 +23,11 @@
   "AyGauy": {
     "message": "ログイン"
   },
-  "BcTz5b": {
-    "message": "サーバー内部エラー"
-  },
   "C81/uG": {
     "message": "Logout"
   },
   "CoEsov": {
     "message": "ユーザー名またはメール"
-  },
-  "HH8O0c": {
-    "message": "リクエストに失敗しました。ネットワーク異常の可能性があります。"
   },
   "HpyhN3": {
     "message": "パイン"
@@ -43,12 +37,6 @@
   },
   "K7AkdL": {
     "message": "表示"
-  },
-  "KNyL7j": {
-    "message": "実行する権限がありません。"
-  },
-  "MWO2zy": {
-    "message": "何か問題が起きました。"
   },
   "OvBwdK": {
     "message": "最初のチャネル名"
@@ -68,9 +56,6 @@
   "Sns2BW": {
     "message": "ペインを作成"
   },
-  "TThIOM": {
-    "message": "見つかりません"
-  },
   "VA/Z1S": {
     "message": "非表示"
   },
@@ -80,29 +65,14 @@
   "X2ic5v": {
     "message": "ログアウトしました"
   },
-  "ZgSUm5": {
-    "message": "リクエストが多すぎから、後でもう一度やり直してください。"
-  },
   "aIRWQB": {
     "message": "ホームへ戻る"
-  },
-  "bF0HPN": {
-    "message": "リソースの競合があります。"
   },
   "dMEGZV": {
     "message": "分割ペイン"
   },
-  "hFIEcy": {
-    "message": "不正なリクエスト。"
-  },
   "kMogDE": {
     "message": "メールアドレスのフォーマットが不正です。"
-  },
-  "kNZGAe": {
-    "message": "認証に失敗しました。"
-  },
-  "nKu0Ba": {
-    "message": "ログインする必要があります。"
   },
   "nmSKJK": {
     "message": "入力必須です。"
@@ -116,19 +86,10 @@
   "s/IAy6": {
     "message": "デフォルトのサイコロ"
   },
-  "vMrnt6": {
-    "message": "データを解析中にエラーが発生しました。"
-  },
   "wb3MSp": {
     "message": "このユーザー名は既に使われています。"
   },
-  "xgZgnO": {
-    "message": "不正なリクエスト方法です。"
-  },
   "y63e7m": {
     "message": "メール"
-  },
-  "z/ipXX": {
-    "message": "おっとっと！"
   }
 }
