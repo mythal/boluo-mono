@@ -17,9 +17,6 @@
   "6JNvt/": {
     "message": "少なくとも {min} 文字以上でなければなりません。"
   },
-  "8I/DPV": {
-    "message": "ライトスキームに切り替える"
-  },
   "8ULGYw": {
     "message": "スペース名"
   },
@@ -29,11 +26,11 @@
   "BcTz5b": {
     "message": "サーバー内部エラー"
   },
+  "C81/uG": {
+    "message": "Logout"
+  },
   "CoEsov": {
     "message": "ユーザー名またはメール"
-  },
-  "FwQ8Qb": {
-    "message": "システム設定によると"
   },
   "HH8O0c": {
     "message": "リクエストに失敗しました。ネットワーク異常の可能性があります。"
@@ -83,9 +80,6 @@
   "X2ic5v": {
     "message": "ログアウトしました"
   },
-  "Y6tZmW": {
-    "message": "暗いスキームに切り替える"
-  },
   "ZgSUm5": {
     "message": "リクエストが多すぎから、後でもう一度やり直してください。"
   },
@@ -94,10 +88,6 @@
   },
   "bF0HPN": {
     "message": "リソースの競合があります。"
-  },
-  "crTG+P": {
-    "description": "Follow the system scheme",
-    "message": "システム"
   },
   "dMEGZV": {
     "message": "分割ペイン"
