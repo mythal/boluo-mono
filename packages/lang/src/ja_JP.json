@@ -1,12 +1,24 @@
 {
-  "3cc4Ct": {
-    "message": "ライト"
+  "+OyBM6": {
+    "message": "このメールアドレスは既に使用されています。"
   },
-  "47FYwb": {
-    "message": "キャンセル"
+  "2gujDD": {
+    "message": "これらはコンポーネントの設計とデバッグに使用されるページです"
+  },
+  "39AHJm": {
+    "message": "新規登録"
+  },
+  "5HUwAy": {
+    "message": "文字、数字、アンダースコアのみ使用可能です。"
   },
   "5sg7KC": {
     "message": "パスワード"
+  },
+  "6JNvt/": {
+    "message": "少なくとも {min} 文字以上でなければなりません。"
+  },
+  "8ULGYw": {
+    "message": "スペース名"
   },
   "AyGauy": {
     "message": "ログイン"
@@ -14,40 +26,61 @@
   "CoEsov": {
     "message": "ユーザー名またはメール"
   },
-  "FcwBEE": {
-    "message": "リフレッシュ"
-  },
   "HpyhN3": {
     "message": "パイン"
   },
-  "MWO2zy": {
-    "message": "何か問題が起きました。"
+  "JCIgkj": {
+    "message": "ユーザー名"
   },
-  "NXI/XL": {
-    "message": "オート"
+  "K7AkdL": {
+    "message": "表示"
   },
-  "X2ic5v": {
-    "message": "ログアウトしました"
+  "OvBwdK": {
+    "message": "最初のチャネル名"
   },
-  "aIRWQB": {
-    "message": "ホームへ戻る"
+  "Q8Qw5B": {
+    "message": "説明"
+  },
+  "RraqCg": {
+    "message": "ユーザー名とパスワードが一致しません"
+  },
+  "SBkvpf": {
+    "message": "ニックネーム"
+  },
+  "Sf+ebw": {
+    "message": "ペインを閉じる"
+  },
+  "Sns2BW": {
+    "message": "ペインを作成"
+  },
+  "VA/Z1S": {
+    "message": "非表示"
+  },
+  "VzzYJk": {
+    "message": "作成する"
+  },
+  "dMEGZV": {
+    "message": "分割ペイン"
+  },
+  "kMogDE": {
+    "message": "メールアドレスのフォーマットが不正です。"
   },
   "nmSKJK": {
     "message": "入力必須です。"
   },
-  "pULdOq": {
-    "message": "ネットワークに問題が発生している可能性があります。ページを更新しても問題が解決しない場合は、管理者に連絡してください。"
+  "oVARYX": {
+    "message": "少なくとも {max} 文字以上でなければなりません。"
   },
   "rELDbB": {
     "message": "再読み込み"
   },
-  "tOdNiY": {
-    "message": "ダーク"
+  "s/IAy6": {
+    "message": "デフォルトのサイコロ"
   },
-  "wSZR47": {
-    "message": "提出"
+  "wb3MSp": {
+    "message": "このユーザー名は既に使われています。"
   },
-  "z/ipXX": {
-    "message": "おっとっと！"
+  "y63e7m": {
+    "message": "メール"
   }
 }

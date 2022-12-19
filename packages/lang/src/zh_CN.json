@@ -1,12 +1,24 @@
 {
-  "3cc4Ct": {
-    "message": "亮色"
+  "+OyBM6": {
+    "message": "这个邮箱地址已经被使用。"
   },
-  "47FYwb": {
-    "message": "取消"
+  "2gujDD": {
+    "message": "这些是用于设计和调试组件的页面"
+  },
+  "39AHJm": {
+    "message": "注册"
+  },
+  "5HUwAy": {
+    "message": "只允许字母，数字和下划线。"
   },
   "5sg7KC": {
     "message": "密码"
+  },
+  "6JNvt/": {
+    "message": "至少需要 {min} 个字符。"
+  },
+  "8ULGYw": {
+    "message": "空间名称"
   },
   "AyGauy": {
     "message": "登录"
@@ -14,40 +26,61 @@
   "CoEsov": {
     "message": "用户名或邮箱"
   },
-  "FcwBEE": {
-    "message": "刷新"
-  },
   "HpyhN3": {
     "message": "菠萝"
   },
-  "MWO2zy": {
-    "message": "出错了！"
+  "JCIgkj": {
+    "message": "用户名"
   },
-  "NXI/XL": {
-    "message": "自动"
+  "K7AkdL": {
+    "message": "显示"
   },
-  "X2ic5v": {
-    "message": "您已登出"
+  "OvBwdK": {
+    "message": "初始频道名称"
   },
-  "aIRWQB": {
-    "message": "返回主页"
+  "Q8Qw5B": {
+    "message": "描述"
+  },
+  "RraqCg": {
+    "message": "帐号与密码不匹配"
+  },
+  "SBkvpf": {
+    "message": "昵称"
+  },
+  "Sf+ebw": {
+    "message": "关闭窗格"
+  },
+  "Sns2BW": {
+    "message": "创建窗格"
+  },
+  "VA/Z1S": {
+    "message": "隐藏"
+  },
+  "VzzYJk": {
+    "message": "创建"
+  },
+  "dMEGZV": {
+    "message": "分割窗格"
+  },
+  "kMogDE": {
+    "message": "请输入合法的邮箱地址。"
   },
   "nmSKJK": {
     "message": "不能为空。"
   },
-  "pULdOq": {
-    "message": "这可能是网络问题。如果刷新页面后错误仍然存在，请联系管理员。"
+  "oVARYX": {
+    "message": "至多 {max} 个字符。"
   },
   "rELDbB": {
     "message": "刷新"
   },
-  "tOdNiY": {
-    "message": "暗色"
+  "s/IAy6": {
+    "message": "默认使用的骰子"
   },
-  "wSZR47": {
-    "message": "提交"
+  "wb3MSp": {
+    "message": "此用户名已被占用。"
   },
-  "z/ipXX": {
-    "message": "糟糕！"
+  "y63e7m": {
+    "message": "邮箱"
   }
 }
