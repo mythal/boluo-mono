@@ -1,4 +1,4 @@
-use chrono::naive::NaiveDateTime;
+use chrono::prelude::*;
 use postgres_types::FromSql;
 use serde::{Deserialize, Serialize};
 use serde_json::Value as JsonValue;
@@ -46,9 +46,9 @@ pub struct Message {
     pub whisper_to_users: Option<Vec<Uuid>>,
     #[ts(type = "unknown")]
     pub entities: JsonValue,
-    pub created: NaiveDateTime,
-    pub modified: NaiveDateTime,
-    pub order_date: NaiveDateTime,
+    pub created: DateTime<Utc>,
+    pub modified: DateTime<Utc>,
+    pub order_date: DateTime<Utc>,
     pub order_offset: i32,
     pub pos: f64,
 }
@@ -105,7 +105,7 @@ impl Message {
         db: &mut T,
         channel_id: &Uuid,
         hide: bool,
-        after: Option<NaiveDateTime>,
+        after: Option<DateTime<Utc>>,
     ) -> Result<Vec<Message>, DbError> {
         let rows = db
             .query(include_str!("./sql/export.sql"), &[channel_id, &after])

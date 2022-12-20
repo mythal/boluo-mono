@@ -1,3 +1,4 @@
+use chrono::prelude::*;
 use postgres_types::FromSql;
 use serde::Serialize;
 use ts_rs::TS;
@@ -20,7 +21,7 @@ pub struct User {
     #[serde(skip)]
     pub password: String,
     pub bio: String,
-    pub joined: chrono::naive::NaiveDateTime,
+    pub joined: DateTime<Utc>,
     #[serde(skip)]
     pub deactivated: bool,
     pub avatar_id: Option<Uuid>,

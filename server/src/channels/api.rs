@@ -2,7 +2,7 @@ use super::models::{Channel, ChannelMember};
 use crate::channels::models::Member;
 use crate::spaces::Space;
 use crate::users::User;
-use chrono::NaiveDateTime;
+use chrono::prelude::*;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use ts_rs::TS;
@@ -107,5 +107,5 @@ pub struct AddChannelMember {
 pub struct Export {
     pub channel_id: Uuid,
     #[serde(default)]
-    pub after: Option<NaiveDateTime>,
+    pub after: Option<DateTime<Utc>>,
 }
