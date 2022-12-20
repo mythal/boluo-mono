@@ -1,10 +1,10 @@
 use anyhow::Context;
+use chrono::prelude::*;
 use hyper::header::HeaderName;
 use hyper::{Body, Request};
 use once_cell::sync::OnceCell;
 use ring::hmac;
 use ring::rand::SecureRandom;
-use std::time::{Duration, SystemTime};
 use uuid::Uuid;
 
 macro_rules! regex {
@@ -14,13 +14,6 @@ macro_rules! regex {
         static CELL: OnceCell<Regex> = OnceCell::new();
         CELL.get_or_init(|| Regex::new($pattern).unwrap())
     }};
-}
-
-pub fn now_unix_duration() -> Duration {
-    use std::time::UNIX_EPOCH;
-
-    let now = SystemTime::now();
-    now.duration_since(UNIX_EPOCH).expect("SystemTime before UNIX EPOCH!")
 }
 
 pub fn id() -> Uuid {
@@ -34,9 +27,9 @@ pub fn id() -> Uuid {
         rng.fill(&mut id).unwrap();
         id
     });
-    let now = now_unix_duration();
+    let now = Utc::now();
     static CONTEXT: UuidContext = UuidContext::new(0);
-    let timestamp = Timestamp::from_unix(&CONTEXT, now.as_secs(), now.subsec_nanos());
+    let timestamp = Timestamp::from_unix(&CONTEXT, now.timestamp() as u64, now.timestamp_subsec_nanos());
     Uuid::new_v1(timestamp, node_id)
 }
 
@@ -65,7 +58,6 @@ pub fn verify(message: &str, signature: &str) -> Result<(), anyhow::Error> {
 }
 
 pub fn timestamp() -> i64 {
-    use chrono::Utc;
     Utc::now().timestamp_millis()
 }
 

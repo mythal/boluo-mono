@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use std::convert::TryInto;
 
-use chrono::naive::NaiveDateTime;
+use chrono::prelude::*;
 use postgres_types::FromSql;
 use redis::AsyncCommands;
 use serde::{Deserialize, Serialize};
@@ -69,9 +69,9 @@ pub struct Space {
     #[serde(skip)]
     pub invite_token: Uuid,
     #[ts(type = "number")]
-    pub created: NaiveDateTime,
+    pub created: DateTime<Utc>,
     #[ts(type = "number")]
-    pub modified: NaiveDateTime,
+    pub modified: DateTime<Utc>,
     pub name: String,
     pub description: String,
     #[serde(skip)]
@@ -245,7 +245,7 @@ pub struct SpaceMember {
     pub user_id: Uuid,
     pub space_id: Uuid,
     pub is_admin: bool,
-    pub join_date: NaiveDateTime,
+    pub join_date: DateTime<Utc>,
 }
 
 impl SpaceMember {
@@ -347,7 +347,7 @@ pub struct RestrainedMember {
     pub space_id: Uuid,
     pub blocked: bool,
     pub muted: bool,
-    pub restrained_date: NaiveDateTime,
+    pub restrained_date: DateTime<Utc>,
     pub operator_id: Option<Uuid>,
 }
 

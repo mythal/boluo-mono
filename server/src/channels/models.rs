@@ -22,7 +22,7 @@ pub struct Channel {
     pub name: String,
     pub topic: String,
     pub space_id: Uuid,
-    pub created: NaiveDateTime,
+    pub created: DateTime<Utc>,
     pub is_public: bool,
     pub is_document: bool,
     pub old_name: String,
@@ -157,7 +157,7 @@ impl Channel {
 pub struct ChannelMember {
     pub user_id: Uuid,
     pub channel_id: Uuid,
-    pub join_date: NaiveDateTime,
+    pub join_date: DateTime<Utc>,
     pub character_name: String,
     pub is_master: bool,
     pub text_color: Option<String>,

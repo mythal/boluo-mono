@@ -1,7 +1,7 @@
 use crate::error::DbError;
 use crate::utils::inner_result_map;
 use crate::{context::media_path, database::Querist};
-use chrono::naive::NaiveDateTime;
+use chrono::prelude::*;
 use postgres_types::FromSql;
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
@@ -47,7 +47,7 @@ pub struct Media {
     pub size: i32,
     pub description: String,
     pub source: String,
-    pub created: NaiveDateTime,
+    pub created: DateTime<Utc>,
 }
 
 impl Media {
