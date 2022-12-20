@@ -1,6 +1,7 @@
 use crate::error::AppError;
 use crate::session::{self, Session};
-use crate::utils::{now_unix_duration, sign};
+use crate::utils::sign;
+use chrono::Utc;
 use hyper::{Body, Request};
 use uuid::Uuid;
 
@@ -13,7 +14,7 @@ pub async fn authenticate(req: &Request<Body>) -> Result<Session, AppError> {
 
 pub fn generate_csrf_token(session_key: &Uuid) -> String {
     let expire_sec = 60 * 60 * 3;
-    let timestamp: u64 = now_unix_duration().as_secs() + expire_sec;
+    let timestamp: i64 = Utc::now().timestamp() + expire_sec;
     let mut buffer = String::with_capacity(128);
     base64::encode_config_buf(session_key.as_bytes(), base64::STANDARD, &mut buffer);
     buffer.push('.');

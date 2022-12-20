@@ -3,7 +3,7 @@ use crate::database;
 use crate::error::AppError;
 use crate::events::Event;
 use crate::{cache, error::Find};
-use chrono::NaiveDateTime;
+use chrono::prelude::*;
 use serde::{Deserialize, Serialize};
 use serde_json::Value as JsonValue;
 use ts_rs::TS;
@@ -29,7 +29,7 @@ pub struct Preview {
     pub entities: Vec<JsonValue>,
     pub start: f64,
     pub pos: f64,
-    pub edit_for: Option<NaiveDateTime>,
+    pub edit_for: Option<DateTime<Utc>>,
 }
 
 #[derive(Deserialize, Debug)]
@@ -46,7 +46,7 @@ pub struct PreviewPost {
     pub clear: bool,
     pub entities: Vec<JsonValue>,
     #[serde(default)]
-    pub edit_for: Option<NaiveDateTime>,
+    pub edit_for: Option<DateTime<Utc>>,
 }
 
 impl PreviewPost {

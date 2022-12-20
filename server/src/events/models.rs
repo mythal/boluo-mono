@@ -1,4 +1,4 @@
-use chrono::NaiveDateTime;
+use chrono::prelude::*;
 use postgres_types::FromSql;
 use serde_json::Value as JsonValue;
 use uuid::Uuid;
@@ -22,5 +22,5 @@ pub struct DbEvent {
     pub space_id: Option<Uuid>,
     pub receiver_id: Option<Uuid>,
     pub payload: JsonValue,
-    pub created: NaiveDateTime,
+    pub created: DateTime<Utc>,
 }
