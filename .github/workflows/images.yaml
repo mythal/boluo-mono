@@ -1,11 +1,12 @@
-name: Nightly images
+name: Build Images
 on:
   push:
     branches:
       - master
+      - production
 jobs:
   site:
-    name: site:nightly
+    name: site
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -26,10 +27,10 @@ jobs:
           context: .
           file: apps/site/Dockerfile
           tags: |
-            ghcr.io/${{ github.repository }}/site:nightly
+            ghcr.io/${{ github.repository }}/site:${{ github.ref_name }}
 
   server:
-    name: server:nightly
+    name: server
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -49,4 +50,4 @@ jobs:
           push: true
           file: server/Dockerfile
           tags: |
-            ghcr.io/${{ github.repository }}/server:nightly
+            ghcr.io/${{ github.repository }}/server:${{ github.ref_name }}
