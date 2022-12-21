@@ -1,7 +1,7 @@
 use super::api::{Login, LoginReturn, Register, ResetPassword, ResetPasswordConfirm, ResetPasswordTokenCheck};
 use super::models::User;
 use crate::interface::{missing, ok_response, parse_body, parse_query, Response};
-use crate::session::{remove_session, revoke_session};
+use crate::session::{remove_session, remove_session_cookie, revoke_session};
 use crate::{cache, database, mail};
 
 use crate::channels::Channel;
@@ -45,7 +45,7 @@ pub async fn query_user(req: Request<Body>) -> Result<User, AppError> {
     User::get_by_id(&mut *db, &id).await.or_not_found()
 }
 
-pub async fn get_me(req: Request<Body>) -> Result<Option<GetMe>, AppError> {
+pub async fn get_me(req: Request<Body>) -> Result<Response, AppError> {
     use crate::session::authenticate;
     if let Ok(session) = authenticate(&req).await {
         let mut conn = database::get().await?;
@@ -55,19 +55,23 @@ pub async fn get_me(req: Request<Body>) -> Result<Option<GetMe>, AppError> {
             let my_spaces = Space::get_by_user(db, &user.id).await?;
             let my_channels = Channel::get_by_user(db, user.id).await?;
             let settings = UserExt::get_settings(db, user.id).await?;
-            Ok(Some(GetMe {
+            Ok(ok_response(Some(GetMe {
                 user,
                 settings,
                 my_channels,
                 my_spaces,
-            }))
+            })))
         } else {
             remove_session(session.id).await?;
             log::warn!("session is valid, but user can't be found at database.");
-            Ok(None)
+            let mut response = ok_response::<Option<GetMe>>(None);
+            remove_session_cookie(response.headers_mut());
+            Ok(response)
         }
     } else {
-        Ok(None)
+        let mut response = ok_response::<Option<GetMe>>(None);
+        remove_session_cookie(response.headers_mut());
+        Ok(response)
     }
 }
 
@@ -300,7 +304,7 @@ pub async fn router(req: Request<Body>, path: &str) -> Result<Response, AppError
         ("/register", Method::POST) => register(req).await.map(ok_response),
         ("/logout", _) => logout(req).await,
         ("/query", Method::GET) => query_user(req).await.map(ok_response),
-        ("/get_me", Method::GET) => get_me(req).await.map(ok_response),
+        ("/get_me", Method::GET) => get_me(req).await,
         ("/edit", Method::POST) => edit(req).await.map(ok_response),
         ("/edit_avatar", Method::POST) => edit_avatar(req).await.map(ok_response),
         ("/update_settings", Method::POST) => update_settings(req).await.map(ok_response),

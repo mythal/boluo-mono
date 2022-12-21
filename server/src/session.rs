@@ -3,6 +3,8 @@ use crate::error::AppError::{self, Unauthenticated};
 use crate::error::CacheError;
 use crate::utils::{self, sign};
 use anyhow::Context;
+use hyper::http::HeaderValue;
+use hyper::HeaderMap;
 use once_cell::sync::OnceCell;
 use regex::Regex;
 use uuid::Uuid;
@@ -63,6 +65,19 @@ pub async fn remove_session(id: Uuid) -> Result<(), CacheError> {
     Ok(())
 }
 
+pub fn remove_session_cookie(headers: &mut HeaderMap<HeaderValue>) {
+    use cookie::time::OffsetDateTime;
+    use cookie::CookieBuilder;
+    use hyper::header::SET_COOKIE;
+    let session_cookie = CookieBuilder::new("session", "")
+        .http_only(true)
+        .path("/")
+        .expires(OffsetDateTime::UNIX_EPOCH)
+        .finish()
+        .to_string();
+    headers.insert(SET_COOKIE, HeaderValue::from_str(&session_cookie).unwrap());
+}
+
 fn parse_cookie(value: &hyper::header::HeaderValue) -> Result<&str, anyhow::Error> {
     static COOKIE_PATTERN: OnceCell<Regex> = OnceCell::new();
     let cookie_pattern = COOKIE_PATTERN.get_or_init(|| Regex::new(r#"\bsession=([^;]+)"#).unwrap());
@@ -75,7 +90,7 @@ fn parse_cookie(value: &hyper::header::HeaderValue) -> Result<&str, anyhow::Erro
 }
 
 pub async fn authenticate(req: &hyper::Request<hyper::Body>) -> Result<Session, AppError> {
-    use hyper::header::{HeaderValue, AUTHORIZATION, COOKIE};
+    use hyper::header::{AUTHORIZATION, COOKIE};
 
     let headers = req.headers();
     let authorization = headers.get(AUTHORIZATION).map(HeaderValue::to_str);
