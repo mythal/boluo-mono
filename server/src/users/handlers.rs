@@ -78,6 +78,15 @@ pub async fn login(req: Request<Body>) -> Result<Response, AppError> {
     use crate::session;
     use cookie::{CookieBuilder, SameSite};
     use hyper::header::{HeaderValue, SET_COOKIE};
+    let domain = "boluo.chat";
+
+    let should_set_domain = req
+        .headers()
+        .get("host")
+        .and_then(|value| value.to_str().ok())
+        .unwrap_or("boluo.chat")
+        .to_lowercase()
+        .ends_with(domain);
 
     let is_developer = req.headers().contains_key("development");
     let form: Login = interface::parse_body(req).await?;
@@ -88,12 +97,15 @@ pub async fn login(req: Request<Body>) -> Result<Response, AppError> {
         .or_no_permission()?;
     let session = session::start(&user.id).await.map_err(error_unexpected!())?;
     let token = session::token(&session);
-    let builder = CookieBuilder::new("session", token.clone())
+    let mut builder = CookieBuilder::new("session", token.clone())
         .same_site(SameSite::Lax)
         .secure(!is_developer && !debug())
         .http_only(true)
         .path("/")
         .permanent();
+    if should_set_domain {
+        builder = builder.domain(domain);
+    }
     let session_cookie = builder.finish().to_string();
 
     let token = if form.with_token { Some(token) } else { None };
