@@ -13,6 +13,7 @@ export async function get<P extends keyof Get>(
   const url = makeUri(BACKEND_URL, path, query);
   const session = cookies().get('session')?.value;
   const headers = new Headers();
+  console.log(`Backend: ${BACKEND_URL} Session: ${session ?? '[NO SESSION]'}`);
   if (session) {
     headers.set('authorization', session);
   }
