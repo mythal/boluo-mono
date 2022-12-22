@@ -3,3 +3,6 @@ resolver = "2"
 members = [
   "server",
 ]
+
+[profile.release]
+panic = "abort"
