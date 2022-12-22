@@ -66,15 +66,12 @@ async fn handler(req: Request<Body>) -> Result<Response, hyper::Error> {
     let method = req.method().clone();
     let method = method.as_str();
     let uri = req.uri().clone();
-    if context::debug() && req.method() == hyper::Method::OPTIONS {
+    if req.method() == hyper::Method::OPTIONS {
         return Ok(cors::preflight_requests(req));
     }
-    let mut response = router(req).await;
-    if debug() {
-        response = response.map(allow_origin);
-    }
+    let response = router(req).await;
     let mut has_error = false;
-    let response = match response {
+    let response = allow_origin(match response {
         Ok(response) => response,
         Err(e) => {
             has_error = true;
@@ -89,7 +86,7 @@ async fn handler(req: Request<Body>) -> Result<Response, hyper::Error> {
             }
             res
         }
-    };
+    });
 
     if has_error {
         log::warn!("{} {} {:?}", method, &uri, start.elapsed());
