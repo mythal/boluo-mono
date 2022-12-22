@@ -16,13 +16,6 @@ export default async function RootLayout({
 
   return (
     <html className="h-full w-full" lang={locale}>
-      <head>
-        <meta name="description" content="RPG tool, next generation" />
-        <meta name="color-scheme" content="dark light" />
-        <meta name="theme-color" content="#ffffff" key="theme-color" />
-        <link rel="manifest" href="/site.webmanifest" type="application/manifest+json" key="manifest" />
-        <link rel="shortcut icon" href={logo.src} key="icon" />
-      </head>
       <body className="h-full w-full bg-bg text-text">
         <ClientProviders locale={locale} messages={messages} me={me.unwrapOr(null)}>
           {children}
