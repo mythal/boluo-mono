@@ -75,7 +75,7 @@ pub fn remove_session_cookie(headers: &mut HeaderMap<HeaderValue>) {
         .expires(OffsetDateTime::UNIX_EPOCH)
         .finish()
         .to_string();
-    headers.insert(SET_COOKIE, HeaderValue::from_str(&session_cookie).unwrap());
+    headers.append(SET_COOKIE, HeaderValue::from_str(&session_cookie).unwrap());
 
     let session_cookie = CookieBuilder::new("session", "")
         .http_only(true)
@@ -83,7 +83,7 @@ pub fn remove_session_cookie(headers: &mut HeaderMap<HeaderValue>) {
         .expires(OffsetDateTime::UNIX_EPOCH)
         .finish()
         .to_string();
-    headers.insert(SET_COOKIE, HeaderValue::from_str(&session_cookie).unwrap());
+    headers.append(SET_COOKIE, HeaderValue::from_str(&session_cookie).unwrap());
 }
 
 fn parse_cookie(value: &hyper::header::HeaderValue) -> Result<&str, anyhow::Error> {

@@ -14,7 +14,6 @@ use crate::users::api::{CheckEmailExists, CheckUsernameExists, EditUser, GetMe, 
 use crate::users::models::UserExt;
 use crate::utils::get_ip;
 use hyper::{Body, Method, Request};
-use once_cell::sync::OnceCell;
 use redis::AsyncCommands;
 
 async fn register(req: Request<Body>) -> Result<User, AppError> {
@@ -79,6 +78,7 @@ pub async fn login(req: Request<Body>) -> Result<Response, AppError> {
     use crate::session;
     use cookie::{CookieBuilder, SameSite};
     use hyper::header::{HeaderValue, SET_COOKIE};
+
     let is_developer = req.headers().contains_key("development");
     let form: Login = interface::parse_body(req).await?;
     let mut conn = database::get().await?;
@@ -88,14 +88,13 @@ pub async fn login(req: Request<Body>) -> Result<Response, AppError> {
         .or_no_permission()?;
     let session = session::start(&user.id).await.map_err(error_unexpected!())?;
     let token = session::token(&session);
-    let session_cookie = CookieBuilder::new("session", token.clone())
+    let builder = CookieBuilder::new("session", token.clone())
         .same_site(SameSite::Lax)
         .secure(!is_developer && !debug())
         .http_only(true)
         .path("/")
-        .permanent()
-        .finish()
-        .to_string();
+        .permanent();
+    let session_cookie = builder.finish().to_string();
 
     let token = if form.with_token { Some(token) } else { None };
     let my_spaces = Space::get_by_user(db, &user.id).await?;
@@ -115,26 +114,12 @@ pub async fn login(req: Request<Body>) -> Result<Response, AppError> {
 
 pub async fn logout(req: Request<Body>) -> Result<Response, AppError> {
     use crate::session::authenticate;
-    use cookie::CookieBuilder;
-    use hyper::header::{HeaderValue, SET_COOKIE};
 
     if let Ok(session) = authenticate(&req).await {
         revoke_session(&session.id).await?;
     }
     let mut response = ok_response(true);
-    let header = response.headers_mut();
-
-    static HEADER_VALUE: OnceCell<HeaderValue> = OnceCell::new();
-    let header_value = HEADER_VALUE.get_or_init(|| {
-        let cookie = CookieBuilder::new("session", "")
-            .http_only(true)
-            .path("/")
-            .expires(time::OffsetDateTime::now_utc())
-            .finish()
-            .to_string();
-        HeaderValue::from_str(&cookie).unwrap()
-    });
-    header.append(SET_COOKIE, header_value.clone());
+    remove_session_cookie(response.headers_mut());
     Ok(response)
 }
 
