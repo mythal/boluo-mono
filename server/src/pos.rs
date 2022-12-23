@@ -4,11 +4,11 @@ use redis::AsyncCommands;
 use uuid::Uuid;
 
 fn create_max_pos_key(channel_id: &Uuid) -> String {
-    format!("channel:{}:max_pos", channel_id)
+    format!("channel:{channel_id}:max_pos")
 }
 
 fn create_pos_key(channel_id: Uuid, message_id: Uuid) -> String {
-    format!("channel:{}:preview:{}:pos", channel_id, message_id)
+    format!("channel:{channel_id}:preview:{message_id}:pos")
 }
 
 pub async fn alloc_new_pos<T: Querist>(

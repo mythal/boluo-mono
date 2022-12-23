@@ -2,10 +2,10 @@ pub async fn send(to: &str, subject: &str, html: &str) -> Result<(), anyhow::Err
     let client = reqwest::Client::new();
     let domain = std::env::var("MAILGUN_DOMAIN")?;
     let api_key = std::env::var("MAILGUN_API_KEY")?;
-    let url = format!("https://api.mailgun.net/v3/{}/messages", domain);
+    let url = format!("https://api.mailgun.net/v3/{domain}/messages");
 
     let mut params = std::collections::HashMap::new();
-    let from = format!("Boluo <noreply@{}>", domain);
+    let from = format!("Boluo <noreply@{domain}>");
     params.insert("from", &*from);
     params.insert("to", to);
     params.insert("subject", subject);

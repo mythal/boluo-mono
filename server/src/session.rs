@@ -30,7 +30,7 @@ pub fn token(session: &Uuid) -> String {
     base64::encode_config_buf(session.as_bytes(), base64::STANDARD_NO_PAD, &mut buffer);
     let signature = sign(&buffer);
     buffer.push('.');
-    base64::encode_config_buf(&signature, base64::STANDARD_NO_PAD, &mut buffer);
+    base64::encode_config_buf(signature, base64::STANDARD_NO_PAD, &mut buffer);
     buffer
 }
 
@@ -86,7 +86,7 @@ pub fn add_session_cookie(session: &Uuid, host: Option<&HeaderValue>, response_h
         .ends_with(SESSION_COOKIE_DOMAIN);
 
     let token = token(session);
-    let mut builder = CookieBuilder::new(SESSION_COOKIE_KEY, token.clone())
+    let mut builder = CookieBuilder::new(SESSION_COOKIE_KEY, token)
         .same_site(SameSite::Lax)
         .secure(should_set_domain)
         .http_only(true)
@@ -163,12 +163,12 @@ fn parse_cookie(value: &hyper::header::HeaderValue) -> Result<Option<&str>, anyh
     use std::sync::OnceLock;
     static COOKIE_PATTERN: OnceLock<Regex> = OnceLock::new();
     let cookie_pattern = COOKIE_PATTERN.get_or_init(|| {
-        let pattern = format!(r"\b{}=([^;]+)", SESSION_COOKIE_KEY);
+        let pattern = format!(r"\b{SESSION_COOKIE_KEY}=([^;]+)");
         Regex::new(&pattern).unwrap()
     });
     let value = value
         .to_str()
-        .with_context(|| format!("Failed to convert {:?} to string.", value))?;
+        .with_context(|| format!("Failed to convert {value:?} to string."))?;
     let capture = cookie_pattern.captures(value);
     if let Some(capture) = capture {
         capture
@@ -176,7 +176,7 @@ fn parse_cookie(value: &hyper::header::HeaderValue) -> Result<Option<&str>, anyh
             .map(|m| Some(m.as_str()))
             .ok_or_else(|| anyhow::anyhow!("Failed to parse cookie: {}", value))
     } else {
-        return Ok(None);
+        Ok(None)
     }
 }
 

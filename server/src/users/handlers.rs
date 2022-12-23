@@ -88,9 +88,7 @@ pub async fn get_me(req: Request<Body>) -> Result<Response, AppError> {
             remove_session_cookie(response.headers_mut());
             Ok(response)
         }
-        Err(e) => {
-            return Err(e);
-        }
+        Err(e) => Err(e),
     }
 }
 
@@ -214,7 +212,7 @@ pub async fn ip_limit(cache: &mut cache::Connection, req: &Request<Body>) -> Res
     Ok(())
 }
 
-pub async fn email_limit(cache: &mut cache::Connection, email: &String) -> Result<(), AppError> {
+pub async fn email_limit(cache: &mut cache::Connection, email: &str) -> Result<(), AppError> {
     let email_key = token_key(email);
     let counter: i32 = cache.inner.incr(&email_key, 1).await?;
     if counter == 1 {
@@ -249,11 +247,10 @@ pub async fn reset_password(req: Request<Body>) -> Result<(), AppError> {
             "
             <p>
                 You have requested to reset your password.
-                <a href=\"https://boluo.chat/confirm-password-reset/{}\">Click here</a> to reset your password.
+                <a href=\"https://boluo.chat/confirm-password-reset/{token}\">Click here</a> to reset your password.
             </p>
             <p>If you did not request to reset your password, please ignore this email.</p>
-        ",
-            token
+        "
         ),
     )
     .await

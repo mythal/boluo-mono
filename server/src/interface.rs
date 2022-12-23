@@ -89,7 +89,7 @@ where
 {
     let query = uri.query().unwrap_or("");
     serde_urlencoded::from_str(query).map_err(|e| {
-        let message = format!("Failed to parse the query in the URI ({})", uri);
+        let message = format!("Failed to parse the query in the URI ({uri})");
         log::debug!("{}: {}", message, e);
         AppError::BadRequest(message)
     })
@@ -119,7 +119,7 @@ fn test_get_uuid() {
     use uuid::Uuid;
 
     let uuid = Uuid::new_v4();
-    let path_and_query = format!("/?id={}", uuid);
+    let path_and_query = format!("/?id={uuid}");
     let uri = Uri::builder().path_and_query(&*path_and_query).build().unwrap();
     let query: IdQuery = parse_query(&uri).unwrap();
     assert_eq!(query.id, uuid);

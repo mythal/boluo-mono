@@ -51,8 +51,8 @@ impl User {
 
         EMAIL.run(&email)?;
         DISPLAY_NAME.run(&nickname)?;
-        NAME.run(&username)?;
-        PASSWORD.run(&password)?;
+        NAME.run(username)?;
+        PASSWORD.run(password)?;
 
         let row = db
             .query_exactly_one(
@@ -113,7 +113,7 @@ impl User {
         use crate::validators::PASSWORD;
         use postgres_types::Type;
 
-        PASSWORD.run(&password)?;
+        PASSWORD.run(password)?;
 
         db.execute_typed(
             include_str!("sql/reset_password.sql"),

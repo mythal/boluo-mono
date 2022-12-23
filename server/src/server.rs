@@ -1,4 +1,5 @@
 #![allow(dead_code)]
+#![allow(clippy::too_many_arguments)]
 #![feature(once_cell)]
 
 use std::env;
@@ -43,8 +44,8 @@ async fn router(req: Request<Body>) -> Result<Response, AppError> {
     macro_rules! table {
         ($prefix: expr, $handler: expr) => {
             let prefix = $prefix;
-            if path.starts_with(prefix) {
-                return $handler(req, &path[prefix.len()..]).await;
+            if let Some(stripped) = path.strip_prefix(prefix) {
+                return $handler(req, stripped).await;
             }
         };
     }
@@ -114,6 +115,7 @@ async fn main() {
     // https://tokio.rs/tokio/topics/shutdown
     let mut stream = signal(SignalKind::terminate()).unwrap();
 
+    #[allow(clippy::never_loop)]
     loop {
         tokio::select! {
             _ = stream.recv() => log::info!("Shutdown boluo server"),

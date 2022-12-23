@@ -1,12 +1,12 @@
 use super::api::Token;
-use super::events::EventQuery;
+use super::types::EventQuery;
 use super::Event;
 use crate::cache::make_key;
 use crate::csrf::authenticate;
 use crate::database::Querist;
 use crate::error::{AppError, Find};
 use crate::events::context::get_mailbox_broadcast_rx;
-use crate::events::events::ClientEvent;
+use crate::events::types::ClientEvent;
 use crate::interface::{missing, ok_response, parse_query, Request, Response};
 use crate::spaces::models::StatusKind;
 use crate::spaces::{Space, SpaceMember};

@@ -397,7 +397,7 @@ async fn channels_test() -> Result<(), crate::error::AppError> {
     let new_name = "深水城水很深";
     let channel_edited = Channel::edit(db, &channel.id, Some(new_name), None, None, None, Some(false), None).await?;
     assert_eq!(channel_edited.name, new_name);
-    assert_eq!(channel_edited.is_public, false);
+    assert!(!channel_edited.is_public);
     let (_, space) = Channel::get_with_space(db, &channel.id).await?.unwrap();
     let channel = Channel::get_by_name(db, space.id, new_name).await?.unwrap();
     assert!(Channel::get_by_name(db, space.id, "Madoka").await?.is_none());

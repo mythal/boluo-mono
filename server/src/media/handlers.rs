@@ -19,7 +19,7 @@ fn content_disposition(attachment: bool, filename: &str) -> HeaderValue {
     let kind = if attachment { "attachment" } else { "inline" };
     const SET: &AsciiSet = NON_ALPHANUMERIC;
     let filename = utf8_percent_encode(filename, SET).to_string();
-    HeaderValue::from_str(&format!("{}; filename*=utf-8''{}", kind, filename)).unwrap()
+    HeaderValue::from_str(&format!("{kind}; filename*=utf-8''{filename}")).unwrap()
 }
 
 fn filename_sanitizer(filename: String) -> String {
@@ -39,7 +39,7 @@ pub fn upload_params(uri: &Uri) -> Result<Upload, AppError> {
 pub async fn upload(req: Request<Body>, params: Upload, max_size: usize) -> Result<MediaFile, AppError> {
     let Upload { filename, mime_type } = params;
     let id = utils::id();
-    let temp_filename = format!("{}_{}", id, filename);
+    let temp_filename = format!("{id}_{filename}");
 
     let path = Media::path(&temp_filename);
     let mut file = File::create(&path).await?;
@@ -63,7 +63,7 @@ pub async fn upload(req: Request<Body>, params: Upload, max_size: usize) -> Resu
     let hash = hash.to_hex().to_string();
     let ext = path.extension().and_then(|s| s.to_str()).unwrap_or("");
 
-    let new_filename = format!("{}.{}", hash, ext);
+    let new_filename = format!("{hash}.{ext}");
     let new_path = Media::path(&new_filename);
     let duplicate = new_path.exists();
     if duplicate {

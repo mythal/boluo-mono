@@ -81,7 +81,7 @@ pub fn merge_blank(s: &str) -> String {
 fn test_sign() {
     let message = "hello, world";
     let signature = sign(message);
-    let signature = base64::encode(&signature);
+    let signature = base64::encode(signature);
     verify(message, &signature).unwrap();
 }
 
