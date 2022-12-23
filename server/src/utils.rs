@@ -2,16 +2,16 @@ use anyhow::Context;
 use chrono::prelude::*;
 use hyper::header::HeaderName;
 use hyper::{Body, Request};
-use once_cell::sync::OnceCell;
 use ring::hmac;
 use ring::rand::SecureRandom;
+use std::sync::OnceLock as OnceCell;
 use uuid::Uuid;
 
 macro_rules! regex {
     ($pattern: expr) => {{
-        use once_cell::sync::OnceCell;
         use regex::Regex;
-        static CELL: OnceCell<Regex> = OnceCell::new();
+        use std::sync::OnceLock;
+        static CELL: OnceLock<Regex> = OnceLock::new();
         CELL.get_or_init(|| Regex::new($pattern).unwrap())
     }};
 }

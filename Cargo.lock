@@ -1553,7 +1553,6 @@ dependencies = [
  "itertools",
  "log",
  "mime",
- "once_cell",
  "percent-encoding",
  "postgres",
  "postgres-types",

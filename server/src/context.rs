@@ -1,6 +1,6 @@
 use std::{env, path::Path, path::PathBuf};
 
-use once_cell::sync::OnceCell;
+use std::sync::OnceLock as OnceCell;
 
 static DEBUG: OnceCell<bool> = OnceCell::new();
 static SYSTEMD: OnceCell<bool> = OnceCell::new();

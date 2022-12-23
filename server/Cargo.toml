@@ -29,7 +29,6 @@ futures = "0.3"
 itertools = "0.10"
 log = "0.4"
 mime = "0.3"
-once_cell = "1.13"
 percent-encoding = "2.1.0"
 postgres = "0.19"
 postgres-types = { version = "0.2", features = ["derive"] }

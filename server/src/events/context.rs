@@ -1,7 +1,7 @@
 use crate::events::Event;
-use once_cell::sync::OnceCell;
 use std::collections::{HashMap, VecDeque};
 use std::sync::Arc;
+use std::sync::OnceLock as OnceCell;
 use tokio::sync::{broadcast, Mutex, RwLock};
 use uuid::Uuid;
 

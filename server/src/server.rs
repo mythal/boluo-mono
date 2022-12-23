@@ -1,4 +1,5 @@
 #![allow(dead_code)]
+#![feature(once_cell)]
 
 use std::env;
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
@@ -36,7 +37,7 @@ mod websocket;
 use crate::cors::allow_origin;
 use crate::error::AppError;
 use crate::interface::{err_response, missing, ok_response, Response};
-use once_cell::sync::OnceCell;
+use std::sync::OnceLock as OnceCell;
 
 async fn router(req: Request<Body>) -> Result<Response, AppError> {
     let path = req.uri().path().to_string();

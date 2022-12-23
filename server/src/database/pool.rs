@@ -2,8 +2,7 @@ use super::Client;
 use crate::error::DbError;
 use crate::pool::{Connect, Factory, Pool};
 use async_trait::async_trait;
-use once_cell::sync::OnceCell;
-
+use std::sync::OnceLock as OnceCell;
 #[derive(Clone)]
 pub struct PostgresFactory {
     config: tokio_postgres::Config,

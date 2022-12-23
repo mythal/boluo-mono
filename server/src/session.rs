@@ -5,7 +5,6 @@ use crate::utils::{self, sign};
 use anyhow::Context;
 use hyper::http::HeaderValue;
 use hyper::HeaderMap;
-use once_cell::sync::OnceCell;
 use regex::Regex;
 use uuid::Uuid;
 
@@ -69,32 +68,61 @@ pub fn remove_session_cookie(headers: &mut HeaderMap<HeaderValue>) {
     use cookie::time::OffsetDateTime;
     use cookie::CookieBuilder;
     use hyper::header::SET_COOKIE;
-    let session_cookie = CookieBuilder::new("session", "")
-        .http_only(true)
-        .path("/")
-        .expires(OffsetDateTime::UNIX_EPOCH)
-        .finish()
-        .to_string();
-    headers.append(SET_COOKIE, HeaderValue::from_str(&session_cookie).unwrap());
-
-    let session_cookie = CookieBuilder::new("session", "")
-        .http_only(true)
-        .path("/api/")
-        .expires(OffsetDateTime::UNIX_EPOCH)
-        .finish()
-        .to_string();
-    headers.append(SET_COOKIE, HeaderValue::from_str(&session_cookie).unwrap());
+    use std::sync::OnceLock;
+    static SET_COOKIE_LIST_CELL: OnceLock<Vec<HeaderValue>> = OnceLock::new();
+    let set_cookie_list = SET_COOKIE_LIST_CELL.get_or_init(|| {
+        vec![
+            HeaderValue::from_str(
+                &CookieBuilder::new("session", "")
+                    .http_only(true)
+                    .path("/")
+                    .expires(OffsetDateTime::UNIX_EPOCH)
+                    .finish()
+                    .to_string(),
+            )
+            .unwrap(),
+            HeaderValue::from_str(
+                &CookieBuilder::new("session", "")
+                    .http_only(true)
+                    .path("/api/")
+                    .expires(OffsetDateTime::UNIX_EPOCH)
+                    .finish()
+                    .to_string(),
+            )
+            .unwrap(),
+            HeaderValue::from_str(
+                &CookieBuilder::new("session", "")
+                    .http_only(true)
+                    .domain("boluo.chat")
+                    .path("/")
+                    .expires(OffsetDateTime::UNIX_EPOCH)
+                    .finish()
+                    .to_string(),
+            )
+            .unwrap(),
+        ]
+    });
+    for cookie in set_cookie_list {
+        headers.append(SET_COOKIE, cookie.clone());
+    }
 }
 
-fn parse_cookie(value: &hyper::header::HeaderValue) -> Result<&str, anyhow::Error> {
-    static COOKIE_PATTERN: OnceCell<Regex> = OnceCell::new();
+fn parse_cookie(value: &hyper::header::HeaderValue) -> Result<Option<&str>, anyhow::Error> {
+    use std::sync::OnceLock;
+    static COOKIE_PATTERN: OnceLock<Regex> = OnceLock::new();
     let cookie_pattern = COOKIE_PATTERN.get_or_init(|| Regex::new(r#"\bsession=([^;]+)"#).unwrap());
     let value = value
         .to_str()
         .with_context(|| format!("Failed to convert {:?} to string.", value))?;
-    let failed = || anyhow::anyhow!("Failed to parse cookie: {}", value);
-    let capture = cookie_pattern.captures(value).ok_or_else(failed)?;
-    capture.get(1).map(|m| m.as_str()).ok_or_else(failed)
+    let capture = cookie_pattern.captures(value);
+    if let Some(capture) = capture {
+        capture
+            .get(1)
+            .map(|m| Some(m.as_str()))
+            .ok_or_else(|| anyhow::anyhow!("Failed to parse cookie: {}", value))
+    } else {
+        return Ok(None);
+    }
 }
 
 pub async fn authenticate(req: &hyper::Request<hyper::Body>) -> Result<Session, AppError> {
@@ -109,12 +137,14 @@ pub async fn authenticate(req: &hyper::Request<hyper::Body>) -> Result<Session, 
         let cookie = headers
             .get(COOKIE)
             .ok_or(Unauthenticated("There is no cookie in header".to_string()))?;
-        let token = parse_cookie(cookie);
-
-        token.map_err(|err| {
-            log::warn!("Failed to parse cookie: {}", err);
-            Unauthenticated("Invalid cookie".to_string())
-        })?
+        match parse_cookie(cookie) {
+            Ok(None) => return Err(Unauthenticated("No session in the cookie".to_string())),
+            Ok(Some(token)) => token,
+            Err(err) => {
+                log::warn!("Failed to parse cookie: {}", err);
+                return Err(Unauthenticated("Invalid cookie".to_string()));
+            }
+        }
     };
 
     let id = match token_verify(token) {
