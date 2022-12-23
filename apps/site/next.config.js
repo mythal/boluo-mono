@@ -14,9 +14,9 @@ const config = {
     dirs: ["src", "tests"],
   },
   output: "standalone",
+  transpilePackages: ["ui"],
   experimental: {
     appDir: true,
-    transpilePackages: ["ui"],
     outputFileTracingRoot: path.join(__dirname, "../../"),
   },
   async rewrites() {

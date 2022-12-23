@@ -37,7 +37,6 @@ mod websocket;
 use crate::cors::allow_origin;
 use crate::error::AppError;
 use crate::interface::{err_response, missing, ok_response, Response};
-use std::sync::OnceLock as OnceCell;
 
 async fn router(req: Request<Body>) -> Result<Response, AppError> {
     let path = req.uri().path().to_string();
@@ -99,26 +98,11 @@ async fn handler(req: Request<Body>) -> Result<Response, hyper::Error> {
     Ok(response)
 }
 
-static SENTRY: OnceCell<sentry::ClientInitGuard> = OnceCell::new();
-
 #[tokio::main]
 async fn main() {
     dotenv::dotenv().ok();
     let port: u16 = env::var("PORT").unwrap().parse().unwrap();
     logger::setup_logger(debug()).unwrap();
-    if let Ok(dsn) = env::var("SENTRY_DSN") {
-        SENTRY
-            .set(sentry::init((
-                dsn,
-                sentry::ClientOptions {
-                    release: sentry::release_name!(),
-                    debug: debug(),
-                    environment: Some(if debug() { "development" } else { "production" }.into()),
-                    ..Default::default()
-                },
-            )))
-            .ok();
-    };
 
     let addr: Ipv4Addr = env::var("HOST").unwrap_or("127.0.0.1".to_string()).parse().unwrap();
     let addr = SocketAddr::new(IpAddr::V4(addr), port);
