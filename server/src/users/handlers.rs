@@ -1,11 +1,10 @@
 use super::api::{Login, LoginReturn, Register, ResetPassword, ResetPasswordConfirm, ResetPasswordTokenCheck};
 use super::models::User;
 use crate::interface::{missing, ok_response, parse_body, parse_query, Response};
-use crate::session::{remove_session, remove_session_cookie, revoke_session};
+use crate::session::{add_session_cookie, remove_session, remove_session_cookie, revoke_session, AuthenticateFail};
 use crate::{cache, database, mail};
 
 use crate::channels::Channel;
-use crate::context::debug;
 use crate::error::{AppError, Find, ValidationFailed};
 use crate::interface;
 use crate::media::{upload, upload_params};
@@ -46,49 +45,59 @@ pub async fn query_user(req: Request<Body>) -> Result<User, AppError> {
 
 pub async fn get_me(req: Request<Body>) -> Result<Response, AppError> {
     use crate::session::authenticate;
-    if let Ok(session) = authenticate(&req).await {
-        let mut conn = database::get().await?;
-        let db = &mut *conn;
-        let user = User::get_by_id(db, &session.user_id).await?;
-        if let Some(user) = user {
-            let my_spaces = Space::get_by_user(db, &user.id).await?;
-            let my_channels = Channel::get_by_user(db, user.id).await?;
-            let settings = UserExt::get_settings(db, user.id).await?;
-            Ok(ok_response(Some(GetMe {
-                user,
-                settings,
-                my_channels,
-                my_spaces,
-            })))
-        } else {
-            remove_session(session.id).await?;
-            log::warn!("session is valid, but user can't be found at database.");
+    use hyper::header::AUTHORIZATION;
+    match authenticate(&req).await {
+        Ok(session) => {
+            let mut conn = database::get().await?;
+            let db = &mut *conn;
+            let user = User::get_by_id(db, &session.user_id).await?;
+            if let Some(user) = user {
+                let my_spaces = Space::get_by_user(db, &user.id).await?;
+                let my_channels = Channel::get_by_user(db, user.id).await?;
+                let settings = UserExt::get_settings(db, user.id).await?;
+
+                let mut response = ok_response(Some(GetMe {
+                    user,
+                    settings,
+                    my_channels,
+                    my_spaces,
+                }));
+                if req.headers().get(AUTHORIZATION).is_none() {
+                    // refresh session cookie
+                    let host = req.headers().get("host");
+                    add_session_cookie(&session.id, host, response.headers_mut())
+                }
+                Ok(response)
+            } else {
+                remove_session(session.id).await?;
+                log::error!(
+                    "[Unexpected] session ({}) is valid and exists, \
+                    but the user ({}) to whom the session refers \
+                    cannot be found in the database.",
+                    session.id,
+                    session.user_id
+                );
+                let mut response = ok_response::<Option<GetMe>>(None);
+                remove_session_cookie(response.headers_mut());
+                Ok(response)
+            }
+        }
+        Err(AppError::Unauthenticated(AuthenticateFail::NoData)) => Ok(ok_response::<Option<GetMe>>(None)),
+        Err(AppError::Unauthenticated(_)) => {
             let mut response = ok_response::<Option<GetMe>>(None);
             remove_session_cookie(response.headers_mut());
             Ok(response)
         }
-    } else {
-        let mut response = ok_response::<Option<GetMe>>(None);
-        remove_session_cookie(response.headers_mut());
-        Ok(response)
+        Err(e) => {
+            return Err(e);
+        }
     }
 }
 
 pub async fn login(req: Request<Body>) -> Result<Response, AppError> {
     use crate::session;
-    use cookie::{CookieBuilder, SameSite};
-    use hyper::header::{HeaderValue, SET_COOKIE};
-    let domain = "boluo.chat";
 
-    let should_set_domain = req
-        .headers()
-        .get("host")
-        .and_then(|value| value.to_str().ok())
-        .unwrap_or("boluo.chat")
-        .to_lowercase()
-        .ends_with(domain);
-
-    let is_developer = req.headers().contains_key("development");
+    let host = req.headers().get("host").cloned();
     let form: Login = interface::parse_body(req).await?;
     let mut conn = database::get().await?;
     let db = &mut *conn;
@@ -97,17 +106,6 @@ pub async fn login(req: Request<Body>) -> Result<Response, AppError> {
         .or_no_permission()?;
     let session = session::start(&user.id).await.map_err(error_unexpected!())?;
     let token = session::token(&session);
-    let mut builder = CookieBuilder::new("session", token.clone())
-        .same_site(SameSite::Lax)
-        .secure(!is_developer && !debug())
-        .http_only(true)
-        .path("/")
-        .permanent();
-    if should_set_domain {
-        builder = builder.domain(domain);
-    }
-    let session_cookie = builder.finish().to_string();
-
     let token = if form.with_token { Some(token) } else { None };
     let my_spaces = Space::get_by_user(db, &user.id).await?;
     let my_channels = Channel::get_by_user(db, user.id).await?;
@@ -119,8 +117,7 @@ pub async fn login(req: Request<Body>) -> Result<Response, AppError> {
         my_channels,
     };
     let mut response = ok_response(LoginReturn { me, token });
-    let headers = response.headers_mut();
-    headers.insert(SET_COOKIE, HeaderValue::from_str(&session_cookie).unwrap());
+    add_session_cookie(&session, host.as_ref(), response.headers_mut());
     Ok(response)
 }
 

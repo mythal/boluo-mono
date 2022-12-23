@@ -1,4 +1,4 @@
-use crate::pool::PoolError;
+use crate::{pool::PoolError, session::AuthenticateFail};
 use hyper::{StatusCode, Uri};
 pub use redis::RedisError as CacheError;
 use std::error::Error;
@@ -14,8 +14,8 @@ pub enum AppError {
         #[from]
         source: CacheError,
     },
-    #[error("Authentication failed: {0}")]
-    Unauthenticated(String),
+    #[error("Authentication failed")]
+    Unauthenticated(#[from] AuthenticateFail),
     #[error("Resource not found")]
     NotFound(&'static str),
     #[error("Permission denied: {0}")]

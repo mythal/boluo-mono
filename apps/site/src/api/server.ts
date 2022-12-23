@@ -6,17 +6,25 @@ import { cookies } from 'next/headers';
 import { BACKEND_URL } from '../const';
 import { appFetch } from './common';
 
+// Keep this value the same as the server
+const sessionCookieKey = 'boluo-session-v1';
+
+const makeHeaders = (): Headers => {
+  const session = cookies().get(sessionCookieKey)?.value;
+
+  const headers = new Headers();
+  if (session) {
+    headers.set('authorization', session);
+  }
+  return headers;
+};
+
 export async function get<P extends keyof Get>(
   path: P,
   query: Get[P]['query'],
 ): Promise<Result<Get[P]['result'], ApiError>> {
   const url = makeUri(BACKEND_URL, path, query);
-  const session = cookies().get('session')?.value;
-  const headers = new Headers();
-  if (session) {
-    headers.set('authorization', session);
-  }
-  return appFetch(url, { headers });
+  return appFetch(url, { headers: makeHeaders() });
 }
 
 export async function post<P extends keyof Post>(
@@ -24,11 +32,9 @@ export async function post<P extends keyof Post>(
   payload: Post[P]['result'],
 ): Promise<Result<Post[P]['result'], ApiError>> {
   const url = BACKEND_URL + path;
-  const headers = new Headers({ 'Content-Type': 'application/json' });
-  const session = cookies().get('session')?.value;
-  if (session) {
-    headers.set('authorization', session);
-  }
+
+  const headers = makeHeaders();
+  headers.set('Content-Type', 'application/json');
   return appFetch(url, {
     headers,
     cache: 'no-cache',

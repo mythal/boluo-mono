@@ -1,12 +1,28 @@
 use crate::cache;
-use crate::error::AppError::{self, Unauthenticated};
+use crate::error::AppError;
 use crate::error::CacheError;
 use crate::utils::{self, sign};
 use anyhow::Context;
-use hyper::http::HeaderValue;
+use hyper::header::HeaderValue;
 use hyper::HeaderMap;
 use regex::Regex;
+use thiserror::Error;
 use uuid::Uuid;
+
+pub const SESSION_COOKIE_KEY: &str = "boluo-session-v1";
+pub const SESSION_COOKIE_DOMAIN: &str = "boluo.chat";
+
+#[derive(Error, Debug)]
+pub enum AuthenticateFail {
+    #[error("No authentication data found")]
+    NoData,
+    #[error("Invaild token format")]
+    InvaildToken,
+    #[error("Failed to verify the session")]
+    CheckSignFail,
+    #[error("No session found")]
+    NoSessionFound,
+}
 
 pub fn token(session: &Uuid) -> String {
     // [body (base64)].[sign]
@@ -58,6 +74,32 @@ pub struct Session {
     pub user_id: Uuid,
 }
 
+pub fn add_session_cookie(session: &Uuid, host: Option<&HeaderValue>, response_header: &mut HeaderMap<HeaderValue>) {
+    use cookie::time::Duration;
+    use cookie::{CookieBuilder, SameSite};
+    use hyper::header::SET_COOKIE;
+
+    let should_set_domain = host
+        .and_then(|value| value.to_str().ok())
+        .unwrap_or("boluo.chat")
+        .to_lowercase()
+        .ends_with(SESSION_COOKIE_DOMAIN);
+
+    let token = token(session);
+    let mut builder = CookieBuilder::new(SESSION_COOKIE_KEY, token.clone())
+        .same_site(SameSite::Lax)
+        .secure(should_set_domain)
+        .http_only(true)
+        .path("/")
+        .max_age(Duration::days(30));
+
+    if should_set_domain {
+        builder = builder.domain(SESSION_COOKIE_DOMAIN);
+    }
+    let session_cookie = builder.finish().to_string();
+    response_header.append(SET_COOKIE, HeaderValue::from_str(&session_cookie).unwrap());
+}
+
 pub async fn remove_session(id: Uuid) -> Result<(), CacheError> {
     let key = make_key(&id);
     cache::conn().await.remove(&key).await?;
@@ -65,18 +107,29 @@ pub async fn remove_session(id: Uuid) -> Result<(), CacheError> {
 }
 
 pub fn remove_session_cookie(headers: &mut HeaderMap<HeaderValue>) {
-    use cookie::time::OffsetDateTime;
+    use cookie::time::Duration;
     use cookie::CookieBuilder;
     use hyper::header::SET_COOKIE;
     use std::sync::OnceLock;
     static SET_COOKIE_LIST_CELL: OnceLock<Vec<HeaderValue>> = OnceLock::new();
     let set_cookie_list = SET_COOKIE_LIST_CELL.get_or_init(|| {
+        let zero = Duration::seconds(0);
         vec![
             HeaderValue::from_str(
-                &CookieBuilder::new("session", "")
+                &CookieBuilder::new(SESSION_COOKIE_KEY, "")
+                    .http_only(true)
+                    .domain(SESSION_COOKIE_DOMAIN)
+                    .path("/")
+                    .max_age(zero)
+                    .finish()
+                    .to_string(),
+            )
+            .unwrap(),
+            HeaderValue::from_str(
+                &CookieBuilder::new(SESSION_COOKIE_KEY, "")
                     .http_only(true)
                     .path("/")
-                    .expires(OffsetDateTime::UNIX_EPOCH)
+                    .max_age(zero)
                     .finish()
                     .to_string(),
             )
@@ -85,7 +138,7 @@ pub fn remove_session_cookie(headers: &mut HeaderMap<HeaderValue>) {
                 &CookieBuilder::new("session", "")
                     .http_only(true)
                     .path("/api/")
-                    .expires(OffsetDateTime::UNIX_EPOCH)
+                    .max_age(zero)
                     .finish()
                     .to_string(),
             )
@@ -93,9 +146,8 @@ pub fn remove_session_cookie(headers: &mut HeaderMap<HeaderValue>) {
             HeaderValue::from_str(
                 &CookieBuilder::new("session", "")
                     .http_only(true)
-                    .domain("boluo.chat")
                     .path("/")
-                    .expires(OffsetDateTime::UNIX_EPOCH)
+                    .max_age(zero)
                     .finish()
                     .to_string(),
             )
@@ -110,7 +162,10 @@ pub fn remove_session_cookie(headers: &mut HeaderMap<HeaderValue>) {
 fn parse_cookie(value: &hyper::header::HeaderValue) -> Result<Option<&str>, anyhow::Error> {
     use std::sync::OnceLock;
     static COOKIE_PATTERN: OnceLock<Regex> = OnceLock::new();
-    let cookie_pattern = COOKIE_PATTERN.get_or_init(|| Regex::new(r#"\bsession=([^;]+)"#).unwrap());
+    let cookie_pattern = COOKIE_PATTERN.get_or_init(|| {
+        let pattern = format!(r"\b{}=([^;]+)", SESSION_COOKIE_KEY);
+        Regex::new(&pattern).unwrap()
+    });
     let value = value
         .to_str()
         .with_context(|| format!("Failed to convert {:?} to string.", value))?;
@@ -134,38 +189,35 @@ pub async fn authenticate(req: &hyper::Request<hyper::Body>) -> Result<Session, 
     let token = if let Some(Ok(t)) = authorization {
         t
     } else {
-        let cookie = headers
-            .get(COOKIE)
-            .ok_or(Unauthenticated("There is no cookie in header".to_string()))?;
+        let cookie = headers.get(COOKIE).ok_or(AuthenticateFail::NoData)?;
         match parse_cookie(cookie) {
-            Ok(None) => return Err(Unauthenticated("No session in the cookie".to_string())),
+            Ok(None) => return Err(AuthenticateFail::NoData.into()),
             Ok(Some(token)) => token,
             Err(err) => {
-                log::warn!("Failed to parse cookie: {}", err);
-                return Err(Unauthenticated("Invalid cookie".to_string()));
+                log::warn!(
+                    "Failed to parse the cookie: {} error: {}",
+                    cookie.to_str().unwrap_or("[Failed convert the cookie to string]"),
+                    err
+                );
+                return Err(AuthenticateFail::InvaildToken.into());
             }
         }
     };
 
     let id = match token_verify(token) {
         Err(err) => {
-            log::warn!("{}", err);
-            return Err(AppError::Unauthenticated("Invalid session".to_string()));
+            log::warn!("Failed to verify the token: {} error: {}", token, err);
+            return Err(AuthenticateFail::CheckSignFail.into());
         }
         Ok(id) => id,
     };
 
     let key = make_key(&id);
-    let bytes: Vec<u8> = cache::conn()
-        .await
-        .get(&key)
-        .await
-        .map_err(error_unexpected!())?
-        .ok_or_else(|| {
-            log::warn!("Session {} not found, token: {}", id, token);
-            Unauthenticated("Session not found".to_string())
-        })?;
+    let bytes: Vec<u8> = cache::conn().await.get(&key).await?.ok_or_else(|| {
+        log::warn!("Session {} not found, token: {}", id, token);
+        AuthenticateFail::NoSessionFound
+    })?;
 
-    let user_id = Uuid::from_slice(&bytes).map_err(error_unexpected!())?;
+    let user_id = Uuid::from_slice(&bytes).map_err(|_| AuthenticateFail::InvaildToken)?;
     Ok(Session { id, user_id })
 }

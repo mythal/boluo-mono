@@ -25,7 +25,7 @@ use uuid::Uuid;
 
 type Sender = SplitSink<WebSocketStream<Upgraded>, tungstenite::Message>;
 
-async fn check_space_perms<T: Querist>(
+async fn check_permissions<T: Querist>(
     db: &mut T,
     space: &Space,
     user_id: &Result<Uuid, AppError>,
@@ -36,8 +36,13 @@ async fn check_space_perms<T: Querist>(
                 SpaceMember::get(db, user_id, &space.id).await.or_no_permission()?;
             }
             Err(err) => {
-                log::warn!("Failed to verify session: {:?}", err);
-                return Err(AppError::Unauthenticated("space do not allow spectator".to_string()));
+                log::warn!(
+                    "A user tried to access space but did not pass authentication: {:?}",
+                    err
+                );
+                return Err(AppError::NoPermission(
+                    "This space does not allow non-members to view it.".to_string(),
+                ));
             }
         }
     }
@@ -116,7 +121,9 @@ async fn handle_client_event(mailbox: Uuid, user_id: Option<Uuid>, message: Stri
     let event = event.unwrap();
     match event {
         ClientEvent::Preview { preview } => {
-            let user_id = user_id.ok_or(AppError::Unauthenticated("user id is empty".to_string()))?;
+            let user_id = user_id.ok_or(AppError::NoPermission(
+                "You must be logged in to send a Preview.".to_string(),
+            ))?;
             preview.broadcast(mailbox, user_id).await?;
         }
         ClientEvent::Status { kind, focus } => {
@@ -151,7 +158,7 @@ async fn connect(req: Request) -> Result<Response, anyhow::Error> {
     let db = &mut *conn;
     let space = Space::get_by_id(db, &mailbox).await?;
     if let Some(space) = space.as_ref() {
-        check_space_perms(db, space, &user_id).await?;
+        check_permissions(db, space, &user_id).await?;
     }
     let user_id = user_id.ok();
     establish_web_socket(req, move |ws_stream| async move {
