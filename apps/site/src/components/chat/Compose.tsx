@@ -7,9 +7,10 @@ import { useFocusPane } from '../../state/panes';
 
 interface Props {
   me: GetMe;
+  className?: string;
 }
 
-export const Compose = ({ me }: Props) => {
+export const Compose = ({ me, className }: Props) => {
   const channelId = useChannelId();
   const focus = useFocusPane();
   const [text, setText] = useState('');
@@ -32,7 +33,7 @@ export const Compose = ({ me }: Props) => {
   };
 
   return (
-    <div onClick={focus}>
+    <div onClick={focus} className={className}>
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}

@@ -2,7 +2,7 @@ import type { Channel } from 'boluo-api';
 import { makeId } from 'boluo-utils';
 import clsx from 'clsx';
 import type { FC } from 'react';
-import { useChatPaneDispatch } from '../../state/panes';
+import { useChatPaneDispatch } from '../../../state/panes';
 
 interface Props {
   channel: Channel;
@@ -16,13 +16,12 @@ export const ChatSidebarItem: FC<Props> = ({ channel, active }) => {
   };
   return (
     <div>
-      <a
-        className={clsx('block py-2 px-2 hover:bg-surface-200', active && 'bg-surface-200')}
-        href="#"
+      <button
+        className={clsx('block w-full text-left py-2 px-4 hover:bg-surface-200', active && 'bg-surface-200')}
         onClick={replace}
       >
         {channel.name}
-      </a>
+      </button>
     </div>
   );
 };

@@ -2,8 +2,8 @@ import type { Space } from 'boluo-api';
 import Link from 'next/link';
 import type { FC } from 'react';
 import { useMemo } from 'react';
-import { useChannelList } from '../../hooks/useChannelList';
-import type { ChatPane } from '../../types/ChatPane';
+import { useChannelList } from '../../../hooks/useChannelList';
+import type { ChatPane } from '../../../types/ChatPane';
 import { ChatSidebarItem } from './ChatSidebarItem';
 
 interface Props {
@@ -30,12 +30,9 @@ export const ChatSiderbar: FC<Props> = ({ space, panes }) => {
   );
   return (
     <>
-      <Link
-        href={`/chat/space/${space.id}`}
-        className="bg-surface-700 border-r text-surface-50 flex p-2 items-center overflow-ellipsis overflow-hidden"
-      >
+      <span className="border-r border-b-1/2 border-b-gray-600 flex py-2 px-4 items-center overflow-ellipsis overflow-hidden">
         {space.name}
-      </Link>
+      </span>
       <div className="border-r row-span-2 row-end-4">
         {channelList}
       </div>

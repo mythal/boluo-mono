@@ -15,8 +15,8 @@ export default async function RootLayout({
   const messages = await getMessages(locale);
 
   return (
-    <html className="h-full w-full" lang={locale}>
-      <body className="h-full w-full bg-bg text-text">
+    <html lang={locale}>
+      <body className="bg-bg text-text">
         <ClientProviders locale={locale} messages={messages} me={me.unwrapOr(null)}>
           {children}
           <div id="portal" />

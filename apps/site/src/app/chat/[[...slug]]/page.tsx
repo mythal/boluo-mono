@@ -1,6 +1,7 @@
 import { isUuid } from '../../../helper/id';
 import type { ChatRoute } from './ChatPage';
 import { ChatPage } from './ChatPage';
+import '../../../chat.css';
 
 interface Params {
   slug: string[];

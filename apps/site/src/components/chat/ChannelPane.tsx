@@ -30,7 +30,7 @@ const ChatPaneChannelView: FC<ViewProps> = ({ channelId, messages }) => {
           </div>
         ))}
       </div>
-      {me && <Compose me={me} />}
+      {me && <Compose me={me} className="m-2" />}
     </>
   );
 };
