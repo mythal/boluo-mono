@@ -4,6 +4,8 @@ use crate::error::CacheError;
 use crate::utils::{self, sign};
 use anyhow::Context;
 use hyper::header::HeaderValue;
+use hyper::header::AUTHORIZATION;
+use hyper::header::COOKIE;
 use hyper::HeaderMap;
 use regex::Regex;
 use thiserror::Error;
@@ -72,6 +74,27 @@ pub async fn start(user_id: &Uuid) -> Result<Uuid, CacheError> {
 pub struct Session {
     pub id: Uuid,
     pub user_id: Uuid,
+}
+
+pub fn is_authenticate_use_cookie(headers: &HeaderMap<HeaderValue>) -> bool {
+    !headers.contains_key(AUTHORIZATION)
+}
+
+pub async fn get_session_from_old_version_cookies(headers: &HeaderMap<HeaderValue>) -> Option<Session> {
+    use std::sync::OnceLock;
+    static COOKIE_PATTERN: OnceLock<Regex> = OnceLock::new();
+
+    if headers.contains_key(AUTHORIZATION) {
+        return None;
+    }
+    let value = headers.get(COOKIE)?.to_str().ok()?;
+    let cookie_pattern = COOKIE_PATTERN.get_or_init(|| {
+        let pattern = r"\bsession=([^;]+)".to_string();
+        Regex::new(&pattern).unwrap()
+    });
+    let captures = cookie_pattern.captures(value)?;
+    let token = captures.get(1)?.as_str();
+    get_session_from_token(token).await.ok()
 }
 
 pub fn add_session_cookie(session: &Uuid, host: Option<&HeaderValue>, response_header: &mut HeaderMap<HeaderValue>) {
@@ -180,9 +203,26 @@ fn parse_cookie(value: &hyper::header::HeaderValue) -> Result<Option<&str>, anyh
     }
 }
 
-pub async fn authenticate(req: &hyper::Request<hyper::Body>) -> Result<Session, AppError> {
-    use hyper::header::{AUTHORIZATION, COOKIE};
+async fn get_session_from_token(token: &str) -> Result<Session, AppError> {
+    let id = match token_verify(token) {
+        Err(err) => {
+            log::warn!("Failed to verify the token: {} error: {}", token, err);
+            return Err(AuthenticateFail::CheckSignFail.into());
+        }
+        Ok(id) => id,
+    };
 
+    let key = make_key(&id);
+    let bytes: Vec<u8> = cache::conn().await.get(&key).await?.ok_or_else(|| {
+        log::warn!("Session {} not found, token: {}", id, token);
+        AuthenticateFail::NoSessionFound
+    })?;
+
+    let user_id = Uuid::from_slice(&bytes).map_err(|_| AuthenticateFail::InvaildToken)?;
+    Ok(Session { id, user_id })
+}
+
+pub async fn authenticate(req: &hyper::Request<hyper::Body>) -> Result<Session, AppError> {
     let headers = req.headers();
     let authorization = headers.get(AUTHORIZATION).map(HeaderValue::to_str);
 
@@ -203,21 +243,5 @@ pub async fn authenticate(req: &hyper::Request<hyper::Body>) -> Result<Session, 
             }
         }
     };
-
-    let id = match token_verify(token) {
-        Err(err) => {
-            log::warn!("Failed to verify the token: {} error: {}", token, err);
-            return Err(AuthenticateFail::CheckSignFail.into());
-        }
-        Ok(id) => id,
-    };
-
-    let key = make_key(&id);
-    let bytes: Vec<u8> = cache::conn().await.get(&key).await?.ok_or_else(|| {
-        log::warn!("Session {} not found, token: {}", id, token);
-        AuthenticateFail::NoSessionFound
-    })?;
-
-    let user_id = Uuid::from_slice(&bytes).map_err(|_| AuthenticateFail::InvaildToken)?;
-    Ok(Session { id, user_id })
+    get_session_from_token(token).await
 }

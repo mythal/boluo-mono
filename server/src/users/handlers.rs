@@ -1,7 +1,10 @@
 use super::api::{Login, LoginReturn, Register, ResetPassword, ResetPasswordConfirm, ResetPasswordTokenCheck};
 use super::models::User;
 use crate::interface::{missing, ok_response, parse_body, parse_query, Response};
-use crate::session::{add_session_cookie, remove_session, remove_session_cookie, revoke_session, AuthenticateFail};
+use crate::session::{
+    add_session_cookie, get_session_from_old_version_cookies, is_authenticate_use_cookie, remove_session,
+    remove_session_cookie, revoke_session, AuthenticateFail,
+};
 use crate::{cache, database, mail};
 
 use crate::channels::Channel;
@@ -45,8 +48,15 @@ pub async fn query_user(req: Request<Body>) -> Result<User, AppError> {
 
 pub async fn get_me(req: Request<Body>) -> Result<Response, AppError> {
     use crate::session::authenticate;
-    use hyper::header::AUTHORIZATION;
-    match authenticate(&req).await {
+    let mut session = authenticate(&req).await;
+    if let Err(AppError::Unauthenticated(_)) = session {
+        let maybe_session = get_session_from_old_version_cookies(req.headers()).await;
+        if let Some(some_session) = maybe_session {
+            session = Ok(some_session);
+        }
+    }
+
+    match session {
         Ok(session) => {
             let mut conn = database::get().await?;
             let db = &mut *conn;
@@ -62,7 +72,7 @@ pub async fn get_me(req: Request<Body>) -> Result<Response, AppError> {
                     my_channels,
                     my_spaces,
                 }));
-                if req.headers().get(AUTHORIZATION).is_none() {
+                if is_authenticate_use_cookie(req.headers()) {
                     // refresh session cookie
                     let host = req.headers().get("host");
                     add_session_cookie(&session.id, host, response.headers_mut())
@@ -85,7 +95,9 @@ pub async fn get_me(req: Request<Body>) -> Result<Response, AppError> {
         Err(AppError::Unauthenticated(AuthenticateFail::NoData)) => Ok(ok_response::<Option<GetMe>>(None)),
         Err(AppError::Unauthenticated(_)) => {
             let mut response = ok_response::<Option<GetMe>>(None);
-            remove_session_cookie(response.headers_mut());
+            if is_authenticate_use_cookie(req.headers()) {
+                remove_session_cookie(response.headers_mut());
+            }
             Ok(response)
         }
         Err(e) => Err(e),
