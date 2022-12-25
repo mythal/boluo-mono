@@ -20,7 +20,7 @@ const handleMessageLoaded = (state: ChannelState, action: MessagesLoaded): Chann
   if (state.state === 'UNINITIALIZED') {
     return state;
   }
-  const newMessages = action.messages;
+  const newMessages = [...action.messages].reverse();
   if (newMessages.length === 0) {
     return state;
   }
@@ -28,10 +28,9 @@ const handleMessageLoaded = (state: ChannelState, action: MessagesLoaded): Chann
     return { ...state, messages: newMessages };
   }
   const firstMessage = state.messages[0]!;
-  if (firstMessage.pos <= action.messages[0]!.pos) {
+  if (firstMessage.pos <= newMessages[0]!.pos) {
     return state;
   }
-  newMessages.reverse();
   const messages = newMessages.concat(state.messages);
   return { ...state, messages };
 };
