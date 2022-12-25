@@ -46,6 +46,17 @@ pub async fn query_user(req: Request<Body>) -> Result<User, AppError> {
     User::get_by_id(&mut *db, &id).await.or_not_found()
 }
 
+pub async fn query_settings(req: Request<Body>) -> Result<serde_json::Value, AppError> {
+    use crate::session::authenticate;
+    let session = authenticate(&req).await?;
+
+    let mut conn = database::get().await?;
+
+    let db = &mut *conn;
+    let settings = UserExt::get_settings(db, session.user_id).await?;
+    Ok(settings)
+}
+
 pub async fn get_me(req: Request<Body>) -> Result<Response, AppError> {
     use crate::session::authenticate;
     let mut session = authenticate(&req).await;
@@ -167,6 +178,16 @@ pub async fn update_settings(req: Request<Body>) -> Result<serde_json::Value, Ap
     let settings: serde_json::Value = parse_body(req).await?;
     let mut db = database::get().await?;
     UserExt::update_settings(&mut *db, session.user_id, settings)
+        .await
+        .map_err(Into::into)
+}
+
+pub async fn partial_update_settings(req: Request<Body>) -> Result<serde_json::Value, AppError> {
+    use crate::csrf::authenticate;
+    let session = authenticate(&req).await?;
+    let settings: serde_json::Value = parse_body(req).await?;
+    let mut db = database::get().await?;
+    UserExt::partial_update_settings(&mut *db, session.user_id, settings)
         .await
         .map_err(Into::into)
 }
@@ -308,10 +329,12 @@ pub async fn router(req: Request<Body>, path: &str) -> Result<Response, AppError
         ("/logout", _) => logout(req).await,
         ("/query", Method::GET) => query_user(req).await.map(ok_response),
         ("/get_me", Method::GET) => get_me(req).await,
+        ("/settings", Method::GET) => query_settings(req).await.map(ok_response),
         ("/edit", Method::POST) => edit(req).await.map(ok_response),
         ("/edit_avatar", Method::POST) => edit_avatar(req).await.map(ok_response),
         ("/update_settings", Method::POST) => update_settings(req).await.map(ok_response),
         ("/update_settings", Method::PUT) => update_settings(req).await.map(ok_response),
+        ("/update_settings", Method::PATCH) => partial_update_settings(req).await.map(ok_response),
         ("/check_username", Method::GET) => check_username_exists(req).await.map(ok_response),
         ("/check_email", Method::GET) => check_email_exists(req).await.map(ok_response),
         ("/reset_password", Method::POST) => reset_password(req).await.map(ok_response),

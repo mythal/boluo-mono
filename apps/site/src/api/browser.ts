@@ -1,4 +1,4 @@
-import type { ApiError, Get, Post, Put } from 'boluo-api';
+import type { ApiError, Get, Patch, Post } from 'boluo-api';
 import { makeUri } from 'boluo-api';
 import type { Result } from 'boluo-utils';
 import { BACKEND_URL } from '../const';
@@ -34,17 +34,17 @@ export async function post<P extends keyof Post>(
   return appFetch(url, params);
 }
 
-export async function put<P extends keyof Put>(
+export async function patch<P extends keyof Patch>(
   path: P,
-  payload: Put[P]['payload'],
-): Promise<Result<Put[P]['result'], ApiError>> {
+  payload: Patch[P]['payload'],
+): Promise<Result<Patch[P]['result'], ApiError>> {
   const baseUrl = BACKEND_URL;
   const url = baseUrl + path;
   const params: RequestInit = {
     credentials: 'include',
     headers,
     cache: 'no-cache',
-    method: 'PUT',
+    method: 'PATCH',
     body: JSON.stringify(payload),
   };
   return appFetch(url, params);

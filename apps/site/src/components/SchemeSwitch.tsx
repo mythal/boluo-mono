@@ -2,27 +2,39 @@
 import type { FC } from 'react';
 import { useMemo } from 'react';
 import { useIntl } from 'react-intl';
-import { Select, useScheme } from 'ui';
+import type { MutationFetcher } from 'swr/mutation';
+import useSWRMutation from 'swr/mutation';
+import type { Scheme } from 'ui';
+import { Select, setScheme, useScheme } from 'ui';
+import { patch } from '../api/browser';
+import { useMe } from '../hooks/useMe';
+import type { Settings } from '../settings';
 
 interface Props {
   id?: string;
 }
 
+const updateScheme: MutationFetcher<Settings, Scheme, string> = async (url: string, { arg: scheme }) => {
+  const settings: Settings = { scheme };
+  const settingsResult = await patch('/users/update_settings', settings);
+  return settingsResult.unwrapOr({});
+};
+
 export const SchemeSwitch: FC<Props> = ({ id }) => {
+  const me = useMe();
   const scheme = useScheme();
   const intl = useIntl();
+  const { trigger } = useSWRMutation('/users/settings', updateScheme, {
+    populateCache: (settings: Settings) => settings,
+    revalidate: false,
+  });
 
   const handleChange = (value: string) => {
-    const html = window.document.documentElement;
-    if (value === 'light') {
-      html.classList.add('light');
-      html.classList.remove('dark');
-    } else if (value === 'dark') {
-      html.classList.remove('light');
-      html.classList.add('dark');
+    const scheme = setScheme(value);
+    if (me) {
+      void trigger(scheme);
     } else {
-      html.classList.remove('light');
-      html.classList.remove('dark');
+      document.cookie = `SCHEME=${scheme}; path=/`;
     }
   };
 

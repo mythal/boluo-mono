@@ -178,6 +178,17 @@ impl UserExt {
             .await?;
         row.try_get(0).map_err(Into::into)
     }
+
+    pub async fn partial_update_settings<T: Querist>(
+        db: &mut T,
+        user_id: Uuid,
+        settings: serde_json::Value,
+    ) -> Result<serde_json::Value, DbError> {
+        let row = db
+            .query_exactly_one(include_str!("sql/partial_set_settings.sql"), &[&user_id, &settings])
+            .await?;
+        row.try_get(0).map_err(Into::into)
+    }
 }
 
 #[tokio::test]

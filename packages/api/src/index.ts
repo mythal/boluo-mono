@@ -32,7 +32,7 @@ export interface Post {
   '/messages/send': { payload: NewMessage; result: Message };
 }
 
-export interface Put {
+export interface Patch {
   // users
   '/users/update_settings': { payload: object; result: object };
 }

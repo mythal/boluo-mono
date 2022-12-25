@@ -4,6 +4,8 @@ import { createIntl } from '@formatjs/intl';
 import type { GetMe } from 'boluo-api';
 import { cookies, headers } from 'next/headers';
 import { cache } from 'react';
+import type { Scheme } from 'ui';
+import { toScheme } from 'ui/scheme';
 import { get } from '../api/server';
 import type { Locale } from '../locale';
 import { defaultLocale } from '../locale';
@@ -50,6 +52,25 @@ export const getLocale = cache(async (): Promise<Locale> => {
     }
   }
   return getLocaleFromHeaders();
+});
+
+export const getSchemeFromHeaders = cache((): Scheme => {
+  const cookieScheme = cookies().get('SCHEME')?.value;
+  if (!cookieScheme) {
+    return 'system';
+  }
+  return toScheme(cookieScheme);
+});
+
+export const getScheme = cache(async (): Promise<Scheme> => {
+  const me = await getMe();
+  if (me) {
+    const settings = getSettings(me.settings);
+    if (settings.scheme) {
+      return settings.scheme;
+    }
+  }
+  return getSchemeFromHeaders();
 });
 
 export const getMessages = cache(async (locale: Locale) => await loadMessages(locale));
