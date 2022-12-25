@@ -2,6 +2,7 @@ import { Root as Label } from '@radix-ui/react-label';
 import Icon from './Icon';
 
 export { Button } from './Button';
+export { useScheme } from './hooks/useScheme';
 export { Loading } from './Loading';
 export { Oops } from './Oops';
 export { RefreshButton } from './RefreshButton';

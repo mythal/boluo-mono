@@ -4,6 +4,7 @@ import { useId } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useFocusPane } from '../../state/panes';
 import { LocaleSwitch } from '../LocaleSwitch';
+import { SchemeSwitch } from '../SchemeSwitch';
 import { ClosePaneButton } from './ClosePaneButton';
 import { PaneHeaderBox } from './PaneHeaderBox';
 
@@ -19,6 +20,18 @@ const LanguageField = () => {
   );
 };
 
+const SchemeField = () => {
+  const id = useId();
+  return (
+    <div>
+      <label htmlFor={id} className="block py-1">
+        <FormattedMessage defaultMessage="Scheme" />
+      </label>
+      <SchemeSwitch id={id} />
+    </div>
+  );
+};
+
 export const PaneSettings: FC = () => {
   const focus = useFocusPane();
   return (
@@ -27,8 +40,9 @@ export const PaneSettings: FC = () => {
         <Settings />
         <FormattedMessage defaultMessage="Settings" />
       </PaneHeaderBox>
-      <div className="row-span-2 p-4 flex-col gap-2" onClick={focus}>
+      <div className="row-span-2 flex p-4 flex-col gap-4" onClick={focus}>
         <LanguageField />
+        <SchemeField />
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import { Loading as LoadingUi } from 'ui';
+import { Loading as LoadingUi } from 'ui/Loading';
 import { ChatSkeleton } from './ChatSkeleton';
 
 export default function Loading() {

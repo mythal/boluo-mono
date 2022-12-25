@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import { Spinner } from './Spinner';
 
 export type LoadingType = 'inline' | 'block';
