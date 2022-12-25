@@ -8,6 +8,9 @@
   "39AHJm": {
     "message": "新規登録"
   },
+  "3cc4Ct": {
+    "message": "Light"
+  },
   "5HUwAy": {
     "message": "文字、数字、アンダースコアのみ使用可能です。"
   },
@@ -22,6 +25,9 @@
   },
   "AyGauy": {
     "message": "ログイン"
+  },
+  "C357Ss": {
+    "message": "Scheme"
   },
   "CoEsov": {
     "message": "ユーザー名またはメール"
@@ -80,8 +86,14 @@
   "rELDbB": {
     "message": "再読み込み"
   },
+  "rYtHKT": {
+    "message": "Follow System"
+  },
   "s/IAy6": {
     "message": "デフォルトのサイコロ"
+  },
+  "tOdNiY": {
+    "message": "Dark"
   },
   "wb3MSp": {
     "message": "このユーザー名は既に使われています。"
