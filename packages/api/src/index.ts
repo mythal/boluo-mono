@@ -32,6 +32,11 @@ export interface Post {
   '/messages/send': { payload: NewMessage; result: Message };
 }
 
+export interface Put {
+  // users
+  '/users/update_settings': { payload: object; result: object };
+}
+
 export type { AppResponse };
 export { isAppResponse, makeUri };
 export * from './error-types';

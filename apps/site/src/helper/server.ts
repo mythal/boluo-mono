@@ -1,13 +1,20 @@
 import 'server-only';
 import type { IntlShape } from '@formatjs/intl';
 import { createIntl } from '@formatjs/intl';
+import type { GetMe } from 'boluo-api';
 import { cookies, headers } from 'next/headers';
 import { cache } from 'react';
+import { get } from '../api/server';
 import type { Locale } from '../locale';
 import { defaultLocale } from '../locale';
 import { localeList } from '../locale';
 import { loadMessages } from '../locale';
 import { toLocale } from '../locale';
+import { getSettings } from '../settings';
+
+export const getMe = cache(async (): Promise<GetMe | null> => {
+  return (await get('/users/get_me', null)).unwrapOr(null);
+});
 
 const getLocaleFromAcceptLanguage = (): Locale => {
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language
@@ -34,10 +41,21 @@ export const getLocaleFromHeaders = cache((): Locale => {
   return toLocale(cookieLocale);
 });
 
+export const getLocale = cache(async (): Promise<Locale> => {
+  const me = await getMe();
+  if (me) {
+    const settings = getSettings(me.settings);
+    if (settings.locale) {
+      return settings.locale;
+    }
+  }
+  return getLocaleFromHeaders();
+});
+
 export const getMessages = cache(async (locale: Locale) => await loadMessages(locale));
 
 export const getIntl = cache(async (): Promise<IntlShape<string>> => {
-  const locale = getLocaleFromHeaders();
+  const locale = await getLocale();
   const messages = await getMessages(locale);
   return createIntl({
     locale,

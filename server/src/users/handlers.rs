@@ -311,6 +311,7 @@ pub async fn router(req: Request<Body>, path: &str) -> Result<Response, AppError
         ("/edit", Method::POST) => edit(req).await.map(ok_response),
         ("/edit_avatar", Method::POST) => edit_avatar(req).await.map(ok_response),
         ("/update_settings", Method::POST) => update_settings(req).await.map(ok_response),
+        ("/update_settings", Method::PUT) => update_settings(req).await.map(ok_response),
         ("/check_username", Method::GET) => check_username_exists(req).await.map(ok_response),
         ("/check_email", Method::GET) => check_email_exists(req).await.map(ok_response),
         ("/reset_password", Method::POST) => reset_password(req).await.map(ok_response),
