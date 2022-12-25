@@ -6,10 +6,10 @@ import { useTransition } from 'react';
 import { useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { Button } from 'ui';
-import type { ChildrenProps } from '../../helper/props';
-import { useChannel } from '../../hooks/useChannel';
-import { useChannelId } from '../../hooks/useChannelId';
-import { useChatPaneDispatch, useClosePane, useFocusPane, useIsFocused, usePaneId } from '../../state/panes';
+import type { ChildrenProps } from '../../../helper/props';
+import { useChannel } from '../../../hooks/useChannel';
+import { useChannelId } from '../../../hooks/useChannelId';
+import { useChatPaneDispatch, useClosePane, useFocusPane, useIsFocused, usePaneId } from '../../../state/panes';
 
 const SplitPaneButton: FC = () => {
   const channelId = useChannelId();

@@ -2,7 +2,7 @@ import { Result } from 'boluo-utils';
 import { ApiError } from './errors';
 import { AppResponse, isAppResponse, makeUri } from './request';
 import type { Channel } from './types/channels';
-import { Message, NewMessage } from './types/messages';
+import { GetMessagesByChannel, Message, NewMessage } from './types/messages';
 import type { CreateSpace, Space, SpaceWithMember, SpaceWithRelated } from './types/spaces';
 import type { CheckEmail, CheckUsername, GetMe, LoginData, LoginReturn, RegisterData, User } from './types/users';
 
@@ -18,6 +18,8 @@ export interface Get {
   // channels
   '/channels/query': { query: { id: string }; result: Channel };
   '/channels/by_space': { query: { id: string }; result: Channel[] };
+  // messages
+  '/messages/by_channel': { query: GetMessagesByChannel; result: Message[] };
 }
 
 export interface Post {

@@ -6,4 +6,15 @@ export interface ReceiveMessage {
   message: Message;
 }
 
-export type Action = ReceiveMessage;
+export interface Initialized {
+  type: 'INITIALIZED';
+}
+
+export interface MessagesLoaded {
+  type: 'MESSAGES_LOADED';
+  messages: Message[];
+  before: number | null;
+  channelId: string;
+}
+
+export type Action = ReceiveMessage | Initialized | MessagesLoaded;

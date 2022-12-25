@@ -3,7 +3,7 @@ import { memo, Suspense } from 'react';
 import { ChannelIdContext } from '../../hooks/useChannelId';
 import { PaneIdProvider } from '../../state/panes';
 import type { ChatPane } from '../../types/ChatPane';
-import { ChatPaneChannel } from './ChannelPane';
+import { ChatPaneChannel } from './channel/ChannelPane';
 import { PaneEmpty } from './PaneEmpty';
 import { PaneError } from './PaneError';
 import { PaneLoading } from './PaneLoading';
