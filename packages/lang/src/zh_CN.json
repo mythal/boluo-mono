@@ -8,6 +8,9 @@
   "39AHJm": {
     "message": "注册"
   },
+  "3cc4Ct": {
+    "message": "Light"
+  },
   "5HUwAy": {
     "message": "只允许字母，数字和下划线。"
   },
@@ -22,6 +25,9 @@
   },
   "AyGauy": {
     "message": "登录"
+  },
+  "C357Ss": {
+    "message": "Scheme"
   },
   "CoEsov": {
     "message": "用户名或邮箱"
@@ -80,8 +86,14 @@
   "rELDbB": {
     "message": "刷新"
   },
+  "rYtHKT": {
+    "message": "Follow System"
+  },
   "s/IAy6": {
     "message": "默认使用的骰子"
+  },
+  "tOdNiY": {
+    "message": "Dark"
   },
   "wb3MSp": {
     "message": "此用户名已被占用。"
