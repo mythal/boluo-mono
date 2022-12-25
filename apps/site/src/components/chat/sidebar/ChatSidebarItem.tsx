@@ -12,7 +12,7 @@ interface Props {
 export const ChatSidebarItem: FC<Props> = ({ channel, active }) => {
   const dispatch = useChatPaneDispatch();
   const replace = () => {
-    dispatch({ type: 'REPLACE_CHAT', item: { type: 'channel', id: makeId(), channelId: channel.id } });
+    dispatch({ type: 'REPLACE_PANE', item: { type: 'CHANNEL', id: makeId(), channelId: channel.id } });
   };
   return (
     <div>

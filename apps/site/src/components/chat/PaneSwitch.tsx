@@ -2,24 +2,27 @@ import type { FC } from 'react';
 import { memo, Suspense } from 'react';
 import { ChannelIdContext } from '../../hooks/useChannelId';
 import { PaneIdProvider } from '../../state/panes';
-import type { ChatPane } from '../../types/ChatPane';
+import type { Pane } from '../../types/ChatPane';
 import { ChatPaneChannel } from './channel/ChannelPane';
 import { PaneEmpty } from './PaneEmpty';
 import { PaneError } from './PaneError';
 import { PaneLoading } from './PaneLoading';
+import { PaneSettings } from './PaneSettings';
 
 interface Props {
-  pane: ChatPane;
+  pane: Pane;
 }
 
 const Switch: FC<Props> = ({ pane }) => {
   switch (pane.type) {
-    case 'channel':
+    case 'CHANNEL':
       return (
         <ChannelIdContext.Provider value={pane.channelId}>
           <ChatPaneChannel key={pane.channelId} />
         </ChannelIdContext.Provider>
       );
+    case 'SETTINGS':
+      return <PaneSettings />;
     default:
       return <PaneEmpty />;
   }

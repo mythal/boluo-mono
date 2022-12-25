@@ -4,21 +4,25 @@ import { useCallback } from 'react';
 import { createContext, useContext, useReducer } from 'react';
 import type { ChildrenProps } from '../helper/props';
 import { useChannelList } from '../hooks/useChannelList';
-import type { ChatPane } from '../types/ChatPane';
+import type { Pane } from '../types/ChatPane';
 
 export interface AddChat {
   type: 'ADD_CHAT';
   selfId: string;
-  item: ChatPane;
+  item: Pane;
 }
 
-export interface ReplaceChat {
-  type: 'REPLACE_CHAT';
-  item: ChatPane;
+export interface ToggleSettings {
+  type: 'TOGGLE_SETTINGS';
 }
 
-export interface RemoveChat {
-  type: 'REMOVE_CHAT';
+export interface ReplacePane {
+  type: 'REPLACE_PANE';
+  item: Pane;
+}
+
+export interface RemovePane {
+  type: 'REMOVE_PANE';
   id: string;
 }
 
@@ -27,7 +31,7 @@ export interface Focus {
   id: string;
 }
 
-type Action = AddChat | ReplaceChat | RemoveChat | Focus;
+type Action = AddChat | ReplacePane | RemovePane | Focus | ToggleSettings;
 
 const PaneDispatchContext = createContext<Dispatch<Action>>(() => {
   throw new Error('Unexpected');
@@ -63,7 +67,7 @@ export const useFocusPane = () => {
 export const useClosePane = () => {
   const id = usePaneId();
   const dispatch = useChatPaneDispatch();
-  return useCallback(() => dispatch({ type: 'REMOVE_CHAT', id }), [dispatch, id]);
+  return useCallback(() => dispatch({ type: 'REMOVE_PANE', id }), [dispatch, id]);
 };
 
 interface PaneProviderProps extends ChildrenProps {
@@ -83,13 +87,13 @@ export const useChatPaneDispatch = (): Dispatch<Action> => useContext(PaneDispat
 
 interface Return {
   dispatch: Dispatch<Action>;
-  panes: ChatPane[];
+  panes: Pane[];
   focused: string | null;
 }
 
 interface PaneState {
   focused: string | null;
-  panes: ChatPane[];
+  panes: Pane[];
 }
 
 const initialPaneState: PaneState = {
@@ -105,13 +109,13 @@ const handleAddChat = (state: PaneState, { selfId, item }: AddChat): PaneState =
   } else {
     panes.push(item);
   }
-  return { panes, focused: item.id };
+  return { ...state, panes, focused: item.id };
 };
 
-const handleReplaceChat = (state: PaneState, action: ReplaceChat): PaneState => {
+const handleReplacePane = (state: PaneState, action: ReplacePane): PaneState => {
   const { focused } = state;
   if (!focused || state.panes.length <= 1) {
-    return { panes: [action.item], focused: action.item.id };
+    return { ...state, panes: [action.item], focused: action.item.id };
   }
   const panes = [...state.panes];
   const focusedPaneIndex = panes.findIndex(pane => pane.id === focused);
@@ -120,10 +124,10 @@ const handleReplaceChat = (state: PaneState, action: ReplaceChat): PaneState => 
   } else {
     panes.push(action.item);
   }
-  return { panes, focused: action.item.id };
+  return { ...state, panes, focused: action.item.id };
 };
 
-const handleRemoveChat = (state: PaneState, action: RemoveChat): PaneState => {
+const handleRemoveChat = (state: PaneState, action: RemovePane): PaneState => {
   let { panes, focused } = state;
   panes = panes.filter(item => item.id !== action.id);
   if (focused === action.id && panes.length > 0) {
@@ -134,7 +138,20 @@ const handleRemoveChat = (state: PaneState, action: RemoveChat): PaneState => {
       focused = panes[0]!.id;
     }
   }
-  return { panes, focused };
+  return { ...state, panes, focused };
+};
+
+const handleToggleSettings = (state: PaneState, _: ToggleSettings): PaneState => {
+  const settingsPaneIndex = state.panes.findIndex((pane) => pane.type === 'SETTINGS');
+  if (settingsPaneIndex === -1) {
+    const settingsPane: Pane = { type: 'SETTINGS', id: 'settings' };
+    const panes: typeof state.panes = [settingsPane as Pane].concat(state.panes);
+    return { ...state, panes };
+  } else {
+    const panes = [...state.panes];
+    panes.splice(settingsPaneIndex, 1);
+    return { ...state, panes };
+  }
 };
 
 export const usePanes = (spaceId: string): Return => {
@@ -149,10 +166,12 @@ export const usePanes = (spaceId: string): Return => {
         return { panes, focused: action.id };
       case 'ADD_CHAT':
         return handleAddChat(state, action);
-      case 'REMOVE_CHAT':
+      case 'REMOVE_PANE':
         return handleRemoveChat(state, action);
-      case 'REPLACE_CHAT':
-        return handleReplaceChat(state, action);
+      case 'REPLACE_PANE':
+        return handleReplacePane(state, action);
+      case 'TOGGLE_SETTINGS':
+        return handleToggleSettings(state, action);
       default:
         return state;
     }
@@ -162,10 +181,10 @@ export const usePanes = (spaceId: string): Return => {
     initialPaneState,
     (): PaneState => {
       const channel = channels.find(channel => channel.isPublic);
-      const panes: ChatPane[] = channel ? [{ type: 'channel', id: makeId(), channelId: channel.id }] : [];
+      const panes: Pane[] = channel ? [{ type: 'CHANNEL', id: makeId(), channelId: channel.id }] : [];
       return { focused: null, panes };
     },
   );
   const { panes, focused } = state;
-  return { panes, dispatch, focused };
+  return { panes: panes, dispatch, focused };
 };

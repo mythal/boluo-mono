@@ -1,7 +1,7 @@
 import * as BaseSelect from '@radix-ui/react-select';
 import { Check, ChevronUp } from 'boluo-icons';
 import clsx from 'clsx';
-import { FC } from 'react';
+import type { FC } from 'react';
 import Icon from './Icon';
 
 // see https://www.radix-ui.com/docs/primitives/components/select
@@ -14,13 +14,15 @@ export interface SelectItem {
 interface Props {
   items: SelectItem[];
   value: string;
+  id?: string;
   onChange: (newValue: string) => void;
 }
 
-export const Select: FC<Props> = ({ items, onChange, value }) => {
+export const Select: FC<Props> = ({ items, onChange, value, id }) => {
   return (
     <BaseSelect.Root value={value} onValueChange={onChange}>
       <BaseSelect.Trigger
+        id={id}
         className={clsx(
           'p-2 inline-flex min-w-[10em] h-10 items-center justify-between',
           'rounded bg-lowest border-1/2 hover-enabled:bg-surface-100 border-surface-300 hover:border-surface-800 state-open:border-surface-800',

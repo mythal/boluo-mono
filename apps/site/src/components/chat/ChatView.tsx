@@ -1,14 +1,14 @@
 import type { Space } from 'boluo-api';
 import type { FC } from 'react';
 import { useMemo } from 'react';
-import type { ChatPane } from '../../types/ChatPane';
+import type { Pane } from '../../types/ChatPane';
 import { PaneEmpty } from './PaneEmpty';
 import { ChatPaneSwitch } from './PaneSwitch';
 import { ChatSiderbar } from './sidebar/ChatSidebar';
 
 interface Props {
   space: Space;
-  panes: ChatPane[];
+  panes: Pane[];
 }
 
 export const ChatView: FC<Props> = ({ space, panes }) => {

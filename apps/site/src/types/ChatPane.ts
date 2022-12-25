@@ -1,12 +1,17 @@
 export interface ChannelPane {
-  type: 'channel';
+  type: 'CHANNEL';
   id: string;
   channelId: string;
 }
 
+export interface SettingsPane {
+  type: 'SETTINGS';
+  id: 'settings';
+}
+
 export interface EmptyPane {
-  type: 'empty';
+  type: 'EMPTY';
   id: string;
 }
 
-export type ChatPane = ChannelPane | EmptyPane;
+export type Pane = ChannelPane | EmptyPane | SettingsPane;
