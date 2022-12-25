@@ -49,7 +49,7 @@ export const useIsFocused = (): boolean => {
 export const usePaneId = (): string => {
   const id = useContext(PaneIdContext);
   if (id === '') {
-    console.warn('Attempt use pane id outside provider.');
+    throw new Error('Unexpected. Attempt use pane id outside provider.');
   }
   return id;
 };

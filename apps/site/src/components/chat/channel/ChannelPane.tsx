@@ -1,14 +1,9 @@
-import type { Message } from 'boluo-api';
 import type { FC } from 'react';
-import { useEffect } from 'react';
 import { useMemo } from 'react';
-import { useContextSelector } from 'use-context-selector';
-import { get } from '../../../api/browser';
 import { useChannelId } from '../../../hooks/useChannelId';
 import { useMe } from '../../../hooks/useMe';
-import { ChatContext, useChatDispatch } from '../../../state/chat';
-import { useFocusPane } from '../../../state/panes';
-import { Compose } from '../Compose';
+import { Compose } from '../compose/Compose';
+import { GuestCompose } from '../compose/GuestCompose';
 import { ChannelHeader } from './ChannelHeader';
 import { MessageList } from './MessageList';
 
@@ -25,7 +20,7 @@ const ChatPaneChannelView: FC<ViewProps> = ({ channelId }) => {
     <>
       <ChannelHeader />
       <MessageList channelId={channelId} />
-      {me && <Compose me={me} className="m-2" />}
+      {me ? <Compose me={me} className="m-2" /> : <GuestCompose />}
     </>
   );
 };

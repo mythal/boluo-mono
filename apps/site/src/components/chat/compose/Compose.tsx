@@ -1,9 +1,9 @@
 'use client';
 import type { GetMe } from 'boluo-api';
 import { useState } from 'react';
-import { post } from '../../api/browser';
-import { useChannelId } from '../../hooks/useChannelId';
-import { useFocusPane } from '../../state/panes';
+import { post } from '../../../api/browser';
+import { useChannelId } from '../../../hooks/useChannelId';
+import { useFocusPane } from '../../../state/panes';
 
 interface Props {
   me: GetMe;

@@ -30,7 +30,7 @@ const Chat: FC<Props> = ({ spaceId }) => {
     <Suspense fallback={<Loading />}>
       <PaneProvider dispatch={dispatch} focused={focused}>
         <ChatConnectionProvider mailboxId={spaceId}>
-          <ChatStateProvider>
+          <ChatStateProvider spaceId={spaceId}>
             <ChatView space={space} panes={panes} />
           </ChatStateProvider>
         </ChatConnectionProvider>

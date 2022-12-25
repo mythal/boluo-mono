@@ -1,3 +1,10 @@
+import { Loading as LoadingUi } from 'ui';
+import { ChatSkeleton } from './ChatSkeleton';
+
 export default function Loading() {
-  return <span>Loading...</span>;
+  return (
+    <ChatSkeleton>
+      <LoadingUi />
+    </ChatSkeleton>
+  );
 }

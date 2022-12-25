@@ -1,14 +1,10 @@
 'use client';
 
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 import React, { useEffect, useState } from 'react';
+import { Loading as LoadingUi } from 'ui';
 import { ChatNotFound } from '../../../components/chat/ChatNotFound';
-
-const ChatLoading: FC<{ reason?: string }> = ({ reason = 'Loading...' }) => {
-  return <div className="w-full">{reason}</div>;
-};
-
-type Reason = string;
+import { ChatSkeleton } from './ChatSkeleton';
 
 const Chat = React.lazy(() => import('../../../components/chat/Chat'));
 
@@ -28,13 +24,13 @@ interface NotFoundRoute {
 export type ChatRoute = RootRoute | SpaceRoute | NotFoundRoute;
 
 export const ChatPage: FC<{ route: ChatRoute }> = ({ route }) => {
-  const [loading, setLoading] = useState<Reason | false>('Page Loading...');
+  const [loading, setLoading] = useState<ReactNode | false>(<LoadingUi />);
 
   // To prevent SSR
   useEffect(() => setLoading(false), []);
 
   if (loading !== false) {
-    return <ChatLoading reason={loading} />;
+    return <ChatSkeleton>{loading}</ChatSkeleton>;
   }
 
   if (route.type === 'NOT_FOUND') {
