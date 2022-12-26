@@ -29,6 +29,7 @@ export const ChatSiderbar: FC<Props> = ({ space, panes }) => {
     [channelIdFromPanes, channels],
   );
   const isSettingsOpen = useMemo(() => panes.findIndex(pane => pane.type === 'SETTINGS') !== -1, [panes]);
+  const isHelpOpen = useMemo(() => panes.findIndex(pane => pane.type === 'HELP') !== -1, [panes]);
   return (
     <>
       <span className="border-r border-b-1/2 border-b-gray-600 flex py-2 px-4 items-center overflow-ellipsis overflow-hidden">
@@ -38,7 +39,11 @@ export const ChatSiderbar: FC<Props> = ({ space, panes }) => {
         <div>
           {channelList}
         </div>
-        <ChatSidebarFooter className="p-2" isSettingsOpen={isSettingsOpen} />
+        <ChatSidebarFooter
+          className="p-2 flex justify-between"
+          isSettingsOpen={isSettingsOpen}
+          isHelpOpen={isHelpOpen}
+        />
       </div>
     </>
   );

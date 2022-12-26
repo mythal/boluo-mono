@@ -13,8 +13,9 @@ export interface AddChat {
   item: Pane;
 }
 
-export interface ToggleSettings {
-  type: 'TOGGLE_SETTINGS';
+export interface TogglePane {
+  type: 'TOGGLE';
+  pane: Pane;
 }
 
 export interface ReplacePane {
@@ -32,7 +33,7 @@ export interface Focus {
   id: string;
 }
 
-type Action = AddChat | ReplacePane | RemovePane | Focus | ToggleSettings;
+type Action = AddChat | ReplacePane | RemovePane | Focus | TogglePane;
 
 const PaneDispatchContext = createContext<Dispatch<Action>>(() => {
   throw new Error('Unexpected');
@@ -137,14 +138,15 @@ const handleRemovePane = (state: PaneState, action: RemovePane): PaneState => {
   return { ...state, panes, focused };
 };
 
-const handleToggleSettings = (state: PaneState, _: ToggleSettings): PaneState => {
-  const settingsPaneIndex = state.panes.findIndex((pane) => pane.type === 'SETTINGS');
+const handleTogglePane = (state: PaneState, action: TogglePane): PaneState => {
+  const settingsPaneIndex = state.panes.findIndex((pane) =>
+    pane.type === action.pane.type && pane.id === action.pane.id
+  );
   if (settingsPaneIndex === -1) {
-    const settingsPane: Pane = { type: 'SETTINGS', id: 'settings' };
-    const panes: typeof state.panes = [settingsPane as Pane].concat(state.panes);
-    return { ...state, panes, focused: 'settings' };
+    const panes: typeof state.panes = [action.pane].concat(state.panes);
+    return { ...state, panes, focused: action.pane.id };
   } else {
-    return handleRemovePane(state, { type: 'REMOVE_PANE', id: 'settings' });
+    return handleRemovePane(state, { type: 'REMOVE_PANE', id: action.pane.id });
   }
 };
 
@@ -186,8 +188,8 @@ export const usePanes = (spaceId: string): Return => {
         return handleRemovePane(state, action);
       case 'REPLACE_PANE':
         return handleReplacePane(state, action);
-      case 'TOGGLE_SETTINGS':
-        return handleToggleSettings(state, action);
+      case 'TOGGLE':
+        return handleTogglePane(state, action);
       default:
         return state;
     }

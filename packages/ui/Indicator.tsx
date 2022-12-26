@@ -9,10 +9,10 @@ interface Props {
 export const Indicator: FC<Props> = ({ on, className }) => (
   <span
     className={clsx(
-      'w-[6px] h-[6px] border-[2px] rounded-full border-surface-100 box-content',
+      'w-[6px] h-[6px] border-[2px] rounded-full border-surface-400 box-content',
       on
-        ? 'bg-brand-300'
-        : 'bg-lowest',
+        ? 'bg-brand-400'
+        : 'bg-surface-200',
       className,
     )}
     aria-hidden

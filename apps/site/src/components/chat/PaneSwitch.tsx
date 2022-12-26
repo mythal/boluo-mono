@@ -6,6 +6,7 @@ import type { Pane } from '../../types/ChatPane';
 import { ChatPaneChannel } from './channel/ChannelPane';
 import { PaneEmpty } from './PaneEmpty';
 import { PaneError } from './PaneError';
+import { PaneHelp } from './PaneHelp';
 import { PaneLoading } from './PaneLoading';
 import { PaneSettings } from './settings/PaneSettings';
 
@@ -23,6 +24,8 @@ const Switch: FC<Props> = ({ pane }) => {
       );
     case 'SETTINGS':
       return <PaneSettings />;
+    case 'HELP':
+      return <PaneHelp />;
     default:
       return <PaneEmpty />;
   }
