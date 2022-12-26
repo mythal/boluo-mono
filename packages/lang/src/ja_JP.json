@@ -62,6 +62,9 @@
   "SBkvpf": {
     "message": "ニックネーム"
   },
+  "SENRqu": {
+    "message": "Help"
+  },
   "Sf+ebw": {
     "message": "ペインを閉じる"
   },
@@ -76,6 +79,9 @@
   },
   "YELoe8": {
     "message": "Tip: Use {key} to send messages."
+  },
+  "YtexzU": {
+    "message": "Close {paneName}"
   },
   "dMEGZV": {
     "message": "分割ペイン"
@@ -106,6 +112,9 @@
   },
   "wb3MSp": {
     "message": "このユーザー名は既に使われています。"
+  },
+  "x0pAb7": {
+    "message": "Open {paneName}"
   },
   "x32Fvf": {
     "message": "Expand dice in the messages"
