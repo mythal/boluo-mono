@@ -38,6 +38,9 @@
   "HpyhN3": {
     "message": "パイン"
   },
+  "IvBid4": {
+    "message": "Use the {enter} key to send messages"
+  },
   "JCIgkj": {
     "message": "ユーザー名"
   },
@@ -49,6 +52,9 @@
   },
   "Q8Qw5B": {
     "message": "説明"
+  },
+  "RoMEHB": {
+    "message": "Tip: Use {key} to make a line break."
   },
   "RraqCg": {
     "message": "ユーザー名とパスワードが一致しません"
@@ -67,6 +73,9 @@
   },
   "VzzYJk": {
     "message": "作成する"
+  },
+  "YELoe8": {
+    "message": "Tip: Use {key} to send messages."
   },
   "dMEGZV": {
     "message": "分割ペイン"
@@ -97,6 +106,9 @@
   },
   "wb3MSp": {
     "message": "このユーザー名は既に使われています。"
+  },
+  "x32Fvf": {
+    "message": "Expand dice in the messages"
   },
   "y1Z3or": {
     "message": "Language"
