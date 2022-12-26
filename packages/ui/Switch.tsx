@@ -17,17 +17,17 @@ export const Switch: FC<Props> = ({ checked, onChange, id, disabled = false }) =
     onCheckedChange={onChange}
     disabled={disabled}
     className={clsx(
-      'w-12 h-8 rounded-full bg-pin-surface-500 relative inline-flex',
-      'items-center state-checked:bg-pin-brand-900 flex-none transition-all duration-100 ease-in-out',
+      'w-10 h-8 rounded-[2px] bg-pin-surface-500 relative inline-flex shadow-inner',
+      'items-center state-checked:bg-pin-brand-600 flex-none transition-all duration-100 ease-in-out',
       disabled && 'contrast-50 brightness-75 cursor-not-allowed',
     )}
   >
     <RadixSwitch.Thumb
       id={id}
       className={clsx(
-        'block w-6 h-6 state-unchecked:bg-white state-checked:bg-brand-300 rounded-full ',
-        'transition-all duration-150 ease-out',
-        'state-unchecked:translate-x-1 state-checked:translate-x-5',
+        'block w-3 h-6 state-unchecked:bg-white state-checked:bg-white rounded-[1px] shadow-sm',
+        'transition-all duration-100 ease-out',
+        'state-unchecked:translate-x-1 state-checked:translate-x-6',
       )}
     />
   </RadixSwitch.Root>
