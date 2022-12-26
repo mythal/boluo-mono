@@ -1,6 +1,6 @@
-export type Scheme = 'light' | 'dark' | 'system';
+export type Theme = 'light' | 'dark' | 'system';
 
-export const toScheme = (value: string): Scheme => {
+export const toTheme = (value: string): Theme => {
   if (value === 'light') {
     return 'light';
   } else if (value === 'dark') {
@@ -10,7 +10,7 @@ export const toScheme = (value: string): Scheme => {
   }
 };
 
-export const getScheme = (): Scheme => {
+export const getThemeFromDom = (): Theme => {
   const classList = window.document.documentElement.classList;
   if (classList.contains('dark')) {
     return 'dark';
@@ -21,7 +21,7 @@ export const getScheme = (): Scheme => {
   }
 };
 
-export const setScheme = (value: string): Scheme => {
+export const setThemeToDom = (value: string): Theme => {
   const html = window.document.documentElement;
   if (value === 'light') {
     html.classList.add('light');
@@ -38,7 +38,7 @@ export const setScheme = (value: string): Scheme => {
   }
 };
 
-export const observeScheme = (callback: (scheme: Scheme) => void): () => void => {
+export const observeTheme = (callback: (theme: Theme) => void): () => void => {
   const node = window.document.documentElement;
   const config: MutationObserverInit = {
     attributeFilter: ['class'],
@@ -48,7 +48,7 @@ export const observeScheme = (callback: (scheme: Scheme) => void): () => void =>
   };
 
   const observer = new MutationObserver(() => {
-    callback(getScheme());
+    callback(getThemeFromDom());
   });
 
   observer.observe(node, config);

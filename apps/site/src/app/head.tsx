@@ -19,7 +19,7 @@ export default async function Head() {
       {/* <link rel="manifest" href="/site.webmanifest" type="application/manifest+json" key="manifest" /> */}
       <meta name="description" content="RPG tool, next generation" />
       <meta name="color-scheme" content="dark light" />
-      <meta name="theme-color" content="#ffffff" key="theme-color" />
+      <meta name="theme-color" content="#ffffff" />
       <title>{intl.formatMessage({ defaultMessage: 'Boluo ' })}</title>
     </>
   );

@@ -4,8 +4,8 @@ import { createIntl } from '@formatjs/intl';
 import type { GetMe } from 'boluo-api';
 import { cookies, headers } from 'next/headers';
 import { cache } from 'react';
-import type { Scheme } from 'ui';
-import { toScheme } from 'ui/scheme';
+import type { Theme } from 'ui';
+import { toTheme } from 'ui/theme';
 import { get } from '../api/server';
 import type { Locale } from '../locale';
 import { defaultLocale } from '../locale';
@@ -54,23 +54,23 @@ export const getLocale = cache(async (): Promise<Locale> => {
   return getLocaleFromHeaders();
 });
 
-export const getSchemeFromHeaders = cache((): Scheme => {
-  const cookieScheme = cookies().get('SCHEME')?.value;
-  if (!cookieScheme) {
+export const getThemeFromHeaders = cache((): Theme => {
+  const cookieTheme = cookies().get('BOLUO_THEME')?.value;
+  if (!cookieTheme) {
     return 'system';
   }
-  return toScheme(cookieScheme);
+  return toTheme(cookieTheme);
 });
 
-export const getScheme = cache(async (): Promise<Scheme> => {
+export const getTheme = cache(async (): Promise<Theme> => {
   const me = await getMe();
   if (me) {
     const settings = toSettings(me.settings);
-    if (settings.scheme) {
-      return settings.scheme;
+    if (settings.theme) {
+      return settings.theme;
     }
   }
-  return getSchemeFromHeaders();
+  return getThemeFromHeaders();
 });
 
 export const getMessages = cache(async (locale: Locale) => await loadMessages(locale));

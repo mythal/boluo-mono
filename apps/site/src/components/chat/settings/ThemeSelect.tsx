@@ -4,8 +4,8 @@ import { useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import type { MutationFetcher } from 'swr/mutation';
 import useSWRMutation from 'swr/mutation';
-import type { Scheme } from 'ui';
-import { Select, setScheme, useScheme } from 'ui';
+import type { Theme } from 'ui';
+import { Select, setThemeToDom, useTheme } from 'ui';
 import { patch } from '../../../api/browser';
 import { identity } from '../../../helper/function';
 import { useMe } from '../../../hooks/useMe';
@@ -15,27 +15,27 @@ interface Props {
   id?: string;
 }
 
-const updateScheme: MutationFetcher<Settings, Scheme, string> = async (url: string, { arg: scheme }) => {
-  const settings: Settings = { scheme };
+const updater: MutationFetcher<Settings, Theme, string> = async (url: string, { arg: theme }) => {
+  const settings: Settings = { theme };
   const settingsResult = await patch('/users/update_settings', settings);
   return settingsResult.unwrapOr({});
 };
 
-export const SchemeSelect: FC<Props> = ({ id }) => {
+export const ThemeSelect: FC<Props> = ({ id }) => {
   const me = useMe();
-  const scheme = useScheme();
+  const theme = useTheme();
   const intl = useIntl();
-  const { trigger } = useSWRMutation('/users/settings', updateScheme, {
+  const { trigger } = useSWRMutation('/users/settings', updater, {
     populateCache: identity,
     revalidate: false,
   });
 
   const handleChange = (value: string) => {
-    const scheme = setScheme(value);
+    const theme = setThemeToDom(value);
     if (me) {
-      void trigger(scheme);
+      void trigger(theme);
     } else {
-      document.cookie = `SCHEME=${scheme}; path=/`;
+      document.cookie = `BOLUO_THEME=${theme}; path=/`;
     }
   };
 
@@ -44,5 +44,5 @@ export const SchemeSelect: FC<Props> = ({ id }) => {
     { value: 'light', label: intl.formatMessage({ defaultMessage: 'Light' }) },
     { value: 'dark', label: intl.formatMessage({ defaultMessage: 'Dark' }) },
   ], [intl]);
-  return <Select items={items} value={scheme} onChange={handleChange} id={id} />;
+  return <Select items={items} value={theme} onChange={handleChange} id={id} />;
 };

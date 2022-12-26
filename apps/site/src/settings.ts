@@ -1,9 +1,9 @@
-import type { Scheme } from 'ui';
+import type { Theme } from 'ui';
 import type { Locale } from './locale';
 
 export interface Settings {
   locale?: Locale;
-  scheme?: Scheme;
+  theme?: Theme;
   enterSend?: boolean;
   expandDice?: boolean;
 }

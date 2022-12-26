@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import 'ui/tailwind.css';
 import { ClientProviders } from '../components/global/Providers';
-import { getLocale, getMe, getMessages, getScheme } from '../helper/server';
+import { getLocale, getMe, getMessages, getTheme } from '../helper/server';
 
 export default async function RootLayout({
   children,
@@ -11,10 +11,10 @@ export default async function RootLayout({
   const me = await getMe();
   const locale = await getLocale();
   const messages = await getMessages(locale);
-  const scheme = await getScheme();
+  const theme = await getTheme();
 
   return (
-    <html lang={locale} className={scheme}>
+    <html lang={locale} className={theme}>
       <body className="bg-bg text-text">
         <ClientProviders locale={locale} messages={messages} me={me}>
           {children}

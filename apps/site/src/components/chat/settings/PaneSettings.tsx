@@ -4,14 +4,13 @@ import { useId } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Kbd } from 'ui/Kbd';
 import { useSettings } from '../../../hooks/useSettings';
-import { useFocusPane } from '../../../state/panes';
 import { ClosePaneButton } from '../ClosePaneButton';
 import { PaneBodyBox } from '../PaneBodyBox';
 import { PaneHeaderBox } from '../PaneHeaderBox';
 import { EnterSendSwitch } from './EnterSendSwitch';
 import { ExpandDiceSwitch } from './ExpandDiceSwitch';
 import { LocaleSelect } from './LocaleSelect';
-import { SchemeSelect } from './SchemeSelect';
+import { ThemeSelect } from './ThemeSelect';
 
 const LanguageField = () => {
   const id = useId();
@@ -25,14 +24,14 @@ const LanguageField = () => {
   );
 };
 
-const SchemeField = () => {
+const ThemeField = () => {
   const id = useId();
   return (
     <div>
       <label htmlFor={id} className="block py-1">
-        <FormattedMessage defaultMessage="Scheme" />
+        <FormattedMessage defaultMessage="Theme" />
       </label>
-      <SchemeSelect id={id} />
+      <ThemeSelect id={id} />
     </div>
   );
 };
@@ -99,7 +98,7 @@ export const PaneSettings: FC = () => {
       </PaneHeaderBox>
       <PaneBodyBox className="flex p-4 flex-col gap-6 overflow-y-scroll">
         <LanguageField />
-        <SchemeField />
+        <ThemeField />
         <ExpandDiceField />
         <EneterSendField />
       </PaneBodyBox>
