@@ -30,7 +30,12 @@ const onIntlError: OnErrorFn = (e) => {
 
 export const ClientProviders: FC<Props> = ({ children, locale, messages, me }) => {
   return (
-    <SWRConfig value={{}}>
+    <SWRConfig
+      value={{
+        refreshInterval: 6000,
+        suspense: true,
+      }}
+    >
       <IntlProvider locale={locale} messages={messages} defaultLocale={defaultLocale} onError={onIntlError}>
         <MeProvider initialMe={me}>
           {children}

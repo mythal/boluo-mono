@@ -9,12 +9,11 @@ export const useChannelList = (spaceId: string): Channel[] => {
     ['/channels/by_space' as const, spaceId],
     ([path, id]) => get(path, { id }).then(unwrap),
     {
-      suspense: true,
       onSuccess: (channels) =>
-        void Promise.all(channels.map((channel) => mutate(['/channels/query', channel.id], channel))),
+        void Promise.all(
+          channels.map((channel) => mutate(['/channels/query', channel.id], channel, { revalidate: false })),
+        ),
     },
   );
-  // In Suspense mode, `data` is always the fetch response
-  // https://swr.vercel.app/docs/suspense
-  return query.data!;
+  return query.data;
 };

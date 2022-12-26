@@ -7,7 +7,7 @@ const options = { revalidate: false };
 
 export const useSpaceWithRelated = (spaceId: string): SpaceWithRelated => {
   const { mutate } = useSWRConfig();
-  const query = useSWR(
+  const { data } = useSWR(
     ['/spaces/query_with_related' as const, spaceId],
     ([path, id]) => get(path, { id }).then(unwrap),
     {
@@ -21,7 +21,5 @@ export const useSpaceWithRelated = (spaceId: string): SpaceWithRelated => {
       }),
     },
   );
-  // In Suspense mode, `data` is always the fetch response
-  // https://swr.vercel.app/docs/suspense
-  return query.data!;
+  return data;
 };
