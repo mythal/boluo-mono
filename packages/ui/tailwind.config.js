@@ -222,6 +222,7 @@ module.exports = {
       boxShadow: {
         "1/2": "0.125rem 0.125rem 0",
         1: "0.25rem 0.25rem 0",
+        key: "0px 1px 0px 1px",
         toast: "0.125rem 0.125rem 0 rgba(0, 0, 0, 0.25)",
         menu: "0.25rem 0.25rem 0 rgba(0, 0, 0, 0.1)",
       },

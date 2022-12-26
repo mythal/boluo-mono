@@ -7,7 +7,7 @@ import { ChatPaneChannel } from './channel/ChannelPane';
 import { PaneEmpty } from './PaneEmpty';
 import { PaneError } from './PaneError';
 import { PaneLoading } from './PaneLoading';
-import { PaneSettings } from './PaneSettings';
+import { PaneSettings } from './settings/PaneSettings';
 
 interface Props {
   pane: Pane;

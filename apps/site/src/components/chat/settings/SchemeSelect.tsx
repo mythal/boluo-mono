@@ -6,9 +6,10 @@ import type { MutationFetcher } from 'swr/mutation';
 import useSWRMutation from 'swr/mutation';
 import type { Scheme } from 'ui';
 import { Select, setScheme, useScheme } from 'ui';
-import { patch } from '../api/browser';
-import { useMe } from '../hooks/useMe';
-import type { Settings } from '../settings';
+import { patch } from '../../../api/browser';
+import { identity } from '../../../helper/function';
+import { useMe } from '../../../hooks/useMe';
+import type { Settings } from '../../../settings';
 
 interface Props {
   id?: string;
@@ -20,12 +21,12 @@ const updateScheme: MutationFetcher<Settings, Scheme, string> = async (url: stri
   return settingsResult.unwrapOr({});
 };
 
-export const SchemeSwitch: FC<Props> = ({ id }) => {
+export const SchemeSelect: FC<Props> = ({ id }) => {
   const me = useMe();
   const scheme = useScheme();
   const intl = useIntl();
   const { trigger } = useSWRMutation('/users/settings', updateScheme, {
-    populateCache: (settings: Settings) => settings,
+    populateCache: identity,
     revalidate: false,
   });
 

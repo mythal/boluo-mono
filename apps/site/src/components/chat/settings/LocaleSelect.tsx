@@ -1,14 +1,14 @@
 import React, { useMemo } from 'react';
 import { Select } from 'ui';
-import { useLocale } from '../hooks/useLocale';
-import { toLocale } from '../locale';
+import { useLocale } from '../../../hooks/useLocale';
+import { toLocale } from '../../../locale';
 
 interface Props {
   id?: string;
   className?: string;
 }
 
-export const LocaleSwitch: React.FC<Props> = ({ id }) => {
+export const LocaleSelect: React.FC<Props> = ({ id }) => {
   const [locale, changeLocale] = useLocale();
   const handler = (value: string) => {
     changeLocale(toLocale(value));

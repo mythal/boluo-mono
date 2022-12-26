@@ -1,11 +1,11 @@
 'use client';
 
-import { LocaleSwitch } from '../../components/LocaleSwitch';
+import { LocaleSelect } from '../../components/chat/settings/LocaleSelect';
 
 export const Footer = () => {
   return (
     <footer className="flex justify-center py-2">
-      <LocaleSwitch />
+      <LocaleSelect />
     </footer>
   );
 };

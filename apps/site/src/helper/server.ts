@@ -12,7 +12,7 @@ import { defaultLocale } from '../locale';
 import { localeList } from '../locale';
 import { loadMessages } from '../locale';
 import { toLocale } from '../locale';
-import { getSettings } from '../settings';
+import { toSettings } from '../settings';
 
 export const getMe = cache(async (): Promise<GetMe | null> => {
   return (await get('/users/get_me', null)).unwrapOr(null);
@@ -46,7 +46,7 @@ export const getLocaleFromHeaders = cache((): Locale => {
 export const getLocale = cache(async (): Promise<Locale> => {
   const me = await getMe();
   if (me) {
-    const settings = getSettings(me.settings);
+    const settings = toSettings(me.settings);
     if (settings.locale) {
       return settings.locale;
     }
@@ -65,7 +65,7 @@ export const getSchemeFromHeaders = cache((): Scheme => {
 export const getScheme = cache(async (): Promise<Scheme> => {
   const me = await getMe();
   if (me) {
-    const settings = getSettings(me.settings);
+    const settings = toSettings(me.settings);
     if (settings.scheme) {
       return settings.scheme;
     }

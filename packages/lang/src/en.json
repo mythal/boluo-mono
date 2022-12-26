@@ -38,6 +38,9 @@
   "HpyhN3": {
     "message": "Boluo"
   },
+  "IvBid4": {
+    "message": "Use the {enter} key to send messages"
+  },
   "JCIgkj": {
     "message": "Username"
   },
@@ -49,6 +52,9 @@
   },
   "Q8Qw5B": {
     "message": "Description"
+  },
+  "RoMEHB": {
+    "message": "Tip: Use {key} to make a line break."
   },
   "RraqCg": {
     "message": "Username and password do not match"
@@ -67,6 +73,9 @@
   },
   "VzzYJk": {
     "message": "Create"
+  },
+  "YELoe8": {
+    "message": "Tip: Use {key} to send messages."
   },
   "dMEGZV": {
     "message": "Split pane"
@@ -97,6 +106,9 @@
   },
   "wb3MSp": {
     "message": "This username is already taken."
+  },
+  "x32Fvf": {
+    "message": "Expand dice in the messages"
   },
   "y1Z3or": {
     "message": "Language"

@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 import type { MutationFetcher } from 'swr/mutation';
 import useSWRMutation from 'swr/mutation';
 import { patch } from '../api/browser';
+import { identity } from '../helper/function';
 import type { Locale } from '../locale';
 import { toLocale } from '../locale';
 import type { Settings } from '../settings';
@@ -21,7 +22,7 @@ export const useLocale = (): [Locale, (locale: Locale) => void] => {
   const locale = toLocale(intl.locale);
   const router = useRouter();
   const { trigger } = useSWRMutation('/users/settings', updateLocale, {
-    populateCache: (settings: Settings) => settings,
+    populateCache: identity,
     revalidate: false,
   });
 

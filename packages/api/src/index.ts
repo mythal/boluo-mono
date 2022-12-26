@@ -1,5 +1,3 @@
-import { Result } from 'boluo-utils';
-import { ApiError } from './errors';
 import { AppResponse, isAppResponse, makeUri } from './request';
 import type { Channel } from './types/channels';
 import { GetMessagesByChannel, Message, NewMessage } from './types/messages';
@@ -10,6 +8,7 @@ export interface Get {
   // users
   '/users/get_me': { query: null; result: GetMe | null };
   '/users/logout': { query: null; result: true };
+  '/users/settings': { query: null; result: unknown };
   '/users/check_username': { query: CheckUsername; result: boolean };
   '/users/check_email': { query: CheckEmail; result: boolean };
   // spaces
