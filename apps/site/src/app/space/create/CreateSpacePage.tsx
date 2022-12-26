@@ -6,7 +6,7 @@ import { CreateSpaceForm } from '../../../components/CreateSpaceForm';
 
 export const CreateSpacePage: FC = () => {
   const intl = useIntl();
-  const title = intl.formatMessage({ defaultMessage: 'Create a Plane' });
+  const title = intl.formatMessage({ defaultMessage: 'Create a Space' });
   return (
     <>
       <main className="p-4">

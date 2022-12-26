@@ -47,7 +47,7 @@ const UserOperations = ({ className }: StyleProps) => {
       </a>
 
       <Link href="/space/create" className="link">
-        Create Plane
+        Create Space
       </Link>
     </div>
   );
