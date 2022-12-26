@@ -26,9 +26,6 @@
   "AyGauy": {
     "message": "ログイン"
   },
-  "C357Ss": {
-    "message": "スキーム"
-  },
   "CoEsov": {
     "message": "ユーザー名またはメール"
   },
@@ -50,6 +47,9 @@
   "OvBwdK": {
     "message": "最初のチャネル名"
   },
+  "Pe0ogR": {
+    "message": "Theme"
+  },
   "Q8Qw5B": {
     "message": "説明"
   },
@@ -65,8 +65,8 @@
   "Sf+ebw": {
     "message": "ペインを閉じる"
   },
-  "Sns2BW": {
-    "message": "ペインを作成"
+  "SqVNRz": {
+    "message": "Create a Space"
   },
   "VA/Z1S": {
     "message": "非表示"
