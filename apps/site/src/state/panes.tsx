@@ -7,9 +7,9 @@ import type { ChildrenProps } from '../helper/props';
 import { useChannelList } from '../hooks/useChannelList';
 import type { Pane } from '../types/ChatPane';
 
-export interface AddChat {
-  type: 'ADD_CHAT';
-  selfId: string;
+export interface AddPane {
+  type: 'ADD_PANE';
+  insertAfter?: string;
   item: Pane;
 }
 
@@ -33,7 +33,7 @@ export interface Focus {
   id: string;
 }
 
-type Action = AddChat | ReplacePane | RemovePane | Focus | TogglePane;
+type Action = AddPane | ReplacePane | RemovePane | Focus | TogglePane;
 
 const PaneDispatchContext = createContext<Dispatch<Action>>(() => {
   throw new Error('Unexpected');
@@ -98,13 +98,17 @@ interface PaneState {
   panes: Pane[];
 }
 
-const handleAddChat = (state: PaneState, { selfId, item }: AddChat): PaneState => {
+const handleAddChat = (state: PaneState, { insertAfter, item }: AddPane): PaneState => {
   const panes = [...state.panes];
-  const index = panes.findIndex(pane => pane.id === selfId);
-  if (index >= 0) {
-    panes.splice(index + 1, 0, item);
+  if (insertAfter === undefined) {
+    panes.unshift(item);
   } else {
-    panes.push(item);
+    const index = panes.findIndex(pane => pane.id === insertAfter);
+    if (index >= 0) {
+      panes.splice(index + 1, 0, item);
+    } else {
+      panes.unshift(item);
+    }
   }
   return { ...state, panes, focused: item.id };
 };
@@ -182,7 +186,7 @@ export const usePanes = (spaceId: string): Return => {
     switch (action.type) {
       case 'FOCUS':
         return handleFocus(state, action);
-      case 'ADD_CHAT':
+      case 'ADD_PANE':
         return handleAddChat(state, action);
       case 'REMOVE_PANE':
         return handleRemovePane(state, action);

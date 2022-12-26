@@ -18,7 +18,7 @@ const SplitPaneButton: FC = () => {
   const [, starTransition] = useTransition();
   const dup = () =>
     starTransition(() =>
-      paneDispatch({ type: 'ADD_CHAT', selfId: paneId, item: { type: 'CHANNEL', id: makeId(), channelId } })
+      paneDispatch({ type: 'ADD_PANE', insertAfter: paneId, item: { type: 'CHANNEL', id: makeId(), channelId } })
     );
   return (
     <Button
