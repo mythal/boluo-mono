@@ -38,6 +38,9 @@
   "HpyhN3": {
     "message": "菠萝"
   },
+  "IvBid4": {
+    "message": "Use the {enter} key to send messages"
+  },
   "JCIgkj": {
     "message": "用户名"
   },
@@ -49,6 +52,9 @@
   },
   "Q8Qw5B": {
     "message": "描述"
+  },
+  "RoMEHB": {
+    "message": "Tip: Use {key} to make a line break."
   },
   "RraqCg": {
     "message": "帐号与密码不匹配"
@@ -67,6 +73,9 @@
   },
   "VzzYJk": {
     "message": "创建"
+  },
+  "YELoe8": {
+    "message": "Tip: Use {key} to send messages."
   },
   "dMEGZV": {
     "message": "分割窗格"
@@ -97,6 +106,9 @@
   },
   "wb3MSp": {
     "message": "此用户名已被占用。"
+  },
+  "x32Fvf": {
+    "message": "Expand dice in the messages"
   },
   "y1Z3or": {
     "message": "Language"
