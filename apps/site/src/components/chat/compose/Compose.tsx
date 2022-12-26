@@ -3,7 +3,6 @@ import type { GetMe } from 'boluo-api';
 import { useState } from 'react';
 import { post } from '../../../api/browser';
 import { useChannelId } from '../../../hooks/useChannelId';
-import { useFocusPane } from '../../../state/panes';
 
 interface Props {
   me: GetMe;
@@ -12,7 +11,6 @@ interface Props {
 
 export const Compose = ({ me, className }: Props) => {
   const channelId = useChannelId();
-  const focus = useFocusPane();
   const [text, setText] = useState('');
   const onSubmit = async () => {
     const result = await post('/messages/send', {
@@ -33,7 +31,7 @@ export const Compose = ({ me, className }: Props) => {
   };
 
   return (
-    <div onClick={focus} className={className}>
+    <div className={className}>
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}

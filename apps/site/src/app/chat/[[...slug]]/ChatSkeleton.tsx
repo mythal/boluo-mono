@@ -6,7 +6,7 @@ export const ChatSkeleton: FC<Partial<ChildrenProps>> = ({ children }) => {
   return (
     <div className="chat-grid">
       <div className="border-r border-b-1/2 border-b-gray-400"></div>
-      <div className="border-r row-span-2"></div>
+      <div className="border-r"></div>
       <PaneBox>{children}</PaneBox>
     </div>
   );

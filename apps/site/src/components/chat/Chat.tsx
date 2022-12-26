@@ -31,7 +31,7 @@ const Chat: FC<Props> = ({ spaceId }) => {
       <PaneProvider dispatch={dispatch} focused={focused}>
         <ChatConnectionProvider mailboxId={spaceId}>
           <ChatStateProvider spaceId={spaceId}>
-            <ChatView space={space} panes={panes} />
+            <ChatView space={space} panes={panes} focused={focused} />
           </ChatStateProvider>
         </ChatConnectionProvider>
       </PaneProvider>

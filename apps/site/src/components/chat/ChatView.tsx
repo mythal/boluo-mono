@@ -9,9 +9,10 @@ import { ChatSiderbar } from './sidebar/ChatSidebar';
 interface Props {
   space: Space;
   panes: Pane[];
+  focused: string | null;
 }
 
-export const ChatView: FC<Props> = ({ space, panes }) => {
+export const ChatView: FC<Props> = ({ space, panes, focused }) => {
   const sidebar = useMemo(
     () => (
       <ChatSiderbar
@@ -30,8 +31,18 @@ export const ChatView: FC<Props> = ({ space, panes }) => {
     return panes.map((pane) => <ChatPaneSwitch key={pane.id} pane={pane} />);
   }, [panes]);
 
+  const templates: string | undefined = useMemo(() => {
+    if (panes.length < 2) {
+      return undefined;
+    }
+    return panes
+      .map(pane => pane.id === focused ? 'var(--pane-header-height) 1fr' : 'var(--pane-header-height)')
+      .join(' ');
+  }, [focused, panes]);
+
+  const style = { '--pane-grid-rows': templates } as React.CSSProperties;
   return (
-    <div className="chat-grid">
+    <div className="chat-grid" style={style}>
       {sidebar}
       {chatBody}
     </div>

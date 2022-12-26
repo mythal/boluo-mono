@@ -19,20 +19,21 @@ import { MessageListItem } from './MessageListItem';
 
 interface Props {
   channelId: string;
+  className: string;
 }
 
 interface ViewProps {
   channelId: string;
   messages: Message[];
+  className: string;
   state: ChannelState['state'];
-  focus: () => void;
 }
 
 const START_INDEX = Number.MAX_SAFE_INTEGER - 10000000;
 const SHOW_BOTTOM_BUTTON_TIMEOUT = 500;
 const LOAD_MESSAGE_LIMIT = 51;
 
-const MessageListView: FC<ViewProps> = ({ channelId, messages, focus, state }) => {
+const MessageListView: FC<ViewProps> = ({ channelId, messages, className }) => {
   const dispatch = useChatDispatch();
   const [finished, setFinished] = useState(false);
   const [showButton, setShowButton] = useState(false);
@@ -79,9 +80,8 @@ const MessageListView: FC<ViewProps> = ({ channelId, messages, focus, state }) =
   };
 
   return (
-    <div className="relative">
+    <div className={className}>
       <Virtuoso
-        onClick={focus}
         firstItemIndex={firstItemIndex}
         ref={virtuosoRef}
         components={{ Header: MessageListHeader }}
@@ -105,16 +105,22 @@ const MessageListView: FC<ViewProps> = ({ channelId, messages, focus, state }) =
   );
 };
 
-export const MessageList: FC<Props> = ({ channelId }) => {
-  const focus = useFocusPane();
+export const MessageList: FC<Props> = ({ channelId, className }) => {
   const messages = useContextSelector(ChatContext, (state) => state.channels[channelId]!.messages);
   const state = useContextSelector(ChatContext, (state) => state.channels[channelId]!.state);
   if (state === 'UNINITIALIZED') {
     return (
-      <div>
+      <div className={className}>
         <FormattedMessage defaultMessage="Loading" />
       </div>
     );
   }
-  return <MessageListView messages={messages} focus={focus} state={state} channelId={channelId} />;
+  return (
+    <MessageListView
+      messages={messages}
+      state={state}
+      channelId={channelId}
+      className={className}
+    />
+  );
 };

@@ -1,13 +1,23 @@
 .chat-grid {
+  --pane-header-height: 3rem;
+  --pane-sidebar-width: 10rem;
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
   display: grid;
-  grid-template-rows: 3rem 1fr 4rem;
   grid-auto-flow: column;
-  grid-template-columns: 10em repeat(auto-fit, minmax(0, 1fr));
 }
 
-.sidebar-body {
-  grid-row: 2/4;
+@media not all and (min-width: 768px) {
+  .chat-grid {
+    grid-template-rows: var(--pane-grid-rows, var(--pane-header-height) 1fr);
+    grid-template-columns: var(--pane-sidebar-width) 1fr;
+  }
+}
+
+@media (min-width: 768px) {
+  .chat-grid {
+    grid-template-rows: var(--pane-header-height) 1fr;
+    grid-template-columns: var(--pane-sidebar-width) repeat(auto-fit, minmax(0, 1fr));
+  }
 }

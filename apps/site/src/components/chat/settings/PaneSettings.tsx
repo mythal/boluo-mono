@@ -6,6 +6,7 @@ import { Kbd } from 'ui/Kbd';
 import { useSettings } from '../../../hooks/useSettings';
 import { useFocusPane } from '../../../state/panes';
 import { ClosePaneButton } from '../ClosePaneButton';
+import { PaneBodyBox } from '../PaneBodyBox';
 import { PaneHeaderBox } from '../PaneHeaderBox';
 import { EnterSendSwitch } from './EnterSendSwitch';
 import { ExpandDiceSwitch } from './ExpandDiceSwitch';
@@ -90,19 +91,18 @@ const EneterSendField = () => {
 };
 
 export const PaneSettings: FC = () => {
-  const focus = useFocusPane();
   return (
     <>
       <PaneHeaderBox operators={<ClosePaneButton />}>
         <Settings />
         <FormattedMessage defaultMessage="Settings" />
       </PaneHeaderBox>
-      <div className="row-span-2 flex p-4 flex-col gap-6" onClick={focus}>
+      <PaneBodyBox className="flex p-4 flex-col gap-6 overflow-y-scroll">
         <LanguageField />
         <SchemeField />
         <ExpandDiceField />
         <EneterSendField />
-      </div>
+      </PaneBodyBox>
     </>
   );
 };

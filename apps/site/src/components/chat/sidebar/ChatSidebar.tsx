@@ -34,7 +34,7 @@ export const ChatSiderbar: FC<Props> = ({ space, panes }) => {
       <span className="border-r border-b-1/2 border-b-gray-600 flex py-2 px-4 items-center overflow-ellipsis overflow-hidden">
         {space.name}
       </span>
-      <div className="border-r row-span-2 row-end-4 flex flex-col justify-between">
+      <div className="border-r flex flex-col justify-between row-start-2 row-end-[-1] col-start-1 col-end-1">
         <div>
           {channelList}
         </div>

@@ -1,3 +1,4 @@
+import type { Channel } from 'boluo-api';
 import { makeId } from 'boluo-utils';
 import type { Dispatch, FC } from 'react';
 import { useCallback } from 'react';
@@ -59,7 +60,7 @@ export const usePaneId = (): string => {
 };
 
 export const useFocusPane = () => {
-  const id = usePaneId();
+  const id = useContext(PaneIdContext);
   const dispatch = useChatPaneDispatch();
   return useCallback(() => dispatch({ type: 'FOCUS', id }), [dispatch, id]);
 };
@@ -96,11 +97,6 @@ interface PaneState {
   panes: Pane[];
 }
 
-const initialPaneState: PaneState = {
-  focused: null,
-  panes: [],
-};
-
 const handleAddChat = (state: PaneState, { selfId, item }: AddChat): PaneState => {
   const panes = [...state.panes];
   const index = panes.findIndex(pane => pane.id === selfId);
@@ -127,7 +123,7 @@ const handleReplacePane = (state: PaneState, action: ReplacePane): PaneState => 
   return { ...state, panes, focused: action.item.id };
 };
 
-const handleRemoveChat = (state: PaneState, action: RemovePane): PaneState => {
+const handleRemovePane = (state: PaneState, action: RemovePane): PaneState => {
   let { panes, focused } = state;
   panes = panes.filter(item => item.id !== action.id);
   if (focused === action.id && panes.length > 0) {
@@ -146,28 +142,48 @@ const handleToggleSettings = (state: PaneState, _: ToggleSettings): PaneState =>
   if (settingsPaneIndex === -1) {
     const settingsPane: Pane = { type: 'SETTINGS', id: 'settings' };
     const panes: typeof state.panes = [settingsPane as Pane].concat(state.panes);
-    return { ...state, panes };
+    return { ...state, panes, focused: 'settings' };
   } else {
-    const panes = [...state.panes];
-    panes.splice(settingsPaneIndex, 1);
-    return { ...state, panes };
+    return handleRemovePane(state, { type: 'REMOVE_PANE', id: 'settings' });
   }
+};
+
+const handleFocus = (state: PaneState, { id }: Focus): PaneState => {
+  const { panes, focused } = state;
+  if (id === '') {
+    if (panes.length > 0) {
+      return { ...state, focused: panes[0]!.id };
+    } else {
+      return { ...state, focused: null };
+    }
+  }
+  if (focused === id) {
+    return state;
+  }
+  return { panes, focused: id };
+};
+
+const initPaneState = (channels: Channel[]) => {
+  const channel = channels.find(channel => channel.isPublic);
+  if (!channel) {
+    return { focused: null, panes: [] };
+  }
+
+  const id = makeId();
+  const panes: Pane[] = [{ type: 'CHANNEL', id, channelId: channel.id }];
+  return { focused: id, panes };
 };
 
 export const usePanes = (spaceId: string): Return => {
   const channels = useChannelList(spaceId);
   const reducer = (state: PaneState, action: Action): PaneState => {
-    const { panes, focused } = state;
     switch (action.type) {
       case 'FOCUS':
-        if (focused === action.id) {
-          return state;
-        }
-        return { panes, focused: action.id };
+        return handleFocus(state, action);
       case 'ADD_CHAT':
         return handleAddChat(state, action);
       case 'REMOVE_PANE':
-        return handleRemoveChat(state, action);
+        return handleRemovePane(state, action);
       case 'REPLACE_PANE':
         return handleReplacePane(state, action);
       case 'TOGGLE_SETTINGS':
@@ -176,15 +192,8 @@ export const usePanes = (spaceId: string): Return => {
         return state;
     }
   };
-  const [state, dispatch] = useReducer<typeof reducer, PaneState>(
-    reducer,
-    initialPaneState,
-    (): PaneState => {
-      const channel = channels.find(channel => channel.isPublic);
-      const panes: Pane[] = channel ? [{ type: 'CHANNEL', id: makeId(), channelId: channel.id }] : [];
-      return { focused: null, panes };
-    },
-  );
+
+  const [state, dispatch] = useReducer(reducer, channels, initPaneState);
   const { panes, focused } = state;
   return { panes: panes, dispatch, focused };
 };

@@ -26,7 +26,7 @@ const SplitPaneButton: FC = () => {
       onClick={dup}
       title={intl.formatMessage({ defaultMessage: 'Split pane' })}
     >
-      <SplitHorizontal />
+      <SplitHorizontal className="rotate-90 md:rotate-0" />
     </Button>
   );
 };

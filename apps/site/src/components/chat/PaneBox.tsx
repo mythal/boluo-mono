@@ -9,7 +9,6 @@ export const PaneBox: FC<Props> = ({ children }) => {
     <>
       <div className="border-b" />
       <div className="flex items-center justify-center text-surface-400">{children}</div>
-      <div />
     </>
   );
 };
