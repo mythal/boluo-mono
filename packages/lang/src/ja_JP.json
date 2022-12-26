@@ -9,7 +9,7 @@
     "message": "新規登録"
   },
   "3cc4Ct": {
-    "message": "Light"
+    "message": "ライト"
   },
   "5HUwAy": {
     "message": "文字、数字、アンダースコアのみ使用可能です。"
@@ -27,19 +27,19 @@
     "message": "ログイン"
   },
   "C357Ss": {
-    "message": "Scheme"
+    "message": "スキーム"
   },
   "CoEsov": {
     "message": "ユーザー名またはメール"
   },
   "D3idYv": {
-    "message": "Settings"
+    "message": "設定"
   },
   "HpyhN3": {
     "message": "パイン"
   },
   "IvBid4": {
-    "message": "Use the {enter} key to send messages"
+    "message": "{enter} キーを使ってメッセージを送信する。"
   },
   "JCIgkj": {
     "message": "ユーザー名"
@@ -81,7 +81,7 @@
     "message": "分割ペイン"
   },
   "iFsDVR": {
-    "message": "Loading"
+    "message": "読み込み中"
   },
   "kMogDE": {
     "message": "メールアドレスのフォーマットが不正です。"
@@ -96,13 +96,13 @@
     "message": "再読み込み"
   },
   "rYtHKT": {
-    "message": "Follow System"
+    "message": "システムに従う"
   },
   "s/IAy6": {
     "message": "デフォルトのサイコロ"
   },
   "tOdNiY": {
-    "message": "Dark"
+    "message": "ダーク"
   },
   "wb3MSp": {
     "message": "このユーザー名は既に使われています。"
@@ -111,7 +111,7 @@
     "message": "Expand dice in the messages"
   },
   "y1Z3or": {
-    "message": "Language"
+    "message": "言語"
   },
   "y63e7m": {
     "message": "メール"
