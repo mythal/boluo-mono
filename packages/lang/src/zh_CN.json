@@ -36,7 +36,7 @@
     "message": "菠萝"
   },
   "IvBid4": {
-    "message": "Use the {enter} key to send messages"
+    "message": "使用 {enter} 键发送消息"
   },
   "JCIgkj": {
     "message": "用户名"
@@ -48,13 +48,13 @@
     "message": "初始频道名称"
   },
   "Pe0ogR": {
-    "message": "Theme"
+    "message": "主题"
   },
   "Q8Qw5B": {
     "message": "描述"
   },
   "RoMEHB": {
-    "message": "Tip: Use {key} to make a line break."
+    "message": "提示：使用 {key} 换行。"
   },
   "RraqCg": {
     "message": "帐号与密码不匹配"
@@ -63,13 +63,13 @@
     "message": "昵称"
   },
   "SENRqu": {
-    "message": "Help"
+    "message": "帮助"
   },
   "Sf+ebw": {
     "message": "关闭窗格"
   },
   "SqVNRz": {
-    "message": "Create a Space"
+    "message": "创建位面"
   },
   "VA/Z1S": {
     "message": "隐藏"
@@ -78,10 +78,10 @@
     "message": "创建"
   },
   "YELoe8": {
-    "message": "Tip: Use {key} to send messages."
+    "message": "提示：使用 {key} 发送消息。"
   },
   "YtexzU": {
-    "message": "Close {paneName}"
+    "message": "关闭 {paneName}"
   },
   "dMEGZV": {
     "message": "分割窗格"
@@ -114,10 +114,10 @@
     "message": "此用户名已被占用。"
   },
   "x0pAb7": {
-    "message": "Open {paneName}"
+    "message": "打开 {paneName}"
   },
   "x32Fvf": {
-    "message": "Expand dice in the messages"
+    "message": "自动展开消息中的骰子"
   },
   "y1Z3or": {
     "message": "语言"
