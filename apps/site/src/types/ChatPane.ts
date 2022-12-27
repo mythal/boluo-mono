@@ -14,9 +14,14 @@ export interface HelpPane {
   id: 'help';
 }
 
+export interface SpaceSettingsPane {
+  type: 'SPACE_SETTINGS';
+  id: 'space_settings';
+}
+
 export interface EmptyPane {
   type: 'EMPTY';
   id: string;
 }
 
-export type Pane = ChannelPane | EmptyPane | SettingsPane | HelpPane;
+export type Pane = ChannelPane | EmptyPane | SettingsPane | HelpPane | SpaceSettingsPane;
