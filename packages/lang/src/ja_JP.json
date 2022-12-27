@@ -78,10 +78,10 @@
     "message": "作成する"
   },
   "YELoe8": {
-    "message": "Tip: Use {key} to send messages."
+    "message": "ヒント: {key} でメッセージを送信できます。"
   },
   "YtexzU": {
-    "message": "Close {paneName}"
+    "message": "{paneName} を閉じる"
   },
   "dMEGZV": {
     "message": "分割ペイン"
@@ -114,10 +114,10 @@
     "message": "このユーザー名は既に使われています。"
   },
   "x0pAb7": {
-    "message": "Open {paneName}"
+    "message": "{paneName} を開く"
   },
   "x32Fvf": {
-    "message": "Expand dice in the messages"
+    "message": "メッセージ内のサイコロを展開"
   },
   "y1Z3or": {
     "message": "言語"
