@@ -65,6 +65,9 @@
   "SENRqu": {
     "message": "ヘルプ"
   },
+  "SQoTBO": {
+    "message": "Options for {spaceName}"
+  },
   "Sf+ebw": {
     "message": "ペインを閉じる"
   },
@@ -82,6 +85,9 @@
   },
   "YtexzU": {
     "message": "{paneName} を閉じる"
+  },
+  "bGay8d": {
+    "message": "Space Settings"
   },
   "dMEGZV": {
     "message": "分割ペイン"
