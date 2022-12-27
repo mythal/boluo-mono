@@ -1,6 +1,6 @@
 .chat-grid {
   --pane-header-height: 3rem;
-  --pane-sidebar-width: 10rem;
+  --pane-sidebar-width: 12rem;
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
