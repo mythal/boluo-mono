@@ -7,6 +7,7 @@ export type ButtonProps =
   & DataAttr<{
     small?: boolean;
     type?: 'primary' | 'default';
+    active?: boolean;
   }>;
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ children, className, ...props }, ref) => {

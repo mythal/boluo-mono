@@ -6,9 +6,10 @@ import { useFocusPane, useIsFocused } from '../../state/panes';
 interface Props {
   children: ReactNode;
   operators?: ReactNode;
+  icon?: ReactNode;
 }
 
-export const PaneHeaderBox: FC<Props> = ({ children, operators }) => {
+export const PaneHeaderBox: FC<Props> = ({ children, operators, icon }) => {
   const isFocused = useIsFocused();
   const focus = useFocusPane();
   return (
@@ -21,6 +22,7 @@ export const PaneHeaderBox: FC<Props> = ({ children, operators }) => {
       onClick={focus}
     >
       <div className="inline-flex gap-1 items-center">
+        {icon}
         {children}
       </div>
       {operators && <div className="inline-flex gap-1 ml-2" onClick={stopPropagation}>{operators}</div>}

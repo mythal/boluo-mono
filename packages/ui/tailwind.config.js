@@ -235,7 +235,7 @@ module.exports = {
     plugin(function ({ addVariant }) {
       addVariant("enabled", "&:not(:disabled)");
       addVariant("hover-enabled", "&:hover:not(:disabled)");
-      addVariant("active-enabled", "&:active:not(:disabled)");
+      addVariant("active-enabled", "&:is([data-active=\"true\"],:active):not(:disabled)");
       addVariant("state-on", '&[data-state="on"]');
       addVariant("state-off", '&[data-state="off"]');
       addVariant("state-open", '&[data-state="open"]');

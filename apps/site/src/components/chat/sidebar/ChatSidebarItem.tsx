@@ -1,4 +1,5 @@
 import type { Channel } from 'boluo-api';
+import { Hash } from 'boluo-icons';
 import { makeId } from 'boluo-utils';
 import clsx from 'clsx';
 import type { FC } from 'react';
@@ -17,9 +18,13 @@ export const ChatSidebarItem: FC<Props> = ({ channel, active }) => {
   return (
     <div>
       <button
-        className={clsx('block w-full text-left py-2 px-4 hover:bg-surface-200', active && 'bg-surface-200')}
+        className={clsx(
+          'flex gap-1 items-center w-full text-left py-2 px-4 hover:bg-surface-200',
+          active && 'bg-surface-200',
+        )}
         onClick={replace}
       >
+        <Hash className={active ? 'text-pin-surface-600' : 'text-surface-400'} />
         {channel.name}
       </button>
     </div>

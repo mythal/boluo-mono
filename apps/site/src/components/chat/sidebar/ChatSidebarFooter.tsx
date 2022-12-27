@@ -25,6 +25,8 @@ const SettingToggleButton: FC<{ on: boolean }> = ({ on }) => {
       onClick={() => dispatch({ type: 'TOGGLE', pane })}
       title={label}
       aria-label={label}
+      className="group"
+      data-active={on}
     >
       <Settings />
       <Indicator on={on} className="ml-0.5" />
@@ -45,6 +47,8 @@ const HelpToggleButton: FC<{ on: boolean }> = ({ on }) => {
       onClick={() => dispatch({ type: 'TOGGLE', pane })}
       title={label}
       aria-label={label}
+      className="group"
+      data-active={on}
     >
       <HelpCircle />
       <Indicator on={on} className="ml-0.5" />

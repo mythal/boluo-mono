@@ -1,4 +1,4 @@
-import { SplitHorizontal } from 'boluo-icons';
+import { Hash, SplitHorizontal } from 'boluo-icons';
 import { makeId } from 'boluo-utils';
 import type { FC } from 'react';
 import { useTransition } from 'react';
@@ -40,6 +40,7 @@ const ChannelName: FC = () => {
 export const ChannelHeader: FC = () => {
   return (
     <PaneHeaderBox
+      icon={<Hash />}
       operators={
         <>
           <SplitPaneButton />

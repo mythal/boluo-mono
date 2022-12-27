@@ -92,8 +92,7 @@ const EneterSendField = () => {
 export const PaneSettings: FC = () => {
   return (
     <>
-      <PaneHeaderBox operators={<ClosePaneButton />}>
-        <Settings />
+      <PaneHeaderBox operators={<ClosePaneButton />} icon={<Settings />}>
         <FormattedMessage defaultMessage="Settings" />
       </PaneHeaderBox>
       <PaneBodyBox className="flex p-4 flex-col gap-6 overflow-y-scroll">

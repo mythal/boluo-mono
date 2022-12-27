@@ -19,7 +19,6 @@ interface ViewProps {
 
 const ChatPaneChannelView: FC<ViewProps> = ({ channelId }) => {
   const me = useMe();
-  const isFocused = useIsFocused();
   return (
     <>
       <ChannelHeader />
@@ -35,7 +34,5 @@ const ChatPaneChannelView: FC<ViewProps> = ({ channelId }) => {
 
 export const ChatPaneChannel: FC<Props> = () => {
   const channelId = useChannelId();
-  return useMemo(() => <ChatPaneChannelView channelId={channelId} />, [
-    channelId,
-  ]);
+  return useMemo(() => <ChatPaneChannelView channelId={channelId} />, [channelId]);
 };

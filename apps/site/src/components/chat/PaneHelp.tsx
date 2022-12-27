@@ -11,8 +11,7 @@ interface Props {
 export const PaneHelp: FC<Props> = () => {
   return (
     <>
-      <PaneHeaderBox operators={<ClosePaneButton />}>
-        <HelpCircle />
+      <PaneHeaderBox operators={<ClosePaneButton />} icon={<HelpCircle />}>
         <FormattedMessage defaultMessage="Help" />
       </PaneHeaderBox>
       <PaneBodyBox className="p-4">
