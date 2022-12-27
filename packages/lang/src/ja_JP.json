@@ -21,7 +21,7 @@
     "message": "少なくとも {min} 文字以上でなければなりません。"
   },
   "8ULGYw": {
-    "message": "スペース名"
+    "message": "次元名"
   },
   "AyGauy": {
     "message": "ログイン"
@@ -48,13 +48,13 @@
     "message": "最初のチャネル名"
   },
   "Pe0ogR": {
-    "message": "Theme"
+    "message": "テーマ"
   },
   "Q8Qw5B": {
     "message": "説明"
   },
   "RoMEHB": {
-    "message": "Tip: Use {key} to make a line break."
+    "message": "ヒント: {key} を使用して改行します。"
   },
   "RraqCg": {
     "message": "ユーザー名とパスワードが一致しません"
@@ -63,13 +63,13 @@
     "message": "ニックネーム"
   },
   "SENRqu": {
-    "message": "Help"
+    "message": "ヘルプ"
   },
   "Sf+ebw": {
     "message": "ペインを閉じる"
   },
   "SqVNRz": {
-    "message": "Create a Space"
+    "message": "次元を作成する"
   },
   "VA/Z1S": {
     "message": "非表示"
