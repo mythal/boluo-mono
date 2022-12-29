@@ -53,9 +53,6 @@
   "K7AkdL": {
     "message": "表示"
   },
-  "OvBwdK": {
-    "message": "最初のチャネル名"
-  },
   "Pe0ogR": {
     "message": "テーマ"
   },
@@ -113,6 +110,9 @@
   "iFsDVR": {
     "message": "読み込み中"
   },
+  "kIUNDX": {
+    "message": "Default Dice"
+  },
   "kMogDE": {
     "message": "メールアドレスのフォーマットが不正です。"
   },
@@ -134,11 +134,11 @@
   "rELDbB": {
     "message": "再読み込み"
   },
+  "rK7cTy": {
+    "message": "Initial Channel Name"
+  },
   "rYtHKT": {
     "message": "システムに従う"
-  },
-  "s/IAy6": {
-    "message": "デフォルトのサイコロ"
   },
   "tOdNiY": {
     "message": "ダーク"
