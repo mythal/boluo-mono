@@ -5,7 +5,7 @@ import { FormProvider, useController, useForm, useFormContext } from 'react-hook
 import { FormattedMessage } from 'react-intl';
 import type { MutationFetcher } from 'swr/mutation';
 import useSWRMutation from 'swr/mutation';
-import { Button, HelpText, TextArea, TextInput } from 'ui';
+import { Button, HelpText, Spinner, TextArea, TextInput } from 'ui';
 import type { ChildrenProps } from 'ui/types';
 import { post } from '../../../api/browser';
 import { useSpace } from '../../../hooks/useSpace';
@@ -124,6 +124,16 @@ const updater: MutationFetcher<Space, EditSpace, [string, string]> = async (_, {
   return space;
 };
 
+const spaceToForm = (space: Space): FormSchema => ({
+  spaceId: space.id,
+  name: space.name,
+  description: space.description,
+  defaultDiceType: space.defaultDiceType,
+  explorable: space.explorable,
+  publicity: space.isPublic ? 'public' : 'private',
+  allowSpectator: space.allowSpectator,
+});
+
 export const PaneSpaceSettings: FC<Props> = ({ spaceId }) => {
   const close = useClosePane();
   const space = useSpace(spaceId);
@@ -139,19 +149,14 @@ export const PaneSpaceSettings: FC<Props> = ({ spaceId }) => {
     },
   );
   const form = useForm<FormSchema>({
-    defaultValues: {
-      spaceId: space.id,
-      name: space.name,
-      description: space.description,
-      defaultDiceType: space.defaultDiceType,
-      explorable: space.explorable,
-      publicity: space.isPublic ? 'public' : 'private',
-      allowSpectator: space.allowSpectator,
-    },
+    defaultValues: spaceToForm(space),
   });
   const onSubmit = async ({ publicity, ...rest }: FormSchema): Promise<void> => {
     const isPublic = publicity === 'public';
-    await editSpace({ isPublic, ...rest, grantAdmins: [], removeAdmins: [] });
+    const space = await editSpace({ isPublic, ...rest, grantAdmins: [], removeAdmins: [] });
+    if (space) {
+      form.reset(spaceToForm(space));
+    }
   };
   return (
     <>
@@ -182,11 +187,12 @@ export const PaneSpaceSettings: FC<Props> = ({ spaceId }) => {
               </div>
             </div>
             <div className="p-4 sticky bottom-0 border-t bg-bg flex justify-end gap-2">
+              {isMutating && <Spinner />}
               <Button type="button" onClick={close}>
                 <FormattedMessage defaultMessage="Cancel" />
               </Button>
 
-              <Button type="submit" data-type="primary" disabled={isMutating}>
+              <Button type="submit" data-type="primary" disabled={isMutating || !form.formState.isDirty}>
                 <FormattedMessage defaultMessage="Change Settings" />
               </Button>
             </div>
