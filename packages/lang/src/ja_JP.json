@@ -66,7 +66,7 @@
     "message": "ヘルプ"
   },
   "SQoTBO": {
-    "message": "Options for {spaceName}"
+    "message": "{spaceName} のオプション"
   },
   "Sf+ebw": {
     "message": "ペインを閉じる"
@@ -87,7 +87,7 @@
     "message": "{paneName} を閉じる"
   },
   "bGay8d": {
-    "message": "Space Settings"
+    "message": "次元の設定"
   },
   "dMEGZV": {
     "message": "分割ペイン"
