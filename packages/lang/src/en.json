@@ -53,9 +53,6 @@
   "K7AkdL": {
     "message": "Show"
   },
-  "OvBwdK": {
-    "message": "Initial channel name"
-  },
   "Pe0ogR": {
     "message": "Theme"
   },
@@ -113,6 +110,9 @@
   "iFsDVR": {
     "message": "Loading"
   },
+  "kIUNDX": {
+    "message": "Default Dice"
+  },
   "kMogDE": {
     "message": "Must be a valid email address."
   },
@@ -134,11 +134,11 @@
   "rELDbB": {
     "message": "Refresh"
   },
+  "rK7cTy": {
+    "message": "Initial Channel Name"
+  },
   "rYtHKT": {
     "message": "Follow System"
-  },
-  "s/IAy6": {
-    "message": "Default dice"
   },
   "tOdNiY": {
     "message": "Dark"

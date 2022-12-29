@@ -110,7 +110,7 @@ const FieldDefaultDice: FC = () => {
     <div>
       <label>
         <div className="py-1">
-          <FormattedMessage defaultMessage="Default dice" />
+          <FormattedMessage defaultMessage="Default Dice" />
         </div>
         <DiceSelect value={value} onChange={onChange} />
       </label>

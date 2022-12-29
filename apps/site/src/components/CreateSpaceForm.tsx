@@ -68,7 +68,7 @@ const DefaultDiceField: FC = () => {
   return (
     <div>
       <Label htmlFor={id}>
-        <FormattedMessage defaultMessage="Default dice" />
+        <FormattedMessage defaultMessage="Default Dice" />
       </Label>
       <div>
         <DiceSelect value={value ?? 'd20'} onChange={onChange} />
@@ -85,7 +85,7 @@ const FirstChannelNameField: FC = () => {
   return (
     <div>
       <Label htmlFor={id}>
-        <FormattedMessage defaultMessage="Initial channel name" />
+        <FormattedMessage defaultMessage="Initial Channel Name" />
       </Label>
 
       <TextInput
