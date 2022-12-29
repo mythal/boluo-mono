@@ -53,9 +53,6 @@
   "K7AkdL": {
     "message": "显示"
   },
-  "OvBwdK": {
-    "message": "初始频道名称"
-  },
   "Pe0ogR": {
     "message": "主题"
   },
@@ -113,6 +110,9 @@
   "iFsDVR": {
     "message": "加载中"
   },
+  "kIUNDX": {
+    "message": "Default Dice"
+  },
   "kMogDE": {
     "message": "请输入合法的邮箱地址。"
   },
@@ -134,11 +134,11 @@
   "rELDbB": {
     "message": "刷新"
   },
+  "rK7cTy": {
+    "message": "Initial Channel Name"
+  },
   "rYtHKT": {
     "message": "依照系统设定"
-  },
-  "s/IAy6": {
-    "message": "默认使用的骰子"
   },
   "tOdNiY": {
     "message": "暗色"
