@@ -14,7 +14,7 @@ export const SidebarItem: FC<Props> = ({ onClick, icon, children, active = false
       onClick={onClick}
       className={clsx(
         'flex text-left items-center gap-1 w-full py-2 px-4 hover:bg-surface-200',
-        active && 'bg-surface-200',
+        active && 'bg-surface-200 border-r-1 border-brand-500',
       )}
     >
       <span className={active ? 'text-surface-600' : 'text-surface-400'}>{icon}</span>

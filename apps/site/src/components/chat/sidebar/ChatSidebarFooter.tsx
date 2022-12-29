@@ -26,10 +26,10 @@ const SettingToggleButton: FC<{ on: boolean }> = ({ on }) => {
       title={label}
       aria-label={label}
       className="group"
-      data-active={on}
+      data-type="switch"
+      data-on={on}
     >
       <Settings />
-      <Indicator on={on} className="ml-0.5" />
     </Button>
   );
 };
@@ -48,10 +48,10 @@ const HelpToggleButton: FC<{ on: boolean }> = ({ on }) => {
       title={label}
       aria-label={label}
       className="group"
-      data-active={on}
+      data-type="switch"
+      data-on={on}
     >
       <HelpCircle />
-      <Indicator on={on} className="ml-0.5" />
     </Button>
   );
 };

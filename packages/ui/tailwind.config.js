@@ -14,14 +14,24 @@ const revLime = revert(lime);
 const revSlate = revert(slate);
 const revBlue = revert(blue);
 
-/** @type {import('tailwindcss').Config.theme} */
+/** @type {import('tailwindcss').Config["theme"]} */
 const lightTheme = {
+  ringColor: {
+    DEFAULT: green[400],
+  },
+  ringOffsetColor: {
+    DEFAULT: neutral[50],
+  },
+  borderColor: {
+    DEFAULT: neutral[200],
+  },
   colors: {
     pin: {
       highest: black,
       lowest: white,
       surface: neutral,
       brand: lime,
+      gray: gray,
     },
     highest: black,
     lowest: white,
@@ -103,8 +113,17 @@ const lightTheme = {
   },
 };
 
-/** @type {import('tailwindcss').Config.theme} */
+/** @type {import('tailwindcss').Config["theme"]} */
 const darkTheme = {
+  ringColor: {
+    DEFAULT: blue[500]
+  },
+  ringOffsetColor: {
+    DEFAULT: slate[900],
+  },
+  borderColor: {
+    DEFAULT: neutral[700],
+  },
   colors: {
     highest: white,
     lowest: black,
@@ -215,6 +234,9 @@ module.exports = {
       1: "0.25rem",
     },
     extend: {
+      ringOffsetWidth: {
+        DEFAULT: '1px',
+      },
       fontSize: {
         "12px": "12px",
         "24px": "24px",
@@ -236,6 +258,8 @@ module.exports = {
       addVariant("enabled", "&:not(:disabled)");
       addVariant("hover-enabled", "&:hover:not(:disabled)");
       addVariant("active-enabled", "&:is([data-active=\"true\"],:active):not(:disabled)");
+      addVariant("on", '&[data-on="true"]');
+      addVariant("off", '&[data-on="false"]');
       addVariant("state-on", '&[data-state="on"]');
       addVariant("state-off", '&[data-state="off"]');
       addVariant("state-open", '&[data-state="open"]');
