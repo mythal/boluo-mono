@@ -25,6 +25,7 @@ export const SpaceOptions: FC<Props> = ({ space, panes }) => {
         icon={<Settings />}
         active={spaceSettingsActive}
         onClick={() => dispatch({ type: 'TOGGLE', pane: spaceSettingsPane })}
+        toggle
       >
         <FormattedMessage defaultMessage="Space Settings" />
       </SidebarItem>

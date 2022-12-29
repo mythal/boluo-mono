@@ -5,16 +5,21 @@ interface Props {
   onClick: () => void;
   icon?: ReactNode;
   active?: boolean;
+  toggle?: boolean;
   children: ReactNode;
 }
 
-export const SidebarItem: FC<Props> = ({ onClick, icon, children, active = false }) => {
+export const SidebarItem: FC<Props> = ({ onClick, icon, children, active = false, toggle = false }) => {
   return (
     <button
       onClick={onClick}
       className={clsx(
         'flex text-left items-center gap-1 w-full py-2 px-4 hover:bg-surface-200',
-        active && 'bg-surface-200 border-r-1 border-brand-500',
+        toggle && [
+          'border-r-1',
+          active ? 'border-brand-500' : 'border-surface-300',
+        ],
+        active && 'bg-surface-100',
       )}
     >
       <span className={active ? 'text-surface-600' : 'text-surface-400'}>{icon}</span>
