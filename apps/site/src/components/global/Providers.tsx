@@ -38,7 +38,7 @@ export const ClientProviders: FC<Props> = ({ children, locale, messages, me }) =
   return (
     <SWRConfig
       value={{
-        refreshInterval: 10000,
+        refreshInterval: 60000,
         suspense: true,
       }}
     >

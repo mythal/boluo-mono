@@ -10,6 +10,7 @@ import { Button, Label, Oops, Select, TextArea, TextInput } from 'ui';
 import type { SelectItem } from 'ui/Select';
 import { post } from '../api/browser';
 import { required } from '../validations';
+import { DiceSelect } from './DiceSelect';
 
 const FormErrorDispay: FC<{ error: ApiError }> = ({ error }) => {
   return (
@@ -36,7 +37,7 @@ const NameField: FC = () => {
   return (
     <div>
       <Label htmlFor={id}>
-        <FormattedMessage defaultMessage="Space name" />
+        <FormattedMessage defaultMessage="Space Name" />
       </Label>
 
       <TextInput
@@ -70,7 +71,7 @@ const DefaultDiceField: FC = () => {
         <FormattedMessage defaultMessage="Default dice" />
       </Label>
       <div>
-        <Select items={dices} value={value ?? 'd20'} onChange={onChange} data-state={error ? 'error' : 'default'} />
+        <DiceSelect value={value ?? 'd20'} onChange={onChange} />
       </div>
       <FieldErrorDisplay error={error} />
     </div>

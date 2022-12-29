@@ -8,8 +8,8 @@ import { PaneEmpty } from './PaneEmpty';
 import { PaneError } from './PaneError';
 import { PaneHelp } from './PaneHelp';
 import { PaneLoading } from './PaneLoading';
-import { PaneSpaceSettings } from './PaneSpaceSettings';
 import { PaneSettings } from './settings/PaneSettings';
+import { PaneSpaceSettings } from './space-settings/PaneSpaceSettings';
 
 interface Props {
   pane: Pane;
@@ -28,7 +28,7 @@ const Switch: FC<Props> = ({ pane }) => {
     case 'HELP':
       return <PaneHelp />;
     case 'SPACE_SETTINGS':
-      return <PaneSpaceSettings />;
+      return <PaneSpaceSettings spaceId={pane.spaceId} />;
     default:
       return <PaneEmpty />;
   }

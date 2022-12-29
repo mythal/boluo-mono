@@ -21,7 +21,7 @@ export const PaneHeaderBox: FC<Props> = ({ children, operators, icon }) => {
       )}
       onClick={focus}
     >
-      <div className="inline-flex gap-1 items-center">
+      <div className="inline-flex gap-1 items-center flex-nowrap whitespace-nowrap overflow-hidden">
         {icon}
         {children}
       </div>

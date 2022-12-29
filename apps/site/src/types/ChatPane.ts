@@ -16,7 +16,8 @@ export interface HelpPane {
 
 export interface SpaceSettingsPane {
   type: 'SPACE_SETTINGS';
-  id: 'space_settings';
+  id: string;
+  spaceId: string;
 }
 
 export interface EmptyPane {

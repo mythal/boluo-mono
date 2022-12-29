@@ -1,7 +1,7 @@
 import { AppResponse, isAppResponse, makeUri } from './request';
 import type { Channel } from './types/channels';
 import { GetMessagesByChannel, Message, NewMessage } from './types/messages';
-import type { CreateSpace, Space, SpaceWithMember, SpaceWithRelated } from './types/spaces';
+import type { CreateSpace, EditSpace, Space, SpaceWithMember, SpaceWithRelated } from './types/spaces';
 import type { CheckEmail, CheckUsername, GetMe, LoginData, LoginReturn, RegisterData, User } from './types/users';
 
 export interface Get {
@@ -27,8 +27,12 @@ export interface Post {
   '/users/register': { payload: RegisterData; result: User };
   // spaces
   '/spaces/create': { payload: CreateSpace; result: SpaceWithMember };
+  '/spaces/edit': { payload: EditSpace; result: Space };
   // messages
   '/messages/send': { payload: NewMessage; result: Message };
+}
+
+export interface Put {
 }
 
 export interface Patch {

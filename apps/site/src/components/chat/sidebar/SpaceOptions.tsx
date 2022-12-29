@@ -14,7 +14,7 @@ interface Props {
 
 export const SpaceOptions: FC<Props> = ({ space, panes }) => {
   const dispatch = useChatPaneDispatch();
-  const spaceSettingsPane: SpaceSettingsPane = { type: 'SPACE_SETTINGS', id: 'space_settings' };
+  const spaceSettingsPane: SpaceSettingsPane = { type: 'SPACE_SETTINGS', id: space.id, spaceId: space.id };
   const spaceSettingsActive = useMemo(() => panes.findIndex(pane => pane.type === 'SPACE_SETTINGS') !== -1, [panes]);
   return (
     <>
