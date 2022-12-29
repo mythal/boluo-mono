@@ -3,8 +3,10 @@
 import type { OnErrorFn } from '@formatjs/intl';
 import type { GetMe } from 'boluo-api';
 import type { FC } from 'react';
+import { useEffect } from 'react';
 import { IntlProvider } from 'react-intl';
 import { SWRConfig } from 'swr';
+import { clearWatchSystemTheme, watchSystemTheme } from 'ui/theme';
 import type { ChildrenProps } from '../../helper/props';
 import { MeProvider } from '../../hooks/useMe';
 import type { IntlMessages, Locale } from '../../locale';
@@ -29,6 +31,10 @@ const onIntlError: OnErrorFn = (e) => {
 };
 
 export const ClientProviders: FC<Props> = ({ children, locale, messages, me }) => {
+  useEffect(() => {
+    watchSystemTheme();
+    return clearWatchSystemTheme;
+  }, []);
   return (
     <SWRConfig
       value={{
