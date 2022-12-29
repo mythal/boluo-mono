@@ -95,7 +95,7 @@ export const PaneSettings: FC = () => {
       <PaneHeaderBox operators={<ClosePaneButton />} icon={<Settings />}>
         <FormattedMessage defaultMessage="Settings" />
       </PaneHeaderBox>
-      <PaneBodyBox className="flex p-4 flex-col gap-6 overflow-y-scroll">
+      <PaneBodyBox className="flex p-4 flex-col gap-6 overflow-y-auto">
         <LanguageField />
         <ThemeField />
         <ExpandDiceField />
