@@ -13,7 +13,7 @@ export const Compose = ({ me, className }: Props) => {
   const channelId = useChannelId();
   const [text, setText] = useState('');
   const onSubmit = async () => {
-    const result = await post('/messages/send', {
+    const result = await post('/messages/send', null, {
       messageId: null,
       channelId,
       name: me.user.nickname,

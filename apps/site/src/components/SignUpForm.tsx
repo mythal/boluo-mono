@@ -169,7 +169,7 @@ export const SignUpForm = () => {
   const [error, setError] = useState<ApiError | null>(null);
 
   const onSubmit: SubmitHandler<Schema> = async ({ password, username, email, nickname }) => {
-    const result = await post('/users/register', { password, username, email, nickname });
+    const result = await post('/users/register', null, { password, username, email, nickname });
     if (result.isErr) {
       return setError(result.err);
     }

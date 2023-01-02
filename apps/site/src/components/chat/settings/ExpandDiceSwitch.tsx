@@ -12,7 +12,7 @@ interface Props {
 }
 const updater: MutationFetcher<Settings, boolean, string> = async (url: string, { arg: expandDice }) => {
   const settings: Settings = { expandDice };
-  const settingsResult = await patch('/users/update_settings', settings);
+  const settingsResult = await patch('/users/update_settings', null, settings);
   return settingsResult.map(toSettings).unwrapOr({});
 };
 export const ExpandDiceSwitch: FC<Props> = () => {

@@ -23,13 +23,14 @@ export interface Get {
 
 export interface Post {
   // users
-  '/users/login': { payload: LoginData; result: LoginReturn };
-  '/users/register': { payload: RegisterData; result: User };
+  '/users/login': { payload: LoginData; query: null; result: LoginReturn };
+  '/users/register': { payload: RegisterData; query: null; result: User };
   // spaces
-  '/spaces/create': { payload: CreateSpace; result: SpaceWithMember };
-  '/spaces/edit': { payload: EditSpace; result: Space };
+  '/spaces/create': { payload: CreateSpace; query: null; result: SpaceWithMember };
+  '/spaces/edit': { payload: EditSpace; query: null; result: Space };
+  '/spaces/delete': { payload: {}; query: { id: string }; result: Space };
   // messages
-  '/messages/send': { payload: NewMessage; result: Message };
+  '/messages/send': { payload: NewMessage; query: null; result: Message };
 }
 
 export interface Put {
@@ -37,7 +38,7 @@ export interface Put {
 
 export interface Patch {
   // users
-  '/users/update_settings': { payload: object; result: object };
+  '/users/update_settings': { payload: object; query: null; result: object };
 }
 
 export type { AppResponse };

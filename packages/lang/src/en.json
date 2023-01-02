@@ -41,6 +41,9 @@
   "GMPXuF": {
     "message": "Everyone can join this space"
   },
+  "H2WXs6": {
+    "message": "Destroy Space"
+  },
   "HpyhN3": {
     "message": "Boluo"
   },
@@ -85,6 +88,9 @@
   },
   "VzzYJk": {
     "message": "Create"
+  },
+  "X5rIjZ": {
+    "message": "Danger Zone"
   },
   "YELoe8": {
     "message": "Tip: Use {key} to send messages."
@@ -131,6 +137,9 @@
   "qoUUiA": {
     "message": "Allow Spectator"
   },
+  "qvc9uM": {
+    "message": "This cannot be undone."
+  },
   "rELDbB": {
     "message": "Refresh"
   },
@@ -139,6 +148,9 @@
   },
   "rYtHKT": {
     "message": "Follow System"
+  },
+  "s+ixvA": {
+    "message": "Sure, Destroy {spaceName}"
   },
   "tOdNiY": {
     "message": "Dark"
@@ -166,5 +178,8 @@
   },
   "y63e7m": {
     "message": "EMail"
+  },
+  "zNnjeF": {
+    "message": "Are you sure you want to delete {spaceName}?"
   }
 }

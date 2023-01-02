@@ -20,10 +20,10 @@ const headers = new Headers({
 
 export async function post<P extends keyof Post>(
   path: P,
+  query: Post[P]['query'],
   payload: Post[P]['payload'],
 ): Promise<Result<Post[P]['result'], ApiError>> {
-  const baseUrl = BACKEND_URL;
-  const url = baseUrl + path;
+  const url = makeUri(BACKEND_URL, path, query);
   const params: RequestInit = {
     credentials: 'include',
     headers,
@@ -36,10 +36,10 @@ export async function post<P extends keyof Post>(
 
 export async function patch<P extends keyof Patch>(
   path: P,
+  query: Patch[P]['query'],
   payload: Patch[P]['payload'],
 ): Promise<Result<Patch[P]['result'], ApiError>> {
-  const baseUrl = BACKEND_URL;
-  const url = baseUrl + path;
+  const url = makeUri(BACKEND_URL, path, query);
   const params: RequestInit = {
     credentials: 'include',
     headers,

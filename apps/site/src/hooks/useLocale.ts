@@ -12,7 +12,7 @@ import { useMe } from './useMe';
 
 const updateLocale: MutationFetcher<Settings, Locale, string> = async (url: string, { arg: locale }) => {
   const settings: Settings = { locale };
-  const settingsResult = await patch('/users/update_settings', settings);
+  const settingsResult = await patch('/users/update_settings', null, settings);
   return settingsResult.unwrapOr({});
 };
 

@@ -130,7 +130,7 @@ export const LoginForm: FC<Props> = () => {
   const { handleSubmit } = methods;
   const [error, setError] = useState<ApiError | null>(null);
   const onSubmit: SubmitHandler<Inputs> = async ({ password, username }) => {
-    const result = await post('/users/login', { password, username });
+    const result = await post('/users/login', null, { password, username });
     if (result.isErr) {
       return setError(result.err);
     }

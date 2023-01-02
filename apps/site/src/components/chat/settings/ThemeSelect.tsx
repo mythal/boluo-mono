@@ -17,7 +17,7 @@ interface Props {
 
 const updater: MutationFetcher<Settings, Theme, string> = async (url: string, { arg: theme }) => {
   const settings: Settings = { theme };
-  const settingsResult = await patch('/users/update_settings', settings);
+  const settingsResult = await patch('/users/update_settings', null, settings);
   return settingsResult.unwrapOr({});
 };
 

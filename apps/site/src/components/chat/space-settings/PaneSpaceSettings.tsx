@@ -1,6 +1,7 @@
 import type { EditSpace, Space } from 'boluo-api';
 import { Settings } from 'boluo-icons';
 import type { FC } from 'react';
+import { useState } from 'react';
 import { useId } from 'react';
 import { FormProvider, useController, useForm, useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
@@ -15,6 +16,7 @@ import { DiceSelect } from '../../DiceSelect';
 import { ClosePaneButton } from '../ClosePaneButton';
 import { PaneBodyBox } from '../PaneBodyBox';
 import { PaneHeaderBox } from '../PaneHeaderBox';
+import { FieldDestroySpace } from './FieldDestroySpace';
 
 interface Props {
   spaceId: string;
@@ -130,8 +132,8 @@ const PaneFooterBox: FC<ChildrenProps> = ({ children }) => (
   <div className="p-4 sticky bottom-0 border-t bg-bg flex justify-end gap-2">{children}</div>
 );
 
-const updater: MutationFetcher<Space, EditSpace, [string, string]> = async (_, { arg }) => {
-  const result = await post('/spaces/edit', arg);
+const updater: MutationFetcher<Space, EditSpace, [string, string]> = async ([_, spaceId], { arg }) => {
+  const result = await post('/spaces/edit', null, arg);
   const space = result.unwrap();
   return space;
 };
@@ -195,6 +197,12 @@ export const PaneSpaceSettings: FC<Props> = ({ spaceId }) => {
                   <FormattedMessage defaultMessage="Space Publicity" />
                 </SectionTitle>
                 <PublicityField />
+              </div>
+              <div>
+                <SectionTitle>
+                  <FormattedMessage defaultMessage="Danger Zone" />
+                </SectionTitle>
+                <FieldDestroySpace spaceId={space.id} spaceName={space.name} />
               </div>
             </div>
             <PaneFooterBox>

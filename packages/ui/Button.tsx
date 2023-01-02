@@ -6,7 +6,7 @@ export type ButtonProps =
   & React.ComponentPropsWithoutRef<'button'>
   & DataAttr<{
     small?: boolean;
-    type?: 'primary' | 'default' | 'switch';
+    type?: 'primary' | 'default' | 'switch' | 'danger';
     active?: boolean;
     on?: boolean;
   }>;
@@ -26,6 +26,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ childr
           'bg-surface-300 text-highest',
           'hover-enabled:bg-surface-200 active-enabled:bg-surface-400',
           'disabled:text-surface-600 disabled:bg-surface-400',
+        ],
+        type === 'danger' && [
+          'bg-error-600 text-lowest',
+          'hover-enabled:bg-error-500 active-enabled:bg-error-400',
         ],
         type === 'primary' && [
           'bg-pin-brand-600 text-white',

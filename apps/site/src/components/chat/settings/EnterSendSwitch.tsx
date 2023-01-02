@@ -12,7 +12,7 @@ interface Props {
 }
 const updater: MutationFetcher<Settings, boolean, string> = async (url: string, { arg: enterSend }) => {
   const settings: Settings = { enterSend };
-  const settingsResult = await patch('/users/update_settings', settings);
+  const settingsResult = await patch('/users/update_settings', null, settings);
   return settingsResult.map(toSettings).unwrapOr({});
 };
 export const EnterSendSwitch: FC<Props> = () => {

@@ -122,7 +122,7 @@ export const CreateSpaceForm: FC<Props> = () => {
   const [error, setError] = useState<ApiError | null>(null);
   const router = useRouter();
   const onSubmit: SubmitHandler<CreateSpace> = async (params) => {
-    const result = await post('/spaces/create', params);
+    const result = await post('/spaces/create', null, params);
     if (result.isErr) {
       setError(result.err);
       return;
