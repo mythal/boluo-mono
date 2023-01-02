@@ -122,7 +122,7 @@ async fn move_between(req: Request<Body>) -> Result<bool, AppError> {
         ));
     }
 
-    let message = match range {
+    let mut message = match range {
         (None, None) => return Err(AppError::BadRequest("a and b cannot both be null".to_string())),
         (Some(a), Some(b)) => {
             if a < b {
@@ -140,6 +140,9 @@ async fn move_between(req: Request<Body>) -> Result<bool, AppError> {
     };
 
     trans.commit().await?;
+    if message.whisper_to_users.is_some() {
+        message.hide();
+    }
     Event::message_edited(channel.space_id, message);
     Ok(true)
 }
