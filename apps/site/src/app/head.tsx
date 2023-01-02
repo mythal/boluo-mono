@@ -3,10 +3,10 @@ import logo from 'boluo-logo/png/logo.png';
 import logoDevSvg from 'boluo-logo/svg/logo-dev.svg';
 import logoSvg from 'boluo-logo/svg/logo.svg';
 import { IS_DEVELOPMENT } from '../const';
-import { getIntl } from '../helper/server';
+import { getIntlSync } from '../helper/server';
 
-export default async function Head() {
-  const intl = await getIntl();
+export default function Head() {
+  const intl = getIntlSync();
   return (
     <>
       <link rel="shortcut icon" href={IS_DEVELOPMENT ? logoDev.src : logo.src} key="icon" />

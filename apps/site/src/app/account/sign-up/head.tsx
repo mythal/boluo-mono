@@ -1,7 +1,7 @@
-import { getIntl, title } from '../../../helper/server';
+import { getIntlSync, title } from '../../../helper/server';
 
-export default async function Head() {
-  const intl = await getIntl();
+export default function Head() {
+  const intl = getIntlSync();
   return (
     <>
       <title>{title(intl, intl.formatMessage({ defaultMessage: 'Sign Up' }))}</title>

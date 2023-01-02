@@ -2,15 +2,17 @@ import 'server-only';
 import type { IntlShape } from '@formatjs/intl';
 import { createIntl } from '@formatjs/intl';
 import type { GetMe } from 'boluo-api';
+import en from 'lang/compiled/en.json';
+import ja from 'lang/compiled/ja_JP.json';
+import zh_CN from 'lang/compiled/zh_CN.json';
 import { cookies, headers } from 'next/headers';
 import { cache } from 'react';
 import type { Theme } from 'ui';
 import { toTheme } from 'ui/theme';
 import { get } from '../api/server';
-import type { Locale } from '../locale';
+import type { IntlMessages, Locale } from '../locale';
 import { defaultLocale } from '../locale';
 import { localeList } from '../locale';
-import { loadMessages } from '../locale';
 import { toLocale } from '../locale';
 import { toSettings } from '../settings';
 
@@ -73,16 +75,34 @@ export const getTheme = cache(async (): Promise<Theme> => {
   return getThemeFromHeaders();
 });
 
-export const getMessages = cache(async (locale: Locale) => await loadMessages(locale));
+export const getMessages = (locale: Locale): IntlMessages => {
+  switch (locale) {
+    case 'en':
+      return en;
+    case 'ja':
+      return ja;
+    case 'zh-CN':
+      return zh_CN;
+  }
+};
 
 export const getIntl = cache(async (): Promise<IntlShape<string>> => {
   const locale = await getLocale();
-  const messages = await getMessages(locale);
+  const messages = getMessages(locale);
   return createIntl({
     locale,
     messages,
   });
 });
+
+export const getIntlSync = (): IntlShape<string> => {
+  const locale = getLocaleFromHeaders();
+  const messages = getMessages(locale);
+  return createIntl({
+    locale,
+    messages,
+  });
+};
 
 export const title = (intl: IntlShape<string>, prefix: string): string => {
   return prefix + ' - ' + intl.formatMessage({ defaultMessage: 'Boluo' });

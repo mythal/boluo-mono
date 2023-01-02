@@ -10,7 +10,7 @@ export default async function RootLayout({
 }) {
   const me = await getMe();
   const locale = await getLocale();
-  const messages = await getMessages(locale);
+  const messages = getMessages(locale);
   const theme = await getTheme();
 
   return (
