@@ -41,6 +41,9 @@
   "GMPXuF": {
     "message": "Everyone can join this space"
   },
+  "H2WXs6": {
+    "message": "Destroy Space"
+  },
   "HpyhN3": {
     "message": "菠萝"
   },
@@ -85,6 +88,9 @@
   },
   "VzzYJk": {
     "message": "创建"
+  },
+  "X5rIjZ": {
+    "message": "Danger Zone"
   },
   "YELoe8": {
     "message": "提示：使用 {key} 发送消息。"
@@ -131,6 +137,9 @@
   "qoUUiA": {
     "message": "Allow Spectator"
   },
+  "qvc9uM": {
+    "message": "This cannot be undone."
+  },
   "rELDbB": {
     "message": "刷新"
   },
@@ -139,6 +148,9 @@
   },
   "rYtHKT": {
     "message": "依照系统设定"
+  },
+  "s+ixvA": {
+    "message": "Sure, Destroy {spaceName}"
   },
   "tOdNiY": {
     "message": "暗色"
@@ -166,5 +178,8 @@
   },
   "y63e7m": {
     "message": "邮箱"
+  },
+  "zNnjeF": {
+    "message": "Are you sure you want to delete {spaceName}?"
   }
 }
