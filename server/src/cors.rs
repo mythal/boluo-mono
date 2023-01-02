@@ -8,7 +8,8 @@ use hyper::{Body, Request, Response};
 pub fn allow_origin(origin: Option<&str>, mut res: Response<Body>) -> Response<Body> {
     let header = res.headers_mut();
     let origin = if let Some(origin) = origin {
-        if origin.ends_with(".boluo.chat") || origin.starts_with("http://localhost:") {
+        if origin == "https://boluo.chat" || origin.ends_with(".boluo.chat") || origin.starts_with("http://localhost:")
+        {
             origin
         } else {
             ""
