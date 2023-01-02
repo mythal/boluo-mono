@@ -6,6 +6,7 @@ use std::env;
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 
 use crate::context::debug;
+use hyper::header::ORIGIN;
 use hyper::server::conn::AddrStream;
 use hyper::service::{make_service_fn, service_fn};
 use hyper::{Body, Request, Server};
@@ -66,28 +67,36 @@ async fn handler(req: Request<Body>) -> Result<Response, hyper::Error> {
     let start = Instant::now();
     let method = req.method().clone();
     let method = method.as_str();
+    let origin = req
+        .headers()
+        .get(ORIGIN)
+        .and_then(|x| x.to_str().ok())
+        .map(|x| x.to_owned());
     let uri = req.uri().clone();
     if req.method() == hyper::Method::OPTIONS {
         return Ok(cors::preflight_requests(req));
     }
     let response = router(req).await;
     let mut has_error = false;
-    let response = allow_origin(match response {
-        Ok(response) => response,
-        Err(e) => {
-            has_error = true;
-            error::log_error(&e, &uri);
-            let mut remove_session = false;
-            if let AppError::Unauthenticated(_) = e {
-                remove_session = true;
+    let response = allow_origin(
+        origin.as_deref(),
+        match response {
+            Ok(response) => response,
+            Err(e) => {
+                has_error = true;
+                error::log_error(&e, &uri);
+                let mut remove_session = false;
+                if let AppError::Unauthenticated(_) = e {
+                    remove_session = true;
+                }
+                let mut res = err_response(e);
+                if remove_session {
+                    session::remove_session_cookie(res.headers_mut());
+                }
+                res
             }
-            let mut res = err_response(e);
-            if remove_session {
-                session::remove_session_cookie(res.headers_mut());
-            }
-            res
-        }
-    });
+        },
+    );
 
     if has_error {
         log::warn!("{} {} {:?}", method, &uri, start.elapsed());
