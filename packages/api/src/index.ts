@@ -13,6 +13,7 @@ export interface Get {
   '/users/check_email': { query: CheckEmail; result: boolean };
   // spaces
   '/spaces/query': { query: { id: string }; result: Space };
+  '/spaces/my': { query: null; result: SpaceWithMember[] };
   '/spaces/query_with_related': { query: { id: string }; result: SpaceWithRelated };
   // channels
   '/channels/query': { query: { id: string }; result: Channel };

@@ -6,6 +6,7 @@ import { useId, useState } from 'react';
 import type { FieldError, SubmitHandler } from 'react-hook-form';
 import { FormProvider, useController, useForm, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { useSWRConfig } from 'swr';
 import { Button, Label, Oops, Select, TextArea, TextInput } from 'ui';
 import type { SelectItem } from 'ui/Select';
 import { post } from '../api/browser';
@@ -115,6 +116,7 @@ const DescriptionField: FC = () => {
 };
 
 export const CreateSpaceForm: FC<Props> = () => {
+  const { mutate } = useSWRConfig();
   const methods = useForm<CreateSpace>({
     defaultValues: {},
   });
@@ -128,6 +130,7 @@ export const CreateSpaceForm: FC<Props> = () => {
       return;
     }
     const { space, member } = result.some;
+    await mutate('/spaces/my');
     router.push('/');
   };
   return (

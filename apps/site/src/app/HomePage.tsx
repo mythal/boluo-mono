@@ -13,6 +13,7 @@ import { get } from '../api/browser';
 import { Me } from '../components/Me';
 import type { StyleProps } from '../helper/props';
 import { useMe } from '../hooks/useMe';
+import { useMySpaces } from '../hooks/useMySpaces';
 
 const useLogout = () => {
   const router = useRouter();
@@ -64,19 +65,16 @@ const MySpaceListItem: FC<{ space: Space }> = ({ space }) => {
 };
 
 const MySpaceList: FC = () => {
-  const me = useMe();
-  const spaces = useMemo(() => me?.mySpaces ?? [], [me?.mySpaces]);
+  const spaces = useMySpaces();
   const items = useMemo(() => (
     spaces.map(item => <MySpaceListItem key={item.space.id} space={item.space} />)
   ), [spaces]);
 
-  if (me === null) {
-    return null;
-  }
   return <div>{items}</div>;
 };
 
 const Home: NextPage = () => {
+  const me = useMe();
   return (
     <>
       <h1 className="my-4 text-3xl">
@@ -86,7 +84,7 @@ const Home: NextPage = () => {
         <Me />
         <UserOperations className="flex gap-2" />
       </div>
-      <MySpaceList />
+      {me && <MySpaceList />}
     </>
   );
 };

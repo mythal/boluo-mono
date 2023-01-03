@@ -2,10 +2,12 @@ import { useRouter } from 'next/navigation';
 import type { FC } from 'react';
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { useSWRConfig } from 'swr';
 import { Button } from 'ui';
 import { post } from '../../../api/browser';
 
 export const FieldDestroySpace: FC<{ spaceName: string; spaceId: string }> = ({ spaceId, spaceName }) => {
+  const { mutate } = useSWRConfig();
   const router = useRouter();
   const [isShowConfirm, setShowConfirm] = useState(false);
   const [isMutating, setIsMutating] = useState(false);
@@ -14,6 +16,7 @@ export const FieldDestroySpace: FC<{ spaceName: string; spaceId: string }> = ({ 
     const result = await post('/spaces/delete', { id: spaceId }, {});
     setIsMutating(false);
     if (result.isOk) {
+      await mutate('/spaces/my');
       router.push('/', {});
     }
   };
