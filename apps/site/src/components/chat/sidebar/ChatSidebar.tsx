@@ -4,10 +4,9 @@ import clsx from 'clsx';
 import type { FC } from 'react';
 import { useState } from 'react';
 import { useMemo } from 'react';
-import { useChannelList } from '../../../hooks/useChannelList';
 import type { Pane } from '../../../types/ChatPane';
 import { ChatSidebarFooter } from './ChatSidebarFooter';
-import { SidebarChannelItem } from './SidebarChannelItem';
+import { SidebarChannelList } from './SidebarChannelList';
 import { SpaceOptions } from './SpaceOptions';
 
 interface Props {
@@ -16,22 +15,6 @@ interface Props {
 }
 
 export const ChatSiderbar: FC<Props> = ({ space, panes }) => {
-  const channels = useChannelList(space.id);
-  const channelIdFromPanes = useMemo(
-    () => panes.flatMap((pane) => pane.type === 'CHANNEL' ? [pane.channelId] : []),
-    [panes],
-  );
-  const channelList = useMemo(
-    () =>
-      channels.map((channel) => (
-        <SidebarChannelItem
-          key={channel.id}
-          channel={channel}
-          active={channelIdFromPanes.includes(channel.id)}
-        />
-      )),
-    [channelIdFromPanes, channels],
-  );
   const [state, setState] = useState<'CHANNELS' | 'SPACE'>('CHANNELS');
   const isSettingsOpen = useMemo(() => panes.findIndex(pane => pane.type === 'SETTINGS') !== -1, [panes]);
   const isHelpOpen = useMemo(() => panes.findIndex(pane => pane.type === 'HELP') !== -1, [panes]);
@@ -53,13 +36,13 @@ export const ChatSiderbar: FC<Props> = ({ space, panes }) => {
           {state === 'SPACE' ? <ChevronUp /> : <ChevronDown />}
         </span>
       </div>
-      <div className="border-r flex flex-col justify-between row-start-2 row-end-[-1] col-start-1 col-end-1">
+      <div className="border-r relative flex flex-col justify-between overflow-y-auto row-start-2 row-end-[-1] col-start-1 col-end-1">
         <div>
-          {state === 'CHANNELS' && channelList}
+          {state === 'CHANNELS' && <SidebarChannelList panes={panes} spaceId={space.id} />}
           {state === 'SPACE' && <SpaceOptions space={space} panes={panes} />}
         </div>
         <ChatSidebarFooter
-          className="p-2 flex justify-between"
+          className="p-2 flex justify-between sticky bottom-0 bg-bg"
           isSettingsOpen={isSettingsOpen}
           isHelpOpen={isHelpOpen}
         />

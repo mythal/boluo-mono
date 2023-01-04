@@ -1,5 +1,5 @@
 import { AppResponse, isAppResponse, makeUri } from './request';
-import type { Channel } from './types/channels';
+import type { Channel, ChannelMember, ChannelWithMember, CreateChannel } from './types/channels';
 import { GetMessagesByChannel, Message, NewMessage } from './types/messages';
 import type { CreateSpace, EditSpace, Space, SpaceWithMember, SpaceWithRelated } from './types/spaces';
 import type { CheckEmail, CheckUsername, GetMe, LoginData, LoginReturn, RegisterData, User } from './types/users';
@@ -32,6 +32,8 @@ export interface Post {
   '/spaces/delete': { payload: {}; query: { id: string }; result: Space };
   // messages
   '/messages/send': { payload: NewMessage; query: null; result: Message };
+  // channels
+  '/channels/create': { payload: CreateChannel; query: null; result: ChannelWithMember };
 }
 
 export interface Put {

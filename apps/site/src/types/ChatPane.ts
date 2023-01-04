@@ -20,9 +20,15 @@ export interface SpaceSettingsPane {
   spaceId: string;
 }
 
+export interface CreateChannelPane {
+  type: 'CREATE_CHANNEL';
+  id: 'create_channel';
+  spaceId: string;
+}
+
 export interface EmptyPane {
   type: 'EMPTY';
   id: string;
 }
 
-export type Pane = ChannelPane | EmptyPane | SettingsPane | HelpPane | SpaceSettingsPane;
+export type Pane = ChannelPane | EmptyPane | SettingsPane | HelpPane | SpaceSettingsPane | CreateChannelPane;

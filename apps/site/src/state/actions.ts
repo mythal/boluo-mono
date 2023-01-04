@@ -1,4 +1,4 @@
-import type { Message } from 'boluo-api';
+import type { Message, SpaceWithRelated } from 'boluo-api';
 
 export interface ReceiveMessage {
   type: 'RECEIVE_MESSAGE';
@@ -10,6 +10,11 @@ export interface Initialized {
   type: 'INITIALIZED';
 }
 
+export interface SpaceUpdated {
+  type: 'SPACE_UPDATED';
+  spaceWithRelated: SpaceWithRelated;
+}
+
 export interface MessagesLoaded {
   type: 'MESSAGES_LOADED';
   messages: Message[];
@@ -17,4 +22,4 @@ export interface MessagesLoaded {
   channelId: string;
 }
 
-export type Action = ReceiveMessage | Initialized | MessagesLoaded;
+export type Action = ReceiveMessage | Initialized | MessagesLoaded | SpaceUpdated;

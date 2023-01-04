@@ -183,7 +183,7 @@ export const PaneSpaceSettings: FC<Props> = ({ spaceId }) => {
       <PaneBodyBox className="relative border-r overflow-x-hidden overflow-y-auto ">
         <FormProvider {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="p-4 flex flex-col gap-8 h-full">
+            <div className="p-4 flex flex-col gap-8 h-full max-w-md">
               <div className="flex flex-col gap-2">
                 <SectionTitle>
                   <FormattedMessage defaultMessage="Basic" />
