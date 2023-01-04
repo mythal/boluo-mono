@@ -2,6 +2,9 @@
   "+OyBM6": {
     "message": "This email is already in use."
   },
+  "/iUStU": {
+    "message": "e.g. Gandalf"
+  },
   "2gujDD": {
     "message": "These are the pages used to design and debug the components"
   },
@@ -35,6 +38,9 @@
   "CoEsov": {
     "message": "Username or Email"
   },
+  "CuNepY": {
+    "message": "Create Channel"
+  },
   "D3idYv": {
     "message": "Settings"
   },
@@ -55,6 +61,15 @@
   },
   "K7AkdL": {
     "message": "Show"
+  },
+  "LUrJwE": {
+    "message": "Channels"
+  },
+  "LqOJ8B": {
+    "message": "Is this a secret channel?"
+  },
+  "NigiUz": {
+    "message": "You have to enter a channel name."
   },
   "Pe0ogR": {
     "message": "Theme"
@@ -110,8 +125,17 @@
   "dMEGZV": {
     "message": "Split pane"
   },
+  "dVoumD": {
+    "message": "My Character Name in the Channel (Optional)"
+  },
+  "fGwy5t": {
+    "message": "This channel name already exist."
+  },
   "fNCCY7": {
     "message": "Basic"
+  },
+  "hh0xW7": {
+    "message": "Channel Name"
   },
   "iFsDVR": {
     "message": "Loading"

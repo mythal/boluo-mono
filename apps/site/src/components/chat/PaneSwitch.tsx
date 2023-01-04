@@ -4,6 +4,7 @@ import { ChannelIdContext } from '../../hooks/useChannelId';
 import { PaneIdProvider } from '../../state/panes';
 import type { Pane } from '../../types/ChatPane';
 import { ChatPaneChannel } from './channel/ChannelPane';
+import { PaneCreateChannel } from './PaneCreateChannel';
 import { PaneEmpty } from './PaneEmpty';
 import { PaneError } from './PaneError';
 import { PaneHelp } from './PaneHelp';
@@ -29,6 +30,8 @@ const Switch: FC<Props> = ({ pane }) => {
       return <PaneHelp />;
     case 'SPACE_SETTINGS':
       return <PaneSpaceSettings spaceId={pane.spaceId} />;
+    case 'CREATE_CHANNEL':
+      return <PaneCreateChannel spaceId={pane.spaceId} />;
     default:
       return <PaneEmpty />;
   }

@@ -13,7 +13,6 @@ import { useContextSelector } from 'use-context-selector';
 import { get } from '../../../api/browser';
 import type { ChannelState } from '../../../state/channel';
 import { ChatContext, useChatDispatch } from '../../../state/chat';
-import { useFocusPane } from '../../../state/panes';
 import { MessageListHeader } from './MessageListHeader';
 import { MessageListItem } from './MessageListItem';
 
@@ -106,9 +105,9 @@ const MessageListView: FC<ViewProps> = ({ channelId, messages, className }) => {
 };
 
 export const MessageList: FC<Props> = ({ channelId, className }) => {
-  const messages = useContextSelector(ChatContext, (state) => state.channels[channelId]!.messages);
-  const state = useContextSelector(ChatContext, (state) => state.channels[channelId]!.state);
-  if (state === 'UNINITIALIZED') {
+  const messages = useContextSelector(ChatContext, (state) => state.channels[channelId]?.messages);
+  const state = useContextSelector(ChatContext, (state) => state.channels[channelId]?.state);
+  if (state !== 'INITIALIZED' || messages === undefined) {
     return (
       <div className={className}>
         <FormattedMessage defaultMessage="Loading" />

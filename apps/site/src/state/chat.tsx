@@ -5,7 +5,7 @@ import { createContext as createSelectorContext, useContextUpdate } from 'use-co
 import type { ChildrenProps } from '../helper/props';
 import { useChannelList } from '../hooks/useChannelList';
 import { SpaceConnectionStateContext } from '../hooks/useChatConnection';
-import type { Action } from './actions';
+import type { Action, SpaceUpdated } from './actions';
 import type { ChannelState } from './channel';
 import { channelReducer, makeInitialChannelState } from './channel';
 import { useChatEvent } from './connection';
@@ -35,8 +35,24 @@ const channelsReducer = (channels: ChatState['channels'], action: Action): ChatS
   }
 };
 
+const handleSpaceUpdated = (state: ChatState, { spaceWithRelated }: SpaceUpdated): ChatState => {
+  const channels = { ...state.channels };
+  for (const channel of spaceWithRelated.channels) {
+    if (channel.id in state.channels) {
+      continue;
+    }
+    const newChannelState = makeInitialChannelState(channel.id);
+    newChannelState.state = 'INITIALIZED';
+    channels[channel.id] = newChannelState;
+  }
+  return { ...state, channels };
+};
+
 const reducer = (state: ChatState, action: Action) => {
   const { channels } = state;
+  if (action.type === 'SPACE_UPDATED') {
+    return handleSpaceUpdated(state, action);
+  }
   return {
     channels: channelsReducer(channels, action),
   };
@@ -54,6 +70,8 @@ const eventToAction = (e: Event): Action | null => {
     return { type: 'RECEIVE_MESSAGE', channelId, message };
   } else if (e.body.type === 'INITIALIZED') {
     return { 'type': 'INITIALIZED' };
+  } else if (e.body.type === 'SPACE_UPDATED') {
+    return { 'type': 'SPACE_UPDATED', spaceWithRelated: e.body.spaceWithRelated };
   }
   return null;
 };
