@@ -12,7 +12,7 @@
     "message": "ライト"
   },
   "47FYwb": {
-    "message": "Cancel"
+    "message": "キャンセル"
   },
   "5HUwAy": {
     "message": "文字、数字、アンダースコアのみ使用可能です。"
@@ -24,13 +24,13 @@
     "message": "少なくとも {min} 文字以上でなければなりません。"
   },
   "973Dls": {
-    "message": "Only invited people can join this space"
+    "message": "招待された人だけがこの次元に参加できます"
   },
   "AyGauy": {
     "message": "ログイン"
   },
   "BzWmz8": {
-    "message": "Space Name"
+    "message": "次元名"
   },
   "CoEsov": {
     "message": "ユーザー名またはメール"
