@@ -22,11 +22,11 @@
   }
 }
 
-.fade-in {
-  animation: fade-in 2s ease-in-out forwards;
+.danger-fade-in {
+  animation: danger-fade-in 1.5s ease-in-out forwards;
 }
 
-@keyframes fade-in {
+@keyframes danger-fade-in {
   0% {
     opacity: 0;
     pointer-events: none;
