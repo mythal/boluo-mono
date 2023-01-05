@@ -11,6 +11,9 @@
   "3cc4Ct": {
     "message": "ライト"
   },
+  "47FYwb": {
+    "message": "キャンセル"
+  },
   "5HUwAy": {
     "message": "文字、数字、アンダースコアのみ使用可能です。"
   },
@@ -20,17 +23,26 @@
   "6JNvt/": {
     "message": "少なくとも {min} 文字以上でなければなりません。"
   },
-  "8ULGYw": {
-    "message": "次元名"
+  "973Dls": {
+    "message": "招待された人だけがこの次元に参加できます"
   },
   "AyGauy": {
     "message": "ログイン"
+  },
+  "BzWmz8": {
+    "message": "次元名"
   },
   "CoEsov": {
     "message": "ユーザー名またはメール"
   },
   "D3idYv": {
     "message": "設定"
+  },
+  "GMPXuF": {
+    "message": "誰でもこの次元に参加できます"
+  },
+  "H2WXs6": {
+    "message": "次元を破壊する"
   },
   "HpyhN3": {
     "message": "パイン"
@@ -43,9 +55,6 @@
   },
   "K7AkdL": {
     "message": "表示"
-  },
-  "OvBwdK": {
-    "message": "最初のチャネル名"
   },
   "Pe0ogR": {
     "message": "テーマ"
@@ -80,6 +89,9 @@
   "VzzYJk": {
     "message": "作成する"
   },
+  "X5rIjZ": {
+    "message": "危険な操作"
+  },
   "YELoe8": {
     "message": "ヒント: {key} でメッセージを送信できます。"
   },
@@ -89,11 +101,23 @@
   "bGay8d": {
     "message": "次元の設定"
   },
+  "cCTI4h": {
+    "message": "インターネット上の誰もがこの次元を閲覧できるようにするか"
+  },
+  "clpFBW": {
+    "message": "次元のパブリシティ"
+  },
   "dMEGZV": {
     "message": "分割ペイン"
   },
+  "fNCCY7": {
+    "message": "ベーシック"
+  },
   "iFsDVR": {
     "message": "読み込み中"
+  },
+  "kIUNDX": {
+    "message": "デフォルトのサイコロ"
   },
   "kMogDE": {
     "message": "メールアドレスのフォーマットが不正です。"
@@ -104,17 +128,41 @@
   "oVARYX": {
     "message": "少なくとも {max} 文字以上でなければなりません。"
   },
+  "q7JBy1": {
+    "message": "設定を変更"
+  },
+  "qbB8pg": {
+    "message": "次元の説明"
+  },
+  "qoUUiA": {
+    "message": "観覧を許可"
+  },
+  "qvc9uM": {
+    "message": "この操作は元に戻すことができません。"
+  },
   "rELDbB": {
     "message": "再読み込み"
+  },
+  "rK7cTy": {
+    "message": "最初のチャネル名"
   },
   "rYtHKT": {
     "message": "システムに従う"
   },
-  "s/IAy6": {
-    "message": "デフォルトのサイコロ"
+  "s+ixvA": {
+    "message": "「 {spaceName}」を破壊します"
   },
   "tOdNiY": {
     "message": "ダーク"
+  },
+  "uhu5aG": {
+    "message": "公開"
+  },
+  "viXE32": {
+    "message": "非公開"
+  },
+  "wR2FW8": {
+    "message": "「{spaceName}」次元の設定"
   },
   "wb3MSp": {
     "message": "このユーザー名は既に使われています。"
@@ -130,5 +178,8 @@
   },
   "y63e7m": {
     "message": "メール"
+  },
+  "zNnjeF": {
+    "message": "本当に「{spaceName}」を削除しますか？"
   }
 }
