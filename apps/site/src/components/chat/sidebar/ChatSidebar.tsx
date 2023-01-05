@@ -21,7 +21,7 @@ export const ChatSiderbar: FC<Props> = ({ space, panes }) => {
   return (
     <>
       <div
-        className="border-r border-b-1/2 bg-surface-100 border-b-gray-600 flex justify-between gap-1 py-2 px-4 items-center cursor-pointer group"
+        className="border-b-1/2 bg-surface-100 border-b-gray-600 flex justify-between gap-1 py-2 px-4 items-center cursor-pointer group"
         onClick={() => setState(state => state === 'SPACE' ? 'CHANNELS' : 'SPACE')}
       >
         <span className="overflow-ellipsis overflow-hidden break-all whitespace-nowrap">{space.name}</span>
@@ -36,7 +36,7 @@ export const ChatSiderbar: FC<Props> = ({ space, panes }) => {
           {state === 'SPACE' ? <ChevronUp /> : <ChevronDown />}
         </span>
       </div>
-      <div className="border-r relative flex flex-col justify-between overflow-y-auto row-start-2 row-end-[-1] col-start-1 col-end-1">
+      <div className="bg-bg relative flex flex-col justify-between overflow-y-auto row-start-2 row-end-[-1] col-start-1 col-end-1">
         <div>
           {state === 'CHANNELS' && <SidebarChannelList panes={panes} spaceId={space.id} />}
           {state === 'SPACE' && <SpaceOptions space={space} panes={panes} />}

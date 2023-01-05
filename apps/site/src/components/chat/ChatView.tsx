@@ -42,7 +42,7 @@ export const ChatView: FC<Props> = ({ space, panes, focused }) => {
 
   const style = { '--pane-grid-rows': templates } as React.CSSProperties;
   return (
-    <div className="chat-grid" style={style}>
+    <div className="chat-grid bg-surface-300 gap-x-[1px]" style={style}>
       {sidebar}
       {chatBody}
     </div>

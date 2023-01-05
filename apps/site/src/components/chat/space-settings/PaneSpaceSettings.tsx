@@ -180,7 +180,7 @@ export const PaneSpaceSettings: FC<Props> = ({ spaceId }) => {
           values={{ spaceName: space.name }}
         />
       </PaneHeaderBox>
-      <PaneBodyBox className="relative border-r overflow-x-hidden overflow-y-auto ">
+      <PaneBodyBox className="relative overflow-x-hidden overflow-y-auto ">
         <FormProvider {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <div className="p-4 flex flex-col gap-8 h-full max-w-md">

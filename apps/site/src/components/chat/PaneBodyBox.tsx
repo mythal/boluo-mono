@@ -12,7 +12,7 @@ export const PaneBodyBox: FC<Props> = ({ children, className }) => {
   const focus = useFocusPane();
   return (
     <div
-      className={clsx(isFocused && `pane-focused`, `max-md:[&:not(.pane-focused)]:hidden`, className)}
+      className={clsx('bg-bg', isFocused && `pane-focused`, `max-md:[&:not(.pane-focused)]:hidden`, className)}
       onClick={focus}
     >
       {children}
