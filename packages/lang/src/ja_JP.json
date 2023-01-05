@@ -39,10 +39,10 @@
     "message": "設定"
   },
   "GMPXuF": {
-    "message": "Everyone can join this space"
+    "message": "誰でもこの次元に参加できます"
   },
   "H2WXs6": {
-    "message": "Destroy Space"
+    "message": "次元を破壊する"
   },
   "HpyhN3": {
     "message": "パイン"
@@ -90,7 +90,7 @@
     "message": "作成する"
   },
   "X5rIjZ": {
-    "message": "Danger Zone"
+    "message": "危険な操作"
   },
   "YELoe8": {
     "message": "ヒント: {key} でメッセージを送信できます。"
@@ -102,22 +102,22 @@
     "message": "次元の設定"
   },
   "cCTI4h": {
-    "message": "Whether to allow everyone on the Internet to view this space"
+    "message": "インターネット上の誰もがこの次元を閲覧できるようにするか"
   },
   "clpFBW": {
-    "message": "Space Publicity"
+    "message": "次元のパブリシティ"
   },
   "dMEGZV": {
     "message": "分割ペイン"
   },
   "fNCCY7": {
-    "message": "Basic"
+    "message": "ベーシック"
   },
   "iFsDVR": {
     "message": "読み込み中"
   },
   "kIUNDX": {
-    "message": "Default Dice"
+    "message": "デフォルトのサイコロ"
   },
   "kMogDE": {
     "message": "メールアドレスのフォーマットが不正です。"
@@ -129,40 +129,40 @@
     "message": "少なくとも {max} 文字以上でなければなりません。"
   },
   "q7JBy1": {
-    "message": "Change Settings"
+    "message": "設定を変更"
   },
   "qbB8pg": {
-    "message": "Space Description"
+    "message": "次元の説明"
   },
   "qoUUiA": {
-    "message": "Allow Spectator"
+    "message": "観覧を許可"
   },
   "qvc9uM": {
-    "message": "This cannot be undone."
+    "message": "この操作は元に戻すことができません。"
   },
   "rELDbB": {
     "message": "再読み込み"
   },
   "rK7cTy": {
-    "message": "Initial Channel Name"
+    "message": "最初のチャネル名"
   },
   "rYtHKT": {
     "message": "システムに従う"
   },
   "s+ixvA": {
-    "message": "Sure, Destroy {spaceName}"
+    "message": "「 {spaceName}」を破壊します"
   },
   "tOdNiY": {
     "message": "ダーク"
   },
   "uhu5aG": {
-    "message": "Public"
+    "message": "公開"
   },
   "viXE32": {
-    "message": "Private"
+    "message": "非公開"
   },
   "wR2FW8": {
-    "message": "Settings of &quot;{spaceName}&quot; Space"
+    "message": "「{spaceName}」次元の設定"
   },
   "wb3MSp": {
     "message": "このユーザー名は既に使われています。"
@@ -180,6 +180,6 @@
     "message": "メール"
   },
   "zNnjeF": {
-    "message": "Are you sure you want to delete {spaceName}?"
+    "message": "本当に「{spaceName}」を削除しますか？"
   }
 }
