@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import type { FC } from 'react';
 import { useState } from 'react';
@@ -40,8 +41,8 @@ export const FieldDestroySpace: FC<{ spaceName: string; spaceId: string }> = ({ 
           <FormattedMessage defaultMessage="This cannot be undone." />
         </span>
       </div>
-      <div className="flex gap-2">
-        <Button type="button" onClick={() => setShowConfirm(false)}>
+      <div className="flex gap-2 fade-in">
+        <Button className="flex-shrink-0" type="button" onClick={() => setShowConfirm(false)}>
           <FormattedMessage defaultMessage="Cancel" />
         </Button>
         <Button data-type="danger" type="button" onClick={() => deleteSpace()}>

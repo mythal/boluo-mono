@@ -21,3 +21,20 @@
     grid-template-columns: var(--pane-sidebar-width) repeat(auto-fit, minmax(0, 1fr));
   }
 }
+
+.fade-in {
+  animation: fade-in 2s ease-in-out forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    pointer-events: none;
+  }
+  99% {
+    pointer-events: none;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
