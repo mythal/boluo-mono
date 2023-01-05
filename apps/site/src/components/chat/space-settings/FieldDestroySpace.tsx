@@ -41,7 +41,7 @@ export const FieldDestroySpace: FC<{ spaceName: string; spaceId: string }> = ({ 
           <FormattedMessage defaultMessage="This cannot be undone." />
         </span>
       </div>
-      <div className="flex gap-2 fade-in">
+      <div className="flex gap-2 danger-fade-in">
         <Button className="flex-shrink-0" type="button" onClick={() => setShowConfirm(false)}>
           <FormattedMessage defaultMessage="Cancel" />
         </Button>
