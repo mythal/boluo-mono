@@ -1,4 +1,5 @@
 export const not = (x: unknown): boolean => !x;
+export const toggle = not;
 
 // identity
 export type SelfMapper<T> = (x: T) => T;

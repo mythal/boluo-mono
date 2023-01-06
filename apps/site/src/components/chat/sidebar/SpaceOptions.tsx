@@ -25,7 +25,7 @@ export const SpaceOptions: FC<Props> = ({ space, panes }) => {
         onClick={() => setFold(fold => !fold)}
         className="flex items-center justify-between w-full text-surface-600 py-3 px-4 text-sm border-b border-surface-200 group cursor-pointer hover:bg-surface-100"
       >
-        <FormattedMessage defaultMessage="Space Options" />
+        <span className="overflow-ellipsis overflow-hidden break-all whitespace-nowrap">{space.name}</span>
         <span
           className={clsx(
             'p-1 border rounded-md bg-surface-50',

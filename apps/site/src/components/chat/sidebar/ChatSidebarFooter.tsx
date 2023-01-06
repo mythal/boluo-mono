@@ -10,9 +10,10 @@ interface Props {
   className?: string;
   isSettingsOpen: boolean;
   isHelpOpen: boolean;
+  isExpand: boolean;
 }
 
-const SettingToggleButton: FC<{ on: boolean }> = ({ on }) => {
+const SettingToggleButton: FC<{ on: boolean; isExpand: boolean }> = ({ on, isExpand }) => {
   const intl = useIntl();
   const dispatch = useChatPaneDispatch();
   const paneName = intl.formatMessage({ defaultMessage: 'Settings' });
@@ -27,6 +28,7 @@ const SettingToggleButton: FC<{ on: boolean }> = ({ on }) => {
       aria-label={label}
       className="group"
       data-type="switch"
+      data-small={!isExpand}
       data-on={on}
     >
       <Settings />
@@ -34,7 +36,7 @@ const SettingToggleButton: FC<{ on: boolean }> = ({ on }) => {
   );
 };
 
-const HelpToggleButton: FC<{ on: boolean }> = ({ on }) => {
+const HelpToggleButton: FC<{ on: boolean; isExpand: boolean }> = ({ on, isExpand }) => {
   const intl = useIntl();
   const dispatch = useChatPaneDispatch();
   const paneName = intl.formatMessage({ defaultMessage: 'Help' });
@@ -48,6 +50,7 @@ const HelpToggleButton: FC<{ on: boolean }> = ({ on }) => {
       title={label}
       aria-label={label}
       className="group"
+      data-small={!isExpand}
       data-type="switch"
       data-on={on}
     >
@@ -56,11 +59,11 @@ const HelpToggleButton: FC<{ on: boolean }> = ({ on }) => {
   );
 };
 
-export const ChatSidebarFooter: FC<Props> = ({ className, isSettingsOpen, isHelpOpen }) => {
+export const ChatSidebarFooter: FC<Props> = ({ className, isSettingsOpen, isHelpOpen, isExpand }) => {
   return (
     <div className={className}>
-      <HelpToggleButton on={isHelpOpen} />
-      <SettingToggleButton on={isSettingsOpen} />
+      <HelpToggleButton on={isHelpOpen} isExpand={isExpand} />
+      <SettingToggleButton on={isSettingsOpen} isExpand={isExpand} />
     </div>
   );
 };
