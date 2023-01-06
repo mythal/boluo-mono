@@ -1,6 +1,8 @@
 import type { Space } from 'boluo-api';
 import type { FC } from 'react';
+import { useCallback, useState } from 'react';
 import { useMemo } from 'react';
+import { toggle } from '../../helper/function';
 import type { Pane } from '../../types/ChatPane';
 import { PaneEmpty } from './PaneEmpty';
 import { ChatPaneSwitch } from './PaneSwitch';

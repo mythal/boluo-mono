@@ -1,6 +1,5 @@
 .chat-grid {
   --pane-header-height: 3rem;
-  --pane-sidebar-width: 12rem;
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
@@ -11,14 +10,14 @@
 @media not all and (min-width: 768px) {
   .chat-grid {
     grid-template-rows: var(--pane-grid-rows, var(--pane-header-height) 1fr);
-    grid-template-columns: var(--pane-sidebar-width) 1fr;
+    grid-template-columns: minmax(0, auto) 1fr;
   }
 }
 
 @media (min-width: 768px) {
   .chat-grid {
     grid-template-rows: var(--pane-header-height) 1fr;
-    grid-template-columns: var(--pane-sidebar-width) repeat(auto-fit, minmax(0, 1fr));
+    grid-template-columns: minmax(0, auto) repeat(auto-fit, minmax(0, 1fr));
   }
 }
 
