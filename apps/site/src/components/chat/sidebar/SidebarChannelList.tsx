@@ -27,7 +27,7 @@ export const SidebarChannelList: FC<Props> = ({ spaceId, panes }) => {
   ]);
   return (
     <>
-      <div className="py-2 px-4 flex justify-between items-center">
+      <div className="py-2 px-4 text-surface-600 flex justify-between items-center text-sm border-b border-surface-200">
         <span>
           <FormattedMessage defaultMessage="Channels" />
         </span>

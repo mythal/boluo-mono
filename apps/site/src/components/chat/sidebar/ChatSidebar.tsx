@@ -21,13 +21,13 @@ export const ChatSiderbar: FC<Props> = ({ space, panes }) => {
   return (
     <>
       <div
-        className="border-b-1/2 bg-surface-100 border-b-gray-600 flex justify-between gap-1 py-2 px-4 items-center cursor-pointer group"
+        className="border-b-1/2 bg-surface-100 border-b-gray-400 flex justify-between gap-1 py-2 px-4 items-center cursor-pointer group select-none hover:bg-surface-200"
         onClick={() => setState(state => state === 'SPACE' ? 'CHANNELS' : 'SPACE')}
       >
         <span className="overflow-ellipsis overflow-hidden break-all whitespace-nowrap">{space.name}</span>
         <span
           className={clsx(
-            'p-1 border  rounded-md',
+            'p-1 border  rounded-md bg-surface-100 group-hover:bg-surface-50',
             state === 'SPACE'
               ? 'border-surface-400 border-opacity-100 group-hover:border-opacity-70'
               : 'border-surface-300 border-opacity-0 group-hover:border-opacity-100',
@@ -38,8 +38,8 @@ export const ChatSiderbar: FC<Props> = ({ space, panes }) => {
       </div>
       <div className="bg-bg relative flex flex-col justify-between overflow-y-auto row-start-2 row-end-[-1] col-start-1 col-end-1">
         <div>
-          {state === 'CHANNELS' && <SidebarChannelList panes={panes} spaceId={space.id} />}
-          {state === 'SPACE' && <SpaceOptions space={space} panes={panes} />}
+          <SpaceOptions space={space} panes={panes} />
+          <SidebarChannelList panes={panes} spaceId={space.id} />
         </div>
         <ChatSidebarFooter
           className="p-2 flex justify-between sticky bottom-0 bg-bg"
