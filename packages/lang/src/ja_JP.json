@@ -2,6 +2,9 @@
   "+OyBM6": {
     "message": "このメールアドレスは既に使用されています。"
   },
+  "/iUStU": {
+    "message": "e.g. Gandalf"
+  },
   "2gujDD": {
     "message": "これらはコンポーネントの設計とデバッグに使用されるページです"
   },
@@ -35,6 +38,9 @@
   "CoEsov": {
     "message": "ユーザー名またはメール"
   },
+  "CuNepY": {
+    "message": "Create Channel"
+  },
   "D3idYv": {
     "message": "設定"
   },
@@ -56,6 +62,15 @@
   "K7AkdL": {
     "message": "表示"
   },
+  "LUrJwE": {
+    "message": "Channels"
+  },
+  "LqOJ8B": {
+    "message": "Is this a secret channel?"
+  },
+  "NigiUz": {
+    "message": "You have to enter a channel name."
+  },
   "Pe0ogR": {
     "message": "テーマ"
   },
@@ -73,9 +88,6 @@
   },
   "SENRqu": {
     "message": "ヘルプ"
-  },
-  "SQoTBO": {
-    "message": "{spaceName} のオプション"
   },
   "Sf+ebw": {
     "message": "ペインを閉じる"
@@ -110,8 +122,17 @@
   "dMEGZV": {
     "message": "分割ペイン"
   },
+  "dVoumD": {
+    "message": "My Character Name in the Channel (Optional)"
+  },
+  "fGwy5t": {
+    "message": "This channel name already exist."
+  },
   "fNCCY7": {
     "message": "ベーシック"
+  },
+  "hh0xW7": {
+    "message": "Channel Name"
   },
   "iFsDVR": {
     "message": "読み込み中"
