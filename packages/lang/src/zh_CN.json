@@ -2,6 +2,9 @@
   "+OyBM6": {
     "message": "这个邮箱地址已经被使用。"
   },
+  "/iUStU": {
+    "message": "e.g. Gandalf"
+  },
   "2gujDD": {
     "message": "这些是用于设计和调试组件的页面"
   },
@@ -35,6 +38,9 @@
   "CoEsov": {
     "message": "用户名或邮箱"
   },
+  "CuNepY": {
+    "message": "Create Channel"
+  },
   "D3idYv": {
     "message": "设置"
   },
@@ -56,6 +62,15 @@
   "K7AkdL": {
     "message": "显示"
   },
+  "LUrJwE": {
+    "message": "Channels"
+  },
+  "LqOJ8B": {
+    "message": "Is this a secret channel?"
+  },
+  "NigiUz": {
+    "message": "You have to enter a channel name."
+  },
   "Pe0ogR": {
     "message": "主题"
   },
@@ -73,9 +88,6 @@
   },
   "SENRqu": {
     "message": "帮助"
-  },
-  "SQoTBO": {
-    "message": "{spaceName} 的选项"
   },
   "Sf+ebw": {
     "message": "关闭窗格"
@@ -110,8 +122,17 @@
   "dMEGZV": {
     "message": "分割窗格"
   },
+  "dVoumD": {
+    "message": "My Character Name in the Channel (Optional)"
+  },
+  "fGwy5t": {
+    "message": "This channel name already exist."
+  },
   "fNCCY7": {
     "message": "基本"
+  },
+  "hh0xW7": {
+    "message": "Channel Name"
   },
   "iFsDVR": {
     "message": "加载中"
